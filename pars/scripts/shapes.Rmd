@@ -1,0 +1,203 @@
+
+
+```{r}
+pmid.sel <- c(1936, 1937, 1459, 1475, 1485, 1451, 1513, 1504, 2234, 2239) 
+dd <- subset(dpreds, pmid %in% pmid.sel)
+```
+
+```{r}
+ggplot(dd, aes(cta, er, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, er.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+```{r}
+ggplot(dd, aes(er, er.pred, colour = app.mthd, group = paste(country, inst, pmid))) +
+  geom_line() +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  geom_abline(aes(intercept = 0, slope = 1)) +
+  theme_bw()
+```
+
+```{r}
+ggplot(dd, aes(cta, j, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, j.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+Add r3 temp sens
+
+```{r}
+ps <- 'w'
+pp <- pars02
+pp['air.temp.r3'] <- 0.07
+pp
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
+pr$pars <- ps
+dd <- cbind(idat1, pr[, -1:-3])
+dpreds <- dpreds[pars != ps, ]
+dpreds <- rbind(dpreds, dd)
+dpreds <- dpreds[, -299:-300]
+```
+
+```{r}
+pmid.sel <- c(1936, 1937, 1459, 1475, 1485, 1451, 1513, 1504, 2234, 2239) 
+dd <- subset(dpreds, pmid %in% pmid.sel)
+```
+
+```{r}
+ggplot(dd, aes(cta, er, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, er.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+```{r}
+ggplot(dd, aes(cta, j, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, j.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+Increase temp sens
+
+
+```{r}
+ps <- 'x'
+pp[grepl('air.temp', names(pp))] <- 0.2
+pp
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
+pr$pars <- ps
+dd <- cbind(idat1, pr[, -1:-3])
+dpreds <- dpreds[pars != ps, ]
+dpreds <- rbind(dpreds, dd)
+```
+
+```{r}
+pmid.sel <- c(1936, 1937, 1459, 1475, 1485, 1451, 1513, 1504, 2234, 2239) 
+dd <- subset(dpreds, pmid %in% pmid.sel)
+```
+
+```{r}
+ggplot(dd, aes(cta, er, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, er.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+```{r}
+ggplot(dd, aes(cta, j, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, j.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+Doesn't really help.
+New bogus spikes in j and other real ones missed.
+
+Try wind instead.
+
+
+```{r}
+ps <- 'y'
+pp <- pars02
+pp['wind.2m.r3'] <- 0.15
+pp
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
+pr$pars <- ps
+dd <- cbind(idat1, pr[, -1:-3])
+dpreds <- dpreds[pars != ps, ]
+dpreds <- rbind(dpreds, dd)
+```
+
+```{r}
+pmid.sel <- c(1936, 1937, 1459, 1475, 1485, 1451, 1513, 1504, 2234, 2239) 
+dd <- subset(dpreds, pmid %in% pmid.sel)
+```
+
+```{r}
+ggplot(dd, aes(cta, er, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, er.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+```{r}
+ggplot(dd, aes(cta, j, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, j.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+Increase values.
+
+```{r}
+ps <- 'z'
+pp[grepl('wind.2m', names(pp))] <- 0.8
+pp
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
+pr$pars <- ps
+dd <- cbind(idat1, pr[, -1:-3])
+dpreds <- dpreds[pars != ps, ]
+dpreds <- rbind(dpreds, dd)
+```
+
+```{r}
+pmid.sel <- c(1936, 1937, 1459, 1475, 1485, 1451, 1513, 1504, 2234, 2239) 
+dd <- subset(dpreds, pmid %in% pmid.sel)
+```
+
+```{r}
+ggplot(dd, aes(cta, er, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, er.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+```{r}
+ggplot(dd, aes(cta, j, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, j.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+How about for a random set of 10 pmid?
+
+```{r}
+set.seed(123)
+pmid.sel <- sample(unique(dpreds[, pmid]), 20)
+dd <- subset(dpreds, pmid %in% pmid.sel)
+```
+
+```{r}
+ggplot(dd, aes(cta, er, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, er.pred), lty = '11') +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
+```{r}
+ggplot(dd, aes(cta, j, colour = app.mthd)) +
+  geom_point(alpha = 0.3) +
+  geom_point(aes(cta, j.pred), shape = 1) +
+  facet_grid(paste(country, inst, pmid) ~ pars, scale = 'free') +
+  theme_bw()
+```
+
