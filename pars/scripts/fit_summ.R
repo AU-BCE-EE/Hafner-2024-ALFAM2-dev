@@ -1,6 +1,6 @@
 # Summarize fit
 
-dpreds <- rbindf(dpreds1, dpreds2)
+dpreds <- rbindf(dpreds1, dpreds2, dpreds3)
 
 # Residuals
 dpreds[, `:=` (resid.j = j.pred - j, resid.er = er.pred - er, inst = factor(inst))]
