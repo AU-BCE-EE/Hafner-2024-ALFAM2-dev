@@ -9,6 +9,7 @@ source('subset.R')
 source('prep.R')
 knit('run1.Rmd', output = '../logs/run1.md')
 source('cal.R')
+#source('labels.R')
 source('fit_summ.R')
 source('plot.R')
 

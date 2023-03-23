@@ -20,8 +20,8 @@ idat1[is.na(cta), cta := ct]
 # And drop obs with cta < 0
 idat1 <- idat1[cta > 0, ]
 
-# Remove obs > 168 hours (ALFAM2_ADAS_RRes_v2.xlsx has > 1000 hours)
-idat1 <- idat1[cta <= 168, ]
+## Remove obs > 168 hours (ALFAM2_ADAS_RRes_v2.xlsx has > 1000 hours)
+#idat1 <- idat1[cta <= 168, ]
 
 dfsumm(pdat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -50,8 +50,10 @@ idat1[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 idat1[, weight.plots := 1 / length(j.NH3), by = pmid]
 # Normalize for cumulative emission
 idat1[, weight.er := 1 / max(er), by = pmid]
+# Keep to 168 h
+idat1[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idat1[, weight.1 := weight.plots * weight.er, by = pmid]
+idat1[, weight.1 := weight.plots * weight.er * weight.168, by = pmid]
 
 # Subset with pH
 idat2 <- idat1[!is.na(man.ph), ]

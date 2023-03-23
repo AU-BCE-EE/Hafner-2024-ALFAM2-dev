@@ -1,12 +1,14 @@
 # Summarize fit
 
-derr <- dpreds
+# Residuals
+dpreds[, `:=` (resid.j = j.pred - j, resid.er = er.pred - er, inst = factor(inst))]
+
+derr <- copy(dpreds)
 
 derr[, ct.168 := cta[which.min(abs(cta - 168))], by = pmid]
 derr[, ct.24 := cta[which.min(abs(cta - 24))], by = pmid]
 
 # Fit stats
-
 dp168 <- derr[cta == ct.168, ]
 dp24 <- derr[cta == ct.24, ]
 

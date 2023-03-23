@@ -8,6 +8,57 @@
 # dpreds[app.mthd == 'cs' & pars == 'ps1', ..cc] <- NA
 dpreds <- dpreds[app.mthd != 'cs' | pars != 'ps1', ]
 
+# Use null2 model (with app method and DM) to look at weather effects
+dd <- subset(dpreds, pars == 'null2' & ct > 12)
+ddf <- subset(dp168, pars == 'null2')
+
+ggplot(ddf, aes(air.temp.48, resid.er, colour = inst, group = pmid)) +
+  geom_line(alpha = 0.1) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'fixed') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  labs(colour = 'Institution', x = expression('48 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots/resids_erf_temp', height = 4.2, width = 6)
+
+ggplot(dd, aes(cta/24, resid.j, colour = inst, group = pmid)) +
+  geom_line(alpha = 0.2) +
+  geom_point() +
+  facet_wrap(~ app.mthd) +
+  theme_bw() +
+  coord_cartesian(xlim = c(0, 4), ylim = c(-1, 1))
+ggsave2x()
+
+ggplot(dd, aes(wind.2m, resid.j, colour = inst, group = pmid)) +
+  geom_line(alpha = 0.2) +
+  geom_point() +
+  facet_wrap(~ app.mthd, scale = 'free') +
+  theme_bw()
+
+ggplot(dd, aes(air.temp, resid.j, colour = inst, group = pmid)) +
+  geom_line(alpha = 0.1) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  coord_cartesian(ylim = c(-0.5, 0.5))
+
+
+ggplot(ddf, aes(air.temp, resid.er, colour = inst, group = pmid)) +
+  geom_line(alpha = 0.2) +
+  geom_point() +
+  facet_wrap(~ app.mthd, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = app.mthd)) +
+  theme_bw()
+
+ggplot(ddf, aes(wind.2m, resid.er, colour = inst, group = pmid)) +
+  geom_line(alpha = 0.2) +
+  geom_point() +
+  facet_wrap(~ app.mthd, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = app.mthd)) +
+  theme_bw()
+
+
 # AU bLS measurements
 x <- dpreds[institute == 'AU' & meas.tech == 'bLS', ]
 

@@ -6,7 +6,7 @@ pars.cal <- ALFAM2pars02[grepl('int', names(ALFAM2pars02))]
 pars.cal['int.r5'] <- -3
 
 # Settings
-ps <- 'null1'
+ps <- 'null0'
 fixed <- integer()
 
 # Look for problem observations before calibration by running with all parameters
@@ -19,7 +19,7 @@ mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'j', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = 1),
+                                          weights = idat1[, weight.168]),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -40,10 +40,57 @@ dd <- cbind(idat1, pr[, -1:-3])
 dpreds <- dpreds[pars != ps, ]
 dpreds <- rbind(dpreds, dd)
 
-# Null model 2, for looking for patterns in residuals ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Includes application methods
+# Null model 1, includes application methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 pars.cal <- ALFAM2pars02[grepl('int|app.mthd', names(ALFAM2pars02))]
 pars.cal['int.r5'] <- -3
+
+# Settings
+ps <- 'null1'
+fixed <- integer()
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+# Should be no NA in output
+which(is.na(pr$e))
+if (is.nan(sum(pr$j))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalc(p = par, dat = idat1, to = 'j', time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
+                                          weights = idat1[, weight.168]),
+                                  method = 'Nelder-Mead')
+
+# View pars
+print(m)
+
+# Save pars
+mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+# Add predictions
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
+pr$pars <- ps
+dd <- cbind(idat1, pr[, -1:-3])
+dpreds <- dpreds[pars != ps, ]
+dpreds <- rbind(dpreds, dd)
+
+# Add predictions
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
+pr$pars <- ps
+dd <- cbind(idat1, pr[, -1:-3])
+dpreds <- dpreds[pars != ps, ]
+dpreds <- rbind(dpreds, dd)
+
+# Null model 2, includes manure DM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pars.cal <- mods[['null1']][['coef']]
+pars.cal['man.dm.f0'] <- 0.4
+pars.cal['man.dm.r1'] <- -0.1
 
 # Settings
 ps <- 'null2'
@@ -59,7 +106,7 @@ mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'j', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = 1),
+                                          weights = idat1[, weight.168]),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -104,7 +151,7 @@ mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'j', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = 1),
+                                          weights = idat1[, weight.168]),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -142,7 +189,7 @@ mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = 1),
+                                          weights = idat1[, weight.168]),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -154,7 +201,6 @@ mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
 # Echo pars and other model info
 print(pp)
 print(m)
-#pp['rain.rate.r5'] <- 0.5
 
 # Add predictions
 pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
@@ -183,7 +229,7 @@ mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = 1),
+                                          weights = idat1[, weight.168]),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -235,7 +281,6 @@ mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
 # Echo pars and other model info
 print(pp)
 print(m)
-#pp['rain.rate.r5'] <- 0.5
 
 # Add predictions
 pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
