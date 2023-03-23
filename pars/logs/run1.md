@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "22 March, 2023 Mar:03"
+date: "23 March, 2023 Mar:03"
 ---
 
 Check package version.
@@ -51,7 +51,7 @@ pars02 <- ALFAM2pars02[!grepl('man.ph', names(ALFAM2pars02))]
 
 
 ```r
-d.pred.ps1 <- as.data.table(alfam2(as.data.frame(idat1), pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+d.pred1.ps1 <- as.data.table(alfam2(idat1, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
 ```
 
 ```
@@ -59,7 +59,7 @@ d.pred.ps1 <- as.data.table(alfam2(as.data.frame(idat1), pars = pars01, app.name
 ```
 
 ```
-## Warning in alfam2(as.data.frame(idat1), pars = pars01, app.name = "tan.app", : Running with 15 parameters. Dropped 3 with no match.
+## Warning in alfam2(idat1, pars = pars01, app.name = "tan.app", time.name = "cta", : Running with 15 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.deep.f4
 ##   incorp.shallow.f4
@@ -84,7 +84,7 @@ d.pred.ps1 <- as.data.table(alfam2(as.data.frame(idat1), pars = pars01, app.name
 ```
 
 ```r
-d.pred.ps2 <- as.data.table(alfam2(as.data.frame(idat1), pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+d.pred1.ps2 <- as.data.table(alfam2(idat1, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
 ```
 
 ```
@@ -92,7 +92,7 @@ d.pred.ps2 <- as.data.table(alfam2(as.data.frame(idat1), pars = pars02, app.name
 ```
 
 ```
-## Warning in alfam2(as.data.frame(idat1), pars = pars02, app.name = "tan.app", : Running with 16 parameters. Dropped 6 with no match.
+## Warning in alfam2(idat1, pars = pars02, app.name = "tan.app", time.name = "cta", : Running with 16 parameters. Dropped 6 with no match.
 ## These secondary parameters have been dropped:
 ##   app.rate.ni.f0
 ##   ts.cereal.hght.r1
@@ -120,39 +120,100 @@ d.pred.ps2 <- as.data.table(alfam2(as.data.frame(idat1), pars = pars02, app.name
 ##   app.mthd.cs.r3
 ```
 
+```r
+d.pred2.ps1 <- as.data.table(alfam2(idat2, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(idat2, pars = pars01, app.name = "tan.app", time.name = "cta", : dat data frame has some columns with reserved names.
+## You can proceed, but there may be problems.
+## Better to remove/rename the offending columns: __group__add.row__f4
+```
 
 ```r
-names(d.pred.ps1)[-1:-3] <- paste0(names(d.pred.ps1)[-1:-3], '.pred')
-names(d.pred.ps2)[-1:-3] <- paste0(names(d.pred.ps2)[-1:-3], '.pred')
+d.pred2.ps2 <- as.data.table(alfam2(idat2, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+```
 
-d.pred.ps1$pars <- 'ps1'
-d.pred.ps2$pars <- 'ps2'
+```
+## User-supplied parameters are being used.
+```
 
-d1 <- cbind(idat1, d.pred.ps1[, -1:-3])
-d2 <- cbind(idat1, d.pred.ps2[, -1:-3])
-dpreds <- rbind(d1, d2)
+```
+## Warning in alfam2(idat2, pars = pars02, app.name = "tan.app", time.name = "cta", : dat data frame has some columns with reserved names.
+## You can proceed, but there may be problems.
+## Better to remove/rename the offending columns: __group__add.row__f4
+```
+
+```
+## Warning in alfam2(idat2, pars = pars02, app.name = "tan.app", time.name = "cta", : Running with 20 parameters. Dropped 2 with no match.
+## These secondary parameters have been dropped:
+##   app.rate.ni.f0
+##   ts.cereal.hght.r1
+## 
+## These secondary parameters are being used:
+##   int.f0
+##   app.mthd.os.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
 ```
 
 
-Plot
+```r
+names(d.pred1.ps1)[-1:-3] <- paste0(names(d.pred1.ps1)[-1:-3], '.pred')
+names(d.pred1.ps2)[-1:-3] <- paste0(names(d.pred1.ps2)[-1:-3], '.pred')
+
+d.pred1.ps1$pars <- 'ps1'
+d.pred1.ps2$pars <- 'ps2'
+
+d1 <- cbind(idat1, d.pred1.ps1[, -1:-3])
+d2 <- cbind(idat1, d.pred1.ps2[, -1:-3])
+dpreds1 <- rbind(d1, d2)
+```
 
 
 ```r
-ggplot(dpreds, aes(cta, er, group = pmid)) +
-  geom_line() +
-  facet_wrap(~ app.mthd)
+names(d.pred2.ps1)[-1:-3] <- paste0(names(d.pred1.ps1)[-1:-3], '.pred')
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
-
+```
+## Warning in names(d.pred2.ps1)[-1:-3] <- paste0(names(d.pred1.ps1)[-1:-3], :
+## number of items to replace is not a multiple of replacement length
+```
 
 ```r
-x <- dpreds[institute == 'AU' & meas.tech == 'bLS', ]
-ggplot(x, aes(cta, er, colour = app.mthd)) +
-  geom_line() +
-  geom_line(aes(cta, er.pred), lty = '11') +
-  facet_grid(pmid ~ pars)
+names(d.pred2.ps2)[-1:-3] <- paste0(names(d.pred1.ps2)[-1:-3], '.pred')
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+```
+## Warning in names(d.pred2.ps2)[-1:-3] <- paste0(names(d.pred1.ps2)[-1:-3], :
+## number of items to replace is not a multiple of replacement length
+```
 
+```r
+d.pred2.ps1$pars <- 'ps1'
+d.pred2.ps2$pars <- 'ps2'
+
+d1 <- cbind(idat2, d.pred2.ps1[, -1:-3])
+d2 <- cbind(idat2, d.pred2.ps2[, -1:-3])
+dpreds2 <- rbind(d1, d2)
+```

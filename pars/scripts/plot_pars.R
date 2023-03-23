@@ -8,3 +8,4 @@ ggplot(parsl, aes(reorder(parameter, ppar), value, colour = pars, group = pars))
   geom_point() +
   geom_line() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+ggsave2x('../plots-pars/pars', height = 4.2, width = 6)
