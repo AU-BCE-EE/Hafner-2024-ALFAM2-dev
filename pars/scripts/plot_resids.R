@@ -9,8 +9,61 @@ dpreds.plot[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os
 dp168.plot[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
                                labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
 
-dpreds.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'c', 'd', 'e', 'null2'))]
-dp168.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'c', 'd', 'e', 'null2'))]
+dpreds.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'null0', 'null1', 'null2'))]
+dp168.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'null0', 'null1', 'null2'))]
+
+names(dp168.plot)
+dp168.plot[, digested := grepl('[Dd]igest', paste(man.trt1, man.trt2))]
+args(dcast)
+
+dp168w <- dcast(dp168.plot, inst + institute + country + pmid + man.source + app.mthd + incorp + app.mthd.nm + digested + acid + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
+
+# WIP
+ggplot(dp168w, aes(p1_3, er, colour = inst)) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point() +
+  theme(legend.pos = c(0.84, 0.23)) +
+  guides(colour = guide_legend(ncol = 2)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Institution')
+ggsave2x('../plots-resids/erf_scatter1', height = 5, width = 6)
+
+dd <- subset(dp168w, acid)
+ggplot(dp168w, aes(p1_3, er, colour = acid)) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point(alpha = 0.6) +
+  geom_point(data = dd) +
+  theme(legend.pos = c(0.84, 0.23)) +
+  guides(colour = guide_legend(ncol = 2)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Acidification')
+ggsave2x('../plots-resids/erf_scatter2', height = 5, width = 6)
+
+dd <- subset(dp168w, incorp != 'none')
+ggplot(dp168w, aes(p1_3, er, colour = incorp)) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point(alpha = 0.3) +
+  geom_point(data = dd) +
+  theme(legend.pos = c(0.84, 0.23)) +
+  guides(colour = guide_legend(ncol = 2)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Incorporation')
+ggsave2x('../plots-resids/erf_scatter3', height = 5, width = 6)
+
+table(pdat3$inst, pdat3$incorp)
+# WTF??? NTS
+
+dd <- subset(dp168w, digested)
+ggplot(dp168w, aes(p1_3, er, colour = digested)) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point(alpha = 0.3) +
+  geom_point(data = dd) +
+  theme(legend.pos = c(0.84, 0.23)) +
+  guides(colour = guide_legend(ncol = 2)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Anaerobic digestion')
+ggsave2x('../plots-resids/erf_scatter4', height = 5, width = 6)
+
 
 # Use null2 model (with app method and DM) to look at weather effects ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 dd <- subset(dpreds.plot, pars == 'null2' & ct > 12)
@@ -63,14 +116,14 @@ ggsave2x('../plots-resids/resids_erf_rain', height = 4.2, width = 6)
 
 
 # Model c and d comparison ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-dd <- subset(dp168.plot, pars %in% c('ps1', 'ps2', 'c', 'null2'))
+dd <- subset(dp168.plot, pars %in% c('ps1', 'ps2', 'p1', 'null2'))
 ggplot(dd, aes(inst, resid.er, fill = pars.nm)) +
   geom_boxplot() +
   facet_wrap(~ app.mthd.nm)
 
 # r5 check, long trials ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 lp <- subset(pdat, ct.max > 100)[, pmid]
-dd <- subset(dpreds.plot, pars %in% c('ps2', 'null2', 'c') & pmid %in% lp)
+dd <- subset(dpreds.plot, pars %in% c('ps2', 'null2', 'p1') & pmid %in% lp)
 ggplot(dd, aes(cta, resid.er, colour = inst, group = pmid)) +
   geom_line(alpha = 0.3) +
   geom_point(alpha = 0.3, size = 0.3) +
@@ -88,7 +141,7 @@ ggplot(dd, aes(cta, resid.er, colour = inst, group = pmid)) +
   labs(colour = 'Institution', x = 'Time since application (h)', y = 'Emission residual (frac. applied TAN)')
 ggsave2x('../plots-resids/resids_er_long_time_short', height = 5.2, width = 6)
 
-dd <- subset(dpreds.plot, pars %in% c('ps2', 'null2', 'c') & pmid %in% c(1498, 1505))
+dd <- subset(dpreds.plot, pars %in% c('ps2', 'null2', 'p1') & pmid %in% c(1498, 1505))
 ggplot(dd, aes(cta, er, colour = pars, group = pmid)) +
   geom_line(colour = 'black') +
   geom_line(aes(cta, er.pred, group = pars), lty = '1111') +
