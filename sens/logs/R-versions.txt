@@ -18,8 +18,8 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] reshape2_1.4.4    knitr_1.39        ALFAM2_2.22       data.table_1.14.2
-[5] rmarkdown_2.14    nvimcom_0.9-82   
+[1] reshape2_1.4.4    data.table_1.14.2 rmarkdown_2.14    knitr_1.39       
+[5] ALFAM2_2.22       nvimcom_0.9-82   
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.10     digest_0.6.29   plyr_1.8.7      magrittr_2.0.3 
