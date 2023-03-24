@@ -3,20 +3,26 @@
 dpreds.plot <- copy(dpreds)
 dp168.plot <- copy(dp168)
 
+# NTS: Clean up this crap
+dp168.plot[, digested := grepl('[Dd]igest', paste(man.trt1, man.trt2))]
+
 dpreds.plot[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
                                labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
 
 dp168.plot[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
                                labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
 
+dp168.plot[, `:=` (acid.nm = factor(ifelse(acid, 'Acidified', 'Reference'), levels = c('Reference', 'Acidified')), 
+                    digested.nm = factor(ifelse(digested, 'Anaerobically\ndigested', 'Raw'), levels = c('Raw', 'Anaerobically\ndigested')),
+                    pig.nm = factor(ifelse(man.source.pig == 1, 'Pig', 'Cattle &\nothers'), levels = c('Pig', 'Cattle &\nothers')),
+                    incorp.nm = factor(oneupper(incorp), levels = c('None', 'Shallow', 'Deep')))]
+
+
 dpreds.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'null0', 'null1', 'null2'))]
 dp168.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'null0', 'null1', 'null2'))]
 
-names(dp168.plot)
-dp168.plot[, digested := grepl('[Dd]igest', paste(man.trt1, man.trt2))]
-args(dcast)
 
-dp168w <- dcast(dp168.plot, inst + institute + country + pmid + man.source + app.mthd + incorp + app.mthd.nm + digested + acid + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
+dp168w <- dcast(dp168.plot, inst + institute + country + pmid + man.source + man.source.pig + pig.nm + app.mthd + incorp + incorp.nm + app.mthd.nm + digested + digested.nm + acid + acid.nm + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
 
 # WIP
 ggplot(dp168w, aes(p1_3, er, colour = inst)) +
@@ -29,18 +35,18 @@ ggplot(dp168w, aes(p1_3, er, colour = inst)) +
 ggsave2x('../plots-resids/erf_scatter1', height = 5, width = 6)
 
 dd <- subset(dp168w, acid)
-ggplot(dp168w, aes(p1_3, er, colour = acid)) +
+ggplot(dp168w, aes(p1_3, er, colour = acid.nm)) +
   geom_abline(intercept = 0, slope = 1) +
   facet_wrap(~ app.mthd.nm) +
   geom_point(alpha = 0.6) +
   geom_point(data = dd) +
   theme(legend.pos = c(0.84, 0.23)) +
   guides(colour = guide_legend(ncol = 2)) +
-  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Acidification')
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '')
 ggsave2x('../plots-resids/erf_scatter2', height = 5, width = 6)
 
 dd <- subset(dp168w, incorp != 'none')
-ggplot(dp168w, aes(p1_3, er, colour = incorp)) +
+ggplot(dp168w, aes(p1_3, er, colour = incorp.nm)) +
   geom_abline(intercept = 0, slope = 1) +
   facet_wrap(~ app.mthd.nm) +
   geom_point(alpha = 0.3) +
@@ -50,20 +56,27 @@ ggplot(dp168w, aes(p1_3, er, colour = incorp)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Incorporation')
 ggsave2x('../plots-resids/erf_scatter3', height = 5, width = 6)
 
-table(pdat3$inst, pdat3$incorp)
-# WTF??? NTS
-
 dd <- subset(dp168w, digested)
-ggplot(dp168w, aes(p1_3, er, colour = digested)) +
+ggplot(dp168w, aes(p1_3, er, colour = digested.nm)) +
   geom_abline(intercept = 0, slope = 1) +
   facet_wrap(~ app.mthd.nm) +
   geom_point(alpha = 0.3) +
   geom_point(data = dd) +
   theme(legend.pos = c(0.84, 0.23)) +
   guides(colour = guide_legend(ncol = 2)) +
-  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Anaerobic digestion')
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '')
 ggsave2x('../plots-resids/erf_scatter4', height = 5, width = 6)
 
+dd <- subset(dp168w, man.source.pig == 1)
+ggplot(dp168w, aes(p1_3, er, colour = pig.nm)) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point(alpha = 0.5) +
+  #geom_point(data = dd) +
+  theme(legend.pos = c(0.84, 0.23)) +
+  guides(colour = guide_legend(ncol = 2)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '')
+ggsave2x('../plots-resids/erf_scatter5', height = 5, width = 6)
 
 # Use null2 model (with app method and DM) to look at weather effects ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 dd <- subset(dpreds.plot, pars == 'null2' & ct > 12)
