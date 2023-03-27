@@ -2,7 +2,7 @@
 
 parsl[, ppar := gsub('^.+([fr][0-5])$', '\\1', parameter)]
 spars <- unique(parsl[, parameter])
-parsl[, parameter := factor(parameter, levels = spars[order(gsub('^.+([fr][0-5])$', '\\1', spars))])]
+parsl[, parameter := factor(parameter, levels = spars[order(gsub('^.+[fr]([0-5])$', '\\1', spars))])]
 
 dd <- subset(parsl, pars == 'p1')
 ggplot(parsl, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +

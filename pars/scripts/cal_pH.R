@@ -21,7 +21,7 @@ mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par)
                                   resCalc(p = par, dat = idat3, to = 'er', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
                                           weights = idat3[, weight.plots] * idat3[, weight.168], flatout = TRUE),
-                                  method = 'Nelder-Mead')
+                                  method = 'Nelder-Mead', control = list(maxit = 30000))
 
 # View pars
 print(m)
