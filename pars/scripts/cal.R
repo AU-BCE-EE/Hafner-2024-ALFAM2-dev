@@ -129,7 +129,7 @@ dpreds1 <- rbind(dpreds1, dd)
 
 # Next calibration sets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # List parameters for calibration
-pars.cal <- ALFAM2pars02[!grepl('incorp|man.ph|app.rate|hght', names(ALFAM2pars02))]
+pars.cal <- ALFAM2pars02[!grepl('incorp|man.ph|hght', names(ALFAM2pars02))]
 pars.cal['int.r5'] <- -3
 pars.cal['rain.rate.r5'] <- 0.5
 pars.cal[c('wind.2m.r3', 'air.temp.r3')] <- 0.1

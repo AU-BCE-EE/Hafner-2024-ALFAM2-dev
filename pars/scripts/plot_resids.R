@@ -29,6 +29,7 @@ ggplot(dp168w, aes(p1_3, er, colour = inst)) +
   geom_abline(intercept = 0, slope = 1) +
   facet_wrap(~ app.mthd.nm) +
   geom_point() +
+  theme_bw() +
   theme(legend.pos = c(0.84, 0.23)) +
   guides(colour = guide_legend(ncol = 2)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Institution')
@@ -40,6 +41,7 @@ ggplot(dp168w, aes(p1_3, er, colour = acid.nm)) +
   facet_wrap(~ app.mthd.nm) +
   geom_point(alpha = 0.6) +
   geom_point(data = dd) +
+  theme_bw() +
   theme(legend.pos = c(0.84, 0.23)) +
   guides(colour = guide_legend(ncol = 2)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '')
@@ -51,6 +53,7 @@ ggplot(dp168w, aes(p1_3, er, colour = incorp.nm)) +
   facet_wrap(~ app.mthd.nm) +
   geom_point(alpha = 0.3) +
   geom_point(data = dd) +
+  theme_bw() +
   theme(legend.pos = c(0.84, 0.23)) +
   guides(colour = guide_legend(ncol = 2)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Incorporation')
@@ -62,6 +65,7 @@ ggplot(dp168w, aes(p1_3, er, colour = digested.nm)) +
   facet_wrap(~ app.mthd.nm) +
   geom_point(alpha = 0.3) +
   geom_point(data = dd) +
+  theme_bw() +
   theme(legend.pos = c(0.84, 0.23)) +
   guides(colour = guide_legend(ncol = 2)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '')
@@ -73,6 +77,7 @@ ggplot(dp168w, aes(p1_3, er, colour = pig.nm)) +
   facet_wrap(~ app.mthd.nm) +
   geom_point(alpha = 0.5) +
   #geom_point(data = dd) +
+  theme_bw() +
   theme(legend.pos = c(0.84, 0.23)) +
   guides(colour = guide_legend(ncol = 2)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '')
