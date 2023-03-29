@@ -5,9 +5,34 @@ rm(list = ls())
 source('packages.R')
 source('functions.R')
 source('load.R')
+source('load_pars03.R')
 source('subset.R')
+
+
+
+
+
 source('prep.R')
 knit('run1.Rmd', output = '../logs/run1.md')
+
+dd <- subset(pdat, meas.tech2 == 'micro met' & e.rel.final < 1.1 & app.mthd %in% c('bsth', 'ts', 'bc', 'os'))
+dd$app.mthd <- factor(dd$app.mthd, levels = c('bsth', 'ts', 'bc', 'os'))
+m1 <- lm(e.rel.final ~ man.source + app.mthd * (air.temp.24 + wind.2m.24) + man.dm, data = dd)
+summary(m1)
+plot(m1)
+
+ggplot(dd, aes(app.mthd, e.rel.final)) + geom_jitter()
+
+library(lme4)
+dd <- subset(pdat, meas.tech2 == 'micro met')
+dd$inst <- factor(dd$inst)
+dd$inst.mm <- interaction(dd$inst, dd$meas.tech2)
+dd$app.mthd <- factor(dd$app.mthd, levels = c('bsth', 'ts', 'bc', 'os', 'cs'))
+m1 <- lmer(e.rel.final ~ man.source + app.mthd + (air.temp.24 + wind.2m.24) + man.dm + (1|inst), data = dd)
+summary(m1)
+drop1(m1)
+
+pdat
 
 
 os.summ <- pdat[, .(n.os = sum(app.mthd == 'os'), n.bc = sum(app.mthd == 'bc'), n.bsth = sum(app.mthd == 'bsth')), by = .(country, institute, iexper)]
