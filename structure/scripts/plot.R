@@ -17,26 +17,28 @@ dd <- subset(idat, pmid %in% c(1529:1532))
 d0 <- subset(dd, ct == ct.min)[, `:=` (ct = 0, e.rel = 0)]
 dd <- rbind(d0, dd)
 dl <- subset(dd, ct == ct.max)
-ggplot(dd, aes(ct, e.rel, colour = acid, group = pmid)) +
+ep <- ggplot(dd, aes(ct, e.rel, colour = acid, group = pmid)) +
   geom_line() +
   geom_text(data = dl, aes(label = man.ph), nudge_x = 7, size = 1.7, colour = 'black') +
   theme_bw() +
   theme(legend.position = 'none') +
   scale_color_viridis_d(option = 'D') +
-  labs(x = 'Time since application', y = 'Emission (frac. TAN)')
-ggsave2x('../plots/acid_emis', height = 2.0, width = 2.5)
+  labs(x = '', y = 'Emis. (frac. TAN)')
 
 d0 <- subset(dd, ct == ct.min)[, `:=` (ct = 0, e.rel = 0)]
 dd <- rbind(d0, dd)
 dl <- subset(dd, ct == ct.min)[, ct := 0][man.ph == 5.2, ct := -2.8]
-ggplot(dd, aes(ct, j.NH3, colour = acid, group = pmid)) +
+jp <- ggplot(dd, aes(ct, j.NH3, colour = acid, group = pmid)) +
   geom_step() +
   geom_text(data = dl, aes(label = man.ph), nudge_x = -2, size = 1.7, colour = 'black') +
   theme_bw() +
-  xlim(-5, 50) +
+  coord_cartesian(xlim = c(-5, 50)) +
   theme(legend.position = 'none') +
   scale_color_viridis_d(option = 'D') +
-  labs(x = 'Time since application', y = 'Emission (frac. TAN)')
-ggsave2x('../plots/acid_flux', height = 2.0, width = 2.5)
+  labs(x = 'Time after application (h)', y = expression('Flux'~(kg~ha^'-1'~h^'-1')))
+
+p <- grid.arrange(ep, jp)
+
+ggsave2x('../plots/acid_curves', p, height = 3.2, width = 2.5)
 
 

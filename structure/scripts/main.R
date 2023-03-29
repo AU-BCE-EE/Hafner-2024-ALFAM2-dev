@@ -7,6 +7,7 @@ source('functions.R')
 source('load.R')
 source('load_pars03.R')
 source('subset.R')
+source('plot.R')
 
 
 
