@@ -1,6 +1,8 @@
 # Sort out scenarios
 
 dat.ref <- data.table(ct = 168, man.dm = 5, wind.2m = 5, air.temp = 15, app.rate.ni = 40, man.ph = 7, tan.app = 100)
+man.source <- data.table(man.source = c('pig', 'cattle/other'))
+dat.ref <- data.table(dfcombos(dat.ref, man.source))
 
 man.dm <- data.table(man.dm = seq(0, 15, length.out = 100))
 man.ph <- data.table(man.ph = seq(5.5, 9.5, length.out = 100))
