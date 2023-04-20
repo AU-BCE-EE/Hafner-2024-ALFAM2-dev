@@ -1,4 +1,5 @@
 # Try to add pH parameters
+# One of these will be "par set 3"
 
 # Cal p1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Revise i2 

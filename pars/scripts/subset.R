@@ -7,14 +7,12 @@ pdat[, man.ph.missing := FALSE]
 
 # To help with rbind() later
 
-# Merge
-idat <- merge(pdat, idat, by = c('pid', 'pmid'))
-
 # Add institute x experiment
 pdat[, iexper := paste(inst, exper)]
-idat[, iexper := paste(inst, exper)]
 
-# NTS: drop digested stuff?
+# Merge pdat and idat
+idat <- merge(pdat, idat, by = c('pid', 'pmid'))
+
 # Main subset
 # No acidification, no incorporation
 # Manure pH not required
@@ -76,7 +74,6 @@ pdat2 <- pdat[!is.na(e.24) &
 pmid.keep <- pdat2[, pmid]
 idat2 <- idat[pmid %in% pmid.keep, ]
 idat2[, dataset := 2]
-table(pdat2$inst, pdat2$incorp)
 
 # Subset 3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Require pH, including acidification and incorporation
@@ -134,3 +131,31 @@ pdati <- pdat[iexper %in% incorp.exper[, iexper] &
 
 idati <- idat[pmid %in% pdati[, pmid], ]
 idati[, dataset := 3]
+
+# Subset 4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Johanna's wind tunnel data
+
+pdat4 <- pdat[inst == 205 &
+              meas.tech2 == 'wt' &
+	      !is.na(e.24) &
+              !is.na(app.mthd) &
+              !is.na(man.ph) &
+              !is.na(man.dm) &
+              !is.na(man.source) & 
+              !is.na(air.temp.24) & 
+              !is.na(wind.2m.24) & 
+              !is.na(till) & 
+              !is.na(incorp) & 
+              !is.na(crop) & 
+              e.24 > 0 & 
+              e.rel.24 < 1.0 &
+              e.rel.final < 1.05 &
+              e.rel.final > - 0.05 &
+              man.source != 'conc' &
+              man.dm <= 15, ]
+
+pmid.keep <- pdat4[, pmid]
+idat4 <- idat[pmid %in% pmid.keep, ]
+idat4[, dataset := 4]
+
+

@@ -1,12 +1,12 @@
 # List for holding output
 mods <- list()
 
-# Null model 1, for looking for patterns in residuals ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Null model A, for looking for patterns in residuals and more ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 pars.cal <- ALFAM2pars02[grepl('int', names(ALFAM2pars02))]
 pars.cal['int.r5'] <- -3
 
 # Settings
-ps <- 'null0'
+ps <- 'nullA'
 fixed <- integer()
 
 # Look for problem observations before calibration by running with all parameters
@@ -40,12 +40,12 @@ dd <- cbind(idat1, pr[, -1:-3])
 dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
 
-# Null model 1, includes application methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Null model B, includes application methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 pars.cal <- ALFAM2pars02[grepl('int|app.mthd', names(ALFAM2pars02))]
 pars.cal['int.r5'] <- -3
 
 # Settings
-ps <- 'null1'
+ps <- 'nullB'
 fixed <- integer()
 
 # Look for problem observations before calibration by running with all parameters
@@ -87,13 +87,13 @@ dd <- cbind(idat1, pr[, -1:-3])
 dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
 
-# Null model 2, includes manure DM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-pars.cal <- mods[['null1']][['coef']]
+# Null model C, includes manure DM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pars.cal <- mods[['nullB']][['coef']]
 pars.cal['man.dm.f0'] <- 0.4
 pars.cal['man.dm.r1'] <- -0.1
 
 # Settings
-ps <- 'null2'
+ps <- 'nullC'
 fixed <- integer()
 
 # Look for problem observations before calibration by running with all parameters
@@ -126,6 +126,15 @@ pr$pars <- ps
 dd <- cbind(idat1, pr[, -1:-3])
 dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
+
+# Next calibration sets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# List parameters for calibration
+pars.cal <- ALFAM2pars02[!grepl('incorp|man.ph|hght', names(ALFAM2pars02))]
+pars.cal['int.r5'] <- -3
+pars.cal['rain.rate.r5'] <- 0.5
+pars.cal[c('wind.2m.r3', 'air.temp.r3')] <- 0.1
+
+pars.cal
 
 # Next calibration sets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # List parameters for calibration

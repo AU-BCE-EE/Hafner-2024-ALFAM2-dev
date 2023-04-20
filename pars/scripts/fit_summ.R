@@ -2,7 +2,7 @@
 
 #dpreds3$dataset <- 3
 #dpreds2$dataset <- 2
-dpreds <- rbindf(dpreds1, dpreds2, dpreds3)
+dpreds <- rbindf(dpreds1, dpreds2, dpreds3, dpreds4)
 
 # Residuals
 dpreds[, `:=` (resid.j = j.pred - j, resid.er = er.pred - er, inst = factor(inst))]
@@ -37,6 +37,7 @@ fit.24 <- dp24[, .(rmse = rmse(m = er, p = er.pred),
                    mbe = mbe(m = er, p = er.pred),
                    n = length(er)), by = .(pars, dataset)]
 
+# NTS: what the heck? seems to be missing app.mthd in by
 fit.168.am <- dp168[, .(rmse = rmse(m = er, p = er.pred),
                         me = me(m = er, p = er.pred),
                         mae = mae(m = er, p = er.pred),
@@ -49,19 +50,35 @@ fit.24.am <- dp24[, .(rmse = rmse(m = er, p = er.pred),
                       mbe = mbe(m = er, p = er.pred),
                       n = length(er)), by = .(pars, dataset)]
 
+# NTS: what is i supposed to be for?
+# NTS: Drop if I cannot remmeber
+# NTS: adding incorp
 fit.168.i <- dp168[, .(rmse = rmse(m = er, p = er.pred),
                        me = me(m = er, p = er.pred),
                        mae = mae(m = er, p = er.pred),
                        mbe = mbe(m = er, p = er.pred),
-                       n = length(er)), by = .(pars, dataset)]
+                       n = length(er)), by = .(pars, dataset, incorp)]
 
 fit.24.i <- dp24[, .(rmse = rmse(m = er, p = er.pred),
                      me = me(m = er, p = er.pred),
                      mae = mae(m = er, p = er.pred),
                      mbe = mbe(m = er, p = er.pred),
-                     n = length(er)), by = .(pars, dataset)]
+                     n = length(er)), by = .(pars, dataset, incorp)]
 
-fit.168.i[pars %in% c('ps2', 'b'), ][order(mbe), ]
+# By digestation status
+fit.168.d <- dp168[, .(rmse = rmse(m = er, p = er.pred),
+                       me = me(m = er, p = er.pred),
+                       mae = mae(m = er, p = er.pred),
+                       mbe = mbe(m = er, p = er.pred),
+                       n = length(er)), by = .(pars, dataset, digested)]
 
+fit.24.d <- dp24[, .(rmse = rmse(m = er, p = er.pred),
+                     me = me(m = er, p = er.pred),
+                     mae = mae(m = er, p = er.pred),
+                     mbe = mbe(m = er, p = er.pred),
+                     n = length(er)), by = .(pars, dataset, digested)]
+
+
+# NTS: export these summaries
 fwrite(fit.168, '../output/fit_168.csv')
 fwrite(fit.168.am, '../output/fit_168_app_mthd.csv')
