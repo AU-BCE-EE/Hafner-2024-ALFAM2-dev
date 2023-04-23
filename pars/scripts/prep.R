@@ -247,3 +247,13 @@ idat2 <- unique(rbind(idat2, idati)[, dataset := 2])
 # Needs next row beacuse there is lack of duplication for same pmid because missing pH is added in idati but not idat2
 idat2 <- idat2[!duplicated(idat2[, .(pmid, cta)]), ]
 idat3 <- unique(rbind(idat3, idati)[, dataset := 3])
+
+# wt
+idat4[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
+# Dummy vars for wt data
+# Will run model with flatout option, so need to do dummy variable data prep separately here
+idat4 <-ALFAM2:::prepDat(idat4, value = 'data') 
+idat4$`__group` <- idat4$pmid
+idat4$`__f4` <- 1
+
+

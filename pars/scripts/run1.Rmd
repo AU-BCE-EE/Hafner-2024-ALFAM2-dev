@@ -81,3 +81,22 @@ d1 <- cbind(idat3, d.pred3.ps1[, -1:-3])
 d2 <- cbind(idat3, d.pred3.ps2[, -1:-3])
 dpreds3 <- rbind(d1, d2)
 ```
+
+Subset 4
+
+```{r}
+d.pred4.ps1 <- as.data.table(alfam2(idat4, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+d.pred4.ps2 <- as.data.table(alfam2(idat4, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+```
+
+```{r}
+names(d.pred4.ps1)[-1:-3] <- paste0(names(d.pred4.ps1)[-1:-3], '.pred')
+names(d.pred4.ps2)[-1:-3] <- paste0(names(d.pred4.ps2)[-1:-3], '.pred')
+
+d.pred4.ps1$pars <- 'ps1'
+d.pred4.ps2$pars <- 'ps2'
+
+d1 <- cbind(idat4, d.pred4.ps1[, -1:-3])
+d2 <- cbind(idat4, d.pred4.ps2[, -1:-3])
+dpreds4 <- rbind(d1, d2)
+```
