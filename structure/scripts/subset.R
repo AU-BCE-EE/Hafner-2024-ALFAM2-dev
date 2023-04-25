@@ -41,10 +41,12 @@ acidpdat[, acid.cond := ifelse(acid, 'acid', 'ref')]
 
 
 # Cast to wide
-dl <- melt(acidpdat, id.vars = c('inst', 'iexper', 'exper', 'app.mthd', 'acid', 'acid.cond', 'pmid'),
+dl <- melt(acidpdat, id.vars = c('inst', 'iexper', 'exper', 'app.mthd', 'acid', 'acid.cond', 'pmid', 'ct.max'),
            measure.vars = patterns('e\\.rel\\.'))
 
-dw <- dcast(dl, inst + iexper + exper + variable + app.mthd ~ acid.cond, fun.aggregate = mean, na.rm = TRUE)
+dl[, ct.max := mean(ct.max), by = iexper]
+
+dw <- dcast(dl, inst + iexper + exper + variable + app.mthd + ct.max ~ acid.cond, fun.aggregate = mean, na.rm = TRUE)
 dw[, ct := sub('e\\.rel\\.', '', variable)]
 dw[, `:=` (rred = 1 - acid / ref)]
 dw[, descrip := 'acid']
