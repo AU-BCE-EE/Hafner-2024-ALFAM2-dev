@@ -256,4 +256,5 @@ idat4 <-ALFAM2:::prepDat(idat4, value = 'data')
 idat4$`__group` <- idat4$pmid
 idat4$`__f4` <- 1
 
-
+# Wind tunnel
+idat4[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]

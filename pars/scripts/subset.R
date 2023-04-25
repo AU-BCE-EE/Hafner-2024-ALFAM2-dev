@@ -134,8 +134,10 @@ idati[, dataset := 3]
 
 # Subset 4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Johanna's wind tunnel data
+# Cannot use !is.na(wind.2m.24) because some files do not have wind height so .2m doesn't exist
 
 pdat4 <- pdat[inst == 205 &
+              uptake == 3 & 
               meas.tech2 == 'wt' &
 	      !is.na(e.24) &
               !is.na(app.mthd) &
@@ -143,7 +145,6 @@ pdat4 <- pdat[inst == 205 &
               !is.na(man.dm) &
               !is.na(man.source) & 
               !is.na(air.temp.24) & 
-              !is.na(wind.2m.24) & 
               !is.na(till) & 
               !is.na(incorp) & 
               !is.na(crop) & 
@@ -154,8 +155,11 @@ pdat4 <- pdat[inst == 205 &
               man.source != 'conc' &
               man.dm <= 15, ]
 
+pmid.missing.wind <- unique(subset(idat, is.na(wind))[, pmid])
+
+# NTS: cta > 0 added to others???
+
 pmid.keep <- pdat4[, pmid]
-idat4 <- idat[pmid %in% pmid.keep, ]
+pmid.keep <- pmid.keep[!pmid.keep %in% pmid.missing.wind]
+idat4 <- idat[pmid %in% pmid.keep & cta > 0 & !is.na(e.rel), ]
 idat4[, dataset := 4]
-
-

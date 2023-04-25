@@ -4,6 +4,7 @@ rm(list = ls())
 
 source('packages.R')
 source('functions.R')
+#source('load_image.R')
 source('load.R')
 source('subset.R')
 source('prep.R')

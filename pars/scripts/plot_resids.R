@@ -18,13 +18,25 @@ dp168.plot[, `:=` (acid.nm = factor(ifelse(acid, 'Acidified', 'Reference'), leve
                     incorp.nm = factor(oneupper(incorp), levels = c('None', 'Shallow', 'Deep')))]
 
 
-dpreds.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'null0', 'null1', 'null2'))]
-dp168.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'null0', 'null1', 'null2'))]
+dpreds.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'nullA', 'nullB', 'nullC', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'w1', 'w2', 'w3', 'w4'))]
+dp168.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'nullA', 'nullB', 'nullC', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'w1', 'w2', 'w3', 'w4'))]
 
 
-dp168w <- dcast(dp168.plot, inst + institute + country + pmid + man.source + man.source.pig + pig.nm + app.mthd + incorp + incorp.nm + app.mthd.nm + digested + digested.nm + acid + acid.nm + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
+dp168w <- dcast(dp168.plot, inst + institute + country + exper + pmid + man.source + man.source.pig + pig.nm + app.mthd + incorp + incorp.nm + app.mthd.nm + digested + digested.nm + acid + acid.nm + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
 
 # WIP
+# Need different dataset
+dd <- droplevels(subset(dp168w, !is.na(w4_4)))
+ggplot(dd, aes(w4_4, er, colour = exper)) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point() +
+  theme_bw() +
+  theme(legend.pos = c(0.84, 0.23)) +
+  guides(colour = guide_legend(ncol = 2)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Institution')
+ggsave2x('../plots-resids/erf_scatter1', height = 5, width = 6)
+
 ggplot(dp168w, aes(p1_3, er, colour = inst)) +
   geom_abline(intercept = 0, slope = 1) +
   facet_wrap(~ app.mthd.nm) +

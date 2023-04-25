@@ -42,4 +42,16 @@ dd <- cbind(idat3, pr[, -1:-3])
 dpreds3 <- dpreds3[pars != ps, ]
 dpreds3 <- rbind(dpreds3, dd)
 
+# Apply to subset 1 as well
+idat1[is.na(man.ph), man.ph := 7]
+ps <- 'p1'
+pp <- mods[[ps]][['coef']]
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
+pr$pars <- ps
+dd <- cbind(idat1, pr[, -1:-3])
+dpreds1 <- dpreds1[pars != ps, ]
+dpreds1 <- rbind(dpreds1, dd)
+
+
 # Cal p2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
