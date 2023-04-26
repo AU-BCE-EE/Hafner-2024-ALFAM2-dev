@@ -13,7 +13,7 @@ ggplot(dd, aes(ct, rred, colour = factor(inst), group = iexper)) +
   xlim(-27, 265) +
   theme_bw() +
   theme(legend.position = 'none', panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  labs(x = 'Emission period', y = 'Relative acidification effect')
+  labs(x = 'Time after application (h)', y = 'Relative acidification effect')
 ggsave2x('../plots/acid_effect', height = 2.5, width = 3)
 
 # Emission curves
