@@ -1,4 +1,4 @@
-# Runs sensitivity simulations, puts results in handy tables
+# Runs sensitivity simulations and plots results
 
 rm(list = ls())
 

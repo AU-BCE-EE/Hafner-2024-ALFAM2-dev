@@ -4,10 +4,10 @@ dat.ref <- data.table(ct = 168, man.dm = 5, wind.2m = 5, air.temp = 15, app.rate
 man.source <- data.table(man.source = c('pig', 'cattle/other'))
 dat.ref <- data.table(dfcombos(dat.ref, man.source))
 
-man.dm <- data.table(man.dm = seq(0, 15, length.out = 100))
-man.ph <- data.table(man.ph = seq(5.5, 9.5, length.out = 100))
-air.temp <- data.table(air.temp = seq(0, 35, length.out = 100))
-wind.2m <- data.table(wind.2m = seq(0, 20, length.out = 100))
+man.dm <- data.table(man.dm = seq(0, 12, length.out = 100))
+man.ph <- data.table(man.ph = seq(5.5, 9.0, length.out = 100))
+air.temp <- data.table(air.temp = seq(0, 28, length.out = 100))
+wind.2m <- data.table(wind.2m = seq(0, 10, length.out = 100))
 
 app.mthd <- data.table(app.mthd = c('bc', 'bsth', 'ts', 'os', 'cs'))
 
