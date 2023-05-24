@@ -1,11 +1,16 @@
 
-
 dat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
-dat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed'))]
+dat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
 
-datin <- dat[!(man.ph < 6 | man.ph > 8 | man.dm < 2 | man.dm > 10 | wind.2m < 1 | wind.2m > 8 | air.temp < 4 | air.temp > 21)]
+pdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
+pdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
+
+qdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
+qdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
+
+datin <- pdat[parset == 3 & !(man.ph < 5.8 | man.ph > 8.9 | man.dm < 1 | man.dm > 8.8 | wind.2m < 0.6 | wind.2m > 9.7 | air.temp < -1 | air.temp > 21.7)]
 d1 <- datin[man.source != 'pig', ]
-d2 <- dat[man.source != 'pig', ]
+d2 <- pdat[parset == 3 & man.source != 'pig', ]
 ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) + 
   geom_line(lty = '1111', linewidth = 0.7) +
   geom_line(data = d1, linewidth = 0.7) +
@@ -15,10 +20,10 @@ ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = '168 h relative emission (frac. TAN)', colour = '') +
   guides(colour = guide_legend(nrow = 2))
-ggsave2x('../plots/sens4_cattle', height = 4, width = 4)
+ggsave2x('../plots/sens5_cattle', height = 4, width = 4)
 
 d1 <- datin[man.source == 'pig', ]
-d2 <- dat[man.source == 'pig', ]
+d2 <- pdat[parset == 3 & man.source == 'pig', ]
 ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) + 
   geom_line(lty = '1111', linewidth = 0.7) +
   geom_line(data = d1, linewidth = 0.7) +
@@ -28,4 +33,37 @@ ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = '168 h relative emission (frac. TAN)', colour = '') +
   guides(colour = guide_legend(nrow = 2))
-ggsave2x('../plots/sens4_pig', height = 4, width = 4)
+ggsave2x('../plots/sens5_pig', height = 4, width = 4)
+
+# Derivatives
+d <- qdat[man.source != 'pig' & app.mthd == 'bsth', ]
+d3 <- pdat[man.source != 'pig' & app.mthd == 'bsth' & parset == '3', ]
+ggplot(d, aes(xval, dedx10)) + 
+  geom_hline(yintercept = 0, colour = 'gray45') +
+  geom_smooth(aes(y = dedx10), linewidth = 0.7, se = FALSE, lty = '2222') +
+  geom_smooth(aes(y = dedx90), linewidth = 0.7, se = FALSE, lty = '2222') +
+  geom_smooth(aes(y = dedxmd), linewidth = 0.7, se = FALSE, col = 'gray45') +
+  geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
+  facet_wrap(~ set.nm, scale = 'free') +
+  scale_color_viridis_d() +
+  theme_bw() +
+  theme(legend.position = 'top') +
+  labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') +
+  guides(colour = guide_legend(nrow = 2))
+ggsave2x('../plots/dsens5_cattle', height = 4, width = 5)
+
+d <- qdat[man.source == 'pig' & app.mthd == 'bsth', ]
+d3 <- pdat[man.source == 'pig' & app.mthd == 'bsth' & parset == '3', ]
+ggplot(d, aes(xval, dedx10)) + 
+  geom_hline(yintercept = 0, colour = 'gray45') +
+  geom_smooth(aes(y = dedx10), linewidth = 0.7, se = FALSE, lty = '2222') +
+  geom_smooth(aes(y = dedx90), linewidth = 0.7, se = FALSE, lty = '2222') +
+  geom_smooth(aes(y = dedxmd), linewidth = 0.7, se = FALSE, col = 'gray45') +
+  geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
+  facet_wrap(~ set.nm, scale = 'free') +
+  scale_color_viridis_d() +
+  theme_bw() +
+  theme(legend.position = 'top') +
+  labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') +
+  guides(colour = guide_legend(nrow = 2))
+ggsave2x('../plots/dsens5_pig', height = 4, width = 5)
