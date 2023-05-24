@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "22 April, 2023 Apr:04"
+date: "24 May, 2023 May:05"
 ---
 
 Check package version.
@@ -277,4 +277,168 @@ d.pred3.ps2$pars <- 'ps2'
 d1 <- cbind(idat3, d.pred3.ps1[, -1:-3])
 d2 <- cbind(idat3, d.pred3.ps2[, -1:-3])
 dpreds3 <- rbind(d1, d2)
+```
+
+Subset 4
+
+
+```r
+d.pred4.ps1 <- as.data.table(alfam2(idat4, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(idat4, pars = pars01, app.name = "tan.app", time.name = "cta", : dat data frame has some columns with reserved names.
+## You can proceed, but there may be problems.
+## Better to remove/rename the offending columns: __group__f4
+```
+
+```
+## Warning in alfam2(idat4, pars = pars01, app.name = "tan.app", time.name = "cta", : Running with 15 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.deep.f4
+##   incorp.shallow.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   int.f0
+##   int.r1
+##   int.r2
+##   int.r3
+##   app.mthd.os.f0
+##   app.rate.f0
+##   man.dm.f0
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   air.temp.r3
+##   app.mthd.os.r3
+##   rain.rate.r2
+##   rain.cum.r3
+```
+
+```
+## Error!
+## Missing values in predictors:
+## app.mthd.os    app.rate      man.dm app.mthd.bc    air.temp     wind.2m 
+##           0           0           0           0           0        4440 
+##   rain.rate    rain.cum 
+##           0           0
+```
+
+```
+## Error in alfam2(idat4, pars = pars01, app.name = "tan.app", time.name = "cta", : NA values in primary parameters. Look for missing values in predictor variables (in dat) and double-check parameters agaist dat column names
+```
+
+```r
+d.pred4.ps2 <- as.data.table(alfam2(idat4, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(idat4, pars = pars02, app.name = "tan.app", time.name = "cta", : dat data frame has some columns with reserved names.
+## You can proceed, but there may be problems.
+## Better to remove/rename the offending columns: __group__f4
+```
+
+```
+## Warning in alfam2(idat4, pars = pars02, app.name = "tan.app", time.name = "cta", : Running with 14 parameters. Dropped 8 with no match.
+## These secondary parameters have been dropped:
+##   app.rate.ni.f0
+##   app.mthd.cs.f0
+##   ts.cereal.hght.r1
+##   app.mthd.cs.r3
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   int.f0
+##   app.mthd.os.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+```
+
+```
+## Error!
+## Missing values in predictors:
+##    app.mthd.os         man.dm man.source.pig    app.mthd.bc       air.temp 
+##              0              0              0              0              0 
+##        wind.2m    app.mthd.ts      rain.rate 
+##           4440              0              0
+```
+
+```
+## Error in alfam2(idat4, pars = pars02, app.name = "tan.app", time.name = "cta", : NA values in primary parameters. Look for missing values in predictor variables (in dat) and double-check parameters agaist dat column names
+```
+
+
+```r
+names(d.pred4.ps1)[-1:-3] <- paste0(names(d.pred4.ps1)[-1:-3], '.pred')
+```
+
+```
+## Error in paste0(names(d.pred4.ps1)[-1:-3], ".pred"): object 'd.pred4.ps1' not found
+```
+
+```r
+names(d.pred4.ps2)[-1:-3] <- paste0(names(d.pred4.ps2)[-1:-3], '.pred')
+```
+
+```
+## Error in paste0(names(d.pred4.ps2)[-1:-3], ".pred"): object 'd.pred4.ps2' not found
+```
+
+```r
+d.pred4.ps1$pars <- 'ps1'
+```
+
+```
+## Error in d.pred4.ps1$pars <- "ps1": object 'd.pred4.ps1' not found
+```
+
+```r
+d.pred4.ps2$pars <- 'ps2'
+```
+
+```
+## Error in d.pred4.ps2$pars <- "ps2": object 'd.pred4.ps2' not found
+```
+
+```r
+d1 <- cbind(idat4, d.pred4.ps1[, -1:-3])
+```
+
+```
+## Error in cbind(deparse.level, ...): object 'd.pred4.ps1' not found
+```
+
+```r
+d2 <- cbind(idat4, d.pred4.ps2[, -1:-3])
+```
+
+```
+## Error in cbind(deparse.level, ...): object 'd.pred4.ps2' not found
+```
+
+```r
+dpreds4 <- rbind(d1, d2)
 ```

@@ -22,7 +22,7 @@ dpreds.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'nullA', 'nullB',
 dp168.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'nullA', 'nullB', 'nullC', 'a', 'b', 'c', 'd', 'i1', 'i2', 'p1', 'w1', 'w2', 'w3', 'w4'))]
 
 
-dp168w <- dcast(dp168.plot, inst + institute + country + exper + pmid + man.source + man.source.pig + pig.nm + app.mthd + incorp + incorp.nm + app.mthd.nm + digested + digested.nm + acid + acid.nm + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
+dp168w <- dcast(dp168.plot, inst + institute + country + exper + pmid + uptake + man.source + man.source.pig + pig.nm + app.mthd + incorp + incorp.nm + app.mthd.nm + digested + digested.nm + acid + acid.nm + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
 
 # WIP
 # Need different dataset
@@ -71,6 +71,19 @@ ggplot(dp168w, aes(p1_3, er, colour = incorp.nm)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = 'Incorporation')
 ggsave2x('../plots-resids/erf_scatter3', height = 5, width = 6)
 
+d1 <- subset(dp168w, app.mthd %in% c('bc', 'bsth', 'cs'))
+d2 <- subset(d1, incorp != 'none')
+ggplot(d1, aes(p1_3, er, colour = incorp.nm)) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point(alpha = 0.4) +
+  geom_point(data = d2, alpha = 0.7) +
+  theme_bw() +
+  theme(legend.pos = c(0.84, 0.72)) +
+  guides(colour = guide_legend(ncol = 2)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emis. (frac. TAN)', colour = 'Incorporation')
+ggsave2x('../plots-resids/erf_scatter3_sel', height = 2.5, width = 6)
+
 dd <- subset(dp168w, digested)
 ggplot(dp168w, aes(p1_3, er, colour = digested.nm)) +
   geom_abline(intercept = 0, slope = 1) +
@@ -82,6 +95,30 @@ ggplot(dp168w, aes(p1_3, er, colour = digested.nm)) +
   guides(colour = guide_legend(ncol = 2)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '')
 ggsave2x('../plots-resids/erf_scatter4', height = 5, width = 6)
+
+dd <- subset(dp168w, digested)
+ggplot(dp168w, aes(ps2_3, er, colour = digested.nm, shape = factor(uptake))) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point(alpha = 0.3) +
+  geom_point(data = dd) +
+  theme_bw() +
+  theme(legend.pos = c(0.84, 0.23)) +
+  guides(colour = guide_legend(ncol = 1)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '', shape = 'Uptake period')
+ggsave2x('../plots-resids/erf_scatter4_ps2', height = 5, width = 6)
+
+ggplot(dp168w, aes(p1_3, er, colour = digested.nm, shape = factor(uptake))) +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~ app.mthd.nm) +
+  geom_point(alpha = 0.3) +
+  geom_point(data = dd) +
+  theme_bw() +
+  theme(legend.pos = c(0.84, 0.23)) +
+  guides(colour = guide_legend(ncol = 1)) +
+  labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '', shape = 'Uptake period')
+ggsave2x('../plots-resids/erf_scatter4_ps3', height = 5, width = 6)
+
 
 dd <- subset(dp168w, man.source.pig == 1)
 ggplot(dp168w, aes(p1_3, er, colour = pig.nm)) +

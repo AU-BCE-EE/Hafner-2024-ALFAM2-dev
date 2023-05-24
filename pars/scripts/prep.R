@@ -248,7 +248,11 @@ idat2 <- unique(rbind(idat2, idati)[, dataset := 2])
 idat2 <- idat2[!duplicated(idat2[, .(pmid, cta)]), ]
 idat3 <- unique(rbind(idat3, idati)[, dataset := 3])
 
-# wt
+# And then get new plots from idati in the pdat* df as well
+pdat2 <- pdat[pmid %in% unique(idat2[, pmid])]
+pdat3 <- pdat[pmid %in% unique(idat3[, pmid])]
+
+# Wind tunnel subset ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat4[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 # Dummy vars for wt data
 # Will run model with flatout option, so need to do dummy variable data prep separately here
