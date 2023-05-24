@@ -58,6 +58,7 @@ parsbl <- melt(d.parsb, id.vars = 'iteration', variable.name = 'parameter')
 parsbl[, parset := paste0('3-', sprintf('%02d', iteration))]
 
 fwrite(parsbl, '../output/pars_boot_long.csv')
+##parsbl <- fread('../output/pars_boot_long.csv')
 
 bootsumm <- parsbl[, .(mn = mean(value), md = median(value), se = sd(value), l90 = quantile(value, 0.05), u90 = quantile(value, 0.95)), by = parameter]
 

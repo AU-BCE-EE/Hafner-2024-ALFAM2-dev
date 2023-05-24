@@ -37,18 +37,24 @@ fit.24 <- dp24[, .(rmse = rmse(m = er, p = er.pred),
                    mbe = mbe(m = er, p = er.pred),
                    n = length(er)), by = .(pars, dataset)]
 
-# NTS: what the heck? seems to be missing app.mthd in by
 fit.168.am <- dp168[, .(rmse = rmse(m = er, p = er.pred),
                         me = me(m = er, p = er.pred),
                         mae = mae(m = er, p = er.pred),
                         mbe = mbe(m = er, p = er.pred),
-                        n = length(er)), by = .(pars, dataset)]
+                        n = length(er)), by = .(pars, dataset, app.mthd)]
 
 fit.24.am <- dp24[, .(rmse = rmse(m = er, p = er.pred),
                       me = me(m = er, p = er.pred),
                       mae = mae(m = er, p = er.pred),
                       mbe = mbe(m = er, p = er.pred),
-                      n = length(er)), by = .(pars, dataset)]
+                      n = length(er)), by = .(pars, dataset, app.mthd)]
+
+# For par set 3 only
+fit.168.ps3.am <- dp168[pars == 'p1', .(rmse = rmse(m = er, p = er.pred),
+                        me = me(m = er, p = er.pred),
+                        mae = mae(m = er, p = er.pred),
+                        mbe = mbe(m = er, p = er.pred),
+                        n = length(er)), by = .(pars, dataset, app.mthd)]
 
 # NTS: what is i supposed to be for?
 # NTS: Drop if I cannot remmeber

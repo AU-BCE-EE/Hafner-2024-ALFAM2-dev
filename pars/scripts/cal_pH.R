@@ -1,6 +1,8 @@
 # Try to add pH parameters
 # One of these will be "par set 3"
 
+print(Sys.time())
+
 # Cal p1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Revise i2 
 # Settings
@@ -53,5 +55,6 @@ dd <- cbind(idat1, pr[, -1:-3])
 dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
 
+print(Sys.time())
 
 # Cal p2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
