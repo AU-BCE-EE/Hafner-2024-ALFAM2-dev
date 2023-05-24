@@ -1,5 +1,8 @@
-# Specific workspace files (so local only)
+# Specific files (so am only saving local copy)
 pars.RData
+pars2.RData
+ALFAM2_interval.csv
+ALFAM2_plot.csv
 
 # History files
 .Rhistory
