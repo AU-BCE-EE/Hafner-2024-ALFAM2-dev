@@ -2,6 +2,7 @@
 mods <- list()
 
 # Null model A, for looking for patterns in residuals and more ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# *Only* has intercept terms
 pars.cal <- ALFAM2pars02[grepl('int', names(ALFAM2pars02))]
 pars.cal['int.r5'] <- -3
 

@@ -1,6 +1,8 @@
 # Try to add pH parameters
 # One of these will be "par set 3"
 
+# NTS: check weights in prev cal scripts! They do not use weight.int
+
 print(Sys.time())
 
 # Cal p1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -23,7 +25,7 @@ mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat3, to = 'er', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat3[, weight.plots] * idat3[, weight.168], flatout = TRUE),
+                                          weights = idat3[, weight.1], flatout = TRUE),
                                   method = 'Nelder-Mead', control = list(maxit = 30000))
 
 # View pars
@@ -56,5 +58,3 @@ dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
 
 print(Sys.time())
-
-# Cal p2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,17 +1,21 @@
 # Bootstrap pars
 # Takes > 1 d to run
 
+nm.fixed <-'incorp|rain.rate.2|int.f0' 
 pars.prev <- mods[['p1']][['cal']][['par']]
-pars.cal <- pars.prev[!grepl('incorp', names(pars.prev))]
-fixed <- pars.prev[grepl('incorp', names(pars.prev))]
+pars.cal <- pars.prev[!grepl(nm.fixed, names(pars.prev))]
+#fixed <- pars.prev[grepl('incorp', names(pars.prev))]
+# Fix pars that are not well-supported by many institutions (or like int.f0 just seem to vary)
+fixed <- pars.prev[grepl(nm.fixed, names(pars.prev))]
 
-nb <- 100
+nb <- 20
 inst.all <- unique(idat3[, inst])
 mods.boot <- list()
 
 set.seed(123) 
 
-for (i in 1:nb) {
+#for (i in 1:nb) {
+for (i in 21:40) {
 
   cat('\n')
   cat('\n')

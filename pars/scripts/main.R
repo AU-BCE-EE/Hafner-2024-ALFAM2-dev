@@ -13,6 +13,8 @@ knit('run1.Rmd', output = '../logs/run1.md')
 source('cal.R')
 source('cal_incorp.R')
 source('cal_pH.R')
+source('cal_polish.R')
+
 source('boot.R')
 source('apply_boot.R')
 #source('cal_wt.R')

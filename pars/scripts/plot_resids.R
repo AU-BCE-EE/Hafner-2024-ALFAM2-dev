@@ -132,26 +132,110 @@ ggplot(dp168w, aes(p1_3, er, colour = pig.nm)) +
   labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', y = 'Measured emission (frac. applied TAN)', colour = '')
 ggsave2x('../plots-resids/erf_scatter5', height = 5, width = 6)
 
-# Use null2 model (with app method and DM) to look at weather effects ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-dd <- subset(dpreds.plot, pars == 'null2' & ct > 12)
-ddf <- subset(dp168.plot, pars == 'null2')
+# Use nullC model (with app method and DM) to look at weather effects ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+dd <- subset(dpreds.plot, pars == 'nullC' & ct > 12)
+# **f for final emission
+ddf <- subset(dp168.plot, pars == 'nullC')
 
 ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
   geom_point(alpha = 0.4) +
-  facet_wrap(~ app.mthd.nm, scale = 'fixed') +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
   geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
   theme_bw() +
   labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
-ggsave2x('../plots-resids/resids_erf_temp', height = 4.2, width = 6)
+ggsave2x('../plots-resids/resids_erf_temp_nc', height = 4.2, width = 6)
 
 ggplot(ddf, aes(wind.2m.24, resid.er, colour = inst, group = pmid)) +
   geom_point(alpha = 0.4) +
-  facet_wrap(~ app.mthd.nm, scale = 'fixed') +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
   geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
   theme_bw() +
   coord_cartesian(xlim = c(0, 11.5)) +
   labs(colour = 'Institution', x = expression('24 h ave. wind speed'~(m~s^'-1')), y = 'Emission residual (frac. applied TAN)')
-ggsave2x('../plots-resids/resids_erf_wind', height = 4.2, width = 6)
+ggsave2x('../plots-resids/resids_erf_wind_nc', height = 4.2, width = 6)
+
+# Compare these two to ps3, set p1
+dd <- subset(dpreds.plot, pars == 'p1' & ct > 12)
+# **f for final emission
+ddf <- subset(dp168.plot, pars == 'p1')
+
+ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots-resids/resids_erf_temp_p1', height = 4.2, width = 6)
+
+ggplot(ddf, aes(wind.2m.24, resid.er, colour = inst, group = pmid)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  coord_cartesian(xlim = c(0, 11.5)) +
+  labs(colour = 'Institution', x = expression('24 h ave. wind speed'~(m~s^'-1')), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots-resids/resids_erf_wind_p1', height = 4.2, width = 6)
+
+# And compare to h1
+# **f for final emission
+ddf <- subset(dp168.plot, pars == 'h1')
+ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots-resids/resids_erf_temp_h1', height = 4.2, width = 6)
+
+ddf <- subset(dp168.plot, pars == 'h2')
+ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots-resids/resids_erf_temp_h2', height = 4.2, width = 6)
+
+
+ddf <- subset(dp168.plot, pars == 'h3')
+ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots-resids/resids_erf_temp_h3', height = 4.2, width = 6)
+
+
+# For DM it is Null B (includes application method) that should be used
+# It doesn't have weather though
+# **f for final emission
+ddf <- subset(dp168.plot, pars == 'nullB')
+ggplot(ddf, aes(man.dm, resid.er, colour = inst, group = pmid)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots-resids/resids_erf_DM_nb', height = 4.2, width = 6)
+
+# Compare to p1
+# **f for final emission
+ddf <- subset(dp168.plot, pars == 'p1')
+ggplot(ddf, aes(man.dm, resid.er, colour = inst, group = pmid)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots-resids/resids_erf_DM_nb', height = 4.2, width = 6)
+
+
+
+
+
+
+
 
 set.seed(186)
 ddd <- subset(dd, pmid %in% sample(dd[, pmid], 100))
@@ -183,14 +267,14 @@ ggsave2x('../plots-resids/resids_erf_rain', height = 4.2, width = 6)
 
 
 # Model c and d comparison ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-dd <- subset(dp168.plot, pars %in% c('ps1', 'ps2', 'p1', 'null2'))
+dd <- subset(dp168.plot, pars %in% c('ps1', 'ps2', 'p1', 'nullC'))
 ggplot(dd, aes(inst, resid.er, fill = pars.nm)) +
   geom_boxplot() +
   facet_wrap(~ app.mthd.nm)
 
 # r5 check, long trials ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 lp <- subset(pdat, ct.max > 100)[, pmid]
-dd <- subset(dpreds.plot, pars %in% c('ps2', 'null2', 'p1') & pmid %in% lp)
+dd <- subset(dpreds.plot, pars %in% c('ps2', 'nullC', 'p1') & pmid %in% lp)
 ggplot(dd, aes(cta, resid.er, colour = inst, group = pmid)) +
   geom_line(alpha = 0.3) +
   geom_point(alpha = 0.3, size = 0.3) +
@@ -208,7 +292,7 @@ ggplot(dd, aes(cta, resid.er, colour = inst, group = pmid)) +
   labs(colour = 'Institution', x = 'Time since application (h)', y = 'Emission residual (frac. applied TAN)')
 ggsave2x('../plots-resids/resids_er_long_time_short', height = 5.2, width = 6)
 
-dd <- subset(dpreds.plot, pars %in% c('ps2', 'null2', 'p1') & pmid %in% c(1498, 1505))
+dd <- subset(dpreds.plot, pars %in% c('ps2', 'nullC', 'p1') & pmid %in% c(1498, 1505))
 ggplot(dd, aes(cta, er, colour = pars, group = pmid)) +
   geom_line(colour = 'black') +
   geom_line(aes(cta, er.pred, group = pars), lty = '1111') +

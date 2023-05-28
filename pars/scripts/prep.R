@@ -46,11 +46,13 @@ idat1[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 # Get weights, equal by plot
 idat1[, weight.plots := 1 / length(j.NH3), by = pmid]
 # Normalize for cumulative emission
-idat1[, weight.er := 1 / max(er), by = pmid]
-# Keep to 168 h
+idat1[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
+# Normalize for number of intervals (later ints count more, last counts the most)
+idat1[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
+# Keep to 168 h (no weight after 168 h)
 idat1[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idat1[, weight.1 := weight.plots * weight.er * weight.168, by = pmid]
+idat1[, weight.1 := weight.plots * weight.int * weight.168, by = pmid]
 
 ### Subset with pH
 ##idat2 <- idat1[!is.na(man.ph), ]
@@ -110,11 +112,13 @@ idat2[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 # Get weights, equal by plot
 idat2[, weight.plots := 1 / length(j.NH3), by = pmid]
 # Normalize for cumulative emission
-idat2[, weight.er := 1 / max(er), by = pmid]
+idat2[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
+# Normalize for number of intervals (later ints count more, last counts the most)
+idat2[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
 idat2[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idat2[, weight.1 := weight.plots * weight.er * weight.168, by = pmid]
+idat2[, weight.1 := weight.plots * weight.int * weight.168, by = pmid]
 
 
 # Repeat for *dat3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -171,11 +175,13 @@ idat3[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 # Get weights, equal by plot
 idat3[, weight.plots := 1 / length(j.NH3), by = pmid]
 # Normalize for cumulative emission
-idat3[, weight.er := 1 / max(er), by = pmid]
+idat3[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
+# Normalize for number of intervals (later ints count more, last counts the most)
+idat3[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
 idat3[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idat3[, weight.1 := weight.plots * weight.er * weight.168, by = pmid]
+idat3[, weight.1 := weight.plots * weight.int * weight.168, by = pmid]
 
 # Repeat for *dati, and also fill in more missing values ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idati[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
@@ -235,11 +241,13 @@ idati[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 # Get weights, equal by plot
 idati[, weight.plots := 1 / length(j.NH3), by = pmid]
 # Normalize for cumulative emission
-idati[, weight.er := 1 / max(er), by = pmid]
+idati[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
+# Normalize for number of intervals (later ints count more, last counts the most)
+idati[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
 idati[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idati[, weight.1 := weight.plots * weight.er * weight.168, by = pmid]
+idati[, weight.1 := weight.plots * weight.int * weight.168, by = pmid]
 
 # Add idati to idat2 and idat3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idati[, app.mthd.ts := 0]
