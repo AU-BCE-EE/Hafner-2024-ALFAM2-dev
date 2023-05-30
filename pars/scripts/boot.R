@@ -2,20 +2,19 @@
 # Takes > 1 d to run
 
 nm.fixed <-'incorp|rain.rate.2|int.f0' 
-pars.prev <- mods[['p1']][['cal']][['par']]
+pars.prev <- mods[['h3']][['cal']][['par']]
 pars.cal <- pars.prev[!grepl(nm.fixed, names(pars.prev))]
 #fixed <- pars.prev[grepl('incorp', names(pars.prev))]
 # Fix pars that are not well-supported by many institutions (or like int.f0 just seem to vary)
 fixed <- pars.prev[grepl(nm.fixed, names(pars.prev))]
 
-nb <- 20
+nb <- 100
 inst.all <- unique(idat3[, inst])
 mods.boot <- list()
 
 set.seed(123) 
 
-#for (i in 1:nb) {
-for (i in 21:40) {
+for (i in 21:nb) {
 
   cat('\n')
   cat('\n')
@@ -41,7 +40,7 @@ for (i in 21:40) {
   mods.boot[[i]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                     resCalc(p = par, dat = idatsamp, to = 'er', time.name = 'cta',
                                             app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'TAE', 
-                                            weights = idatsamp[, weight.plots] * idatsamp[, weight.168], flatout = TRUE),
+                                            weights = idatsamp[, weight.1], flatout = TRUE),
                                     method = 'Nelder-Mead', control = list(maxit = 30000))
   mods.boot[[i]][['coef']] <- c(m$par, fixed)
   
@@ -59,7 +58,7 @@ for(i in 1:length(mods.boot)) {
 fwrite(d.parsb, '../output/pars_boot.csv')
 
 parsbl <- melt(d.parsb, id.vars = 'iteration', variable.name = 'parameter')
-parsbl[, parset := paste0('3-', sprintf('%02d', iteration))]
+parsbl[, parset := paste0('3-', sprintf('%03d', iteration))]
 
 fwrite(parsbl, '../output/pars_boot_long.csv')
 ##parsbl <- fread('../output/pars_boot_long.csv')
