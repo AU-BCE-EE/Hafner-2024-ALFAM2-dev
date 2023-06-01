@@ -1,6 +1,7 @@
 # Specific files (so am only saving local copy)
 pars.RData
 pars2.RData
+*.RData
 ALFAM2_interval.csv
 ALFAM2_plot.csv
 
