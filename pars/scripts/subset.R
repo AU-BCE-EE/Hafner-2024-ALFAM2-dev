@@ -106,7 +106,8 @@ idat3[, dataset := 3]
 
 # Subset i ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Incorporation experiments, with missing variables filled in with averages as needed
-# Will be combined with 2 and 3 
+# Will be combined with 2 and 3 (removing duplicates) in prep.R
+# No acidification allowed
 incorp.exper <- unique(pdat[incorp != 'none', c('inst', 'exper', 'iexper')])
 
 pdati <- pdat[iexper %in% incorp.exper[, iexper] &

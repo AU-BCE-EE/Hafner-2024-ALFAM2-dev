@@ -10,6 +10,7 @@ qdat[, man.source.nm := factor(man.source, levels = c('cattle/other', 'pig'), la
 
 # Limits (datin) from plot.R
 
+datin <- pdat[parset == 3 & !(man.ph < 5.8 | man.ph > 8.9 | man.dm < 1 | man.dm > 8.8 | wind.2m < 0.6 | wind.2m > 9.7 | air.temp < -1 | air.temp > 21.7)]
 d1 <- datin[set == 'man.dm', ]
 d2 <- pdat[parset == 3 & set == 'man.dm', ]
 ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) + 

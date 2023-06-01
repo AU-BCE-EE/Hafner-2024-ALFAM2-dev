@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "28 May, 2023 May:05"
+date: "01 June, 2023 Jun:06"
 ---
 
 Check package version.
@@ -28,7 +28,7 @@ preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
@@ -57,6 +57,7 @@ preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group
 ##   rain.rate.r5
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
 ```
 
 ```r
@@ -99,7 +100,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -118,9 +118,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -136,7 +137,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -155,9 +155,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -173,7 +174,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -192,9 +192,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -210,7 +211,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -229,9 +229,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -247,7 +248,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -266,9 +266,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -284,7 +285,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -303,9 +303,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -321,7 +322,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -340,9 +340,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -358,7 +359,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -377,9 +377,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -395,7 +396,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -414,9 +414,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -432,7 +433,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -451,9 +451,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -469,7 +470,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -488,9 +488,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -506,7 +507,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -525,9 +525,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -543,7 +544,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -562,9 +562,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -580,7 +581,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -599,9 +599,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -617,7 +618,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -636,9 +636,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -654,7 +655,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -673,9 +673,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -691,7 +692,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -710,9 +710,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -728,7 +729,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -747,9 +747,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -765,7 +766,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -784,9 +784,10 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 ```
@@ -802,7 +803,6 @@ for (i in unique(bpars$parset)) {
 ##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
-##   int.f0
 ##   app.mthd.os.f0
 ##   app.rate.ni.f0
 ##   man.dm.f0
@@ -821,9 +821,2970 @@ for (i in unique(bpars$parset)) {
 ##   app.mthd.cs.r3
 ##   int.r5
 ##   rain.rate.r5
-##   air.temp.r3
 ##   man.ph.r1
 ##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 22 parameters. Dropped 4 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## 
+## These secondary parameters are being used:
+##   app.mthd.os.f0
+##   app.rate.ni.f0
+##   man.dm.f0
+##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
+##   air.temp.r1
+##   wind.2m.r1
+##   app.mthd.ts.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
+##   int.r5
+##   rain.rate.r5
+##   man.ph.r1
+##   man.ph.r3
+##   air.temp.ave.r3
+##   int.f0
 ```
 
 

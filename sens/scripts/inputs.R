@@ -38,3 +38,4 @@ dat.man.ph[, set := 'man.ph']
 dat.man.ph[, xval := man.ph]
 
 dat <- rbind(dat.air.temp, dat.wind, dat.rain.rate, dat.dm, dat.man.ph)
+dat[, air.temp.ave := air.temp]

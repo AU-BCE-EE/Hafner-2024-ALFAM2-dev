@@ -1,3 +1,3 @@
 
-save.image('../workspace/pars2.RData')
+save.image('../workspace/pars.RData')
 

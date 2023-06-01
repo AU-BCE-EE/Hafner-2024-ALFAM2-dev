@@ -2,7 +2,7 @@
 # Takes > 1 d to run
 
 nm.fixed <-'incorp|rain.rate.2|int.f0' 
-pars.prev <- mods[['h3']][['cal']][['par']]
+pars.prev <- mods[['h4']][['cal']][['par']]
 pars.cal <- pars.prev[!grepl(nm.fixed, names(pars.prev))]
 #fixed <- pars.prev[grepl('incorp', names(pars.prev))]
 # Fix pars that are not well-supported by many institutions (or like int.f0 just seem to vary)
@@ -14,7 +14,7 @@ mods.boot <- list()
 
 set.seed(123) 
 
-for (i in 21:nb) {
+for (i in 1:nb) {
 
   cat('\n')
   cat('\n')

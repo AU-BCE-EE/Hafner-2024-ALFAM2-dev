@@ -9,6 +9,9 @@ dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 idat1[, `:=` (interp.wind = is.na(wind.2m), interp.air.temp = is.na(air.temp)), ]
 idat1 <- interpm(idat1, 'ct', c('wind.2m', 'air.temp'), by = 'pmid', rule = 2)
 
+# Get an average air temperature for input
+idat1[, air.temp.ave := ifelse(!is.na(air.temp.48), air.temp.48, air.temp.24)]
+
 # Set missing rain to 0
 idat1[is.na(rain.rate), rain.missing := TRUE]
 idat1[is.na(rain.rate), rain.rate := 0]
@@ -67,6 +70,9 @@ dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 # Interpolate missing wind and air temperature values
 idat2[, `:=` (interp.wind = is.na(wind.2m), interp.air.temp = is.na(air.temp)), ]
 idat2 <- interpm(idat2, 'ct', c('wind.2m', 'air.temp'), by = 'pmid', rule = 2)
+
+# Get an average air temperature for input
+idat2[, air.temp.ave := ifelse(!is.na(air.temp.48), air.temp.48, air.temp.24)]
 
 # Set missing rain to 0
 idat2[is.na(rain.rate), rain.missing := TRUE]
@@ -131,6 +137,9 @@ dfsumm(idat3[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 idat3[, `:=` (interp.wind = is.na(wind.2m), interp.air.temp = is.na(air.temp)), ]
 idat3 <- interpm(idat3, 'ct', c('wind.2m', 'air.temp'), by = 'pmid', rule = 2)
 
+# Get an average air temperature for input
+idat3[, air.temp.ave := ifelse(!is.na(air.temp.48), air.temp.48, air.temp.24)]
+
 # Set missing rain to 0
 idat3[is.na(rain.rate), rain.missing := TRUE]
 idat3[is.na(rain.rate), rain.rate := 0]
@@ -193,6 +202,9 @@ dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 idati[, `:=` (interp.wind = is.na(wind.2m), interp.air.temp = is.na(air.temp)), ]
 idati <- interpm(idati, 'ct', c('wind.2m', 'air.temp'), by = 'pmid', rule = 2)
 
+# Get an average air temperature for input
+idati[, air.temp.ave := ifelse(!is.na(air.temp.48), air.temp.48, air.temp.24)]
+
 # Set missing pH to 7.5
 idati[is.na(man.ph), man.ph.missing := TRUE]
 idati[is.na(man.ph), man.ph := 7.5]
@@ -250,6 +262,7 @@ idati[, weight.168 := as.numeric(cta <= 168), by = pmid]
 idati[, weight.1 := weight.plots * weight.int * weight.168, by = pmid]
 
 # Add idati to idat2 and idat3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Not using merge() but I always search for that function so there it is now
 idati[, app.mthd.ts := 0]
 idat2 <- unique(rbind(idat2, idati)[, dataset := 2])
 # Needs next row beacuse there is lack of duplication for same pmid because missing pH is added in idati but not idat2

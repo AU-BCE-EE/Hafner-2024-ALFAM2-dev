@@ -196,7 +196,6 @@ ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
   labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
 ggsave2x('../plots-resids/resids_erf_temp_h2', height = 4.2, width = 6)
 
-
 ddf <- subset(dp168.plot, pars == 'h3')
 ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
   geom_point(alpha = 0.4) +
@@ -205,6 +204,16 @@ ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
   theme_bw() +
   labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
 ggsave2x('../plots-resids/resids_erf_temp_h3', height = 4.2, width = 6)
+
+ddf <- subset(dp168.plot, pars == 'h4')
+dim(ddf)
+ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ app.mthd.nm, scale = 'free') +
+  geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+  theme_bw() +
+  labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+ggsave2x('../plots-resids/resids_erf_temp_h4', height = 4.2, width = 6)
 
 
 # For DM it is Null B (includes application method) that should be used
