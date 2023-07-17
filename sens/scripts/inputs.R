@@ -37,5 +37,11 @@ dat.man.ph[, id := paste('man.ph', 1:nrow(dat.man.ph))]
 dat.man.ph[, set := 'man.ph']
 dat.man.ph[, xval := man.ph]
 
+# Application method has to be handled differently
+dat.app.mthd <- as.data.table(dfcombos(dat.ref, app.mthd))
+dat.app.mthd[, id := paste('app.mthd', 1:nrow(dat.app.mthd))]
+dat.app.mthd[, set := 'app.mthd']
+dat.app.mthd[, xval := app.mthd]
+
 dat <- rbind(dat.air.temp, dat.wind, dat.rain.rate, dat.dm, dat.man.ph)
 dat[, air.temp.ave := air.temp]
