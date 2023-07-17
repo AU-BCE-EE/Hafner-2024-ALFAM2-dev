@@ -1,0 +1,18 @@
+---
+title: 'Subset summary'
+output: pdf_document
+classoption: landscape
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y %h:%m')`"
+---
+
+```{r}
+table(pdat3[, digested])
+table(pdat3[, .(institute, digested)])
+table(pdat3[, .(uptake, digested)])
+table(pdat3[, .(uptake, acid)])
+table(pdat3[, .(institute, acid)])
+table(pdat3[, .(uptake, incorp)])
+table(pdat3[, .(institute, incorp)])
+```
+

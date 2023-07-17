@@ -56,9 +56,7 @@ fit.168.ps3.am <- dp168[pars == 'p1', .(rmse = rmse(m = er, p = er.pred),
                         mbe = mbe(m = er, p = er.pred),
                         n = length(er)), by = .(pars, dataset, app.mthd)]
 
-# NTS: what is i supposed to be for?
-# NTS: Drop if I cannot remmeber
-# NTS: adding incorp
+# 'i' seems to be for incorporation
 fit.168.i <- dp168[, .(rmse = rmse(m = er, p = er.pred),
                        me = me(m = er, p = er.pred),
                        mae = mae(m = er, p = er.pred),
@@ -88,3 +86,4 @@ fit.24.d <- dp24[, .(rmse = rmse(m = er, p = er.pred),
 # NTS: export these summaries
 fwrite(fit.168, '../output/fit_168.csv')
 fwrite(fit.168.am, '../output/fit_168_app_mthd.csv')
+fwrite(fit.168.d, '../output/fit_168_dig.csv')
