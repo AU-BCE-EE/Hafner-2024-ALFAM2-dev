@@ -6,13 +6,47 @@ author: Sasha D. Hafner
 date: "`r format(Sys.time(), '%d %B, %Y %h:%m')`"
 ---
 
+# Summary of main data subset
+
 ```{r}
-table(pdat3[, digested])
-table(pdat3[, .(institute, digested)])
-table(pdat3[, .(uptake, digested)])
-table(pdat3[, .(uptake, acid)])
-table(pdat3[, .(institute, acid)])
-table(pdat3[, .(uptake, incorp)])
-table(pdat3[, .(institute, incorp)])
+table(pdat1[, digested])
+table(pdat1[, .(institute, digested)])
+table(pdat1[, .(uptake, digested)])
+table(pdat1[, .(uptake, acid)])
+table(pdat1[, .(institute, acid)])
+table(pdat1[, .(uptake, incorp)])
+table(pdat1[, .(institute, incorp)])
+```
+
+```{r}
+table(idat1[, rain.missing])
+100 * mean(idat1[, rain.missing])
+
+table(idat1[, interp.wind])
+100 * mean(idat1[, interp.wind])
+
+table(idat1[, interp.air.temp])
+100 * mean(idat1[, interp.air.temp])
+
+table(idat1[, man.ph.missing])
+100 * mean(idat1[, man.ph.missing])
+```
+
+```{r}
+xx <- idat1[, any(rain.missing), by = pmid]
+table(xx[, 2])
+100 * mean(xx[, 2])
+
+xx <- idat1[, any(interp.wind), by = pmid]
+table(xx[, 2])
+100 * mean(xx[, 2])
+
+xx <- idat1[, any(interp.air.temp), by = pmid]
+table(xx[, 2])
+100 * mean(xx[, 2])
+
+xx <- idat1[, any(man.ph.missing), by = pmid]
+table(xx[, 2])
+100 * mean(xx[, 2])
 ```
 

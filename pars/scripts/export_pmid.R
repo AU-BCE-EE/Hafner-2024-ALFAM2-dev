@@ -5,8 +5,3 @@ write.table(pmid1, '../output/pmid_sub1.txt', row.names = FALSE, col.names = FAL
 
 pmid2 <- sort(pdat2[, pmid])
 write.table(pmid2, '../output/pmid_sub2.txt', row.names = FALSE, col.names = FALSE)
-
-pmid3 <- sort(pdat3[, pmid])
-write.table(pmid3, '../output/pmid_sub3.txt', row.names = FALSE, col.names = FALSE)
-
-

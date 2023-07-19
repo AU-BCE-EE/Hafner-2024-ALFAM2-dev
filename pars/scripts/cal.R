@@ -11,16 +11,16 @@ ps <- 'nullA'
 fixed <- integer()
 
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
 # Should be no NA in output
 which(is.na(pr$e))
 if (is.nan(sum(pr$j))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat1, to = 'j', time.name = 'cta',
+                                  resCalc(p = par, dat = idat2, to = 'j', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.168]),
+                                          weights = idat2[, weight.168]),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -34,19 +34,14 @@ print(pp)
 print(m)
 
 # Add predictions
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
-dd <- cbind(idat1, pr[, -1:-3])
-dpreds1 <- dpreds1[pars != ps, ]
-dpreds1 <- rbind(dpreds1, dd)
-
-#pr <- alfam2(as.data.frame(idat3), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
-#names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
-#pr$pars <- ps
-#dd <- cbind(idat3, pr[, -1:-3])
-#dpreds3 <- dpreds3[pars != ps, ]
-#dpreds3 <- rbind(dpreds3, dd)
+dd <- cbind(idat2, pr[, -1:-3])
+dpreds2 <- dpreds2[pars != ps, ]
+dpreds2 <- rbind(dpreds2, dd)
+#names(dd)
+#names(dpreds2)[!names(dpreds2) %in% names(dd)]
 
 
 # Null model B, includes application methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,16 +53,16 @@ ps <- 'nullB'
 fixed <- integer()
 
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
 # Should be no NA in output
 which(is.na(pr$e))
 if (is.nan(sum(pr$j))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat1, to = 'j', time.name = 'cta',
+                                  resCalc(p = par, dat = idat2, to = 'j', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.168]),
+                                          weights = idat2[, weight.168]),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -81,12 +76,12 @@ print(pp)
 print(m)
 
 # Add predictions
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
-dd <- cbind(idat1, pr[, -1:-3])
-dpreds1 <- dpreds1[pars != ps, ]
-dpreds1 <- rbind(dpreds1, dd)
+dd <- cbind(idat2, pr[, -1:-3])
+dpreds2 <- dpreds2[pars != ps, ]
+dpreds2 <- rbind(dpreds2, dd)
 
 # Null model C, includes manure DM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 pars.cal <- mods[['nullB']][['coef']]
@@ -98,16 +93,16 @@ ps <- 'nullC'
 fixed <- integer()
 
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
 # Should be no NA in output
 which(is.na(pr$e))
 if (is.nan(sum(pr$j))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat1, to = 'j', time.name = 'cta',
+                                  resCalc(p = par, dat = idat2, to = 'j', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.168]),
+                                          weights = idat2[, weight.168]),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -121,12 +116,12 @@ print(pp)
 print(m)
 
 # Add predictions
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
+pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
-dd <- cbind(idat1, pr[, -1:-3])
-dpreds1 <- dpreds1[pars != ps, ]
-dpreds1 <- rbind(dpreds1, dd)
+dd <- cbind(idat2, pr[, -1:-3])
+dpreds2 <- dpreds2[pars != ps, ]
+dpreds2 <- rbind(dpreds2, dd)
 
 # Next calibration sets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # List parameters for calibration
@@ -152,6 +147,13 @@ ps <- 'a'
 fixed <- integer()
 
 # Look for problem observations before calibration by running with all parameters
+# WIP WIP
+x <- subset(idat1, pmid == 1800)
+x[, c('pmid', 'file', 'row.in.file.int', 'cta', 'er', '__add.row')]
+names(x)
+pr <- alfam2(x, app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr
+# WIP WIP
 pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
 # Should be no NA in output
 which(is.na(pr$e))

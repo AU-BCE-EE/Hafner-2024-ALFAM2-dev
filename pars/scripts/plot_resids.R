@@ -26,8 +26,9 @@ dp168w <- dcast(dp168.plot, inst + institute + country + exper + pmid + uptake +
 
 # WIP
 # Need different dataset
-dd <- droplevels(subset(dp168w, !is.na(w4_4)))
-ggplot(dd, aes(w4_4, er, colour = exper)) +
+head(dp168w)
+dd <- droplevels(subset(dp168w, !is.na(h3_3)))
+ggplot(dd, aes(h3_3, er, colour = exper)) +
   geom_abline(intercept = 0, slope = 1) +
   facet_wrap(~ app.mthd.nm) +
   geom_point() +

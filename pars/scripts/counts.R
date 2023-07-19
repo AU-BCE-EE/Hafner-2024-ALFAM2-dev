@@ -1,11 +1,21 @@
 # Plot counts for table in paper
 
 # Plot counts of calibration data
-pdat3[, app.mthd := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'))] 
-d3counts <- dcast(idat3, institute + inst + country ~ app.mthd, value.var = 'pmid', fun.aggregate = function(x) length(unique(x)))
-d3counts$total <- rowSums(d3counts[, -1:-3])
-d3counts <- rbind(d3counts, data.frame(institute = 'total', inst = 'total', country = 'total', t(colSums(d3counts[, -1:-3]))))
-d3counts <- d3counts[order(inst), ]
+pdat1[, app.mthd := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'))] 
+d1counts <- dcast(idat1, institute + inst + country ~ app.mthd, value.var = 'pmid', fun.aggregate = function(x) length(unique(x)))
+d1counts$total <- rowSums(d1counts[, -1:-3])
+d1counts <- rbind(d1counts, data.frame(institute = 'total', inst = 'total', country = 'total', t(colSums(d1counts[, -1:-3]))))
+d1counts <- d1counts[order(inst), ]
 
 # Export
-fwrite(d3counts, '../output/d3_counts.csv')
+fwrite(d1counts, '../output/d1_counts.csv')
+
+# Null model subset
+pdat2[, app.mthd := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'))] 
+d2counts <- dcast(idat2, institute + inst + country ~ app.mthd, value.var = 'pmid', fun.aggregate = function(x) length(unique(x)))
+d2counts$total <- rowSums(d2counts[, -1:-3])
+d2counts <- rbind(d2counts, data.frame(institute = 'total', inst = 'total', country = 'total', t(colSums(d2counts[, -1:-3]))))
+d2counts <- d2counts[order(inst), ]
+
+# Export
+fwrite(d2counts, '../output/d2_counts.csv')
