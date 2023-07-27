@@ -14,13 +14,15 @@ pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', grou
 # Should be no warnings (no dropped pars)
 # Should be no NA in output
 which(is.na(pr$e))
-if (is.nan(sum(pr$er))) stop('NAs! Check pars and input data.')
+which(!is.finite(pr$e))
+which(!is.finite(pr$j))
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', time.incorp = 'time.incorp', method = 'TAE', 
-                                          weights = idat1[, weight.168], flatout = TRUE),
+                                          weights = idat1[, weight.168] * (idat1[, cta] > 0) * !is.na(idat1[, er]), flatout = TRUE),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -54,13 +56,15 @@ pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', grou
 # Should be no warnings (no dropped pars)
 # Should be no NA in output
 which(is.na(pr$e))
-if (is.nan(sum(pr$er))) stop('NAs! Check pars and input data.')
+which(!is.finite(pr$e))
+which(!is.finite(pr$j))
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.plots] * idat1[, weight.168], flatout = TRUE),
+                                          weights = idat1[, weight.plots] * idat1[, weight.168] * (idat1[, cta] > 0) * !is.na(idat1[, er]), flatout = TRUE),
                                   method = 'Nelder-Mead')
 
 # View pars

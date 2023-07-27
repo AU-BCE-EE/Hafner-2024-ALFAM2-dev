@@ -38,7 +38,7 @@ idat1 <- ALFAM2:::prepIncorp(idat1, pars = ALFAM2::alfam2pars02, time.name = 'ct
                                        warn = TRUE)[[1]]
 # Set emission in added incorporation rows (needed because flatout option will be used) to NA so they are not used in fitting
 # See love-hate-data.table repo issue #1 for more on this operation below
-idat1[idat1$`__add.row`, c('j', 'e', 'er')] <- NA
+idat1[idat1$`__add.row`, c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
 # Wind tunnel and micromet variables
 idat1[, wt := meas.tech2 == 'wt']
@@ -56,18 +56,6 @@ idat1[, air.temp.log := log10(air.temp + 273.15)]
 
 # resCalc needs measured vars w names that match alfam2() output
 idat1[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
-
-# Get weights, equal by plot
-idat1[, weight.plots := 1 / length(j.NH3), by = pmid]
-# Normalize for cumulative emission
-idat1[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
-# Normalize for number of intervals (later ints count more, last counts the most)
-idat1[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
-# Keep to 168 h
-idat1[, weight.168 := as.numeric(cta <= 168), by = pmid]
-# Combined
-idat1[, weight.1 := weight.plots * weight.int * weight.168, by = pmid]
-
 
 # *dat2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat2[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
@@ -119,17 +107,6 @@ idat2[, air.temp.log := log10(air.temp + 273.15)]
 # resCalc needs measured vars w names that match alfam2() output
 idat2[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 
-# Get weights, equal by plot
-idat2[, weight.plots := 1 / length(j.NH3), by = pmid]
-# Normalize for cumulative emission
-idat2[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
-# Normalize for number of intervals (later ints count more, last counts the most)
-idat2[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
-# Keep to 168 h
-idat2[, weight.168 := as.numeric(cta <= 168), by = pmid]
-# Combined
-idat2[, weight.1 := weight.plots * weight.int * weight.168, by = pmid]
-
 # Repeat for *dati, and also fill in more missing values ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idati[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
 
@@ -171,7 +148,7 @@ idati <- ALFAM2:::prepIncorp(idati, pars = ALFAM2::alfam2pars02, time.name = 'ct
                                        incorp.names = c('incorp', 'deep', 'shallow'), 
                                        warn = TRUE)[[1]]
 # Set emission in added incorporation rows (needed because flatout option will be used) to NA so they are not used in fitting
-idati[idati$`__add.row`, c('j', 'e', 'er')] <- NA
+idati[idati$`__add.row`, c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
 # Wind tunnel and micromet variables
 idati[, wt := meas.tech2 == 'wt']
@@ -199,7 +176,7 @@ idati[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
 idati[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idati[, weight.1 := weight.plots * weight.int * weight.168, by = pmid]
+idati[, weight.1 := weight.plots * weight.int * weight.168 * (idati[, cta] > 0), by = pmid]
 
 # Add idati (other incorporation obs) to idat1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Not using merge() but I always search for that function so there it is now
@@ -214,4 +191,29 @@ idat1 <- rbind(idat1, idati)[, dataset := 1]
 idat1 <- idat1[!duplicated(idat1[, .(pmid, cta)]), ]
 # And then get new plots from idati in the pdat* df as well
 pdat1 <- pdat[pmid %in% unique(idat1[, pmid])]
+
+
+# (Re)calculate weights ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Get weights, equal by plot
+idat1[, weight.plots := 1 / length(j.NH3), by = pmid]
+# Normalize for cumulative emission
+idat1[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
+# Normalize for number of intervals (later ints count more, last counts the most)
+idat1[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
+# Keep to 168 h
+idat1[, weight.168 := as.numeric(cta <= 168), by = pmid]
+# Combined
+idat1[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0), by = pmid]
+
+# Get weights, equal by plot
+idat2[, weight.plots := 1 / length(j.NH3), by = pmid]
+# Normalize for cumulative emission
+idat2[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
+# Normalize for number of intervals (later ints count more, last counts the most)
+idat2[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
+# Keep to 168 h
+idat2[, weight.168 := as.numeric(cta <= 168), by = pmid]
+# Combined
+idat2[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0), by = pmid]
+
 

@@ -1,4 +1,4 @@
-# Runs sensitivity simulations and plots results
+# Effects size
 
 rm(list = ls())
 
@@ -7,10 +7,4 @@ source('packages.R')
 source('load_pars.R')
 source('inputs.R')
 knit('run_ALFAM2.Rmd', output = '../logs/run_ALFAM2.md')
-source('process.R')
 source('plot.R')
-source('plot_sep.R')
-source('plot_app_mthd.R')
-
-head(pdat)
-table(pdat$set)

@@ -1,0 +1,21 @@
+---
+title: 'Model call record'
+output: pdf_document
+classoption: landscape
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y %h:%m')`"
+---
+
+Check package version.
+
+```{r}
+packageVersion('ALFAM2')
+```
+
+Run model with par set 3
+```{r}
+preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep = TRUE))
+names(preds) <- paste0(names(preds), '.pred')
+preds[, parset := '3']
+pdat <- cbind(dat, preds)
+```
