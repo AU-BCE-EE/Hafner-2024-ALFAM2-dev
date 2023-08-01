@@ -3,7 +3,7 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "31 July, 2023 Jul:07"
+date: "01 August, 2023 Aug:08"
 ---
 
 # Summary of main data subset
@@ -296,4 +296,33 @@ table(xx[, 2])
 ```
 ## [1] NA
 ```
+
+# Problems with incorporation
+
+
+```r
+table(pdati[, c('country', 'man.ph')])
+```
+
+```
+##        man.ph
+## country 7.12 7.3 7.47 7.5 7.76 7.9 8 8.02 8.36
+##      FR    4   4    0   2    0   1 0    0    0
+##      IT    0   0    1   0    1   0 2    1    4
+##      NL    0   0    0   0    0   0 0    0    0
+```
+
+```r
+table(pdati[, c('incorp', 'man.ph')])
+```
+
+```
+##          man.ph
+## incorp    7.12 7.3 7.47 7.5 7.76 7.9 8 8.02 8.36
+##   deep       0   0    0   0    0   0 0    1    0
+##   none       2   2    0   2    0   0 0    0    1
+##   shallow    2   2    1   0    1   1 2    0    3
+```
+
+Low pH for shallow incorp plots probably causing wrong sign for shallow incorp pars.
 

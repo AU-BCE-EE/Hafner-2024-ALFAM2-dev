@@ -1,7 +1,7 @@
 # Add incorporation parameters
 
 # Cal i1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Revise c
+# Start with c pars for others
 # Settings
 ps <- 'i1'
 fixed <- integer()
@@ -22,7 +22,7 @@ mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
                                           app.name = 'tan.app', group = 'pmid', time.incorp = 'time.incorp', method = 'TAE', 
-                                          weights = idat1[, weight.168] * (idat1[, cta] > 0) * !is.na(idat1[, er]), flatout = TRUE),
+                                          weights = idat1[, weight.1], flatout = TRUE),
                                   method = 'Nelder-Mead')
 
 # View pars
@@ -44,12 +44,14 @@ dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
 
 # Cal i2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Revise i1, weight by number of obs
+# Start with c pars for others again but do not use air temp r3
 # Settings
 ps <- 'i2'
-fixed <- integer()
 
-pars.cal <- mods[['i1']][['cal']][['par']]
+pars.prev <- mods[['c']][['cal']][['par']]
+pars.cal <- pars.prev[!grepl('air.temp.r3', names(pars.prev))]
+pars.cal <- c(pars.cal, ALFAM2pars02[grepl('incorp', names(ALFAM2pars02))])
+fixed <- numeric()
 
 # Look for problem observations before calibration by running with all parameters
 pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', time.incorp = 'time.incorp', pars = pars.cal)
@@ -63,8 +65,8 @@ if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                   resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
-                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.plots] * idat1[, weight.168] * (idat1[, cta] > 0) * !is.na(idat1[, er]), flatout = TRUE),
+                                          app.name = 'tan.app', group = 'pmid', time.incorp = 'time.incorp', method = 'TAE', 
+                                          weights = idat1[, weight.1], flatout = TRUE),
                                   method = 'Nelder-Mead')
 
 # View pars

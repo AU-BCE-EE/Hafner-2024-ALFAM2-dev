@@ -50,3 +50,12 @@ table(xx[, 2])
 100 * mean(xx[, 2])
 ```
 
+# Problems with incorporation
+
+```{r}
+table(pdati[, c('country', 'man.ph')])
+table(pdati[, c('incorp', 'man.ph')])
+```
+
+Low pH for shallow incorp plots probably causing wrong sign for shallow incorp pars.
+

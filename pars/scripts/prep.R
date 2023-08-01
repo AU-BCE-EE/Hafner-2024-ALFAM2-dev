@@ -192,7 +192,7 @@ idat1[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
 idat1[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idat1[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0), by = pmid]
+idat1[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er), by = pmid]
 
 # Get weights, equal by plot
 idat2[, weight.plots := 1 / length(j.NH3), by = pmid]
@@ -203,6 +203,6 @@ idat2[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
 idat2[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idat2[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0), by = pmid]
+idat2[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er) , by = pmid]
 
 
