@@ -167,19 +167,8 @@ idati[, air.temp.log := log10(air.temp + 273.15)]
 # resCalc needs measured vars w names that match alfam2() output
 idati[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 
-# Get weights, equal by plot
-idati[, weight.plots := 1 / length(j.NH3), by = pmid]
-# Normalize for cumulative emission
-idati[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
-# Normalize for number of intervals (later ints count more, last counts the most)
-idati[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
-# Keep to 168 h
-idati[, weight.168 := as.numeric(cta <= 168), by = pmid]
-# Combined
-idati[, weight.1 := weight.plots * weight.int * weight.168 * (idati[, cta] > 0), by = pmid]
-
 # Add idati (other incorporation obs) to idat1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Not using merge() but I always search for that function so there it is now
+# Not using merge() but I always search for that function so there it is now to use as a keyword
 # Add missing column
 idati[, app.mthd.ts := 0]
 idati[, dataset := 0]
