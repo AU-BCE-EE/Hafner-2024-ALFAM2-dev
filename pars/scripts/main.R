@@ -2,6 +2,8 @@
 
 rm(list = ls())
 
+#NTS: need to get ps1 ps2 in dpreds, check dpreds <- in cal.R
+
 source('packages.R')
 source('functions.R')
 #source('load_image.R')
@@ -17,16 +19,18 @@ source('cal.R')
 source('cal_incorp.R')
 source('cal_pH.R')
 source('cal_polish.R')
-source('ps3.R')
 source('boot.R')
 source('apply_boot.R')
 source('fit_summ.R')
-source('export.R')
 source('pars.R')
+source('export.R')
 source('labels.R')
 source('save_image.R')
 #source('plot.R')
 source('plot_pars.R')
+source('plot_wthr_resids.R')
 source('plot_boot.R')
 source('plot_resids.R')
 #source('plot_.R')
+
+names(mods)

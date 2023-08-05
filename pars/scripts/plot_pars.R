@@ -3,14 +3,25 @@ parsl[, ppar := gsub('^.+([fr][0-5])$', '\\1', parameter)]
 spars <- unique(parsl[, parameter])
 parsl[, parameter := factor(parameter, levels = spars[order(gsub('^.+[fr]([0-5])$', '\\1', spars))])]
 
-dd <- subset(parsl, pars == 'p1')
-ggplot(parsl, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +
+dd <- subset(parsl, !grepl('null|^a|^b|^c|^d', pars))
+ggplot(dd, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +
   geom_point(alpha = 0.5) +
   geom_line(alpha = 0.5) +
   geom_point(data = dd) +
   labs(x = 'Secondary parameter', y = 'Value', colour = 'Par. set') +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ggsave2x('../plots-pars/pars', height = 4.4, width = 6)
+
+dd <- subset(parsl, !grepl('null|^a|^b|^c|^d', pars))
+ggplot(dd, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +
+  geom_point(alpha = 0.5) +
+  geom_line(alpha = 0.5) +
+  geom_point(data = dd) +
+  facet_wrap(.~ppar, scale = 'free') +
+  labs(x = 'Secondary parameter', y = 'Value', colour = 'Par. set') +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+ggsave2x('../plots-pars/pars_facet', height = 4.4, width = 6, scale = 2)
+
 
 dd <- subset(parsl, pars %in% c('ps1', 'ps2', 'ps3', 'p1', 'h1', 'nullA', 'nullB', 'nullC'))
 dd[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'ps3', 'p1', 'h1', 'nullA', 'nullB', 'nullC'), labels = c(1:3, 'p1', 'h1', 'Null A', 'Null B', 'Null C'))]

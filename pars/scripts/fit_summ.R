@@ -33,6 +33,12 @@ fit.168.am <- dp168[, .(rmse = rmse(m = er, p = er.pred),
                         mbe = mbe(m = er, p = er.pred),
                         n = length(er)), by = .(pars, dataset, app.mthd)]
 
+fit.168.ami <- dp168[, .(rmse = rmse(m = er, p = er.pred),
+                        me = me(m = er, p = er.pred),
+                        mae = mae(m = er, p = er.pred),
+                        mbe = mbe(m = er, p = er.pred),
+                        n = length(er)), by = .(pars, dataset, app.mthd, incorp)]
+
 fit.24.am <- dp24[, .(rmse = rmse(m = er, p = er.pred),
                       me = me(m = er, p = er.pred),
                       mae = mae(m = er, p = er.pred),

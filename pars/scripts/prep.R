@@ -32,6 +32,8 @@ idat1 <-ALFAM2:::prepDat(idat1, value = 'data')
 idat1$`__group` <- idat1$pmid
 idat1$`__f4` <- 1
 
+# No deep incorporation so set here
+idat1[, incorp.deep := 0]
 idat1 <- ALFAM2:::prepIncorp(idat1, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
                                        time.incorp = 'time.incorp',  
                                        incorp.names = c('incorp', 'deep', 'shallow'), 
@@ -171,11 +173,13 @@ idati[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 # Not using merge() but I always search for that function so there it is now to use as a keyword
 # Add missing column
 idati[, app.mthd.ts := 0]
+idati[, app.mthd.os := 0]
+idati[, app.mthd.cs := 0]
 idati[, dataset := 0]
 
 #names(idati)[!names(idati) %in% names(idat1)]
 #names(idat1)[!names(idat1) %in% names(idati)]
-idat1 <- rbind(idat1, idati)[, dataset := 1]
+idat1 <- rbind(idat1, idati, fill = TRUE)[, dataset := 1]
 # Needs next row beacuse there is lack of duplication for same pmid because missing pH is added in idati but not idat1
 idat1 <- idat1[!duplicated(idat1[, .(pmid, cta)]), ]
 # And then get new plots from idati in the pdat* df as well

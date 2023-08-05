@@ -40,7 +40,7 @@ pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', grou
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
 dd <- cbind(idat2, pr[, -1:-3])
-dpreds2 <- dpreds2[pars != ps, ]
+if ('pars' %in% names(dpreds2)) dpreds2 <- dpreds2[pars != ps, ]
 dpreds2 <- rbind(dpreds2, dd)
 #names(dd)
 #names(dpreds2)[!names(dpreds2) %in% names(dd)]
@@ -84,7 +84,7 @@ pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', grou
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
 dd <- cbind(idat2, pr[, -1:-3])
-dpreds2 <- dpreds2[pars != ps, ]
+if ('pars' %in% names(dpreds2)) dpreds2 <- dpreds2[pars != ps, ]
 dpreds2 <- rbind(dpreds2, dd)
 
 # Null model C, includes manure DM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,7 +126,7 @@ pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', grou
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
 dd <- cbind(idat2, pr[, -1:-3])
-dpreds2 <- dpreds2[pars != ps, ]
+if ('pars' %in% names(dpreds2)) dpreds2 <- dpreds2[pars != ps, ]
 dpreds2 <- rbind(dpreds2, dd)
 
 # Next calibration sets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,7 +182,7 @@ pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', grou
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
 dd <- cbind(idat1, pr[, -1:-3])
-dpreds1 <- dpreds1[pars != ps, ]
+if ('pars' %in% names(dpreds1)) dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
 
 # Cal b ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -222,7 +222,7 @@ pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', grou
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
 dd <- cbind(idat1, pr[, -1:-3])
-dpreds1 <- dpreds1[pars != ps, ]
+if ('pars' %in% names(dpreds1)) dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
 
 # Cal c ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -265,7 +265,7 @@ pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', grou
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
 dd <- cbind(idat1, pr[, -1:-3])
-dpreds1 <- dpreds1[pars != ps, ]
+if ('pars' %in% names(dpreds1)) dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)
 
 # Cal d ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -306,5 +306,5 @@ pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', grou
 names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
 pr$pars <- ps
 dd <- cbind(idat1, pr[, -1:-3])
-dpreds1 <- dpreds1[pars != ps, ]
+if ('pars' %in% names(dpreds1)) dpreds1 <- dpreds1[pars != ps, ]
 dpreds1 <- rbind(dpreds1, dd)

@@ -9,6 +9,7 @@ fixed <- integer()
 pp <- mods[['c']][['cal']][['par']]
 pars.cal <- c(pp, ALFAM2pars02[grepl('incorp', names(ALFAM2pars02))])
 
+
 # Look for problem observations before calibration by running with all parameters
 pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', time.incorp = 'time.incorp', pars = pars.cal)
 # Should be no warnings (no dropped pars)

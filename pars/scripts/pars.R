@@ -14,6 +14,4 @@ d.pars <- rbindf(d.pars, pp)
 pp <- data.table(pars = 'ps2', t(ALFAM2pars02))
 d.pars <- rbindf(d.pars, pp)
 
-fwrite(d.pars, '../output/pars.csv')
-
 parsl <- melt(d.pars, id.vars = 'pars', variable.name = 'parameter')

@@ -31,6 +31,7 @@ pdat1 <- pdat[!is.na(e.rel.24) &
               man.dm <= 15 &
               app.mthd != 'pi' &
               app.mthd != 'bss' &
+              !(app.mthd %in% c('os', 'cs') & incorp %in% c('shallow', 'deep')) & 
               meas.tech2 %in% c('micro met') &
               !inst %in% c(102, 107, 108) & # Exclude AUN, old Swiss (IUL/FAT), and JTI
               pmid != 1526 &                # See rows 1703 and 1728 and others in MU data. Check with Marco
@@ -66,6 +67,7 @@ pdati <- pdat[iexper %in% incorp.exper[, iexper] &
               man.dm <= 15 &
               app.mthd != 'pi' &
               app.mthd != 'bss' &
+              !(app.mthd %in% c('os', 'cs') & incorp %in% c('shallow', 'deep')) & 
               meas.tech2 %in% c('micro met') &
               !inst %in% c(102, 107, 108) & # Exclude AUN, old Swiss (IUL/FAT), and JTI
               pmid != 1526 &                # See rows 1703 and 1728 and others in MU data. Check with Marco

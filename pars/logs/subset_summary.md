@@ -3,7 +3,7 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "01 August, 2023 Aug:08"
+date: "05 August, 2023 Aug:08"
 ---
 
 # Summary of main data subset
@@ -16,7 +16,7 @@ table(pdat1[, digested])
 ```
 ## 
 ## FALSE  TRUE 
-##   549    26
+##   547    26
 ```
 
 ```r
@@ -35,12 +35,12 @@ table(pdat1[, .(institute, digested)])
 ##   IMAG        86    0
 ##   INH-HAFL    45    0
 ##   INRA         9    4
-##   MU           6    0
+##   MU           5    0
 ##   NMI-WUR      8    0
 ##   TEAGASC     49    0
 ##   UNIMI        0    4
 ##   UNINA        1    1
-##   WUR        122    0
+##   WUR        121    0
 ```
 
 ```r
@@ -51,7 +51,7 @@ table(pdat1[, .(uptake, digested)])
 ##       digested
 ## uptake FALSE TRUE
 ##      1   114    0
-##      2   433   18
+##      2   431   18
 ##      3     2    8
 ```
 
@@ -63,7 +63,7 @@ table(pdat1[, .(uptake, acid)])
 ##       acid
 ## uptake FALSE TRUE
 ##      1   114    0
-##      2   420   31
+##      2   418   31
 ##      3    10    0
 ```
 
@@ -83,12 +83,12 @@ table(pdat1[, .(institute, acid)])
 ##   IMAG        86    0
 ##   INH-HAFL    45    0
 ##   INRA        13    0
-##   MU           6    0
+##   MU           5    0
 ##   NMI-WUR      3    5
 ##   TEAGASC     49    0
 ##   UNIMI        4    0
 ##   UNINA        2    0
-##   WUR        122    0
+##   WUR        121    0
 ```
 
 ```r
@@ -99,7 +99,7 @@ table(pdat1[, .(uptake, incorp)])
 ##       incorp
 ## uptake deep none shallow
 ##      1    0  114       0
-##      2    5  411      35
+##      2    3  411      35
 ##      3    0    7       3
 ```
 
@@ -119,12 +119,12 @@ table(pdat1[, .(institute, incorp)])
 ##   IMAG        0   86       0
 ##   INH-HAFL    0   45       0
 ##   INRA        0    7       6
-##   MU          1    1       4
+##   MU          0    1       4
 ##   NMI-WUR     0    8       0
 ##   TEAGASC     0   49       0
 ##   UNIMI       0    1       3
 ##   UNINA       0    2       0
-##   WUR         4   93      25
+##   WUR         3   93      25
 ```
 
 
@@ -135,7 +135,7 @@ table(idat1[, rain.missing])
 ```
 ## 
 ## FALSE  TRUE 
-## 14337  1233
+## 14170  1223
 ```
 
 ```r
@@ -143,7 +143,7 @@ table(idat1[, rain.missing])
 ```
 
 ```
-## [1] 7.919075
+## [1] 7.94517
 ```
 
 ```r
@@ -153,7 +153,7 @@ table(idat1[, interp.wind])
 ```
 ## 
 ## FALSE  TRUE 
-## 15554    16
+## 15377    16
 ```
 
 ```r
@@ -161,7 +161,7 @@ table(idat1[, interp.wind])
 ```
 
 ```
-## [1] 0.1027617
+## [1] 0.1039434
 ```
 
 ```r
@@ -171,7 +171,7 @@ table(idat1[, interp.air.temp])
 ```
 ## 
 ## FALSE  TRUE 
-## 15566     4
+## 15389     4
 ```
 
 ```r
@@ -179,7 +179,7 @@ table(idat1[, interp.air.temp])
 ```
 
 ```
-## [1] 0.02569043
+## [1] 0.02598584
 ```
 
 ```r
@@ -189,7 +189,7 @@ table(idat1[, man.ph.missing])
 ```
 ## 
 ## FALSE  TRUE 
-## 14834   736
+## 14667   726
 ```
 
 ```r
@@ -197,7 +197,7 @@ table(idat1[, man.ph.missing])
 ```
 
 ```
-## [1] 4.727039
+## [1] 4.71643
 ```
 
 
@@ -209,7 +209,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   431   144
+##   430   143
 ```
 
 ```r
@@ -233,7 +233,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   559    16
+##   557    16
 ```
 
 ```r
@@ -257,7 +257,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   571     4
+##   569     4
 ```
 
 ```r
@@ -281,7 +281,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   527    48
+##   526    47
 ```
 
 ```r
@@ -306,10 +306,10 @@ table(pdati[, c('country', 'man.ph')])
 
 ```
 ##        man.ph
-## country 7.12 7.3 7.47 7.5 7.76 7.9 8 8.02 8.36
-##      FR    4   4    0   2    0   1 0    0    0
-##      IT    0   0    1   0    1   0 2    1    4
-##      NL    0   0    0   0    0   0 0    0    0
+## country 7.12 7.3 7.47 7.5 7.76 7.9 8 8.36
+##      FR    4   4    0   2    0   1 0    0
+##      IT    0   0    1   0    1   0 2    4
+##      NL    0   0    0   0    0   0 0    0
 ```
 
 ```r
@@ -318,10 +318,10 @@ table(pdati[, c('incorp', 'man.ph')])
 
 ```
 ##          man.ph
-## incorp    7.12 7.3 7.47 7.5 7.76 7.9 8 8.02 8.36
-##   deep       0   0    0   0    0   0 0    1    0
-##   none       2   2    0   2    0   0 0    0    1
-##   shallow    2   2    1   0    1   1 2    0    3
+## incorp    7.12 7.3 7.47 7.5 7.76 7.9 8 8.36
+##   deep       0   0    0   0    0   0 0    0
+##   none       2   2    0   2    0   0 0    1
+##   shallow    2   2    1   0    1   1 2    3
 ```
 
 Low pH for shallow incorp plots probably causing wrong sign for shallow incorp pars.
