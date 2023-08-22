@@ -27,8 +27,7 @@ dp168.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'nullA', 'nullB', 
 dp168w <- dcast(dp168.plot, inst + institute + country + exper + pmid + uptake + man.source + man.source.pig + pig.nm + app.mthd + incorp + incorp.nm + app.mthd.nm + digested + digested.nm + acid + acid.nm + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
 
 # Plots ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#for (p in c('ps1', 'ps2', 'i1', 'i2', 'p1', 'p2', 'h1', 'h2')) {
-for (p in c('i1', 'i2', 'p1', 'p2', 'h1', 'h2')) {
+for (p in c('ps1', 'ps2', 'i1', 'i2', 'p1', 'p2', 'p2a', 'p2b', 'p2c', 'p1a', 'p1b', 'p1c', 'p1d', 'p1e')) {
 
   ddf <- subset(dp168.plot, pars == p)
 
@@ -39,5 +38,13 @@ for (p in c('i1', 'i2', 'p1', 'p2', 'h1', 'h2')) {
     theme_bw() +
     labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
   ggsave2x(paste0('../plots-resids/resids_erf_temp_', p), height = 4.2, width = 6)
+
+  ggplot(ddf, aes(man.ph, resid.er, colour = inst, group = pmid)) +
+    geom_point(alpha = 0.4) +
+    facet_wrap(~ app.mthd.nm, scale = 'free') +
+    geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+    theme_bw() +
+    labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+  ggsave2x(paste0('../plots-resids/resids_erf_pH_', p), height = 4.2, width = 6)
 
 }

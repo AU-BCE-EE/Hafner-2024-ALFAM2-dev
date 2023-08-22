@@ -2,8 +2,9 @@
 parsl[, ppar := gsub('^.+([fr][0-5])$', '\\1', parameter)]
 spars <- unique(parsl[, parameter])
 parsl[, parameter := factor(parameter, levels = spars[order(gsub('^.+[fr]([0-5])$', '\\1', spars))])]
+parsl[, parameter := gsub('\\.ni', '', parameter)]
 
-dd <- subset(parsl, !grepl('null|^a|^b|^c|^d', pars))
+dd <- subset(parsl, !grepl('null|^a|^b|^c|^d|^i', pars))
 ggplot(dd, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +
   geom_point(alpha = 0.5) +
   geom_line(alpha = 0.5) +
@@ -12,7 +13,7 @@ ggplot(dd, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ggsave2x('../plots-pars/pars', height = 4.4, width = 6)
 
-dd <- subset(parsl, !grepl('null|^a|^b|^c|^d', pars))
+dd <- subset(parsl, !grepl('null|^a|^b|^c|^d|^h|^i', pars))
 ggplot(dd, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +
   geom_point(alpha = 0.5) +
   geom_line(alpha = 0.5) +
