@@ -15,6 +15,9 @@ source('counts.R')
 source('ranges.R')
 knit('subset_summ.Rmd', output = '../logs/subset_summary.md')
 knit('run1.Rmd', output = '../logs/run1.md')
+
+source('cal_final.R')
+
 source('cal.R')
 source('cal_incorp.R')
 source('cal_pH.R')
@@ -22,6 +25,7 @@ source('cal_pH.R')
 #source('cal_polish.R')
 #source('boot.R')
 #source('apply_boot.R')
+
 source('fit_summ.R')
 source('pars.R')
 source('export.R')

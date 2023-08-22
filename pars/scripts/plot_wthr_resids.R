@@ -27,7 +27,7 @@ dp168.plot[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'nullA', 'nullB', 
 dp168w <- dcast(dp168.plot, inst + institute + country + exper + pmid + uptake + man.source + man.source.pig + pig.nm + app.mthd + incorp + incorp.nm + app.mthd.nm + digested + digested.nm + acid + acid.nm + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
 
 # Plots ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-for (p in c('ps1', 'ps2', 'i1', 'i2', 'p1', 'p2', 'p2a', 'p2b', 'p2c', 'p1a', 'p1b', 'p1c', 'p1d', 'p1e')) {
+for (p in sort(unique(dp168.plot$pars))) {
 
   ddf <- subset(dp168.plot, pars == p)
 
