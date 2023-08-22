@@ -1,5 +1,7 @@
 # Try to add pH parameters
 
+# NTS: fixed isn't actually used! Mistake!
+
 # NTS: check weights in prev cal scripts! They do not use weight.int
 
 print(Sys.time())

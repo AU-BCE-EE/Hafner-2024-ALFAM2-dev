@@ -2,6 +2,8 @@
 
 # *dat1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat1[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
+idat1[, app.rate.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
+idat1[, man.dm.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
 
 dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -32,8 +34,6 @@ idat1 <-ALFAM2:::prepDat(idat1, value = 'data')
 idat1$`__group` <- idat1$pmid
 idat1$`__f4` <- 1
 
-# No deep incorporation so set here
-idat1[, incorp.deep := 0]
 idat1 <- ALFAM2:::prepIncorp(idat1, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
                                        time.incorp = 'time.incorp',  
                                        incorp.names = c('incorp', 'deep', 'shallow'), 
@@ -61,6 +61,8 @@ idat1[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 
 # *dat2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat2[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
+idat2[, app.rate.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
+idat2[, man.dm.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
 
 dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -171,10 +173,10 @@ idati[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 
 # Add idati (other incorporation obs) to idat1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Not using merge() but I always search for that function so there it is now to use as a keyword
-# Add missing column
-idati[, app.mthd.ts := 0]
-idati[, app.mthd.os := 0]
-idati[, app.mthd.cs := 0]
+# Add missing columns, with row indices for safety
+idati[app.mthd != 'ts', app.mthd.ts := 0]
+idati[app.mthd != 'os', app.mthd.os := 0]
+idati[app.mthd != 'cs', app.mthd.cs := 0]
 idati[, dataset := 0]
 
 #names(idati)[!names(idati) %in% names(idat1)]

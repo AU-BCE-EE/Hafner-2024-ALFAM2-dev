@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "16 August, 2023 Aug:08"
+date: "22 August, 2023 Aug:08"
 ---
 
 Check package version.
@@ -14,7 +14,7 @@ packageVersion('ALFAM2')
 ```
 
 ```
-## [1] '3.7'
+## [1] '3.12'
 ```
 
 Parameter values.
@@ -162,31 +162,6 @@ d.pred2.ps1 <- as.data.table(alfam2(idat2, pars = pars01, app.name = 'tan.app', 
 ## Better to remove/rename the offending columns: __group__f4
 ```
 
-```
-## Warning in alfam2(idat2, pars = pars01, app.name = "tan.app", time.name = "cta", : Running with 15 parameters. Dropped 3 with no match.
-## These secondary parameters have been dropped:
-##   incorp.deep.f4
-##   incorp.shallow.f4
-##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   int.r1
-##   int.r2
-##   int.r3
-##   app.mthd.os.f0
-##   app.rate.f0
-##   man.dm.f0
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.2m.r1
-##   air.temp.r3
-##   app.mthd.os.r3
-##   rain.rate.r2
-##   rain.cum.r3
-```
-
 ```r
 d.pred2.ps2 <- as.data.table(alfam2(idat2, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
 ```
@@ -202,13 +177,9 @@ d.pred2.ps2 <- as.data.table(alfam2(idat2, pars = pars02, app.name = 'tan.app', 
 ```
 
 ```
-## Warning in alfam2(idat2, pars = pars02, app.name = "tan.app", time.name = "cta", : Running with 17 parameters. Dropped 5 with no match.
+## Warning in alfam2(idat2, pars = pars02, app.name = "tan.app", time.name = "cta", : Running with 21 parameters. Dropped 1 with no match.
 ## These secondary parameters have been dropped:
 ##   ts.cereal.hght.r1
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
 ## 
 ## These secondary parameters are being used:
 ##   int.f0
@@ -228,6 +199,10 @@ d.pred2.ps2 <- as.data.table(alfam2(idat2, pars = pars02, app.name = 'tan.app', 
 ##   int.r3
 ##   app.mthd.bc.r3
 ##   app.mthd.cs.r3
+##   incorp.shallow.f4
+##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
 ```
 
 
