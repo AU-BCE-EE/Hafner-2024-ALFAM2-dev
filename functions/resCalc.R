@@ -49,11 +49,21 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   if (any(is.na(weights)) || any(is.null(weights))) stop('weights are NA or NULL')
   if (!missing(fixed)) p <- c(p, fixed)
 
+  # Cancel some pars for injection
+  # NTS: Be careful!
+  if ('app.rate.f0' %in% names(p)) {
+    p <- c(p, app.rate.app.mthd.inj.f0 = - p['app.rate.f0'])
+  }
+
+  if ('man.dm.f0' %in% names(p)) {
+    p <- c(p, man.dm.app.mthd.inj.f0 = - p['man.dm.f0'])
+  }
+
   obs <- data.frame(dat)[, to]
 
   if (length(weights) == 1) weights <- data.frame(rep(weights, nrow(dat)), rep(weights, nrow(dat)))
   obs[weights == 0] <- NA # To prevent warning on NaNs
-  if (any(is.na(obs[weights>0]))) stop('NA values in observations obs, not just where weights = 0.')
+  if (any(is.na(obs[weights > 0]))) stop('NA values in observations obs, not just where weights = 0.')
 
   pred <- alfam2(dat, app.name = app.name, time.name = time.name, 
                     time.incorp = time.incorp, group = group, pars = p, flatout = flatout, warn = FALSE)[, to]
@@ -76,6 +86,7 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   if (any(is.na(res))) warning('NA in residuals, see rows ', paste(which(is.na(res)), collapse = ', '), '. ')
   if (any(is.na(res)) && browseNA) browser('NA in residuals')
   res[is.na(res)] <- 0
+
   if (method == 'TAE') {
     obj <- sum(abs(res))
   } else if (method == 'SS') {

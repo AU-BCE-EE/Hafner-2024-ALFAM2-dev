@@ -1,5 +1,5 @@
 # AU bLS measurements
-x <- dpreds[institute == 'AU' & meas.tech == 'bLS' & pars %in% c('ps1', 'ps2', 'f1') & dataset == 1, ]
+x <- dpreds[institute == 'AU' & meas.tech == 'bLS' & dataset == 1, ]
 
 ggplot(x, aes(cta, er, colour = app.mthd)) +
   geom_line() +
@@ -16,7 +16,7 @@ ggplot(x, aes(cta, j, colour = app.mthd)) +
 ggsave('../plots/AU3.png', height = 8.5, width = 11)
 
 
-x <- dpreds[country == 'NL' & pars %in% c('ps1', 'ps2', 'f1') & dataset == 1, ]
+x <- dpreds[country == 'NL' & dataset == 1, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line() +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
@@ -38,7 +38,7 @@ ggplot(x, aes(cta, j, colour = app.mthd)) +
   theme_bw()
 ggsave('../plots/NL3.png', height = 8.5, width = 11)
 
-x <- dpreds[country == 'CH' & pars %in% c('ps1', 'ps2', 'f1') & dataset == 1, ]
+x <- dpreds[country == 'CH' & dataset == 1, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line() +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
@@ -61,7 +61,7 @@ ggplot(x, aes(cta, j, colour = app.mthd)) +
 ggsave('../plots/CH3.png', height = 30, width = 11)
 
 
-x <- dpreds[country == 'UK' & pars %in% c('ps1', 'ps2', 'f1') & dataset == 1, ]
+x <- dpreds[country == 'UK' & dataset == 1, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line() +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
@@ -83,7 +83,7 @@ ggplot(x, aes(cta, j, colour = app.mthd, group = pmid)) +
   theme_bw()
 ggsave('../plots/UK3.png', height = 8.5, width = 11)
 
-x <- dpreds[country == 'IT' & pars %in% c('ps1', 'ps2', 'f1') & dataset == 1, ]
+x <- dpreds[country == 'IT' & dataset == 1, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line() +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
@@ -105,7 +105,7 @@ ggplot(x, aes(cta, j, colour = app.mthd)) +
   theme_bw()
 ggsave('../plots/IT3.png', height = 8.5, width = 11)
 
-x <- dpreds[country == 'DE' & pars %in% c('ps1', 'ps2', 'f1') & dataset == 1, ]
+x <- dpreds[country == 'DE' & dataset == 1, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line() +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
@@ -127,7 +127,7 @@ ggplot(x, aes(cta, j, colour = app.mthd)) +
   theme_bw()
 ggsave('../plots/DE3.png', height = 8.5, width = 11)
 
-x <- dpreds[country == 'FR' & pars %in% c('ps1', 'ps2', 'f1') & dataset == 1, ]
+x <- dpreds[country == 'FR' & dataset == 1, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line(alpha = 0.5) +
   geom_line(aes(cta, er.pred), colour = 'gray45') +

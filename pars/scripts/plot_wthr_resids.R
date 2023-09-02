@@ -29,7 +29,7 @@ dp168w <- dcast(dp168.plot, inst + institute + country + exper + pmid + uptake +
 # Plots ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 for (p in sort(unique(dp168.plot$pars))) {
 
-  ddf <- subset(dp168.plot, pars == p)
+  ddf <- subset(dp168.plot, pars == p & dataset == 1)
 
   ggplot(ddf, aes(air.temp.24, resid.er, colour = inst, group = pmid)) +
     geom_point(alpha = 0.4) +
@@ -44,7 +44,7 @@ for (p in sort(unique(dp168.plot$pars))) {
     facet_wrap(~ app.mthd.nm, scale = 'free') +
     geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
     theme_bw() +
-    labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
+    labs(colour = 'Institution', x = 'Slurry pH', y = 'Emission residual (frac. applied TAN)')
   ggsave2x(paste0('../plots-resids/resids_erf_pH_', p), height = 4.2, width = 6)
 
 }

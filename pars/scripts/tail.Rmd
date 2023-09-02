@@ -1,0 +1,61 @@
+---
+title: 'The tail issue'
+output: pdf_document
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y %h:%m')`"
+---
+
+# lm function
+```{r}
+tailslope <- function(x, y) {
+  m <- lm(y ~ x)
+  return(as.numeric(coef(m)['x']))
+}
+```
+
+
+```{r}
+tailsumm <- idat1[cta >= 24, .(tslope = tailslope(cta, er)), by = .(institute, country, inst, pmid, app.mthd, air.temp.24, wind.2m.24, man.dm, man.ph, e.rel.final)]
+```
+
+```{r}
+ggplot(tailsumm, aes(man.dm, tslope, colour = factor(inst))) +
+  geom_point() +
+  facet_wrap(~ app.mthd)
+```
+
+```{r}
+m1 <- lm(tslope ~ inst + app.mthd + man.dm + man.ph + air.temp.24 + wind.2m.24 + e.rel.final, data = tailsumm)
+summary(m1)
+```
+
+
+```{r}
+ggplot(tailsumm, aes(air.temp.24, tslope, colour = factor(inst))) +
+  geom_point() +
+  facet_wrap(~ app.mthd) +
+  geom_smooth(method = lm, se = FALSE)
+```
+
+```{r}
+ggplot(tailsumm, aes(e.rel.final, tslope, colour = factor(inst))) +
+  geom_point() +
+  facet_wrap(~ app.mthd) +
+  geom_smooth(method = lm, se = FALSE)
+```
+
+```{r}
+ggplot(tailsumm, aes(e.rel.24, tslope, colour = factor(inst))) +
+  geom_point() +
+  facet_wrap(~ app.mthd) +
+  geom_smooth(method = lm, se = FALSE)
+```
+
+Different approach looks at change in residuals from 24 to 168 h
+
+```{r}
+dd <- dpreds[pars == 'ps2', ]
+head(dpreds)
+table(dpreds$pars)
+```
+

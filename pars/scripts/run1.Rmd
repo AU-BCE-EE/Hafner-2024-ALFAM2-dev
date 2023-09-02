@@ -29,8 +29,8 @@ pars02 <- ALFAM2pars02
 ```
 
 ```{r}
-d.pred1.ps1 <- as.data.table(alfam2(idat1, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
-d.pred1.ps2 <- as.data.table(alfam2(idat1, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+d.pred1.ps1 <- as.data.table(alfam2(idat1, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
+d.pred1.ps2 <- as.data.table(alfam2(idat1, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
 ```
 
 ```{r}
@@ -53,8 +53,8 @@ pars02 <- ALFAM2pars02[!grepl('man.ph', names(ALFAM2pars02))]
 ```
 
 ```{r}
-d.pred2.ps1 <- as.data.table(alfam2(idat2, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
-d.pred2.ps2 <- as.data.table(alfam2(idat2, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+d.pred2.ps1 <- as.data.table(alfam2(idat2, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
+d.pred2.ps2 <- as.data.table(alfam2(idat2, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
 ```
 
 ```{r}

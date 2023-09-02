@@ -113,6 +113,8 @@ idat2[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 
 # Repeat for *dati, and also fill in more missing values ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idati[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
+idati[, app.rate.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
+idati[, man.dm.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
 
 dfsumm(idati[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -200,9 +202,13 @@ idat1[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
 idat1[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er), by = pmid]
 idat1[, weight.j := weight.plots * weight.168 * (cta > 0) * !is.na(j), by = pmid]
-# Last obs only
-idat1[!is.na(er), weight.last := 1 * (cta == max(cta)), by = pmid]
-idat1[is.na(er), weight.last := 0, by = pmid]
+# Only last obs
+idat1[, cta.168 := cta[which.min(abs(cta - 168))], by = pmid]
+idat1[, weight.last := 1 * (cta == cta.168), by = pmid]
+# NTS: update dati too
+## Last obs only
+#idat1[!is.na(er), weight.last := 1 * (cta == max(cta)), by = pmid]
+#idat1[is.na(er), weight.last := 0, by = pmid]
 
 # Get weights, equal by plot
 idat2[, weight.plots := 1 / length(j.NH3), by = pmid]

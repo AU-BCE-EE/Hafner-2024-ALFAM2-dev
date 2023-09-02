@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "03 August, 2023 Aug:08"
+date: "30 August, 2023 Aug:08"
 ---
 
 Check package version.
@@ -14,7 +14,7 @@ packageVersion('ALFAM2')
 ```
 
 ```
-## [1] '3.7'
+## [1] '3.12'
 ```
 
 Run model with par set 3
@@ -28,35 +28,36 @@ preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 6 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
+##   app.rate.f0
+##   app.rate.app.mthd.inj.f0
+##   man.dm.app.mthd.inj.f0
 ## 
 ## These secondary parameters are being used:
 ##   int.f0
-##   int.r1
-##   int.r2
-##   int.r3
-##   int.r5
 ##   app.mthd.os.f0
-##   app.mthd.cs.f0
-##   app.mthd.bc.r1
-##   app.mthd.ts.r1
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
 ##   man.dm.f0
-##   man.dm.r1
-##   app.rate.ni.f0
 ##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
 ##   air.temp.r1
 ##   wind.2m.r1
-##   rain.rate.r2
-##   rain.rate.r5
+##   app.mthd.ts.r1
 ##   man.ph.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
 ##   man.ph.r3
+##   int.r5
+##   rain.rate.r5
 ```
 
 ```r
@@ -73,35 +74,36 @@ preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'c
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 6 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
+##   app.rate.f0
+##   app.rate.app.mthd.inj.f0
+##   man.dm.app.mthd.inj.f0
 ## 
 ## These secondary parameters are being used:
 ##   int.f0
-##   int.r1
-##   int.r2
-##   int.r3
-##   int.r5
 ##   app.mthd.os.f0
-##   app.mthd.cs.f0
-##   app.mthd.bc.r1
-##   app.mthd.ts.r1
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
 ##   man.dm.f0
-##   man.dm.r1
-##   app.rate.ni.f0
 ##   man.source.pig.f0
+##   app.mthd.cs.f0
+##   int.r1
+##   app.mthd.bc.r1
+##   man.dm.r1
 ##   air.temp.r1
 ##   wind.2m.r1
-##   rain.rate.r2
-##   rain.rate.r5
+##   app.mthd.ts.r1
 ##   man.ph.r1
+##   int.r2
+##   rain.rate.r2
+##   int.r3
+##   app.mthd.bc.r3
+##   app.mthd.cs.r3
 ##   man.ph.r3
+##   int.r5
+##   rain.rate.r5
 ```
 
 ```r

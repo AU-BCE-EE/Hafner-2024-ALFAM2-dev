@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "22 August, 2023 Aug:08"
+date: "01 September, 2023 Sep:09"
 ---
 
 Check package version.
@@ -68,62 +68,8 @@ pars02 <- ALFAM2pars02
 
 
 ```r
-d.pred1.ps1 <- as.data.table(alfam2(idat1, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(idat1, pars = pars01, app.name = "tan.app", time.name = "cta", : dat data frame has some columns with reserved names.
-## You can proceed, but there may be problems.
-## Better to remove/rename the offending columns: __group__add.row__f4
-```
-
-```r
-d.pred1.ps2 <- as.data.table(alfam2(idat1, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(idat1, pars = pars02, app.name = "tan.app", time.name = "cta", : dat data frame has some columns with reserved names.
-## You can proceed, but there may be problems.
-## Better to remove/rename the offending columns: __group__add.row__f4
-```
-
-```
-## Warning in alfam2(idat1, pars = pars02, app.name = "tan.app", time.name = "cta", : Running with 23 parameters. Dropped 1 with no match.
-## These secondary parameters have been dropped:
-##   ts.cereal.hght.r1
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.2m.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
+d.pred1.ps1 <- as.data.table(alfam2(idat1, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
+d.pred1.ps2 <- as.data.table(alfam2(idat1, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
 ```
 
 
@@ -149,71 +95,70 @@ pars02 <- ALFAM2pars02[!grepl('man.ph', names(ALFAM2pars02))]
 
 
 ```r
-d.pred2.ps1 <- as.data.table(alfam2(idat2, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+d.pred2.ps1 <- as.data.table(alfam2(idat2, pars = pars01, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
 ```
 
 ```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(idat2, pars = pars01, app.name = "tan.app", time.name = "cta", : dat data frame has some columns with reserved names.
-## You can proceed, but there may be problems.
-## Better to remove/rename the offending columns: __group__f4
+## Error in `$<-.data.frame`(`*tmp*`, "__drop.row", value = logical(0)): replacement has 0 rows, data has 10464
 ```
 
 ```r
-d.pred2.ps2 <- as.data.table(alfam2(idat2, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid'))
+d.pred2.ps2 <- as.data.table(alfam2(idat2, pars = pars02, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
 ```
 
 ```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(idat2, pars = pars02, app.name = "tan.app", time.name = "cta", : dat data frame has some columns with reserved names.
-## You can proceed, but there may be problems.
-## Better to remove/rename the offending columns: __group__f4
-```
-
-```
-## Warning in alfam2(idat2, pars = pars02, app.name = "tan.app", time.name = "cta", : Running with 21 parameters. Dropped 1 with no match.
-## These secondary parameters have been dropped:
-##   ts.cereal.hght.r1
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.2m.r1
-##   app.mthd.ts.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
+## Error in `$<-.data.frame`(`*tmp*`, "__drop.row", value = logical(0)): replacement has 0 rows, data has 10464
 ```
 
 
 ```r
 names(d.pred2.ps1)[-1:-3] <- paste0(names(d.pred2.ps1)[-1:-3], '.pred')
+```
+
+```
+## Error in paste0(names(d.pred2.ps1)[-1:-3], ".pred"): object 'd.pred2.ps1' not found
+```
+
+```r
 names(d.pred2.ps2)[-1:-3] <- paste0(names(d.pred2.ps2)[-1:-3], '.pred')
+```
 
+```
+## Error in paste0(names(d.pred2.ps2)[-1:-3], ".pred"): object 'd.pred2.ps2' not found
+```
+
+```r
 d.pred2.ps1$pars <- 'ps1'
-d.pred2.ps2$pars <- 'ps2'
+```
 
+```
+## Error in d.pred2.ps1$pars <- "ps1": object 'd.pred2.ps1' not found
+```
+
+```r
+d.pred2.ps2$pars <- 'ps2'
+```
+
+```
+## Error in d.pred2.ps2$pars <- "ps2": object 'd.pred2.ps2' not found
+```
+
+```r
 d1 <- cbind(idat2, d.pred2.ps1[, -1:-3])
+```
+
+```
+## Error in cbind(deparse.level, ...): object 'd.pred2.ps1' not found
+```
+
+```r
 d2 <- cbind(idat2, d.pred2.ps2[, -1:-3])
+```
+
+```
+## Error in cbind(deparse.level, ...): object 'd.pred2.ps2' not found
+```
+
+```r
 dpreds2 <- rbind(d1, d2)
 ```
