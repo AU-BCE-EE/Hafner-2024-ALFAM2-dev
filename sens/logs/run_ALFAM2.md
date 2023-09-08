@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "30 August, 2023 Aug:08"
+date: "04 September, 2023 Sep:09"
 ---
 
 Check package version.
@@ -14,7 +14,7 @@ packageVersion('ALFAM2')
 ```
 
 ```
-## [1] '3.12'
+## [1] '3.7'
 ```
 
 Run model with par set 3
@@ -28,7 +28,7 @@ preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 6 with no match.
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 18 parameters. Dropped 6 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.deep.f4
@@ -48,7 +48,6 @@ preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group
 ##   man.dm.r1
 ##   air.temp.r1
 ##   wind.2m.r1
-##   app.mthd.ts.r1
 ##   man.ph.r1
 ##   int.r2
 ##   rain.rate.r2
@@ -57,7 +56,6 @@ preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group
 ##   app.mthd.cs.r3
 ##   man.ph.r3
 ##   int.r5
-##   rain.rate.r5
 ```
 
 ```r
@@ -74,7 +72,7 @@ preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'c
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 6 with no match.
+## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 18 parameters. Dropped 6 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.deep.f4
@@ -94,7 +92,6 @@ preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'c
 ##   man.dm.r1
 ##   air.temp.r1
 ##   wind.2m.r1
-##   app.mthd.ts.r1
 ##   man.ph.r1
 ##   int.r2
 ##   rain.rate.r2
@@ -103,7 +100,6 @@ preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'c
 ##   app.mthd.cs.r3
 ##   man.ph.r3
 ##   int.r5
-##   rain.rate.r5
 ```
 
 ```r

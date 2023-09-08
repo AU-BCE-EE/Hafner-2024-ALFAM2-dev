@@ -14,3 +14,10 @@ source('plot_app_mthd.R')
 
 head(pdat)
 table(pdat$set)
+
+# Export for Sven
+ddm <- pdat[set == 'man.dm' & app.mthd == 'bsth' & man.source != 'pig', ]
+plot(er.pred ~ man.dm, data = ddm)
+write.csv(ddm, 'dm_effect_draft.csv', row.names = FALSE)
+ddm$man.source
+ddm$app.mthd

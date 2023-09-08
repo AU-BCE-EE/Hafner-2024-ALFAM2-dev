@@ -3,7 +3,7 @@
 # *dat1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat1[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
 idat1[, app.rate.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
-idat1[, man.dm.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
+idat1[, man.dm.app.mthd.inj := man.dm * app.mthd %in% c('os', 'cs')]
 
 dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -34,6 +34,7 @@ idat1 <-ALFAM2:::prepDat(idat1, value = 'data')
 idat1$`__group` <- idat1$pmid
 idat1$`__f4` <- 1
 
+idat1 <- idat1[order(pmid, cta), ]
 idat1 <- ALFAM2:::prepIncorp(idat1, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
                                        time.incorp = 'time.incorp',  
                                        incorp.names = c('incorp', 'deep', 'shallow'), 
@@ -62,7 +63,7 @@ idat1[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 # *dat2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat2[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
 idat2[, app.rate.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
-idat2[, man.dm.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
+idat2[, man.dm.app.mthd.inj := man.dm * app.mthd %in% c('os', 'cs')]
 
 dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -93,6 +94,8 @@ dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 idat2 <-ALFAM2:::prepDat(idat2, value = 'data') 
 idat2$`__group` <- idat2$pmid
 idat2$`__f4` <- 1
+# Need add.row because it is usually added without flatout option
+idat2$`__add.row` <- FALSE
 
 # Wind tunnel and micromet variables
 idat2[, wt := meas.tech2 == 'wt']
@@ -149,6 +152,7 @@ idati <-ALFAM2:::prepDat(idati, value = 'data')
 idati$`__group` <- idati$pmid
 idati$`__f4` <- 1
 
+idati <- idati[order(pmid, cta), ]
 idati <- ALFAM2:::prepIncorp(idati, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
                                        time.incorp = 'time.incorp',  
                                        incorp.names = c('incorp', 'deep', 'shallow'), 
@@ -221,4 +225,6 @@ idat2[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
 idat2[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er) , by = pmid]
 
-
+# Missing incorporation problem
+idat1[is.na(incorp.deep), incorp.deep := 0]
+idat1[is.na(incorp.shallow), incorp.shallow := 0]

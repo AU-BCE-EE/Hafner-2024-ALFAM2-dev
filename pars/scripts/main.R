@@ -7,7 +7,8 @@ rm(list = ls())
 source('packages.R')
 source('functions.R')
 #source('load_image.R')
-load('../workspace/mods.RData')
+#load('../workspace/mods.RData')
+#load('../workspace/mods2.RData')
 source('load.R')
 source('subset.R')
 source('prep.R')
@@ -15,8 +16,9 @@ source('export_pmid.R')
 source('counts.R')
 source('ranges.R')
 knit('subset_summ.Rmd', output = '../logs/subset_summary.md')
-knit('run1.Rmd', output = '../logs/run1.md')
-source('cal_final.R')
+#knit('run1.Rmd', output = '../logs/run1.md')
+source('cal_sel.R')
+#source('cal_final.R')
 source('ps3.R')
 source('crossval.R')
 
@@ -28,6 +30,8 @@ source('crossval.R')
 #source('boot.R')
 #source('apply_boot.R')
 
+# Generate all predictions
+source('preds.R')
 source('fit_summ.R')
 source('pars.R')
 source('export.R')
@@ -46,7 +50,19 @@ source('plot_scatter_eval.R')
 #source('plot_resids.R')
 #source('plot_.R')
 
+head(idat1)
+x <- idat1[pmid == 1500, ][1:5, ]
+x <- idat1[pmid == 1500, ]
+x$cta
+x
+x$incorp.shallow
 
+y <- ALFAM2:::prepIncorp(x, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
+                                       time.incorp = 'time.incorp',  
+                                       incorp.names = c('incorp', 'deep', 'shallow'), 
+                                       warn = TRUE)[[1]]
+
+undebug(ALFAM2:::prepIncorp)
 
 table(dp168$pmid, dp168$pars, dp168$dataset)
 plot(air.temp.log ~ air.temp, data = idat1)

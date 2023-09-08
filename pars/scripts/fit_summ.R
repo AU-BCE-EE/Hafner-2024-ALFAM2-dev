@@ -6,6 +6,7 @@ dpreds <- rbindf(dpreds1, dpreds2)
 dpreds[, `:=` (resid.j = j.pred - j, resid.er = er.pred - er, inst = factor(inst))]
 
 derr <- copy(dpreds)
+derr <- derr[!is.na(resid.er), ]
 
 derr[, ct.168 := cta[which.min(abs(cta - 168))], by = pmid]
 derr[, ct.24 := cta[which.min(abs(cta - 24))], by = pmid]
@@ -13,6 +14,9 @@ derr[, ct.24 := cta[which.min(abs(cta - 24))], by = pmid]
 # Fit stats
 dp168 <- derr[cta == ct.168, ]
 dp24 <- derr[cta == ct.24, ]
+
+length(unique(idat1$pmid))
+length(unique(dpreds1$pmid))
 
 fit.168 <- dp168[, .(rmse = rmse(m = er, p = er.pred),
                      me = me(m = er, p = er.pred),

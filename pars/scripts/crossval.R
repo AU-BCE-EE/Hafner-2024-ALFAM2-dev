@@ -2,16 +2,16 @@
 
 # Don't even try with some parameters with few measurement data or low stability
 nm.fixed <-'incorp|rain.rate' 
-pars.prev <- mods[['ps3']][['cal']][['par']]
-pars.cal <- pars.prev[!grepl(nm.fixed, names(pars.prev))]
-fixed <- pars.prev[grepl(nm.fixed, names(pars.prev))]
+pars.prev <- mods$ps3$cal$par
+#pars.cal <- pars.prev[!grepl(nm.fixed, names(pars.prev))]
+pars.cal <- pars.prev
+#fixed <- pars.prev[grepl(nm.fixed, names(pars.prev))]
+fixed <- numeric()
 
 insts <- unique(idat1[, inst])
 mods.cv <- list()
 
 set.seed(123) 
-
-dpreds1cv <- copy(dpreds1)
 
 for (i in insts) {
   ic <- as.character(i)
@@ -29,7 +29,7 @@ for (i in insts) {
                                     resCalc(p = par, dat = idatsamp, to = 'er', time.name = 'cta',
                                             app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
                                             weights = idatsamp[, weight.last], flatout = TRUE),
-                                    method = 'Nelder-Mead', control = list(maxit = 30000))
+                                    method = 'Nelder-Mead', control = list(maxit = 500))
 
   pp <- c(m$par, fixed)
   pp <- c(pp, app.rate.app.mthd.inj.f0 = - pp[['app.rate.f0']], man.dm.app.mthd.inj.f0 = - pp[['man.dm.f0']])
@@ -50,13 +50,7 @@ for(i in 1:length(mods.cv)) {
     d.parscv <- rbindf(d.parscv, pp)
 }
 
-fwrite(d.parsb, '../output/pars_cv.csv')
+parscvl <- melt(d.parscv, id.vars = 'inst.dropped', variable.name = 'parameter')
+parscvl[, parset := paste0('3-d', inst.dropped)]
 
-parsbl <- melt(d.parsb, id.vars = 'inst.dropped', variable.name = 'parameter')
-parsbl[, parset := paste0('3-d', inst.dropped)]
-
-fwrite(parsbl, '../output/pars_cv_long.csv')
-##parsbl <- fread('../output/pars_cv_long.csv')
-
-##cvsumm <- parsbl[, .(mn = mean(value), md = median(value), se = sd(value), l90 = quantile(value, 0.05), u90 = quantile(value, 0.95)), by = parameter]
-##fwrite(cvsumm, '../output/cv_summary.csv')
+cvsumm <- parscvl[, .(mn = mean(value), md = median(value), se = sd(value), l90 = quantile(value, 0.05), u90 = quantile(value, 0.95), min = min(value), max = max(value)), by = parameter]
