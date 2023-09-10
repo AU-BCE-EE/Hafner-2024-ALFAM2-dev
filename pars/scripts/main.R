@@ -16,19 +16,8 @@ source('export_pmid.R')
 source('counts.R')
 source('ranges.R')
 knit('subset_summ.Rmd', output = '../logs/subset_summary.md')
-#knit('run1.Rmd', output = '../logs/run1.md')
 source('cal_sel.R')
-#source('cal_final.R')
 source('ps3.R')
-source('crossval.R')
-
-#source('cal.R')
-#source('cal_incorp.R')
-#source('cal_pH.R')
-#source('cal_temp.R')
-#source('cal_polish.R')
-#source('boot.R')
-#source('apply_boot.R')
 
 # Generate all predictions
 source('preds.R')
@@ -36,11 +25,13 @@ source('fit_summ.R')
 source('pars.R')
 source('export.R')
 
-render('tail.Rmd', output_file = '../logs/tail.pdf')
+# Cross-validation
+source('crossval.R')
+source('preds_cv.R')
+
 
 source('labels.R')
-source('save_image.R')
-#source('plot.R')
+#source('save_image.R')
 
 source('plot_pars.R')
 source('plot_wthr_resids.R')

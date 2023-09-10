@@ -1,15 +1,10 @@
 # Bootstrap pars
-# Takes > 1 d to run
 
-nm.fixed <-'incorp|rain.rate.2|int.f0' 
-pars.prev <- mods[['h4']][['cal']][['par']]
-pars.cal <- pars.prev[!grepl(nm.fixed, names(pars.prev))]
-#fixed <- pars.prev[grepl('incorp', names(pars.prev))]
-# Fix pars that are not well-supported by many institutions (or like int.f0 just seem to vary)
-fixed <- pars.prev[grepl(nm.fixed, names(pars.prev))]
+pars.cal <- mods$ps3$cal$par * 0.8
+fixed <- numeric()
 
 nb <- 100
-inst.all <- unique(idat3[, inst])
+inst.all <- unique(idat1[, inst])
 mods.boot <- list()
 
 set.seed(123) 
@@ -28,7 +23,7 @@ for (i in 1:nb) {
   v <- 1
   idatsamp <- data.table()
   for (ii in inst.samp) {
-    x <- idat3[inst == ii]
+    x <- idat1[inst == ii]
     x[, pmid := paste0(v, '-', pmid)]
     idatsamp <- rbind(idatsamp, x)
     v <- v + 1
@@ -41,7 +36,7 @@ for (i in 1:nb) {
                                     resCalc(p = par, dat = idatsamp, to = 'er', time.name = 'cta',
                                             app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'TAE', 
                                             weights = idatsamp[, weight.1], flatout = TRUE),
-                                    method = 'Nelder-Mead', control = list(maxit = 30000))
+                                    method = 'Nelder-Mead', control = list(maxit = 500))
   mods.boot[[i]][['coef']] <- c(m$par, fixed)
   
 }

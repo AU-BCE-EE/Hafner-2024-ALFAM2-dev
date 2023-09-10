@@ -1,11 +1,6 @@
 # Grouped LOOCV (cross-validation)
 
-# Don't even try with some parameters with few measurement data or low stability
-nm.fixed <-'incorp|rain.rate' 
-pars.prev <- mods$ps3$cal$par
-#pars.cal <- pars.prev[!grepl(nm.fixed, names(pars.prev))]
-pars.cal <- pars.prev
-#fixed <- pars.prev[grepl(nm.fixed, names(pars.prev))]
+pars.cal <- mods$ps3$cal$par * 0.8
 fixed <- numeric()
 
 insts <- unique(idat1[, inst])
