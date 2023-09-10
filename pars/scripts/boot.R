@@ -3,7 +3,7 @@
 pars.cal <- mods$ps3$cal$par * 0.8
 fixed <- numeric()
 
-nb <- 100
+nb <- 25
 inst.all <- unique(idat1[, inst])
 mods.boot <- list()
 

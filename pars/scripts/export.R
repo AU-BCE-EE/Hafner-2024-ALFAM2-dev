@@ -11,5 +11,7 @@ fwrite(fit.168.d, '../output/fit_168_dig.csv')
 # Pars
 fwrite(d.pars, '../output/pars.csv')
 fwrite(d.parscv, '../output/pars_cv.csv')
+fwrite(d.parsb, '../output/pars_boot.csv')
 fwrite(parscvl, '../output/pars_cv_long.csv')
+fwrite(parsbl, '../output/pars_boot_long.csv')
 fwrite(cvsumm, '../output/cv_summary.csv')

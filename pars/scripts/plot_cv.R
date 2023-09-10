@@ -22,7 +22,6 @@ ggsave2x('../plots-cv/cross_val_error', height = 3.3, width = 7)
 ggplot(cvsumm, aes(app.mthd.nm, rerr, shape = pig.nm, colour = pig.nm)) + 
   geom_point(size = 4) +
   theme_bw() +
-  coord_cartesian(ylim = c(0, 1.2)) +
+  coord_cartesian(ylim = c(0, NA)) +
   labs(x = 'Application method', y = 'Ave. emission error (frac. meas.)', colour = 'Slurry type', shape = 'Slurry type')
 ggsave2x('../plots-cv/cross_val_rel_error', height = 3.3, width = 7)
-

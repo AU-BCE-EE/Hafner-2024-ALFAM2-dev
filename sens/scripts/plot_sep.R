@@ -99,7 +99,7 @@ ggplot(d, aes(xval, dedx10)) +
   geom_hline(yintercept = 0, colour = 'gray45') +
   geom_line(aes(y = dedx10), linewidth = 0.7, lty = '2222', colour = 'blue') +
   geom_line(aes(y = dedx90), linewidth = 0.7, lty = '2222', colour = 'blue') +
-  geom_line(aes(y = dedxmd), linewidth = 0.7, col = 'gray45') +
+  #geom_line(aes(y = dedxmd), linewidth = 0.7, col = 'gray45') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ man.source.nm, scale = 'free') +
   scale_color_viridis_d() +
@@ -131,13 +131,13 @@ ggplot(d, aes(xval, dedx10)) +
   geom_hline(yintercept = 0, colour = 'gray45') +
   geom_line(aes(y = dedx10), linewidth = 0.7, lty = '2222', colour = 'blue') +
   geom_line(aes(y = dedx90), linewidth = 0.7, lty = '2222', colour = 'blue') +
-  geom_line(aes(y = dedxmd), linewidth = 0.7, col = 'gray45') +
+  #geom_line(aes(y = dedxmd), linewidth = 0.7, col = 'gray45') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ man.source.nm, scale = 'free') +
   scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
-  labs(x = expression('Rainfall rate'~(mm~s^'-1')), y = 'Emission derivative', colour = '') +
+  labs(x = expression('Rainfall rate'~(mm~h^'-1')), y = 'Emission derivative', colour = '') +
   guides(colour = guide_legend(nrow = 2))
 ggsave2x('../plots/dsens_rain', height = 2.2, width = 4.5)
 

@@ -1,9 +1,8 @@
 # Apply bootstrap parameters through ALFAM2 model to get uncertainty in predictions
 
-#parsbl <- fread('../output/pars_boot_long.csv')
-
 bpdat <- data.table()
 
+i <- '3-001'
 for (i in unique(parsbl[, parset])) {
 
   cat(i, ' ')
@@ -11,7 +10,7 @@ for (i in unique(parsbl[, parset])) {
   pars <- d[, value]
   names(pars) <- d[, parameter]
 
-  preds <- data.table(ALFAM2mod(idat3, app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars, flatout = TRUE))
+  preds <- data.table(ALFAM2mod(idat1, app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars, flatout = TRUE))
 
   # Keep pmid and cta for merge
   names(preds)[-1:-2] <- paste0(names(preds)[-1:-2], '.pred')
@@ -19,6 +18,10 @@ for (i in unique(parsbl[, parset])) {
   bpdat <- rbind(bpdat, preds)
 
 }
+
+# Hmm, I guess I don't need this
+......
+
 
 bpdat <- merge(idat3, bpdat, by = c('pmid', 'cta'))
 
