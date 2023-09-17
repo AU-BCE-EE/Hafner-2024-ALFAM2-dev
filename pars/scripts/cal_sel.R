@@ -131,3 +131,69 @@ print(pp)
 print(m)
 
 print(Sys.time())
+
+# Cal f5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Remove rain r5, wrong direction
+# Settings
+ps <- 'f5'
+fixed <- integer()
+pars.cal <- mods$f4$cal$par
+pars.cal <- pars.cal[names(pars.cal) != 'rain.rate.r5']
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+# NTS: increase iterations later!
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, weight.last], flatout = TRUE, rminj = c('app.rate', 'man.dm')),
+                                  method = 'Nelder-Mead', control = list(maxit = 400))
+
+# Save pars
+pp <- c(m$par, fixed)
+# Add injection negation pars
+pp <- c(pp, app.rate.app.mthd.inj.f0 = - pp[['app.rate.f0']], man.dm.app.mthd.inj.f0 = - pp[['man.dm.f0']])
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+# Cal f6 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Remove pH effect for injection
+# Settings
+ps <- 'f6'
+fixed <- integer()
+pars.cal <- mods$f5$cal$par
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+# NTS: increase iterations later!
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, weight.last], flatout = TRUE, rminj = c('app.rate.f0', 'man.dm.f0', 'man.ph.r3')),
+                                  method = 'Nelder-Mead', control = list(maxit = 400))
+
+# Save pars
+pp <- c(m$par, fixed)
+# Add injection negation pars
+pp <- c(pp, app.rate.app.mthd.inj.f0 = - pp['app.rate.f0'], man.dm.app.mthd.inj.f0 = - pp['man.dm.f0'], man.ph.app.mthd.inj.r3 = - pp[['man.ph.r3']])
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+
+

@@ -1,11 +1,20 @@
 # Function for calculating residuals
 
-resCalc <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct', to = 'j', fixed, method = 'TAE', time.incorp = NULL, flatout = FALSE, prog = TRUE, browseNA = FALSE) {
+resCalc <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct', to = 'j', fixed, method = 'TAE', time.incorp = NULL, flatout = FALSE, prog = TRUE, browseNA = FALSE, rminj = NULL) {
 
   if (!all(is.numeric(weights) | length(weights) > 0 | !all(is.na(weights)))) stop('Problem with weights argument.')
   if (!to%in%c('j', 'e', 'e.int', 'er')) stop('to argument must be "j", "e", "er", or "e.int" but is ', to)
   if (any(is.na(weights)) || any(is.null(weights))) stop('weights are NA or NULL')
   if (!missing(fixed)) p <- c(p, fixed)
+
+  # Cancel some pars for injection
+  if (!is.null(rminj)) {
+    rmv <- gsub('\\.[rf][012345]$', '', rminj)
+    rmp <- substr(rminj, nchar(rminj) - 2, nchar(rminj))
+    for (i in 1:length(rminj)) {
+      p[paste0(rmv[i], '.app.mthd.inj', rmp[i])] <- - p[rminj[i]]
+    }
+  }
 
   obs <- dat[[to]]
   if (length(weights) == 1) weights <- rep(weights, nrow(dat))
@@ -42,7 +51,7 @@ resCalc <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct
 
 
 # Objective based on two variables
-resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct', to = c('j', 'er'), wr = 1, fixed, method = 'TAE', time.incorp = NULL, flatout = FALSE, prog = TRUE, browseNA = FALSE) {
+resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct', to = c('j', 'er'), wr = 1, fixed, method = 'TAE', time.incorp = NULL, flatout = FALSE, prog = TRUE, browseNA = FALSE, rminj = NULL) {
 
   if (!all(is.numeric(weights) | length(weights) > 0 | !all(is.na(weights)))) stop('Problem with weights argument.')
   if (!all(to %in% c('j', 'e', 'e.int', 'er'))) stop('to argument must be "j", "e", "er", or "e.int" but is ', to)
@@ -50,13 +59,9 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   if (!missing(fixed)) p <- c(p, fixed)
 
   # Cancel some pars for injection
-  # NTS: Be careful!
-  if ('app.rate.f0' %in% names(p)) {
-    p <- c(p, app.rate.app.mthd.inj.f0 = - p['app.rate.f0'])
-  }
-
-  if ('man.dm.f0' %in% names(p)) {
-    p <- c(p, man.dm.app.mthd.inj.f0 = - p['man.dm.f0'])
+  #NTS: sort this out
+  for (i in rminj) {
+    p[paste0(i, '.app.mthd.inj')] <- - p[i]
   }
 
   obs <- data.frame(dat)[, to]
