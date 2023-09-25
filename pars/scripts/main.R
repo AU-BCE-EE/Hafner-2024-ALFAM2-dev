@@ -2,13 +2,10 @@
 
 rm(list = ls())
 
-#NTS: need to get ps1 ps2 in dpreds, check dpreds <- in cal.R
-
 source('packages.R')
 source('functions.R')
+source('settings.R')
 #source('load_image.R')
-#load('../workspace/mods.RData')
-#load('../workspace/mods2.RData')
 source('load.R')
 source('subset.R')
 source('prep.R')
@@ -17,6 +14,7 @@ source('counts.R')
 source('ranges.R')
 knit('subset_summ.Rmd', output = '../logs/subset_summary.md')
 source('cal_sel.R')
+source('cal_drop.R')
 source('ps3.R')
 
 # Generate all predictions
@@ -27,9 +25,10 @@ source('export.R')
 
 # Cross-validation
 source('crossval.R')
+source('export_cv.R')
 source('preds_cv.R')
 source('boot.R')
-
+source('export_boot.R')
 
 source('labels.R')
 #source('save_image.R')
@@ -37,57 +36,29 @@ source('labels.R')
 source('plot_pars.R')
 source('plot_wthr_resids.R')
 source('plot_country_curves.R')
+source('plot_scatter_flux.R')
 source('plot_scatter_eval.R')
 #source('plot_boot.R')
 #source('plot_resids.R')
 #source('plot_.R')
+dev.off()
 
-head(idat1)
-x <- idat1[pmid == 1500, ][1:5, ]
-x <- idat1[pmid == 1500, ]
-x$cta
-x
-x$incorp.shallow
-
-y <- ALFAM2:::prepIncorp(x, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
-                                       time.incorp = 'time.incorp',  
-                                       incorp.names = c('incorp', 'deep', 'shallow'), 
-                                       warn = TRUE)[[1]]
-
-undebug(ALFAM2:::prepIncorp)
-
-table(dp168$pmid, dp168$pars, dp168$dataset)
-plot(air.temp.log ~ air.temp, data = idat1)
-
-names(mods)
-boxplot(idat1$j.NH3)
-
-x <- dpreds[country == 'NL' & pars %in% c('ps1', 'ps2', 'f3', 'f4') & dataset == 1, ]
-y <- subset(x, country == 'NL' & app.mthd == 'os')
-unique(x$pmid)
-
-
-ggplot(y, aes(cta, j, colour = app.mthd)) +
-  geom_line() +
-  geom_line(aes(cta, j.pred), colour = 'gray45') +
-  facet_grid(pmid ~ pars, scale = 'free') +
-  theme_bw()
-ggsave('x.png', height = 20, width = 8)
-
-ggplot(y, aes(cta, r1.pred, colour = app.mthd)) +
-  geom_line() +
-  facet_grid(pmid ~ pars) +
-  theme_bw()
-
-ggplot(y, aes(cta, f.pred, colour = app.mthd)) +
-  geom_line() +
-  facet_grid(pmid ~ pars, scale = 'free') +
-  theme_bw()
-
-ggplot(y, aes(cta, f0.pred, colour = app.mthd)) +
-  geom_line() +
-  facet_grid(pmid ~ pars) +
-  theme_bw()
-
+x <- subset(dpreds1, pmid %in% 1937:1938)
+x <- subset(idat1, pmid %in% 1937:1938)
+x <- x[!duplicated(x[, pmid]), ]
+x$cta <- 0
+x$app.mthd.os
+x$tan.app
+x$man.dm <- 20
+x$tan.app <- 100
+x$man.dm.app.mthd.inj
+x$man.source.pig
 pp
+x$app.mthd.cs
+x$app.rate
+x$man.ph
+x[1, app.mthd.os := 0]
+cmns
+x <- data.frame(app.mthd.os = c(1, 0), man.dm = 6, app.rate = 30, tan.app = 100, cta = 0, pmid = 1:2)
+alfam2(x, pars = pp, app.name = 'tan.app', time.name = 'cta', group = 'pmid', cmns = cmns)
 

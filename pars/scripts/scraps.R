@@ -1,3 +1,58 @@
+
+
+head(idat1)
+x <- idat1[pmid == 1500, ][1:5, ]
+x <- idat1[pmid == 1500, ]
+x$cta
+x
+x$incorp.shallow
+
+y <- ALFAM2:::prepIncorp(x, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
+                                       time.incorp = 'time.incorp',  
+                                       incorp.names = c('incorp', 'deep', 'shallow'), 
+                                       warn = TRUE)[[1]]
+
+undebug(ALFAM2:::prepIncorp)
+
+table(dp168$pmid, dp168$pars, dp168$dataset)
+plot(air.temp.log ~ air.temp, data = idat1)
+
+names(mods)
+boxplot(idat1$j.NH3)
+
+x <- dpreds[country == 'NL' & pars %in% c('ps1', 'ps2', 'f3', 'f4') & dataset == 1, ]
+y <- subset(x, country == 'NL' & app.mthd == 'os')
+unique(x$pmid)
+
+
+ggplot(y, aes(cta, j, colour = app.mthd)) +
+  geom_line() +
+  geom_line(aes(cta, j.pred), colour = 'gray45') +
+  facet_grid(pmid ~ pars, scale = 'free') +
+  theme_bw()
+ggsave('x.png', height = 20, width = 8)
+
+ggplot(y, aes(cta, r1.pred, colour = app.mthd)) +
+  geom_line() +
+  facet_grid(pmid ~ pars) +
+  theme_bw()
+
+ggplot(y, aes(cta, f.pred, colour = app.mthd)) +
+  geom_line() +
+  facet_grid(pmid ~ pars, scale = 'free') +
+  theme_bw()
+
+ggplot(y, aes(cta, f0.pred, colour = app.mthd)) +
+  geom_line() +
+  facet_grid(pmid ~ pars) +
+  theme_bw()
+
+pp
+
+
+
+
+
 #dp168w <- dcast(dp168.plot, inst + institute + country + exper + pmid + uptake + man.source + man.source.pig + pig.nm + app.mthd + incorp + incorp.nm + app.mthd.nm + digested + digested.nm + acid + acid.nm + man.dm + man.ph + air.temp.24 + wind.2m.24 + er ~ pars + dataset, value.var = 'er.pred')
 
 # Cal f1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

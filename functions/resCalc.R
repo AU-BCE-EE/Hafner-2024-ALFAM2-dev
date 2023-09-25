@@ -9,11 +9,7 @@ resCalc <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct
 
   # Cancel some pars for injection
   if (!is.null(rminj)) {
-    rmv <- gsub('\\.[rf][012345]$', '', rminj)
-    rmp <- substr(rminj, nchar(rminj) - 2, nchar(rminj))
-    for (i in 1:length(rminj)) {
-      p[paste0(rmv[i], '.app.mthd.inj', rmp[i])] <- - p[rminj[i]]
-    }
+    p <- ipars(p, rminj)
   }
 
   obs <- dat[[to]]
@@ -21,8 +17,8 @@ resCalc <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct
   obs[weights == 0] <- NA # To prevent warning on NaNs
   if (any(is.na(obs[weights>0]))) stop('NA values in observations obs, not just where weights = 0.')
 
-  pred <- alfam2(dat, app.name = app.name, time.name = time.name, 
-                    time.incorp = time.incorp, group = group, pars = p, flatout = flatout, warn = FALSE)[[to]]
+  pred <- alfam2(dat, pars = p, app.name = app.name, time.name = time.name, 
+                    time.incorp = time.incorp, group = group, cmns = cmns, flatout = flatout, warn = FALSE)[[to]]
 
   # Set NA obs to high value for high residual
   pred[is.na(pred)] <- 2
@@ -59,9 +55,8 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   if (!missing(fixed)) p <- c(p, fixed)
 
   # Cancel some pars for injection
-  #NTS: sort this out
-  for (i in rminj) {
-    p[paste0(i, '.app.mthd.inj')] <- - p[i]
+  if (!is.null(rminj)) {
+    p <- ipars(p, rminj)
   }
 
   obs <- data.frame(dat)[, to]
@@ -70,8 +65,8 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   obs[weights == 0] <- NA # To prevent warning on NaNs
   if (any(is.na(obs[weights > 0]))) stop('NA values in observations obs, not just where weights = 0.')
 
-  pred <- alfam2(dat, app.name = app.name, time.name = time.name, 
-                    time.incorp = time.incorp, group = group, pars = p, flatout = flatout, warn = FALSE)[, to]
+  pred <- alfam2(dat, pars = p, app.name = app.name, time.name = time.name, 
+                    time.incorp = time.incorp, group = group, cmns = cmns, flatout = flatout, warn = FALSE)[, to]
 
   # Switch to matrix for cell-by-cell calcs
   pred <- as.matrix(pred)

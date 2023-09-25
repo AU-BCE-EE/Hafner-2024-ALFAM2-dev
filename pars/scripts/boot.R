@@ -36,7 +36,7 @@ for (i in 1:nb) {
                                     resCalc(p = par, dat = idatsamp, to = 'er', time.name = 'cta',
                                             app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'TAE', 
                                             weights = idatsamp[, weight.1], flatout = TRUE),
-                                    method = 'Nelder-Mead', control = list(maxit = 500))
+                                    method = 'Nelder-Mead', control = list(maxit = maxit1))
   mods.boot[[i]][['coef']] <- c(m$par, fixed)
   
 }
