@@ -1,5 +1,6 @@
 # AU bLS measurements
-whichpars <- c('ps1', 'ps2', 'ps3', 'f12', 'f13', 'f14', 'f15')
+whichpars <- c('ps1', 'ps2', 'ps3', 'f11', 'f12')
+#whichpars <- unique(dpreds[, pars])
 x <- dpreds[institute == 'AU' & meas.tech == 'bLS' & dataset == 1 & pars %in% whichpars, ]
 
 ggplot(x, aes(cta, er, colour = app.mthd)) +

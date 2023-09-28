@@ -2,9 +2,8 @@
 
 # *dat1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat1[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
-idat1[, app.rate.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
-idat1[, man.dm.app.mthd.inj := man.dm * app.mthd %in% c('os', 'cs')]
-idat1[, man.ph.app.mthd.inj := man.ph * app.mthd %in% c('os', 'cs')]
+idat1[, man.dm.ni := man.dm * !app.mthd %in% c('os', 'cs')]
+idat1[, man.ph.ni := man.ph * !app.mthd %in% c('os', 'cs')]
 
 dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -63,9 +62,8 @@ idat1[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 
 # *dat2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat2[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
-idat2[, app.rate.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
-idat2[, man.dm.app.mthd.inj := man.dm * app.mthd %in% c('os', 'cs')]
-idat2[, man.ph.app.mthd.inj := man.ph * app.mthd %in% c('os', 'cs')]
+idat2[, man.dm.ni := man.dm * !app.mthd %in% c('os', 'cs')]
+idat2[, man.ph.ni := man.ph * !app.mthd %in% c('os', 'cs')]
 
 dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -118,9 +116,8 @@ idat2[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 
 # Repeat for *dati, and also fill in more missing values ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idati[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
-idati[, app.rate.app.mthd.inj := app.rate * app.mthd %in% c('os', 'cs')]
-idati[, man.dm.app.mthd.inj := man.dm * app.mthd %in% c('os', 'cs')]
-idati[, man.ph.app.mthd.inj := man.ph * app.mthd %in% c('os', 'cs')]
+idati[, man.dm.ni := man.dm * !app.mthd %in% c('os', 'cs')]
+idati[, man.ph.ni := man.ph * !app.mthd %in% c('os', 'cs')]
 
 dfsumm(idati[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])

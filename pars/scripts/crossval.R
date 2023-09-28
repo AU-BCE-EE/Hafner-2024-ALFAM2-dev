@@ -1,6 +1,7 @@
 # Grouped LOOCV (cross-validation)
 
 # Change starting pars to avoid getting something similar to ps3 back
+# With this correction and maxit limit below this approach would tend to return poorer fit than possible and so overestimate error
 # Better approach is to use more iterations below
 pars.cal <- mods$ps3$cal$par * 0.8
 fixed <- numeric()
@@ -23,13 +24,12 @@ for (i in insts) {
   # Calibration
   mods.cv[[ic]] <- list()
   mods.cv[[ic]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                    resCalc(p = par, dat = idatsamp, to = 'er', time.name = 'cta',
-                                            app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
-                                            weights = idatsamp[, weight.last], flatout = TRUE),
-                                    method = 'Nelder-Mead', control = list(maxit = maxit2))
-
+                                    resCalcComb(p = par, dat = idatsamp, to = c('er', 'er'), wr = 1 / 5, time.name = 'cta',
+                                            app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'TAE', 
+                                            weights = idatsamp[, .(weight.last, weight.1)], flatout = TRUE),
+                                    method = 'Nelder-Mead', control = list(maxit = maxit3))
+ 
   pp <- c(m$par, fixed)
-  pp <- c(pp, app.rate.app.mthd.inj.f0 = - pp[['app.rate.f0']], man.dm.app.mthd.inj.f0 = - pp[['man.dm.f0']])
   cat('\n')
   print(pp)
 

@@ -14,8 +14,8 @@ source('counts.R')
 source('ranges.R')
 knit('subset_summ.Rmd', output = '../logs/subset_summary.md')
 source('cal_sel.R')
-source('cal_drop.R')
 source('ps3.R')
+source('cal_drop.R')
 
 # Generate all predictions
 source('preds.R')
@@ -23,10 +23,12 @@ source('fit_summ.R')
 source('pars.R')
 source('export.R')
 
-# Cross-validation
+# Cross-validation and bootstrap analysis
 source('crossval.R')
 source('export_cv.R')
 source('preds_cv.R')
+
+# Bootstrap
 source('boot.R')
 source('export_boot.R')
 
@@ -59,6 +61,6 @@ x$app.rate
 x$man.ph
 x[1, app.mthd.os := 0]
 cmns
-x <- data.frame(app.mthd.os = c(1, 0), man.dm = 6, app.rate = 30, tan.app = 100, cta = 0, pmid = 1:2)
+x <- data.frame(app.mthd.os = c(1, 0), man.dm = 6, app.rate = 30, tan.app = 100, cta = 0, app.rate.app.mthd.inj = 1:0 * 30, man.dm.app.mthd.inj = 1:0 * 6, pmid = 1:2)
 alfam2(x, pars = pp, app.name = 'tan.app', time.name = 'cta', group = 'pmid', cmns = cmns)
 

@@ -24,10 +24,7 @@ ggplot(dd, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +
 ggsave2x('../plots-pars/pars_facet', height = 4.4, width = 6, scale = 2)
 
 
-dd <- subset(parsl, pars %in% c('ps1', 'ps2', 'ps3', 'p1', 'h1', 'nullA', 'nullB', 'nullC'))
-dd <- subset(parsl, pars %in% c('ps1', 'ps2', 'f4'))
-dd[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'ps3', 'p1', 'h1', 'nullA', 'nullB', 'nullC'), labels = c(1:3, 'p1', 'h1', 'Null A', 'Null B', 'Null C'))]
-#dd[, parameter := gsub('\\.ni', '', parameter)]
+dd <- subset(parsl, pars %in% c('ps1', 'ps2', 'ps3'))
 dd3 <- subset(dd, pars == 'ps3')
 ggplot(dd, aes(reorder(parameter, ppar), value, colour = pars, group = pars)) +
   geom_hline(yintercept = 0, lty = 2) +

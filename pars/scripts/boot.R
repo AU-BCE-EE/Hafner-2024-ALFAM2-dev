@@ -1,9 +1,9 @@
 # Bootstrap pars
-
+# See crossval.R for notes
 pars.cal <- mods$ps3$cal$par * 0.8
 fixed <- numeric()
 
-nb <- 25
+nb <- 100
 inst.all <- unique(idat1[, inst])
 mods.boot <- list()
 
@@ -33,10 +33,10 @@ for (i in 1:nb) {
   mods.boot[[i]] <- list()
   mods.boot[[i]][['inst']] <- inst.samp
   mods.boot[[i]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                    resCalc(p = par, dat = idatsamp, to = 'er', time.name = 'cta',
+                                    resCalcComb(p = par, dat = idatsamp, to = c('er', 'er'), wr = 1 / 5, time.name = 'cta',
                                             app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'TAE', 
-                                            weights = idatsamp[, weight.1], flatout = TRUE),
-                                    method = 'Nelder-Mead', control = list(maxit = maxit1))
+                                            weights = idatsamp[, .(weight.last, weight.1)], flatout = TRUE),
+                                    method = 'Nelder-Mead', control = list(maxit = maxit2))
   mods.boot[[i]][['coef']] <- c(m$par, fixed)
   
 }
