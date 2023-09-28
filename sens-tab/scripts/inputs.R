@@ -1,7 +1,7 @@
 # Sort out scenario variables
 
 t.max <- 168
-dt <- 1.
+dt <- 1
 nt <- ceiling(t.max/dt)
 
 ni <- nrow(inputs)
@@ -38,6 +38,10 @@ dat[, rain.cum := cumsum(rain.rate * dt), by = .(sid, app.mthd)]
 
 # Dummy variables
 dat$app.rate.ni <- (!dat$app.mthd %in% c('os', 'cs')) * dat$app.rate
+dat$man.dm.ni <- (!dat$app.mthd %in% c('os', 'cs')) * dat$man.dm
+
+# Transformed wind
+dat$wind.sqrt <- sqrt(dat$wind.2m)
 
 # Sim ID plus application method for unique value for each sim
 dat$sida <- paste0(dat$sid, dat$app.mthd)
