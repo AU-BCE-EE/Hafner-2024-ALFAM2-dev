@@ -4,7 +4,6 @@ print(Sys.time())
 mods <- list()
 
 # Cal th2p ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Why can't I improve on ps2 for bsth???
 # Settings
 ps <- 'th1'
 print(ps)
@@ -555,7 +554,7 @@ print(Sys.time())
 ps <- 'os3'
 print(ps)
 pars.cal <- mods$os2$cal$par
-pars.cal <- pars.cal[!grepl('man\\.ph|wind|air\\.temp', names(pars.cal))]
+pars.cal <- pars.cal[!grepl('man\\.ph|wind|air\\.temp|man\\.source\\.pig', names(pars.cal))]
 fixed <- c(wind.sqrt.r1 = 1, air.temp.r1 = 0.1)
 
 caldat <- idat1[app.mthd == 'os', ]
@@ -620,12 +619,12 @@ print(m)
 print(Sys.time())
 
 # Cal cs3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Remove pH, wind, temperature effects
+# Remove pH, wind, temperature, pig effects
 # Settings
 ps <- 'cs3'
 print(ps)
 pars.cal <- mods$cs2$cal$par
-pars.cal <- pars.cal[!grepl('man\\.ph|wind|air\\.temp', names(pars.cal))]
+pars.cal <- pars.cal[!grepl('man\\.ph|wind|air\\.temp|man\\.source\\.pig', names(pars.cal))]
 fixed <- c(wind.sqrt.r1 = 1, air.temp.r1 = 0.1)
 
 caldat <- idat1[app.mthd == 'cs', ]
@@ -652,6 +651,75 @@ print(pp)
 print(m)
 
 print(Sys.time())
+
+# Cal os4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Fix r5 pars
+# Settings
+ps <- 'os4'
+print(ps)
+pars.cal <- mods$os3$cal$par
+pars.cal <- pars.cal[!grepl('r5|r2', names(pars.cal))]
+fixed <- c(wind.sqrt.r1 = 1, air.temp.r1 = 0.1, int.r2 = -1.5, rain.rate.r2 = 1, int.r5 = -1, rain.rate.r5 = 0.5)
+
+caldat <- idat1[app.mthd == 'os', ]
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(caldat), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = caldat, to = c('er', 'er'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = caldat[, .(weight.last, weight.1)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+# Cal cs4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Fix r5 pars
+# Settings
+ps <- 'cs4'
+print(ps)
+pars.cal <- mods$cs3$cal$par
+pars.cal <- pars.cal[!grepl('r5|r2', names(pars.cal))]
+fixed <- c(wind.sqrt.r1 = 1, air.temp.r1 = 0.1, int.r2 = -1.5, rain.rate.r2 = 1, int.r5 = -1, rain.rate.r5 = 0.5)
+
+caldat <- idat1[app.mthd == 'cs', ]
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(caldat), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = caldat, to = c('er', 'er'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = caldat[, .(weight.last, weight.1)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
 
 
 

@@ -4,6 +4,7 @@
 idat1[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
 idat1[, man.dm.ni := man.dm * !app.mthd %in% c('os', 'cs')]
 idat1[, man.ph.ni := man.ph * !app.mthd %in% c('os', 'cs')]
+idat1[, app.mthd.inj := app.mthd %in% c('os', 'cs')]
 
 dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -56,6 +57,7 @@ idat1[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
 # Alternate predictor variables
 idat1[, wind.sqrt := sqrt(wind.2m)]
 idat1[, air.temp.log := log10(air.temp + 273.15)]
+idat1[, man.dm.log := log10(man.dm)]
 
 # resCalc needs measured vars w names that match alfam2() output
 idat1[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
@@ -64,6 +66,7 @@ idat1[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 idat2[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
 idat2[, man.dm.ni := man.dm * !app.mthd %in% c('os', 'cs')]
 idat2[, man.ph.ni := man.ph * !app.mthd %in% c('os', 'cs')]
+idat2[, app.mthd.inj := app.mthd %in% c('os', 'cs')]
 
 dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -110,6 +113,7 @@ idat2[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
 # Alternate predictor variables
 idat2[, wind.sqrt := sqrt(wind.2m)]
 idat2[, air.temp.log := log10(air.temp + 273.15)]
+idat2[, man.dm.log := log10(man.dm)]
 
 # resCalc needs measured vars w names that match alfam2() output
 idat2[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
@@ -118,6 +122,7 @@ idat2[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
 idati[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
 idati[, man.dm.ni := man.dm * !app.mthd %in% c('os', 'cs')]
 idati[, man.ph.ni := man.ph * !app.mthd %in% c('os', 'cs')]
+idati[, app.mthd.inj := app.mthd %in% c('os', 'cs')]
 
 dfsumm(idati[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
@@ -173,6 +178,7 @@ idati[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
 # Alternate predictor variables
 idati[, wind.sqrt := sqrt(wind.2m)]
 idati[, air.temp.log := log10(air.temp + 273.15)]
+idati[, man.dm.log := log10(man.dm)]
 
 # resCalc needs measured vars w names that match alfam2() output
 idati[, `:=` (j = j.NH3, e = e.cum, er = e.rel)]
@@ -195,25 +201,31 @@ pdat1 <- pdat[pmid %in% unique(idat1[, pmid])]
 
 
 # (Re)calculate weights ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Equal by application method
+idat1[, weight.app.mthd := 1 / length(unique(pmid)), by = app.mthd]
 # Get weights, equal by plot
 idat1[, weight.plots := 1 / length(j.NH3), by = pmid]
 # Normalize for cumulative emission
-idat1[, weight.er := 1 / max(er[cta <= 168]), by = pmid]
+idat1[, weight.er := 1 / max(na.omit(er[cta <= 168])), by = pmid]
 # Normalize for number of intervals (later ints count more, last counts the most)
 idat1[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
 idat1[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idat1[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er), by = pmid]
+idat1[, weight.1 :=                                weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er), by = pmid]
+idat1[, weight.1b := weight.app.mthd * weight.er * weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er), by = pmid]
 idat1[, weight.j := weight.plots * weight.168 * (cta > 0) * !is.na(j), by = pmid]
 # Only last obs
 idat1[, cta.168 := cta[which.min(abs(cta - 168))], by = pmid]
 idat1[, weight.last := 1 * (cta == cta.168), by = pmid]
+idat1[, weight.2 := weight.last * weight.app.mthd * weight.er, by = pmid]
 # NTS: update dati too
 ## Last obs only
 #idat1[!is.na(er), weight.last := 1 * (cta == max(cta)), by = pmid]
 #idat1[is.na(er), weight.last := 0, by = pmid]
 
+# Equal by application method
+idat2[, weight.app.mthd := 1 / length(unique(pmid)), by = app.mthd]
 # Get weights, equal by plot
 idat2[, weight.plots := 1 / length(j.NH3), by = pmid]
 # Normalize for cumulative emission

@@ -27,18 +27,23 @@ dp168.plot$set <- ifelse(dp168.plot$incorp != 'none', 'Incorporation', ifelse(dp
 
 for (i in unique(dp168.plot$pars)) {
 
-  ddf <- subset(dp168.plot, pars == i & dataset == 1)
-  ggplot(ddf, aes(er.pred, er, colour = country, shape = set)) +
-    geom_abline(intercept = 0, slope = 1, col = 'gray45') +
-    geom_point(bg = 'gray45') +
-    #geom_line(stat = 'smooth', method = 'lm', se = FALSE, alpha = 0.6) +
-    scale_shape_manual(values = c(1, 2, 20)) +
-    facet_grid(pig.nm ~ app.mthd) +
-    labs(x = 'Calculated', 
-         y = 'Measured',
-         colour = '', shape = '') +
-    theme(legend.position = 'top') +
-    xlim(0, 0.9) +
-    guides(colour = guide_legend(nrow = 1))
-  ggsave(paste0('../plots-scatter/e168_comp_', i, '.png'), height = 4.5, width = 7)
+  fname <- paste0('../plots-scatter/e168_comp_', i, '.png')
+  if (!file.exists(fname)) {
+
+    ddf <- subset(dp168.plot, pars == i & dataset == 1)
+    ggplot(ddf, aes(er.pred, er, colour = country, shape = set)) +
+      geom_abline(intercept = 0, slope = 1, col = 'gray45') +
+      geom_point(bg = 'gray45') +
+      #geom_line(stat = 'smooth', method = 'lm', se = FALSE, alpha = 0.6) +
+      scale_shape_manual(values = c(1, 2, 20)) +
+      facet_grid(pig.nm ~ app.mthd) +
+      labs(x = 'Calculated', 
+           y = 'Measured',
+           colour = '', shape = '') +
+      theme(legend.position = 'top') +
+      xlim(0, 0.9) +
+      guides(colour = guide_legend(nrow = 1))
+    ggsave(fname, height = 4.5, width = 7)
+
+  }
 }

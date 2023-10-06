@@ -1,4 +1,84 @@
 
+# Cal c1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Now add bc (comes with deep incorporation)
+# Settings
+ps <- 'c1'
+print(ps)
+pars.cal <- mods$th5$cal$par
+pars.cal['incorp.deep.r3'] <- ALFAM2::alfam2pars02['incorp.deep.r3']
+pars.cal['incorp.deep.f4'] <- ALFAM2::alfam2pars02['incorp.deep.f4']
+pars.cal['app.mthd.bc.r1'] <- ALFAM2::alfam2pars02['app.mthd.bc.r1']
+pars.cal['app.mthd.bc.r3'] <- ALFAM2::alfam2pars02['app.mthd.bc.r3']
+
+caldat <- idat1[app.mthd %in% c('bsth', 'bc'), ]
+
+fixed <- integer()
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(caldat), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = caldat, to = c('er', 'er'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = caldat[, .(weight.last, weight.1)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+# Cal c2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# c1 performs very poorly. Try starting with ps2 again.
+# Settings
+ps <- 'c2'
+print(ps)
+pars.cal <- ALFAM2::alfam2pars02
+pars.cal <- pars.cal[!names(pars.cal) %in% c('ts.cereal.hght.r1')]
+pars.cal['int.r5'] <- -1.5
+pars.cal['rain.rate.r5'] <- 1.0
+
+fixed <- integer()
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'er'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last, weight.1)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+
+
+
+
+
+
+
 # Cal f2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Try more weight to er
 # Settings

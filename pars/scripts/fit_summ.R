@@ -8,6 +8,7 @@ dpreds[, `:=` (resid.j = j.pred - j, resid.er = er.pred - er, inst = factor(inst
 derr <- copy(dpreds)
 derr <- derr[!is.na(resid.er), ]
 
+# NTS: do I alrready have cta.168?
 derr[, ct.168 := cta[which.min(abs(cta - 168))], by = pmid]
 derr[, ct.24 := cta[which.min(abs(cta - 24))], by = pmid]
 

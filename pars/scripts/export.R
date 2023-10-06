@@ -8,5 +8,8 @@ fwrite(fit.168.am, '../output/fit_168_app_mthd.csv')
 fwrite(fit.168.ami, '../output/fit_168_app_mthd_incorp.csv')
 fwrite(fit.168.d, '../output/fit_168_dig.csv')
 
+fit.168.am.sorted <- fit.168.am[order(dataset, app.mthd, -me), ] 
+fwrite(fit.168.am.sorted, '../output/fit_168_app_mthd_me_sort.csv')
+
 # Pars
 fwrite(d.pars, '../output/pars.csv')

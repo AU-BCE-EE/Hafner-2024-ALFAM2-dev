@@ -1,7 +1,18 @@
 # AU bLS measurements
-whichpars <- c('ps1', 'ps2', 'ps3', 'f11', 'f12')
-#whichpars <- unique(dpreds[, pars])
+#whichpars <- c('ps1', 'ps2', 'f8', 'f9', 'f11', 'f12', 'th4', 'th5', 'c1', 'c2')
+whichpars <- unique(dpreds[, pars])
 x <- dpreds[institute == 'AU' & meas.tech == 'bLS' & dataset == 1 & pars %in% whichpars, ]
+
+#x <- dpreds[institute == 'AU' & meas.tech == 'bLS' & dataset == 1 & ((pars == 'th5' & app.mthd == 'bsth') | (pars == 'os1' & app.mthd == 'os')), ]
+#ggplot(x, aes(cta, j, colour = app.mthd)) +
+#  geom_line() +
+#  geom_line(aes(cta, j.pred), colour = 'gray45') +
+#  facet_grid(. ~ pmid, scale = 'free') +
+#  labs(x = 'Time since application (h)', y = expression(NH[3]~flux~(kg~N~ha^'-1'~h^'-1')), colour = 'Application method') +
+#  theme_bw() +
+#  theme(legend.position = 'top')
+#ggsave('../plots/AU1.png', height = 3, width = 7)
+
 
 ggplot(x, aes(cta, er, colour = app.mthd)) +
   geom_line() +
