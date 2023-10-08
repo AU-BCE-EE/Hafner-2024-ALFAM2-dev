@@ -1,310 +1,320 @@
-# List for holding output
+# Parameter estimation
+
 mods <- list()
 
-# Null model A, for looking for patterns in residuals and more ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# *Only* has intercept terms
-pars.cal <- ALFAM2pars02[grepl('int', names(ALFAM2pars02))]
-pars.cal['int.r5'] <- -3
-
+# Cal f1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Settings
-ps <- 'nullA'
+ps <- 'f1'
+print(ps)
 fixed <- integer()
 
+pars.cal <- ALFAM2::alfam2pars02
+pars.cal <- pars.cal[!names(pars.cal) %in% c('ts.cereal.hght.r1')]
+pars.cal['int.r5'] <- -1.5
+pars.cal['rain.rate.r5'] <- 1.0
+
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
 # Should be no NA in output
-which(is.na(pr$e))
-which(!is.finite(pr$e))
-which(!is.finite(pr$j))
 if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat2, to = 'j', time.name = 'cta',
-                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat2[, weight.168] * (idat2[, cta] > 0) * !is.na(idat2[, j]), flatout = TRUE),
-                                  method = 'Nelder-Mead')
-
-# View pars
-print(m)
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'TAE', 
+                                          weights = idat1[, .(weight.last, weight.1)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
 
 # Save pars
-mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
 
 # Echo pars and other model info
 print(pp)
 print(m)
 
-# Add predictions
-pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
-names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
-pr$pars <- ps
-dd <- cbind(idat2, pr[, -1:-3])
-if ('pars' %in% names(dpreds2)) dpreds2 <- dpreds2[pars != ps, ]
-dpreds2 <- rbind(dpreds2, dd)
-#names(dd)
-#names(dpreds2)[!names(dpreds2) %in% names(dd)]
+print(Sys.time())
 
-
-# Null model B, includes application methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-pars.cal <- ALFAM2pars02[grepl('int|app.mthd', names(ALFAM2pars02))]
-pars.cal['int.r5'] <- -3
-
+# Cal f2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Same but use SS
 # Settings
-ps <- 'nullB'
+ps <- 'f2'
+print(ps)
 fixed <- integer()
 
+pars.cal <- mods$f1$cal$par
+
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
 # Should be no NA in output
-which(is.na(pr$e))
-which(!is.finite(pr$e))
-which(!is.finite(pr$j))
 if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat2, to = 'j', time.name = 'cta',
-                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat2[, weight.168] * (idat2[, cta] > 0) * !is.na(idat2[, j]), flatout = TRUE),
-                                  method = 'Nelder-Mead')
-
-# View pars
-print(m)
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last, weight.1)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
 
 # Save pars
-mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
 
 # Echo pars and other model info
 print(pp)
 print(m)
 
-# Add predictions
-pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
-names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
-pr$pars <- ps
-dd <- cbind(idat2, pr[, -1:-3])
-if ('pars' %in% names(dpreds2)) dpreds2 <- dpreds2[pars != ps, ]
-dpreds2 <- rbind(dpreds2, dd)
+print(Sys.time())
 
-# Null model C, includes manure DM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-pars.cal <- mods[['nullB']][['coef']]
-pars.cal['man.dm.f0'] <- 0.4
-pars.cal['man.dm.r1'] <- -0.1
 
+# Cal f3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Increase weights for injection and band application
 # Settings
-ps <- 'nullC'
+ps <- 'f3'
+print(ps)
 fixed <- integer()
 
+pars.cal <- mods$f2$cal$par
+
+ww <- c(bsth = 1, ts = 1, os = 3, cs = 3, bc = 0.5)
+idat1[, `:=` (weight.last.b = weight.last * ww[app.mthd], weight.1.b = weight.1 * ww[app.mthd])]
+
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
 # Should be no NA in output
-which(is.na(pr$e))
-which(!is.finite(pr$e))
-which(!is.finite(pr$j))
 if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat2, to = 'j', time.name = 'cta',
-                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat2[, weight.168] * (idat2[, cta] > 0) * !is.na(idat2[, j]), flatout = TRUE),
-                                  method = 'Nelder-Mead')
-
-# View pars
-print(m)
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
 
 # Save pars
-mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
 
 # Echo pars and other model info
 print(pp)
 print(m)
 
-# Add predictions
-pr <- alfam2(as.data.frame(idat2), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
-names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
-pr$pars <- ps
-dd <- cbind(idat2, pr[, -1:-3])
-if ('pars' %in% names(dpreds2)) dpreds2 <- dpreds2[pars != ps, ]
-dpreds2 <- rbind(dpreds2, dd)
+print(Sys.time())
 
-# Next calibration sets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# List parameters for calibration
-pars.cal <- ALFAM2pars02[!grepl('incorp|man.ph|hght', names(ALFAM2pars02))]
-pars.cal['int.r5'] <- -3
-pars.cal['rain.rate.r5'] <- 0.5
-pars.cal[c('wind.2m.r3', 'air.temp.r3')] <- 0.1
 
-pars.cal
-
-# Next calibration sets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# List parameters for calibration
-pars.cal <- ALFAM2pars02[!grepl('incorp|man.ph|hght', names(ALFAM2pars02))]
-pars.cal['int.r5'] <- -3
-pars.cal['rain.rate.r5'] <- 0.5
-pars.cal[c('wind.2m.r3', 'air.temp.r3')] <- 0.1
-
-pars.cal
-
-# Cal a ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Cal f4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Try square root wind
 # Settings
-ps <- 'a'
+ps <- 'f4'
+print(ps)
 fixed <- integer()
 
+pars.cal <- mods$f3$cal$par
+names(pars.cal) <- gsub('wind\\.2m', 'wind.sqrt', names(pars.cal))
+
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(idat1, app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
 # Should be no NA in output
-which(is.na(pr$e))
-which(!is.finite(pr$e))
-which(!is.finite(pr$j))
 if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat1, to = 'j', time.name = 'cta',
-                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.168] * (idat1[, cta] > 0) * !is.na(idat1[, j]), flatout = TRUE),
-                                  method = 'Nelder-Mead')
-
-# View pars
-print(m)
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
 
 # Save pars
-mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
 
 # Echo pars and other model info
 print(pp)
 print(m)
 
-# Add predictions
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
-names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
-pr$pars <- ps
-dd <- cbind(idat1, pr[, -1:-3])
-if ('pars' %in% names(dpreds1)) dpreds1 <- dpreds1[pars != ps, ]
-dpreds1 <- rbind(dpreds1, dd)
+print(Sys.time())
 
-# Cal b ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# To emission instead
-# Idea: better late than never
+
+# Exclude man.dm effect from injection
+# Cal f5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Settings
-ps <- 'b'
+ps <- 'f5'
+print(ps)
 fixed <- integer()
 
+pars.cal <- mods$f4$cal$par
+names(pars.cal) <- gsub('man\\.dm', 'man\\.dm\\.ni', names(pars.cal))
+
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
 # Should be no NA in output
-which(is.na(pr$e))
-which(!is.finite(pr$e))
-which(!is.finite(pr$j))
 if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
-                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.168] * (idat1[, cta] > 0) * !is.na(idat1[, er]), flatout = TRUE),
-                                  method = 'Nelder-Mead')
-
-# View pars
-print(m)
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
 
 # Save pars
-mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
 
 # Echo pars and other model info
 print(pp)
 print(m)
 
-# Add predictions
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
-names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
-pr$pars <- ps
-dd <- cbind(idat1, pr[, -1:-3])
-if ('pars' %in% names(dpreds1)) dpreds1 <- dpreds1[pars != ps, ]
-dpreds1 <- rbind(dpreds1, dd)
+print(Sys.time())
 
-# Cal c ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Revise b, drop tiny negative wind.2m.r3 
+# Cal f6 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Adjust weights to try to improve bsth fit
 # Settings
-ps <- 'c'
+ps <- 'f6'
+print(ps)
 fixed <- integer()
 
-pp <- mods[['b']][['cal']][['par']]
-pars.cal <- pp[names(pp) != 'wind.2m.r3']
+pars.cal <- mods$f3$cal$par
+
+ww <- c(bsth = 1, ts = 1, os = 2, cs = 2, bc = 0.5)
+idat1[, `:=` (weight.last.b = weight.last * ww[app.mthd], weight.1.b = weight.1 * ww[app.mthd])]
+
 
 # Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
 # Should be no NA in output
-which(is.na(pr$e))
-which(!is.finite(pr$e))
-which(!is.finite(pr$j))
 if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
 
 mods[[ps]] <- list()
 mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
-                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.168] * (idat1[, cta] > 0) * !is.na(idat1[, er]), flatout = TRUE),
-                                  method = 'Nelder-Mead')
-
-# View pars
-print(m)
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
 
 # Save pars
-mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
-
-# Echo pars and other model info
-print(pp)
-print(m)
-#pp['rain.rate.r5'] <- 0.5
-
-# Add predictions
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
-names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
-pr$pars <- ps
-dd <- cbind(idat1, pr[, -1:-3])
-if ('pars' %in% names(dpreds1)) dpreds1 <- dpreds1[pars != ps, ]
-dpreds1 <- rbind(dpreds1, dd)
-
-# Cal d ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Revise c, use weights
-# Settings
-ps <- 'd'
-fixed <- integer()
-
-pars.cal <- mods[['c']][['cal']][['par']]
-
-# Look for problem observations before calibration by running with all parameters
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pars.cal)
-# Should be no NA in output
-which(is.na(pr$e))
-which(!is.finite(pr$e))
-which(!is.finite(pr$j))
-if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
-
-mods[[ps]] <- list()
-mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                  resCalc(p = par, dat = idat1, to = 'er', time.name = 'cta',
-                                          app.name = 'tan.app', group = 'pmid', method = 'TAE', 
-                                          weights = idat1[, weight.168] * (idat1[, cta] > 0) * !is.na(idat1[, er]), flatout = TRUE),
-                                  method = 'Nelder-Mead')
-
-# View pars
-print(m)
-
-# Save pars
-mods[[ps]][['coef']] <- pp <- c(m$par, fixed)
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
 
 # Echo pars and other model info
 print(pp)
 print(m)
 
-# Add predictions
-pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = pp)
-names(pr)[-1:-3] <- paste0(names(pr)[-1:-3], '.pred')
-pr$pars <- ps
-dd <- cbind(idat1, pr[, -1:-3])
-if ('pars' %in% names(dpreds1)) dpreds1 <- dpreds1[pars != ps, ]
-dpreds1 <- rbind(dpreds1, dd)
+print(Sys.time())
+
+# Cal f7 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Same but improve some starting estimates, hoping some extreme pars are local minima
+# Settings
+ps <- 'f7'
+print(ps)
+fixed <- integer()
+
+pars.cal <- mods$f6$cal$par
+pars.cal['incorp.deep.r3'] <- -0.5
+pars.cal['incorp.shallow.r3'] <- 0
+pars.cal['incorp.deep.f4'] <- -2
+pars.cal['incorp.shallow.f4'] <- -0.5
+pars.cal['man.ph.r1'] <- 0.7
+pars.cal['man.ph.r3'] <- 0.1
+#pars.cal['app.mthd.cs.f0'] <- -4
+
+ww <- c(bsth = 1, ts = 1, os = 2, cs = 2, bc = 0.5)
+idat1[, `:=` (weight.last.b = weight.last * ww[app.mthd], weight.1.b = weight.1 * ww[app.mthd])]
+
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+# Cal f8 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Try again but with app.mthd.cs.f0 this time (had mistakenly omitted above)
+# Settings
+ps <- 'f8'
+print(ps)
+fixed <- integer()
+
+pars.cal <- mods$f7$cal$par
+pars.cal['app.mthd.cs.f0'] <- -4
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+
+# Cal f9 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Try again but start with smaller rain r5 effect to remove shoulders in AU curves caused by small amount of rain
+# Settings
+ps <- 'f9'
+print(ps)
+fixed <- integer()
+
+pars.cal <- mods$f8$cal$par
+pars.cal['rain.rate.r5'] <- 0.3
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+

@@ -13,10 +13,7 @@ source('export_pmid.R')
 source('counts.R')
 source('ranges.R')
 knit('subset_summ.Rmd', output = '../logs/subset_summary.md')
-source('cal_3am.R') # Par est for bsth, bc, ts
-source('pars_3am.R') 
-
-source('cal_sel.R')
+source('cal.R')
 source('ps3.R')
 source('cal_drop.R')
 
@@ -46,6 +43,15 @@ source('plot_scatter_eval.R')
 #source('plot_boot.R')
 #source('plot_resids.R')
 #source('plot_.R')
+dev.off()
+
+x <- subset(dpreds, pmid == 1935 & pars == 'f8')
+x
+
+x[cta > 68, ]
+plot(j.pred ~ cta, data = x, log = 'y')
+plot(er.pred ~ cta, data = x, log = 'y')
+identify()
 dev.off()
 
 

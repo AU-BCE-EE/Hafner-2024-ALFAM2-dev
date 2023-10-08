@@ -6,6 +6,10 @@
 pars.cal <- mods$ps3$cal$par * 0.8
 fixed <- numeric()
 
+# Set weights to match those in ps3
+ww <- c(bsth = 1, ts = 1, os = 2, cs = 2, bc = 0.5)
+idat1[, `:=` (weight.last.b = weight.last * ww[app.mthd], weight.1.b = weight.1 * ww[app.mthd])]
+
 insts <- unique(idat1[, inst])
 mods.cv <- list()
 
@@ -23,12 +27,12 @@ for (i in insts) {
 
   # Calibration
   mods.cv[[ic]] <- list()
-  mods.cv[[ic]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                    resCalcComb(p = par, dat = idatsamp, to = c('er', 'er'), wr = 1 / 5, time.name = 'cta',
-                                            app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'TAE', 
-                                            weights = idatsamp[, .(weight.last, weight.1)], flatout = TRUE),
+  mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                    resCalcComb(p = par, dat = idatsamp, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                            app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                            weights = idatsamp[, .(weight.last.b, weight.1.b)], flatout = TRUE),
                                     method = 'Nelder-Mead', control = list(maxit = maxit3))
- 
+  
   pp <- c(m$par, fixed)
   cat('\n')
   print(pp)
