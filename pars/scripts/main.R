@@ -25,8 +25,8 @@ source('export.R')
 
 # Cross-validation and bootstrap analysis
 source('crossval.R')
-source('export_cv.R')
 source('preds_cv.R')
+source('export_cv.R')
 
 # Bootstrap
 source('boot.R')
@@ -43,34 +43,3 @@ source('plot_scatter_eval.R')
 #source('plot_boot.R')
 #source('plot_resids.R')
 #source('plot_.R')
-dev.off()
-
-x <- subset(dpreds, pmid == 1935 & pars == 'f8')
-x
-
-x[cta > 68, ]
-plot(j.pred ~ cta, data = x, log = 'y')
-plot(er.pred ~ cta, data = x, log = 'y')
-identify()
-dev.off()
-
-
-x <- subset(dpreds1, pmid %in% 1937:1938)
-x <- subset(idat1, pmid %in% 1937:1938)
-x <- x[!duplicated(x[, pmid]), ]
-x$cta <- 0
-x$app.mthd.os
-x$tan.app
-x$man.dm <- 20
-x$tan.app <- 100
-x$man.dm.app.mthd.inj
-x$man.source.pig
-pp
-x$app.mthd.cs
-x$app.rate
-x$man.ph
-x[1, app.mthd.os := 0]
-cmns
-x <- data.frame(app.mthd.os = c(1, 0), man.dm = 6, app.rate = 30, tan.app = 100, cta = 0, app.rate.app.mthd.inj = 1:0 * 30, man.dm.app.mthd.inj = 1:0 * 6, pmid = 1:2)
-alfam2(x, pars = pp, app.name = 'tan.app', time.name = 'cta', group = 'pmid', cmns = cmns)
-

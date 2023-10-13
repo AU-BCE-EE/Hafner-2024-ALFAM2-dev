@@ -83,3 +83,14 @@ fit.24.d <- dp24[, .(rmse = rmse(m = er, p = er.pred),
                      mbe = mbe(m = er, p = er.pred),
                      n = length(er)), by = .(pars, dataset, digested)]
 
+# Fit summary table
+fit.3ps <- fit.168.am[pars %in% c('ps1', 'ps2', 'ps3') & dataset == 1]
+fit.3ps[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
+                                labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 
+                                           'Open slot injection', 'Closed slot injection'))]
+
+
+fit.3ps <- fit.3ps[order(app.mthd.nm, pars), .(app.mthd.nm, n, pars, rmse, mae, mbe, me)]
+fit.3ps[, pars := gsub('ps', '', pars)]
+fit.3ps <- rounddf(fit.3ps, digits = c(0, 0, 2, 2, 2, 3, 2))
+

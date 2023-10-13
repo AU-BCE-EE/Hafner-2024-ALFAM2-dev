@@ -2,7 +2,7 @@
 # Settings to speed things up
 # For intermediate par sets
 maxit1 <-   400
-maxit2 <-  3000
+maxit2 <-  5000
 maxit3 <- 30000
 
 # Centering means that include annoying injection exceptions

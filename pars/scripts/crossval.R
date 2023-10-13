@@ -31,7 +31,7 @@ for (i in insts) {
                                     resCalcComb(p = par, dat = idatsamp, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
                                             app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
                                             weights = idatsamp[, .(weight.last.b, weight.1.b)], flatout = TRUE),
-                                    method = 'Nelder-Mead', control = list(maxit = maxit3))
+                                    method = 'Nelder-Mead', control = list(maxit = maxit2))
   
   pp <- c(m$par, fixed)
   cat('\n')
@@ -54,4 +54,4 @@ for(i in 1:length(mods.cv)) {
 parscvl <- melt(d.parscv, id.vars = 'inst.dropped', variable.name = 'parameter')
 parscvl[, parset := paste0('3-d', inst.dropped)]
 
-cvsumm <- parscvl[, .(mn = mean(value), md = median(value), se = sd(value), l90 = quantile(value, 0.05), u90 = quantile(value, 0.95), min = min(value), max = max(value)), by = parameter]
+cvparsumm <- parscvl[, .(mn = mean(value), md = median(value), se = sd(value), l90 = quantile(value, 0.05), u90 = quantile(value, 0.95), min = min(value), max = max(value)), by = parameter]

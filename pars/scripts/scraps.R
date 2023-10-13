@@ -1,4 +1,99 @@
 
+
+#cvsumm[, `:=` (pig.nm = factor(ifelse(man.source == 'pig', 'Pig', 'Cattle &\nothers'), levels = c('Pig', 'Cattle &\nothers')),
+#               app.mthd.nm = factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
+#                              labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 
+#					 'Open slot\ninjection', 'Closed slot\ninjection')),
+#                    incorp.nm = factor(oneupper(incorp), levels = c('None', 'Shallow', 'Deep')))]
+
+cvsumm[, `:=` (pig.nm = factor(ifelse(man.source, 'Pig', 'Cattle &\nothers'), levels = c('Pig', 'Cattle &\nothers')),
+               app.mthd.nm = factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
+                              labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 
+					 'Open slot\ninjection', 'Closed slot\ninjection')))]
+
+ggplot(cvsumm, aes(app.mthd.nm, ererr, shape = pig.nm, colour = pig.nm)) + 
+  geom_point(size = 4) +
+  theme_bw() +
+  coord_cartesian(ylim = c(0, NA))  +
+  labs(x = 'Application method', y = 'Ave. emission error (frac. TAN)', colour = 'Slurry type', shape = 'Slurry type')
+ggsave2x('../plots-cv/cross_val_error', height = 3.3, width = 7)
+
+
+ggplot(cvsumm, aes(app.mthd.nm, rerr, shape = pig.nm, colour = pig.nm)) + 
+  geom_point(size = 4) +
+  theme_bw() +
+  coord_cartesian(ylim = c(0, NA)) +
+  labs(x = 'Application method', y = 'Ave. emission error (frac. meas.)', colour = 'Slurry type', shape = 'Slurry type')
+ggsave2x('../plots-cv/cross_val_rel_error', height = 3.3, width = 7)
+
+# Cal f8 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Try again but with app.mthd.cs.f0 this time (had mistakenly omitted above)
+# Settings
+ps <- 'f8'
+print(ps)
+fixed <- integer()
+
+pars.cal <- mods$f7$cal$par
+pars.cal['app.mthd.cs.f0'] <- -4
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+
+# Cal f9 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Try again but start with smaller rain r5 effect to remove shoulders in AU curves caused by small amount of rain
+# Settings
+ps <- 'f9'
+print(ps)
+fixed <- integer()
+
+pars.cal <- mods$f8$cal$par
+pars.cal['rain.rate.r5'] <- 0.3
+
+# Look for problem observations before calibration by running with all parameters
+pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.cal, fixed), flatout = TRUE)
+# Should be no warning about pars (none dropped)
+# Should be no NA in output
+if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+
+mods[[ps]] <- list()
+mods[[ps]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
+                                  resCalcComb(p = par, dat = idat1, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                          app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                          weights = idat1[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                  method = 'Nelder-Mead', control = list(maxit = maxit3))
+
+# Save pars
+pp <- c(m$par, fixed)
+mods[[ps]][['coef']] <- pp 
+
+# Echo pars and other model info
+print(pp)
+print(m)
+
+print(Sys.time())
+
+
 # Cal c1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Now add bc (comes with deep incorporation)
 # Settings

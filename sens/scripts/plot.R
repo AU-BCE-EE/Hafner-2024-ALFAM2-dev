@@ -43,6 +43,9 @@ ggplot(d, aes(xval, dedx10)) +
   geom_smooth(aes(y = dedx10), linewidth = 0.7, se = FALSE, lty = '2222') +
   geom_smooth(aes(y = dedx90), linewidth = 0.7, se = FALSE, lty = '2222') +
   geom_smooth(aes(y = dedxmd), linewidth = 0.7, se = FALSE, col = 'gray45') +
+  geom_line(aes(y = dedx10), lty = '2222') +
+  geom_line(aes(y = dedx90), lty = '2222') +
+  geom_line(aes(y = dedxmd), col = 'gray45') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free') +
   scale_color_viridis_d() +

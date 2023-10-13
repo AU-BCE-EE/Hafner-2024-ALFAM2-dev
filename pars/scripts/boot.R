@@ -33,10 +33,11 @@ for (i in 1:nb) {
   mods.boot[[i]] <- list()
   mods.boot[[i]][['inst']] <- inst.samp
   mods.boot[[i]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
-                                    resCalcComb(p = par, dat = idatsamp, to = c('er', 'er'), wr = 1 / 5, time.name = 'cta',
-                                            app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'TAE', 
-                                            weights = idatsamp[, .(weight.last, weight.1)], flatout = TRUE),
+                                    resCalcComb(p = par, dat = idatsamp, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
+                                            app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
+                                            weights = idatsamp[, .(weight.last.b, weight.1.b)], flatout = TRUE),
                                     method = 'Nelder-Mead', control = list(maxit = maxit2))
+
   mods.boot[[i]][['coef']] <- c(m$par, fixed)
   
 }

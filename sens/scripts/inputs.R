@@ -1,6 +1,9 @@
 # Sort out scenarios
 
-dat.ref <- data.table(ct = 168, man.dm = 5, wind.2m = 5, air.temp = 15, rain.rate = 0, app.rate = 40, man.ph = 7, tan.app = 100)
+# Reference conditions, based on cattle slurry 2010-2019 April for Denmark
+dat.ref <- data.table(ct = 168, man.dm = 6.5, wind.2m = 3.4, air.temp = 7.6, rain.rate = 0, app.rate = 40, man.ph = 7, tan.app = 100)
+dat.ref <- data.table(ct = 168, man.dm = 6.5, wind.2m = 3.4, air.temp = 13, rain.rate = 0, app.rate = 40, man.ph = 7, tan.app = 100)
+
 man.source <- data.table(man.source = c('pig', 'cattle/other'))
 dat.ref <- data.table(dfcombos(dat.ref, man.source))
 
@@ -42,6 +45,7 @@ dat <- rbind(dat.air.temp, dat.wind, dat.rain.rate, dat.dm, dat.man.ph)
 # Add some (dummy) variables
 dat[, air.temp.ave := air.temp]
 dat[, wind.sqrt := sqrt(wind.2m)]
+dat[, man.dm.log := log10(man.dm)]
 dat[, app.rate.ni := (as.numeric(!app.mthd %in% c('os', 'cs')) * app.rate)]
 dat[, man.dm.ni := (as.numeric(!app.mthd %in% c('os', 'cs')) * man.dm)]
 
@@ -51,6 +55,8 @@ dat.app.mthd[, id := paste('app.mthd', 1:nrow(dat.app.mthd))]
 dat.app.mthd[, set := 'app.mthd']
 dat.app.mthd[, xval := app.mthd]
 dat.app.mthd[, wind.sqrt := sqrt(wind.2m)]
+dat.app.mthd[, man.dm.log := log10(man.dm)]
+dat.app.mthd[, app.rate.ni := (as.numeric(!app.mthd %in% c('os', 'cs')) * app.rate)]
 dat.app.mthd[, man.dm.ni := (as.numeric(!app.mthd %in% c('os', 'cs')) * man.dm)]
 
 

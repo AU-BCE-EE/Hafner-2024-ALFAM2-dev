@@ -3,7 +3,7 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "25 September, 2023 Sep:09"
+date: "28 September, 2023 Sep:09"
 ---
 
 # Summary of main data subset

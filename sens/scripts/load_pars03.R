@@ -1,6 +1,6 @@
 
 pars <- fread('../../pars/output/pars.csv')
 
-pars03 <- as.numeric(pars[pars == 'p1', ])
+pars03 <- as.numeric(pars[pars == 'f12', ])
 names(pars03) <- colnames(pars)
 pars03 <- pars03[!is.na(pars03)]

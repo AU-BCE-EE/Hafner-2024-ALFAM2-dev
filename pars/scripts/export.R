@@ -11,5 +11,7 @@ fwrite(fit.168.d, '../output/fit_168_dig.csv')
 fit.168.am.sorted <- fit.168.am[order(dataset, app.mthd, -me), ] 
 fwrite(fit.168.am.sorted, '../output/fit_168_app_mthd_me_sort.csv')
 
+fwrite(fit.3ps, '../output/fit_168_table.csv')
+
 # Pars
 fwrite(d.pars, '../output/pars.csv')

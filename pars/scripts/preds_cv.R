@@ -22,11 +22,15 @@ cvdat <- merge(idat1[, c('pmid', 'cta', 'cta.168', 'j', 'e.cum', 'er')], cvdat, 
 cvdat[, ererr := er.pred - er]
 cvdat[, rerr := (er.pred - er) / er]
 
+cvdat168 <- cvdat[cta == cta.168, ]
+
 # Get quantiles for 168 hr emission only
 cvdat <- merge(pdat, cvdat, by = 'pmid', suffixes = c('', '.cv'))
-cvsumm <- cvdat[cta == cta.168 & !is.na(er.pred), .(n = length(er.pred), 
-						       er = er[1], er10 = quantile(er.pred, 0.1), 
-                                                  er90 = quantile(er.pred, 0.9), ermed = median(er.pred),
-						  ererr = mean(abs(ererr)), rerr = mean(abs(ererr)) / mean(er)), 
-             by = .(app.mthd, man.source == 'pig')]
+cverrsumm <- cvdat[cta == cta.168 & !is.na(er.pred), .(n = length(er.pred), 
+                                                       er10 = quantile(er.pred, 0.1), 
+                                                       er90 = quantile(er.pred, 0.9), ermed = median(er.pred),
+                                                       ererr = mean(abs(ererr)), rerr = mean(rerr), arerr = mean(abs(rerr)),
+                                                       esd = sd(er)), 
+               by = .(app.mthd, man.source == 'pig')]
 
+cverrsumm <- cverrsumm[order(app.mthd, man.source), ]
