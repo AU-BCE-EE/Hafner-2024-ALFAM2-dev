@@ -8,3 +8,6 @@ pars03 <- pars03[!is.na(pars03)]
 
 # Bootstrap stuff
 bpars <- fread('../../pars/output/pars_boot_long.csv')
+
+# Variable ranges
+pvsumm <- fread('../../pars/output/d1_var_summ.csv')

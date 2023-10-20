@@ -49,6 +49,11 @@ dat[, man.dm.log := log10(man.dm)]
 dat[, app.rate.ni := (as.numeric(!app.mthd %in% c('os', 'cs')) * app.rate)]
 dat[, man.dm.ni := (as.numeric(!app.mthd %in% c('os', 'cs')) * man.dm)]
 
+# Mark obs outside of par est range
+pvsumm[, set := gsub('\\.24', '', variable)]
+dat <- merge(dat, pvsumm[, .(set, app.mthd, b3, a3)], by = c('set', 'app.mthd')) 
+dat[, outsidein := xval < b3 | xval > a3]
+
 # Application method has to be handled differently, separately
 dat.app.mthd <- as.data.table(dfcombos(dat.ref, app.mthd))
 dat.app.mthd[, id := paste('app.mthd', 1:nrow(dat.app.mthd))]

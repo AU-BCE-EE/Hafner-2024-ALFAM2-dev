@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "13 October, 2023 Oct:10"
+date: "17 October, 2023 Oct:10"
 ---
 
 Check package version.
@@ -34,13 +34,12 @@ preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 5 with no match.
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-##   app.cs.f0
 ## 
 ## These secondary parameters are being used:
 ##   int.f0
@@ -86,13 +85,12 @@ preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'c
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 5 with no match.
+## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-##   app.cs.f0
 ## 
 ## These secondary parameters are being used:
 ##   int.f0

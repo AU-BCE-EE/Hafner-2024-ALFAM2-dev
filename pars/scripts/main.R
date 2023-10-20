@@ -2,44 +2,54 @@
 
 rm(list = ls())
 
+# Can load earlier saved image to use parameter estimates made earlier
+#source('load_image.R')
+
 source('packages.R')
 source('functions.R')
 source('settings.R')
-#source('load_image.R')
 source('load.R')
 source('subset.R')
-source('prep.R')
+sink('../logs/prep.txt')
+  source('prep.R', echo = TRUE, max.deparse.length = 300 )
+sink()
 source('export_pmid.R')
 source('counts.R')
 source('ranges.R')
-knit('subset_summ.Rmd', output = '../logs/subset_summary.md')
-source('cal.R')
+knit('subset_summ.Rmd', output = '../logs/subset_summ.md')
+sink('../logs/par_est.txt')
+  source('par_est.R', echo = TRUE, max.deparse.length = 300)
+sink()
 source('ps3.R')
-source('cal_drop.R')
+source('par_est_drop.R')
 
-# Generate all predictions
-source('preds.R')
+# Extract and apply parameter sets
+source('calc_emis.R')
 source('fit_summ.R')
-source('pars.R')
-source('export.R')
+source('extract_pars.R')
 
-# Cross-validation and bootstrap analysis
+# Cross-validation
 source('crossval.R')
-source('preds_cv.R')
-source('export_cv.R')
+source('extract_cv_pars.R')
+source('calc_emis_cv.R')
 
-# Bootstrap
+# Bootstrap analysis for uncertainty
 source('boot.R')
-source('export_boot.R')
+source('extract_boot_pars.R')
 
+# Add labels for plots
 source('labels.R')
+
+# Save work
 #source('save_image.R')
 
+# Plots
 source('plot_pars.R')
 source('plot_wthr_resids.R')
 source('plot_country_curves.R')
-#source('plot_scatter_flux.R')
-source('plot_scatter_eval.R')
+source('plot_scatter_emis.R')
+source('plot_cv.R')
+
+# Check these
 #source('plot_boot.R')
-#source('plot_resids.R')
-#source('plot_.R')
+#source('plot_resids.R') source('plot_.R')

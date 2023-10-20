@@ -7,8 +7,8 @@ qamdat[, man.source.nm := factor(man.source, levels = c('pig', 'cattle/other'), 
 
 d1 <- subset(qamdat, app.mthd != 'bc')
 d3 <- subset(pamdat, app.mthd != 'bc' & parset == '3')
-ggplot(d1, aes(app.mthd.nm, -rr10, colour = man.source.nm)) + 
-  geom_errorbar(aes(ymin = -rr10, ymax = -rr90), lty = 'solid', colour = 'gray45', lwd = 1.6, width = 0) +
+ggplot(d1, aes(app.mthd.nm, -rr10)) + 
+  geom_errorbar(aes(ymin = -rr10, ymax = -rr90), lty = 'solid', colour = 'gray55', lwd = 1.6, width = 0) +
   #geom_point(aes(y = rrmd),  col = 'gray45', size = 2) +
   geom_point(data = d3, aes(y = -rr),  size = 3, shape = 19) +
   facet_wrap(~ man.source.nm, scale = 'fixed') +

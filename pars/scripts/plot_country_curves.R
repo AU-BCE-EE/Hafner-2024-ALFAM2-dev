@@ -1,32 +1,27 @@
-# AU bLS measurements
-#whichpars <- c('ps1', 'ps2', 'f8', 'f9', 'f11', 'f12', 'th4', 'th5', 'c1', 'c2')
+# Plot emission curves for specific countries
+
+# All par sets
 whichpars <- unique(dpreds[, pars])
+
+# Or some
+whichpars <- c('f6', 'f7', 'f8', 'ps1', 'ps2')
+
+# AU bLS measurements
 x <- dpreds[institute == 'AU' & meas.tech == 'bLS' & dataset == 1 & pars %in% whichpars, ]
-
-#x <- dpreds[institute == 'AU' & meas.tech == 'bLS' & dataset == 1 & ((pars == 'th5' & app.mthd == 'bsth') | (pars == 'os1' & app.mthd == 'os')), ]
-#ggplot(x, aes(cta, j, colour = app.mthd)) +
-#  geom_line() +
-#  geom_line(aes(cta, j.pred), colour = 'gray45') +
-#  facet_grid(. ~ pmid, scale = 'free') +
-#  labs(x = 'Time since application (h)', y = expression(NH[3]~flux~(kg~N~ha^'-1'~h^'-1')), colour = 'Application method') +
-#  theme_bw() +
-#  theme(legend.position = 'top')
-#ggsave('../plots/AU1.png', height = 3, width = 7)
-
 
 ggplot(x, aes(cta, er, colour = app.mthd)) +
   geom_line() +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars, scale = 'free') +
   theme_bw()
-ggsave('../plots/AU1.png', height = 8.5, width = 11)
+ggsave('../plots-country/AU_emis.png', height = 8.5, width = 11)
 
 ggplot(x, aes(cta, j, colour = app.mthd)) +
   geom_line() +
   geom_line(aes(cta, j.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars, scale = 'free') +
   theme_bw()
-ggsave('../plots/AU3.png', height = 8.5, width = 11)
+ggsave('../plots-country/AU_flux.png', height = 8.5, width = 11)
 
 
 x <- dpreds[country == 'NL' & dataset == 1 & pars %in% whichpars, ]
@@ -35,21 +30,14 @@ ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
   facet_grid(app.mthd ~ pars) +
   theme_bw()
-ggsave('../plots/NL1.png', height = 8.5, width = 11)
-
-ggplot(x, aes(er, er.pred, colour = app.mthd, group = pmid)) +
-  geom_line() +
-  facet_grid(app.mthd ~ pars) +
-  geom_abline(aes(intercept = 0, slope = 1)) +
-  theme_bw()
-ggsave('../plots/NL2.png', height = 8.5, width = 11)
+ggsave('../plots-country/NL_emis.png', height = 8.5, width = 11)
 
 ggplot(x, aes(cta, j, colour = app.mthd)) +
   geom_line() +
   geom_line(aes(cta, j.pred), colour = 'gray45') +
   facet_grid(app.mthd ~ pars, scale = 'free') +
   theme_bw()
-ggsave('../plots/NL3.png', height = 8.5, width = 11)
+ggsave('../plots-country/NL_flux.png', height = 8.5, width = 11)
 
 x <- dpreds[country == 'CH' & dataset == 1 & pars %in% whichpars, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
@@ -57,21 +45,14 @@ ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars) +
   theme_bw()
-ggsave('../plots/CH1.png', height = 30, width = 11)
-
-ggplot(x, aes(er, er.pred, colour = app.mthd, group = pmid)) +
-  geom_line() +
-  facet_grid(pmid ~ pars) +
-  geom_abline(aes(intercept = 0, slope = 1)) +
-  theme_bw()
-ggsave('../plots/CH2.png', height = 30, width = 11)
+ggsave('../plots-country/CH_emis.png', height = 30, width = 11)
 
 ggplot(x, aes(cta, j, colour = app.mthd)) +
   geom_line() +
   geom_line(aes(cta, j.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars, scale = 'free') +
   theme_bw()
-ggsave('../plots/CH3.png', height = 30, width = 11)
+ggsave('../plots-country/CH_flux.png', height = 30, width = 11)
 
 
 x <- dpreds[country == 'UK' & dataset == 1 & pars %in% whichpars, ]
@@ -79,22 +60,17 @@ ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line() +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
   facet_grid(app.mthd ~ pars) +
+  xlim(0, 200) +
   theme_bw()
-ggsave('../plots/UK1.png', height = 8.5, width = 11)
-
-ggplot(x, aes(er, er.pred, colour = app.mthd, group = pmid)) +
-  geom_line() +
-  facet_grid(app.mthd ~ pars) +
-  geom_abline(aes(intercept = 0, slope = 1)) +
-  theme_bw()
-ggsave('../plots/UK2.png', height = 8.5, width = 11)
+ggsave('../plots-country/UK_emis.png', height = 8.5, width = 11)
 
 ggplot(x, aes(cta, j, colour = app.mthd, group = pmid)) +
   geom_line() +
   geom_line(aes(cta, j.pred), colour = 'gray45') +
   facet_grid(app.mthd ~ pars, scale = 'free') +
+  xlim(0, 200) +
   theme_bw()
-ggsave('../plots/UK3.png', height = 8.5, width = 11)
+ggsave('../plots-country/UK_flux.png', height = 8.5, width = 11)
 
 x <- dpreds[country == 'IT' & dataset == 1 & pars %in% whichpars, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
@@ -102,21 +78,14 @@ ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars) +
   theme_bw()
-ggsave('../plots/IT1.png', height = 8.5, width = 11)
-
-ggplot(x, aes(er, er.pred, colour = app.mthd, group = pmid)) +
-  geom_line() +
-  facet_grid(pmid ~ pars) +
-  geom_abline(aes(intercept = 0, slope = 1)) +
-  theme_bw()
-ggsave('../plots/IT2.png', height = 8.5, width = 11)
+ggsave('../plots-country/IT_emis.png', height = 8.5, width = 11)
 
 ggplot(x, aes(cta, j, colour = app.mthd)) +
   geom_line() +
   geom_line(aes(cta, j.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars, scale = 'free') +
   theme_bw()
-ggsave('../plots/IT3.png', height = 8.5, width = 11)
+ggsave('../plots-country/IT_flux.png', height = 8.5, width = 11)
 
 x <- dpreds[country == 'DE' & dataset == 1 & pars %in% whichpars, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
@@ -124,21 +93,14 @@ ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars) +
   theme_bw()
-ggsave('../plots/DE1.png', height = 8.5, width = 11)
-
-ggplot(x, aes(er, er.pred, colour = app.mthd, group = pmid)) +
-  geom_line() +
-  facet_grid(pmid ~ pars) +
-  geom_abline(aes(intercept = 0, slope = 1)) +
-  theme_bw()
-ggsave('../plots/DE2.png', height = 8.5, width = 11)
+ggsave('../plots-country/DE_emis.png', height = 8.5, width = 11)
 
 ggplot(x, aes(cta, j, colour = app.mthd)) +
   geom_line() +
   geom_line(aes(cta, j.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars, scale = 'free') +
   theme_bw()
-ggsave('../plots/DE3.png', height = 8.5, width = 11)
+ggsave('../plots-country/DE_flux.png', height = 8.5, width = 11)
 
 x <- dpreds[country == 'FR' & dataset == 1 & pars %in% whichpars, ]
 ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
@@ -146,19 +108,12 @@ ggplot(x, aes(cta, er, colour = app.mthd, group = pmid)) +
   geom_line(aes(cta, er.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars) +
   theme_bw()
-ggsave('../plots/FR1.png', height = 15, width = 11)
-
-ggplot(x, aes(er, er.pred, colour = app.mthd, group = pmid)) +
-  geom_line() +
-  facet_grid(pmid ~ pars) +
-  geom_abline(aes(intercept = 0, slope = 1)) +
-  theme_bw()
-ggsave('../plots/FR2.png', height = 8.5, width = 11)
+ggsave('../plots-country/FR_emis.png', height = 15, width = 11)
 
 ggplot(x, aes(cta, j, colour = app.mthd)) +
   geom_line(alpha = 0.5) +
   geom_line(aes(cta, j.pred), colour = 'gray45') +
   facet_grid(pmid ~ pars, scale = 'free') +
   theme_bw()
-ggsave('../plots/FR3.png', height = 8.5, width = 11)
+ggsave('../plots-country/FR_flux.png', height = 8.5, width = 11)
 

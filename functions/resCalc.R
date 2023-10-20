@@ -1,5 +1,6 @@
-# Function for calculating residuals
+# Functions for calculating residuals
 
+# Basic version, one response variable
 resCalc <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct', to = 'j', fixed, method = 'TAE', time.incorp = NULL, flatout = FALSE, prog = TRUE, browseNA = FALSE, rminj = NULL) {
 
   if (!all(is.numeric(weights) | length(weights) > 0 | !all(is.na(weights)))) stop('Problem with weights argument.')
@@ -18,7 +19,7 @@ resCalc <- function(p, dat, weights = 1, app.name, group = NULL, time.name = 'ct
   if (any(is.na(obs[weights>0]))) stop('NA values in observations obs, not just where weights = 0.')
 
   pred <- alfam2(dat, pars = p, app.name = app.name, time.name = time.name, 
-                    time.incorp = time.incorp, group = group, cmns = cmns, flatout = flatout, warn = FALSE)[[to]]
+                    time.incorp = time.incorp, group = group, flatout = flatout, warn = FALSE)[[to]]
 
   # Set NA obs to high value for high residual
   pred[is.na(pred)] <- 2
@@ -53,6 +54,8 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   if (!all(to %in% c('j', 'e', 'e.int', 'er'))) stop('to argument must be "j", "e", "er", or "e.int" but is ', to)
   if (any(is.na(weights)) || any(is.null(weights))) stop('weights are NA or NULL')
   if (!missing(fixed)) p <- c(p, fixed)
+  #cat('\n')
+  #print(p)
 
   # Cancel some pars for injection
   if (!is.null(rminj)) {
@@ -66,7 +69,7 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   if (any(is.na(obs[weights > 0]))) stop('NA values in observations obs, not just where weights = 0.')
 
   pred <- alfam2(dat, pars = p, app.name = app.name, time.name = time.name, 
-                    time.incorp = time.incorp, group = group, cmns = cmns, flatout = flatout, warn = FALSE)[, to]
+                    time.incorp = time.incorp, group = group, flatout = flatout, warn = FALSE)[, to]
 
   # Switch to matrix for cell-by-cell calcs
   pred <- as.matrix(pred)

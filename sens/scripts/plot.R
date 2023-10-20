@@ -8,8 +8,7 @@ pdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m
 qdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
 qdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
 
-datin <- pdat[parset == 3 & !(man.ph < 5.8 | man.ph > 8.9 | man.dm < 1 | man.dm > 8.8 | wind.2m < 0.6 | wind.2m > 9.7 | air.temp < -1 | air.temp > 21.7)]
-d1 <- datin[man.source != 'pig', ]
+d1 <- pdat[parset == 3 & man.source != 'pig' & !outsidein, ]
 d2 <- pdat[parset == 3 & man.source != 'pig', ]
 ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) + 
   geom_line(lty = '1111', linewidth = 0.7) +
@@ -22,7 +21,7 @@ ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) +
   guides(colour = guide_legend(nrow = 2))
 ggsave2x('../plots/sens5_cattle', height = 4, width = 4)
 
-d1 <- datin[man.source == 'pig', ]
+d1 <- pdat[man.source == 'pig', ]
 d2 <- pdat[parset == 3 & man.source == 'pig', ]
 ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) + 
   geom_line(lty = '1111', linewidth = 0.7) +

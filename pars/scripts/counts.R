@@ -1,6 +1,6 @@
-# Plot counts for table in paper
+# Plot counts for table
 
-# Plot counts of calibration data
+# *dat1
 pdat1[, app.mthd := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'))] 
 d1counts <- dcast(idat1, institute + inst + country ~ app.mthd, value.var = 'pmid', fun.aggregate = function(x) length(unique(x)))
 d1counts$total <- rowSums(d1counts[, -1:-3])
@@ -10,7 +10,7 @@ d1counts <- d1counts[order(inst), ]
 # Export
 fwrite(d1counts, '../output/d1_counts.csv')
 
-# Null model subset
+# *dat2
 pdat2[, app.mthd := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'))] 
 d2counts <- dcast(idat2, institute + inst + country ~ app.mthd, value.var = 'pmid', fun.aggregate = function(x) length(unique(x)))
 d2counts$total <- rowSums(d2counts[, -1:-3])

@@ -1,5 +1,6 @@
 # Bootstrap pars
 # See crossval.R for notes
+
 pars.cal <- mods$ps3$cal$par * 0.8
 fixed <- numeric()
 
@@ -35,30 +36,9 @@ for (i in 1:nb) {
   mods.boot[[i]][['cal']] <- m <- optim(par = pars.cal, fn = function(par) 
                                     resCalcComb(p = par, dat = idatsamp, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
                                             app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
-                                            weights = idatsamp[, .(weight.last.b, weight.1.b)], flatout = TRUE),
+                                            weights = idatsamp[, .(weight.last, weight.1a)], flatout = TRUE),
                                     method = 'Nelder-Mead', control = list(maxit = maxit2))
 
   mods.boot[[i]][['coef']] <- c(m$par, fixed)
   
 }
-
-# Get boot pars
-d.parsb <- data.table()
-
-for(i in 1:length(mods.boot)) {
-    pp <- mods.boot[[i]][['coef']]
-    pp <- data.table(iteration = i, t(pp))
-    d.parsb <- rbindf(d.parsb, pp)
-}
-
-fwrite(d.parsb, '../output/pars_boot.csv')
-
-parsbl <- melt(d.parsb, id.vars = 'iteration', variable.name = 'parameter')
-parsbl[, parset := paste0('3-', sprintf('%03d', iteration))]
-
-fwrite(parsbl, '../output/pars_boot_long.csv')
-##parsbl <- fread('../output/pars_boot_long.csv')
-
-bootsumm <- parsbl[, .(mn = mean(value), md = median(value), se = sd(value), l90 = quantile(value, 0.05), u90 = quantile(value, 0.95)), by = parameter]
-
-fwrite(bootsumm, '../output/boot_summary.csv')

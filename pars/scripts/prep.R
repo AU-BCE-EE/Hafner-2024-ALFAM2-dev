@@ -1,4 +1,5 @@
 # Get measurement data ready
+# Also extends subsets made in subsets.R
 
 # *dat1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 idat1[, app.rate.ni := app.rate * !app.mthd %in% c('os', 'cs')]
@@ -31,6 +32,7 @@ dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
 # Will run model with flatout option, so need to do dummy variable data prep separately here
+# Note: *must* use flatout option for safety once rows have been added (will screw up incorp otherwise) etc.
 idat1 <-ALFAM2:::prepDat(idat1, value = 'data') 
 idat1$`__group` <- idat1$pmid
 idat1$`__f4` <- 1
@@ -93,6 +95,7 @@ dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
 # Will run model with flatout option, so need to do dummy variable data prep separately here
+# Note: *must* use flatout option for safety once rows have been added (will screw up incorp otherwise) etc.
 # No incorporation so skipping prepIncorp() call
 idat2 <-ALFAM2:::prepDat(idat2, value = 'data') 
 idat2$`__group` <- idat2$pmid
@@ -153,6 +156,7 @@ dfsumm(idati[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
 # Will run model with flatout option, so need to do dummy variable data prep separately here
+# Note: *must* use flatout option for safety once rows have been added (will screw up incorp otherwise) etc.
 idati <-ALFAM2:::prepDat(idati, value = 'data') 
 idati$`__group` <- idati$pmid
 idati$`__f4` <- 1
@@ -191,8 +195,6 @@ idati[app.mthd != 'os', app.mthd.os := 0]
 idati[app.mthd != 'cs', app.mthd.cs := 0]
 idati[, dataset := 0]
 
-#names(idati)[!names(idati) %in% names(idat1)]
-#names(idat1)[!names(idat1) %in% names(idati)]
 idat1 <- rbind(idat1, idati, fill = TRUE)[, dataset := 1]
 # Needs next row beacuse there is lack of duplication for same pmid because missing pH is added in idati but not idat1
 idat1 <- idat1[!duplicated(idat1[, .(pmid, cta)]), ]
@@ -210,19 +212,20 @@ idat1[, weight.er := 1 / max(na.omit(er[cta <= 168])), by = pmid]
 # Normalize for number of intervals (later ints count more, last counts the most)
 idat1[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
-idat1[, weight.168 := as.numeric(cta <= 168), by = pmid]
+idat1[, weight.168 := as.numeric(cta <= 168)]
 # Combined
-idat1[, weight.1 :=                                weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er), by = pmid]
-idat1[, weight.1b := weight.app.mthd * weight.er * weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er), by = pmid]
+idat1[, weight.1 :=                                weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er)]
+idat1[, weight.1a :=                               weight.plots *              weight.168 * (cta > 0) * !is.na(er)]
+idat1[, weight.1b := weight.app.mthd * weight.er * weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er)]
 idat1[, weight.j := weight.plots * weight.168 * (cta > 0) * !is.na(j), by = pmid]
 # Only last obs
 idat1[, cta.168 := cta[which.min(abs(cta - 168))], by = pmid]
 idat1[, weight.last := 1 * (cta == cta.168), by = pmid]
 idat1[, weight.2 := weight.last * weight.app.mthd * weight.er, by = pmid]
-# NTS: update dati too
-## Last obs only
-#idat1[!is.na(er), weight.last := 1 * (cta == max(cta)), by = pmid]
-#idat1[is.na(er), weight.last := 0, by = pmid]
+# Arbitrary reduction in broadcast weight, increase in others, partially offsetting plot numbers, also low emission
+ww <- c(bsth = 1, ts = 1, os = 2, cs = 2, bc = 0.5)
+idat1[, `:=` (weight.lastc = weight.last * ww[app.mthd], weight.1c = weight.1a * ww[app.mthd])]
+
 
 # Equal by application method
 idat2[, weight.app.mthd := 1 / length(unique(pmid)), by = app.mthd]
@@ -235,7 +238,14 @@ idat2[, weight.int := interval / max(interval[cta <= 168]), by = pmid]
 # Keep to 168 h
 idat2[, weight.168 := as.numeric(cta <= 168), by = pmid]
 # Combined
-idat2[, weight.1 := weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er) , by = pmid]
+idat2[, weight.1 :=                                weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er)]
+idat2[, weight.1a :=                               weight.plots *              weight.168 * (cta > 0) * !is.na(er)]
+idat2[, weight.1b := weight.app.mthd * weight.er * weight.plots * weight.int * weight.168 * (cta > 0) * !is.na(er)]
+idat2[, weight.j := weight.plots * weight.168 * (cta > 0) * !is.na(j), by = pmid]
+# Only last obs
+idat2[, cta.168 := cta[which.min(abs(cta - 168))], by = pmid]
+idat2[, weight.last := 1 * (cta == cta.168), by = pmid]
+idat2[, weight.2 := weight.last * weight.app.mthd * weight.er, by = pmid]
 
 # Missing incorporation problem
 idat1[is.na(incorp.deep), incorp.deep := 0]
