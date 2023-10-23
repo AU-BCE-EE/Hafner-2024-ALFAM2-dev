@@ -1,16 +1,5 @@
 # Plot cross-validation error estimates
 
-cvdat168[, `:=` (pig.nm = factor(ifelse(man.source == 'pig', 'Pig', 'Cattle & others'), levels = c('Pig', 'Cattle & others')),
-                 acid.nm = factor(ifelse(acid, 'Acidified', 'Reference'), levels = c('Reference', 'Acidified')), 
-                 digested.nm = factor(ifelse(digested, 'Anaerobically\ndigested', 'Raw'), levels = c('Raw', 'Anaerobically\ndigested')),
-                 incorp.nm = factor(oneupper(incorp), levels = c('None', 'Shallow', 'Deep')), 
-                 app.mthd.nm = factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
-                              labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 
-					 'Open slot\ninjection', 'Closed slot\ninjection')))]
-
-cvdat168[, set := ifelse(incorp != 'none', 'Incorporation', ifelse(acid, 'Acidification', ifelse(digested, 'Digestate', 'Other')))]
-
-
 ggplot(cvdat168, aes(app.mthd.nm, abs(ererr), fill = set)) +
   geom_boxplot() +
   facet_grid(~ pig.nm) +

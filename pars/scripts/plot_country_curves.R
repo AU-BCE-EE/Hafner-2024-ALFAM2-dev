@@ -4,7 +4,7 @@
 whichpars <- unique(dpreds[, pars])
 
 # Or some
-whichpars <- c('f6', 'f7', 'f8', 'ps1', 'ps2')
+whichpars <- c('f6', 'f7', 'f8', 'ps1', 'ps2', 'ps3')
 
 # AU bLS measurements
 x <- dpreds[institute == 'AU' & meas.tech == 'bLS' & dataset == 1 & pars %in% whichpars, ]

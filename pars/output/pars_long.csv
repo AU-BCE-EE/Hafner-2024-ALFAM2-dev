@@ -7,7 +7,8 @@ f5,int.f0,0.678724853230581
 f6,int.f0,1.18394624018455
 f7,int.f0,-0.816053759815453
 f8,int.f0,0.720046054936856
-ps3,int.f0,1.18394624018455
+ps3,int.f0,1.05458217416834
+f9,int.f0,1.05458217416834
 ps1,int.f0,-0.7364889
 ps2,int.f0,-0.605683377135473
 f1,app.mthd.os.f0,-2.26061159469655
@@ -18,7 +19,8 @@ f5,app.mthd.os.f0,-3.5753199860706
 f6,app.mthd.os.f0,-3.60603535279338
 f7,app.mthd.os.f0,-3.601431758071
 f8,app.mthd.os.f0,-3.0914273427715
-ps3,app.mthd.os.f0,-3.60603535279338
+ps3,app.mthd.os.f0,-3.47537618343486
+f9,app.mthd.os.f0,-3.47537618343486
 ps1,app.mthd.os.f0,-1.1717859
 ps2,app.mthd.os.f0,-1.74351499199106
 f1,app.rate.ni.f0,-0.0101972916258574
@@ -29,7 +31,8 @@ f5,app.rate.ni.f0,-0.0345602181709521
 f6,app.rate.ni.f0,-0.0291364527596889
 f7,app.rate.ni.f0,-0.0302829895537587
 f8,app.rate.ni.f0,-0.0228233497596235
-ps3,app.rate.ni.f0,-0.0291364527596889
+ps3,app.rate.ni.f0,-0.02746329651548
+f9,app.rate.ni.f0,-0.02746329651548
 ps1,app.rate.ni.f0,
 ps2,app.rate.ni.f0,-0.0111490009460872
 f1,man.dm.f0,0.510419631652441
@@ -40,7 +43,8 @@ f5,man.dm.f0,0.61991086652259
 f6,man.dm.f0,0.546242868741818
 f7,man.dm.f0,
 f8,man.dm.f0,0.487819671765455
-ps3,man.dm.f0,0.546242868741818
+ps3,man.dm.f0,0.53522753688661
+f9,man.dm.f0,0.53522753688661
 ps1,man.dm.f0,0.407466
 ps2,man.dm.f0,0.399670699937794
 f1,man.source.pig.f0,-0.577650320301943
@@ -51,7 +55,8 @@ f5,man.source.pig.f0,-1.05443471654262
 f6,man.source.pig.f0,-0.995816757931689
 f7,man.source.pig.f0,-1.44459608020762
 f8,man.source.pig.f0,-0.930754515875268
-ps3,man.source.pig.f0,-0.995816757931689
+ps3,man.source.pig.f0,-0.963569188144643
+f9,man.source.pig.f0,-0.963569188144643
 ps1,man.source.pig.f0,
 ps2,man.source.pig.f0,-0.592028581423498
 f1,app.mthd.cs.f0,-9.57771059295031
@@ -62,7 +67,8 @@ f5,app.mthd.cs.f0,-110.054135418751
 f6,app.mthd.cs.f0,-110.054135418751
 f7,app.mthd.cs.f0,-110.054135418751
 f8,app.mthd.cs.f0,-5
-ps3,app.mthd.cs.f0,-110.054135418751
+ps3,app.mthd.cs.f0,-7
+f9,app.mthd.cs.f0,-7
 ps1,app.mthd.cs.f0,
 ps2,app.mthd.cs.f0,-7.63373787323506
 f1,int.r1,-1.11288932896622
@@ -73,7 +79,8 @@ f5,int.r1,-0.982519894581867
 f6,int.r1,-1.25919611002594
 f7,int.r1,-1.56599461327058
 f8,int.r1,-1.22199355365218
-ps3,int.r1,-1.25919611002594
+ps3,int.r1,-1.24656404637594
+f9,int.r1,-1.24656404637594
 ps1,int.r1,-1.1785848
 ps2,int.r1,-0.939215157554942
 f1,app.mthd.bc.r1,0.918743818540927
@@ -84,7 +91,8 @@ f5,app.mthd.bc.r1,0.613563324730524
 f6,app.mthd.bc.r1,0.677235747801472
 f7,app.mthd.bc.r1,0.698434265488876
 f8,app.mthd.bc.r1,0.715557291379907
-ps3,app.mthd.bc.r1,0.677235747801472
+ps3,app.mthd.bc.r1,0.684040385484088
+f9,app.mthd.bc.r1,0.684040385484088
 ps1,app.mthd.bc.r1,0.6283396
 ps2,app.mthd.bc.r1,0.793524800080501
 f1,man.dm.r1,-0.102473647201905
@@ -95,7 +103,8 @@ f5,man.dm.r1,-0.106765237546622
 f6,man.dm.r1,-0.0424445286926948
 f7,man.dm.r1,0.0535134420778151
 f8,man.dm.r1,-0.0514607735024712
-ps3,man.dm.r1,-0.0424445286926948
+ps3,man.dm.r1,-0.0459244276690434
+f9,man.dm.r1,-0.0459244276690434
 ps1,man.dm.r1,-0.075822
 ps2,man.dm.r1,-0.139881887708132
 f1,air.temp.r1,0.0445053469537732
@@ -106,7 +115,8 @@ f5,air.temp.r1,0.0434042825663004
 f6,air.temp.r1,0.0345222469616467
 f7,air.temp.r1,0.0304100356727501
 f8,air.temp.r1,0.0369075072854786
-ps3,air.temp.r1,0.0345222469616467
+ps3,air.temp.r1,0.0351402821606844
+f9,air.temp.r1,0.0351402821606844
 ps1,air.temp.r1,0.0492777
 ps2,air.temp.r1,0.0735426766754151
 f1,wind.2m.r1,0.0776335047063279
@@ -118,6 +128,7 @@ f6,wind.2m.r1,
 f7,wind.2m.r1,
 f8,wind.2m.r1,
 ps3,wind.2m.r1,
+f9,wind.2m.r1,
 ps1,wind.2m.r1,0.0486651
 ps2,wind.2m.r1,0.150267203970342
 f1,app.mthd.ts.r1,-0.391364991162918
@@ -128,7 +139,8 @@ f5,app.mthd.ts.r1,-0.407759949543893
 f6,app.mthd.ts.r1,-0.199892831404105
 f7,app.mthd.ts.r1,-0.153577732799692
 f8,app.mthd.ts.r1,-0.221568690754373
-ps3,app.mthd.ts.r1,-0.199892831404105
+ps3,app.mthd.ts.r1,-0.206666161693287
+f9,app.mthd.ts.r1,-0.206666161693287
 ps1,app.mthd.ts.r1,
 ps2,app.mthd.ts.r1,-0.459071351818907
 f1,man.ph.r1,0.555037219396712
@@ -139,7 +151,8 @@ f5,man.ph.r1,0.58003077347457
 f6,man.ph.r1,0.508352309868492
 f7,man.ph.r1,0.518159995751136
 f8,man.ph.r1,0.547654767428313
-ps3,man.ph.r1,0.508352309868492
+ps3,man.ph.r1,0.516450417773096
+f9,man.ph.r1,0.516450417773096
 ps1,man.ph.r1,0.5327231
 ps2,man.ph.r1,0.665
 f1,int.r2,-1.49402176446208
@@ -150,7 +163,8 @@ f5,int.r2,-1.22897184723808
 f6,int.r2,-1.12909161439297
 f7,int.r2,-1.20402106411173
 f8,int.r2,-1.19807455923769
-ps3,int.r2,-1.12909161439297
+ps3,int.r2,-1.14547822498688
+f9,int.r2,-1.14547822498688
 ps1,int.r2,-0.9543731
 ps2,int.r2,-1.79918545831297
 f1,rain.rate.r2,0.419996666136294
@@ -161,7 +175,8 @@ f5,rain.rate.r2,0.527234740270004
 f6,rain.rate.r2,0.63780660236235
 f7,rain.rate.r2,0.646872088234307
 f8,rain.rate.r2,0.666625871036643
-ps3,rain.rate.r2,0.63780660236235
+ps3,rain.rate.r2,0.643255873856773
+f9,rain.rate.r2,0.643255873856773
 ps1,rain.rate.r2,0.4327281
 ps2,rain.rate.r2,0.394021556916743
 f1,int.r3,-2.65284763369613
@@ -172,7 +187,8 @@ f5,int.r3,-2.98903500156019
 f6,int.r3,-2.68676254118305
 f7,int.r3,-2.7729396400304
 f8,int.r3,-2.70391936120175
-ps3,int.r3,-2.68676254118305
+ps3,int.r3,-2.69074448536049
+f9,int.r3,-2.69074448536049
 ps1,int.r3,-2.9012937
 ps2,int.r3,-3.22841225187594
 f1,app.mthd.bc.r3,0.456037037748615
@@ -183,7 +199,8 @@ f5,app.mthd.bc.r3,0.500858542553797
 f6,app.mthd.bc.r3,0.345769124393536
 f7,app.mthd.bc.r3,0.117100597381287
 f8,app.mthd.bc.r3,0.407891619287947
-ps3,app.mthd.bc.r3,0.345769124393536
+ps3,app.mthd.bc.r3,0.35934088454817
+f9,app.mthd.bc.r3,0.35934088454817
 ps1,app.mthd.bc.r3,
 ps2,app.mthd.bc.r3,0.561539558429444
 f1,app.mthd.cs.r3,-0.0603188781150832
@@ -194,7 +211,8 @@ f5,app.mthd.cs.r3,-0.26888802152739
 f6,app.mthd.cs.r3,-0.307276680262275
 f7,app.mthd.cs.r3,-0.22590274345486
 f8,app.mthd.cs.r3,-0.360814257024221
-ps3,app.mthd.cs.r3,-0.307276680262275
+ps3,app.mthd.cs.r3,-0.315228009033424
+f9,app.mthd.cs.r3,-0.315228009033424
 ps1,app.mthd.cs.r3,
 ps2,app.mthd.cs.r3,-0.666474172842208
 f1,man.ph.r3,0.229371095768612
@@ -205,7 +223,8 @@ f5,man.ph.r3,0.104814334759945
 f6,man.ph.r3,0.0779303942965591
 f7,man.ph.r3,-0.021175457569905
 f8,man.ph.r3,0.0722420910558113
-ps3,man.ph.r3,0.0779303942965591
+ps3,man.ph.r3,0.0768822634642168
+f9,man.ph.r3,0.0768822634642168
 ps1,man.ph.r3,0.2663616
 ps2,man.ph.r3,0.238
 f1,incorp.shallow.f4,-1.30255990214267
@@ -216,7 +235,8 @@ f5,incorp.shallow.f4,-1.75645743025513
 f6,incorp.shallow.f4,-1.04660269825825
 f7,incorp.shallow.f4,-0.658404602240412
 f8,incorp.shallow.f4,-1.07000342928298
-ps3,incorp.shallow.f4,-1.04660269825825
+ps3,incorp.shallow.f4,-1.08400465324331
+f9,incorp.shallow.f4,-1.08400465324331
 ps1,incorp.shallow.f4,-0.4121023
 ps2,incorp.shallow.f4,-0.964966548279922
 f1,incorp.shallow.r3,0.103682649921665
@@ -227,7 +247,8 @@ f5,incorp.shallow.r3,-0.126658670588826
 f6,incorp.shallow.r3,-0.153204929142357
 f7,incorp.shallow.r3,-0.110786452426043
 f8,incorp.shallow.r3,-0.173379272163194
-ps3,incorp.shallow.r3,-0.153204929142357
+ps3,incorp.shallow.r3,-0.149103137817605
+f9,incorp.shallow.r3,-0.149103137817605
 ps1,incorp.shallow.r3,
 ps2,incorp.shallow.r3,-0.580526893811793
 f1,incorp.deep.f4,-2.89057375649622
@@ -238,7 +259,8 @@ f5,incorp.deep.f4,-1.59496426821424
 f6,incorp.deep.f4,-1.97666674429703
 f7,incorp.deep.f4,-2.28922731794971
 f8,incorp.deep.f4,-2.06720416595477
-ps3,incorp.deep.f4,-1.97666674429703
+ps3,incorp.deep.f4,-2.15470126252463
+f9,incorp.deep.f4,-2.15470126252463
 ps1,incorp.deep.f4,-3.6477259
 ps2,incorp.deep.f4,-3.6949495394145
 f1,incorp.deep.r3,-1.02470822726213
@@ -249,7 +271,8 @@ f5,incorp.deep.r3,-3.19052178808812
 f6,incorp.deep.r3,-3.19208832539773
 f7,incorp.deep.r3,-3.19298678344638
 f8,incorp.deep.r3,-1.52824448290676
-ps3,incorp.deep.r3,-3.19208832539773
+ps3,incorp.deep.r3,-3.19305918509856
+f9,incorp.deep.r3,-3.19305918509856
 ps1,incorp.deep.r3,-0.3838862
 ps2,incorp.deep.r3,-1.2656956200405
 f1,int.r5,-1.48201690912364
@@ -261,6 +284,7 @@ f6,int.r5,-1.8
 f7,int.r5,-1.8
 f8,int.r5,-1.8
 ps3,int.r5,-1.8
+f9,int.r5,-1.8
 ps1,int.r5,
 ps2,int.r5,
 f1,rain.rate.r5,1.06233898383529
@@ -271,7 +295,8 @@ f5,rain.rate.r5,0.310316206953272
 f6,rain.rate.r5,0.280493573239845
 f7,rain.rate.r5,0.303669391039546
 f8,rain.rate.r5,0.340455235807024
-ps3,rain.rate.r5,0.280493573239845
+ps3,rain.rate.r5,0.291064328169562
+f9,rain.rate.r5,0.291064328169562
 ps1,rain.rate.r5,
 ps2,rain.rate.r5,
 f1,wind.sqrt.r1,
@@ -282,7 +307,8 @@ f5,wind.sqrt.r1,0.689730401585232
 f6,wind.sqrt.r1,0.568087139481269
 f7,wind.sqrt.r1,0.496880008559652
 f8,wind.sqrt.r1,0.598841829633565
-ps3,wind.sqrt.r1,0.568087139481269
+ps3,wind.sqrt.r1,0.575729803118109
+f9,wind.sqrt.r1,0.575729803118109
 ps1,wind.sqrt.r1,
 ps2,wind.sqrt.r1,
 f1,man.dm.sqrt.f0,
@@ -294,6 +320,7 @@ f6,man.dm.sqrt.f0,
 f7,man.dm.sqrt.f0,1.22914426768236
 f8,man.dm.sqrt.f0,
 ps3,man.dm.sqrt.f0,
+f9,man.dm.sqrt.f0,
 ps1,man.dm.sqrt.f0,
 ps2,man.dm.sqrt.f0,
 f1,app.rate.f0,
@@ -305,6 +332,7 @@ f6,app.rate.f0,
 f7,app.rate.f0,
 f8,app.rate.f0,
 ps3,app.rate.f0,
+f9,app.rate.f0,
 ps1,app.rate.f0,-0.0134681
 ps2,app.rate.f0,
 f1,air.temp.r3,
@@ -316,6 +344,7 @@ f6,air.temp.r3,
 f7,air.temp.r3,
 f8,air.temp.r3,
 ps3,air.temp.r3,
+f9,air.temp.r3,
 ps1,air.temp.r3,0.0152419
 ps2,air.temp.r3,
 f1,app.mthd.os.r3,
@@ -327,6 +356,7 @@ f6,app.mthd.os.r3,
 f7,app.mthd.os.r3,
 f8,app.mthd.os.r3,
 ps3,app.mthd.os.r3,
+f9,app.mthd.os.r3,
 ps1,app.mthd.os.r3,-0.122883
 ps2,app.mthd.os.r3,
 f1,rain.cum.r3,
@@ -338,6 +368,7 @@ f6,rain.cum.r3,
 f7,rain.cum.r3,
 f8,rain.cum.r3,
 ps3,rain.cum.r3,
+f9,rain.cum.r3,
 ps1,rain.cum.r3,-0.0300936
 ps2,rain.cum.r3,
 f1,ts.cereal.hght.r1,
@@ -349,5 +380,6 @@ f6,ts.cereal.hght.r1,
 f7,ts.cereal.hght.r1,
 f8,ts.cereal.hght.r1,
 ps3,ts.cereal.hght.r1,
+f9,ts.cereal.hght.r1,
 ps1,ts.cereal.hght.r1,
 ps2,ts.cereal.hght.r1,-0.244712378321887

@@ -32,24 +32,21 @@ source('extract_pars.R')
 source('crossval.R')
 source('extract_cv_pars.R')
 source('calc_emis_cv.R')
+source('cv_error.R')
 
 # Bootstrap analysis for uncertainty
 source('boot.R')
 source('extract_boot_pars.R')
 
-# Add labels for plots
-source('labels.R')
-
 # Save work
 #source('save_image.R')
 
+# Add labels for plots
+source('labels.R')
 # Plots
 source('plot_pars.R')
-source('plot_wthr_resids.R')
+source('plot_resids.R')
 source('plot_country_curves.R')
+source('plot_curves.R')
 source('plot_scatter_emis.R')
 source('plot_cv.R')
-
-# Check these
-#source('plot_boot.R')
-#source('plot_resids.R') source('plot_.R')

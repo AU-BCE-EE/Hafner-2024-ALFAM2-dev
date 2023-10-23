@@ -1,4 +1,8 @@
 
+# Check these
+#source('plot_boot.R')
+#source('plot_resids.R') source('plot_.R')
+
 
 # Cal f4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Try square root wind
