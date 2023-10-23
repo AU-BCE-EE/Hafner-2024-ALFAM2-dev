@@ -21,7 +21,7 @@ ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) +
   guides(colour = guide_legend(nrow = 2))
 ggsave2x('../plots/sens5_cattle', height = 4, width = 4)
 
-d1 <- pdat[man.source == 'pig', ]
+d1 <- pdat[parset == 3 & man.source == 'pig' & !outsidein, ]
 d2 <- pdat[parset == 3 & man.source == 'pig', ]
 ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) + 
   geom_line(lty = '1111', linewidth = 0.7) +

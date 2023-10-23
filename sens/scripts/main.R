@@ -2,7 +2,7 @@
 
 rm(list = ls())
 
-pn <- 'f4'
+pn <- 'ps3'
 
 source('functions.R')
 source('packages.R')

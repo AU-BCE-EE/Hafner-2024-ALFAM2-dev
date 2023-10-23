@@ -14,13 +14,13 @@ packageVersion('ALFAM2')
 
 Run model with par set 3
 ```{r}
-preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, cmns = cmns, prep = TRUE))
+preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep = TRUE))
 names(preds) <- paste0(names(preds), '.pred')
 preds[, parset := '3']
 pdat <- cbind(dat, preds)
 
 # Different for application methods
-preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, cmns = cmns, prep = TRUE))
+preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep = TRUE))
 names(preds) <- paste0(names(preds), '.pred')
 preds[, parset := '3']
 pamdat <- cbind(dat.app.mthd, preds)
@@ -35,14 +35,14 @@ for (i in unique(bpars$parset)) {
   pars <- d[, value]
   names(pars) <- d[, parameter]
 
-  preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, cmns = cmns, prep = TRUE))
+  preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, prep = TRUE))
 
   names(preds) <- paste0(names(preds), '.pred')
   preds[, parset := i]
   pdat <- rbind(pdat, cbind(dat, preds))
 
   # Different for application methods
-  preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, cmns = cmns, prep = TRUE))
+  preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, prep = TRUE))
 
   names(preds) <- paste0(names(preds), '.pred')
   preds[, parset := i]

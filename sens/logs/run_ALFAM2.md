@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "17 October, 2023 Oct:10"
+date: "23 October, 2023 Oct:10"
 ---
 
 Check package version.
@@ -20,13 +20,7 @@ packageVersion('ALFAM2')
 Run model with par set 3
 
 ```r
-preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, cmns = cmns, prep = TRUE))
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
+preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep = TRUE))
 ```
 
 ```
@@ -71,13 +65,7 @@ preds[, parset := '3']
 pdat <- cbind(dat, preds)
 
 # Different for application methods
-preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, cmns = cmns, prep = TRUE))
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
+preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep = TRUE))
 ```
 
 ```
@@ -132,14 +120,14 @@ for (i in unique(bpars$parset)) {
   pars <- d[, value]
   names(pars) <- d[, parameter]
 
-  preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, cmns = cmns, prep = TRUE))
+  preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, prep = TRUE))
 
   names(preds) <- paste0(names(preds), '.pred')
   preds[, parset := i]
   pdat <- rbind(pdat, cbind(dat, preds))
 
   # Different for application methods
-  preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, cmns = cmns, prep = TRUE))
+  preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, prep = TRUE))
 
   names(preds) <- paste0(names(preds), '.pred')
   preds[, parset := i]
@@ -149,12 +137,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -189,12 +171,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -232,13 +208,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -275,12 +245,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -321,12 +285,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -361,12 +319,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -404,13 +356,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -447,12 +393,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -493,12 +433,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -533,12 +467,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -576,13 +504,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -619,12 +541,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -665,12 +581,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -705,12 +615,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -748,13 +652,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -791,12 +689,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -837,12 +729,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -877,12 +763,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -920,13 +800,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -963,12 +837,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1009,12 +877,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -1049,12 +911,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1092,13 +948,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -1135,12 +985,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1181,12 +1025,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -1221,12 +1059,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1264,13 +1096,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -1307,12 +1133,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1353,12 +1173,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -1393,12 +1207,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1436,13 +1244,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -1479,12 +1281,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1525,12 +1321,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -1565,12 +1355,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1608,13 +1392,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -1651,12 +1429,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1697,12 +1469,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -1737,12 +1503,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1780,13 +1540,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -1823,12 +1577,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1869,12 +1617,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -1909,12 +1651,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -1952,13 +1688,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -1995,12 +1725,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2041,12 +1765,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -2081,12 +1799,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2124,13 +1836,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -2167,12 +1873,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2213,12 +1913,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -2253,12 +1947,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2296,13 +1984,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -2339,12 +2021,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2385,12 +2061,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -2425,12 +2095,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2468,13 +2132,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -2511,12 +2169,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2557,12 +2209,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -2597,12 +2243,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2640,13 +2280,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -2683,12 +2317,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2729,12 +2357,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -2769,12 +2391,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2812,13 +2428,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -2855,12 +2465,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2901,12 +2505,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -2941,12 +2539,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -2984,13 +2576,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -3027,12 +2613,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3073,12 +2653,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -3113,12 +2687,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3156,13 +2724,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -3199,12 +2761,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3245,12 +2801,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -3285,12 +2835,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3328,13 +2872,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -3371,12 +2909,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3417,12 +2949,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -3457,12 +2983,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3500,13 +3020,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -3543,12 +3057,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3589,12 +3097,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -3629,12 +3131,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3672,13 +3168,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -3715,12 +3205,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -3761,12 +3245,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -3804,16 +3282,10 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
+## User-supplied parameters are being used.
 ```
 
 ```
-## User-supplied parameters are being used.
-```
-
-```
 ## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 5 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
@@ -3844,13 +3316,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -3887,13 +3353,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -3930,12 +3390,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -3973,12 +3427,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -4019,12 +3467,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -4059,12 +3501,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -4105,12 +3541,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -4145,13 +3575,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -4188,13 +3612,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -4231,12 +3649,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -4274,12 +3686,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -4320,12 +3726,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -4360,12 +3760,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -4406,12 +3800,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -4446,13 +3834,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -4489,13 +3871,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -4532,12 +3908,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -4575,12 +3945,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -4621,12 +3985,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -4664,9 +4022,8 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
+## Warning in calcPParms(pars[which1], dat, upr = 100): Some calculated primary
+## parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4704,12 +4061,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -4750,12 +4101,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -4790,13 +4135,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -4833,13 +4172,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -4876,13 +4209,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -4919,13 +4246,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -4962,13 +4283,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5005,13 +4320,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5048,12 +4357,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -5091,12 +4394,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -5137,12 +4434,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -5177,13 +4468,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5220,13 +4505,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5263,13 +4542,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5306,13 +4579,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5349,12 +4616,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -5392,12 +4653,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -5438,12 +4693,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -5478,12 +4727,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -5524,12 +4767,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -5564,13 +4801,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5607,13 +4838,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5650,13 +4875,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5693,13 +4912,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5736,12 +4949,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -5779,12 +4986,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -5825,12 +5026,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -5865,13 +5060,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5908,13 +5097,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5951,13 +5134,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -5994,13 +5171,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -6037,13 +5208,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -6080,13 +5245,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -6123,12 +5282,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -6166,12 +5319,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -6212,12 +5359,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -6252,12 +5393,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -6298,12 +5433,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -6338,13 +5467,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -6381,13 +5504,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -6424,12 +5541,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -6467,12 +5578,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -6513,12 +5618,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -6553,12 +5652,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -6599,12 +5692,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -6639,13 +5726,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -6682,13 +5763,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -6725,12 +5800,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -6768,12 +5837,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -6814,12 +5877,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -6854,12 +5911,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -6900,12 +5951,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -6940,13 +5985,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -6983,13 +6022,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7026,12 +6059,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -7069,12 +6096,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -7115,12 +6136,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -7155,12 +6170,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -7201,12 +6210,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -7241,13 +6244,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7284,13 +6281,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7327,13 +6318,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7370,13 +6355,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7413,13 +6392,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7456,13 +6429,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7499,12 +6466,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -7542,12 +6503,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -7588,12 +6543,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -7628,13 +6577,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7671,13 +6614,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7714,13 +6651,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7757,13 +6688,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -7800,12 +6725,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -7843,12 +6762,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -7889,12 +6802,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -7929,12 +6836,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -7975,12 +6876,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -8015,13 +6910,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8058,13 +6947,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8101,13 +6984,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8144,13 +7021,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8187,12 +7058,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -8230,12 +7095,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -8276,12 +7135,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -8316,13 +7169,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8359,13 +7206,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8402,13 +7243,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8445,13 +7280,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8488,13 +7317,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8531,13 +7354,7 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
-```
 
 ```
 ## User-supplied parameters are being used.
@@ -8574,12 +7391,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
 ```
 
 ```
@@ -8617,12 +7428,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
@@ -8663,12 +7468,6 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group =
-## "id", : You specified values for the cmns argument for centering means. Only use
-## this option if you know what you are doing.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
@@ -8703,12 +7502,6 @@ for (i in unique(bpars$parset)) {
 ##   int.r5
 ##   rain.rate.r5
 ##   wind.sqrt.r1
-```
-
-```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : You
-## specified values for the cmns argument for centering means. Only use this option
-## if you know what you are doing.
 ```
 
 ```
