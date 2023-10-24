@@ -25,7 +25,7 @@ The largest component, with several further sub-directories for different result
 Some of these are described here.
 
 ### `scripts`
-`main.R` runs everything, but it would take a day or so to run because of the bootstrap part.
+`main.R` runs everything, but it would take a day or more to run because of the bootstrap part.
 Some parts are described here.
 
 The `subset.R` and `prep.R` scripts get measurement data ready.
@@ -44,6 +44,19 @@ In `extract_pars.R` the parameters are extracted for export and plotting.
 ### `workspace`
 To work with parameter estimation results without re-running everything, use the saved workspace.
 See call near top of `main.R`.
+
+### `plots-curves`
+Plots of cumulative emission curves for all field plots used for parameter estimation.
+Measurements are blue, parameter set 3 calculated values in red.
+Plot titles have identification key (`pmid`) and some other information.
+
+### `plots-resids`
+Has plots of residuals (all as ALFAM2 value minus measured value) in 168 h cumulative emission versus some predictor variables: DM, pH, and average air temperature.
+These show that parameter set 3 (ps3 in names) addresses some problems that were present in sets 1 and 2 (ps1, ps2).
+Plots are included for all parameter sets.
+
+### `plots-scatter`
+Bivariate plots of measured vs. calculated 168 h cumulative emission for different parameter sets.
 
 ## `r5`
 Exploration of effect of new sink with `r5` parameter.
