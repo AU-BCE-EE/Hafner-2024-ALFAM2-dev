@@ -1,18 +1,29 @@
 
-dat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
-dat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
+dat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
+                            labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
+dat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), 
+                       labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
 
-pdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
-pdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
+pdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
+                             labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
+pdat[, app.mthd.ab := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
+                             labels = c('BC', 'TH', 'TS', 'OSI', 'CSI'))]
+pdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), 
+                        labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
 
-qdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
-qdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
+qdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
+                             labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
+qdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), 
+                        labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
 
 d1 <- pdat[parset == 3 & man.source != 'pig' & !outsidein, ]
 d2 <- pdat[parset == 3 & man.source != 'pig', ]
+d2[, xvalmax := max(xval), by = .(set, app.mthd)]
+d3 <- d2[xval == xvalmax, ]
 ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) + 
   geom_line(lty = '1111', linewidth = 0.7) +
   geom_line(data = d1, linewidth = 0.7) +
+  #geom_text(data = d3, aes(label = app.mthd.ab), nudge_x = 1) +
   facet_wrap(~ set.nm, scale = 'free_x') +
   scale_color_viridis_d() +
   theme_bw() +
@@ -39,12 +50,12 @@ d <- qdat[man.source != 'pig' & app.mthd == 'bsth', ]
 d3 <- pdat[man.source != 'pig' & app.mthd == 'bsth' & parset == '3', ]
 ggplot(d, aes(xval, dedx10)) + 
   geom_hline(yintercept = 0, colour = 'gray45') +
-  geom_smooth(aes(y = dedx10), linewidth = 0.7, se = FALSE, lty = '2222') +
-  geom_smooth(aes(y = dedx90), linewidth = 0.7, se = FALSE, lty = '2222') +
-  geom_smooth(aes(y = dedxmd), linewidth = 0.7, se = FALSE, col = 'gray45') +
+  #geom_smooth(aes(y = dedx10), linewidth = 0.7, se = FALSE, lty = '2222') +
+  #geom_smooth(aes(y = dedx90), linewidth = 0.7, se = FALSE, lty = '2222') +
+  #geom_smooth(aes(y = dedxmd), linewidth = 0.7, se = FALSE, col = 'gray45') +
   geom_line(aes(y = dedx10), lty = '2222') +
   geom_line(aes(y = dedx90), lty = '2222') +
-  geom_line(aes(y = dedxmd), col = 'gray45') +
+  #geom_line(aes(y = dedxmd), col = 'gray45') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free') +
   scale_color_viridis_d() +
@@ -58,9 +69,12 @@ d <- qdat[man.source == 'pig' & app.mthd == 'bsth', ]
 d3 <- pdat[man.source == 'pig' & app.mthd == 'bsth' & parset == '3', ]
 ggplot(d, aes(xval, dedx10)) + 
   geom_hline(yintercept = 0, colour = 'gray45') +
-  geom_smooth(aes(y = dedx10), linewidth = 0.7, se = FALSE, lty = '2222') +
-  geom_smooth(aes(y = dedx90), linewidth = 0.7, se = FALSE, lty = '2222') +
-  geom_smooth(aes(y = dedxmd), linewidth = 0.7, se = FALSE, col = 'gray45') +
+  #geom_smooth(aes(y = dedx10), linewidth = 0.7, se = FALSE, lty = '2222') +
+  #geom_smooth(aes(y = dedx90), linewidth = 0.7, se = FALSE, lty = '2222') +
+  #geom_smooth(aes(y = dedxmd), linewidth = 0.7, se = FALSE, col = 'gray45') +
+  geom_line(aes(y = dedx10), lty = '2222') +
+  geom_line(aes(y = dedx90), lty = '2222') +
+  #geom_line(aes(y = dedxmd), col = 'gray45') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free') +
   scale_color_viridis_d() +

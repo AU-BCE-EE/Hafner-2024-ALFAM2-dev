@@ -50,6 +50,7 @@ dat[, app.rate.ni := (as.numeric(!app.mthd %in% c('os', 'cs')) * app.rate)]
 dat[, man.dm.ni := (as.numeric(!app.mthd %in% c('os', 'cs')) * man.dm)]
 
 # Mark obs outside of par est range
+pvsumm[, variable := gsub('rain\\.1', 'rain\\.rate', variable)]
 pvsumm[, set := gsub('\\.24', '', variable)]
 dat <- merge(dat, pvsumm[, .(set, app.mthd, b3, a3)], by = c('set', 'app.mthd')) 
 dat[, outsidein := xval < b3 | xval > a3]
