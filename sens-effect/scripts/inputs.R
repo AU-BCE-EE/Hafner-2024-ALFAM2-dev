@@ -1,14 +1,17 @@
 # Sort out scenarios
 
-dat.ref <- data.table(ct = 168, man.dm = 5, wind.2m = 5, air.temp = 15, rain.rate = 0, app.rate.ni = 40, man.ph = 7, tan.app = 100, app.mthd = 'bsth')
+# Set reference values here
+# These values are based on cattle and April values in the DK EF report
+dat.ref <- data.table(ct = 168, man.dm = 6.5, wind.2m = 3.4, air.temp = 7.6, rain.rate = 0, app.rate.ni = 40, man.ph = 7.0, tan.app = 100, app.mthd = 'bsth')
 man.source <- data.table(man.source = c('pig', 'cattle/other'))
 dat.ref <- data.table(dfcombos(dat.ref, man.source))
 
-man.dm <- data.table(man.dm = seq(1, 10, length.out = 100))
-man.ph <- data.table(man.ph = seq(6, 8, length.out = 100))
-air.temp <- data.table(air.temp = seq(0, 20, length.out = 100))
-wind.2m <- data.table(wind.2m = seq(0.5, 8, length.out = 100))
-rain.rate <- data.table(rain.rate = seq(0, 1, length.out = 100))
+# Set min/max here
+man.dm <- data.table(man.dm = seq(1, 15, length.out = 100))
+man.ph <- data.table(man.ph = seq(5, 9, length.out = 100))
+air.temp <- data.table(air.temp = seq(0, 25, length.out = 100))
+wind.2m <- data.table(wind.2m = seq(0, 10, length.out = 100))
+rain.rate <- data.table(rain.rate = seq(0, 2, length.out = 100))
 
 app.mthd <- data.table(app.mthd = c('bc', 'bsth', 'ts', 'os', 'cs'))
 app.mthd.num <- c(bc = 1, bsth = 0, ts = -0.1, os = -0.5, cs = -1)
@@ -64,3 +67,6 @@ dat[set == 'app.mthd', xval.norm := xval]
 
 # Reference
 dat[set == 'ref', xval.norm := 0]
+
+# Square root wind
+dat[, wind.sqrt := sqrt(wind.2m)]
