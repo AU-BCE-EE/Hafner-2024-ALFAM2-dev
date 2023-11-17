@@ -17,15 +17,15 @@ ggplot(dd, aes(ct, rred, colour = factor(inst), group = iexper)) +
 ggsave2x('../plots/acid_effect', height = 2.5, width = 3)
 
 # Emission curves
-dd <- subset(idat, pmid %in% c(1529:1532))
-#dd <- idatp
+#dd <- subset(idat, pmid %in% c(1529:1532))
+dd <- idatp
 d0 <- subset(dd, ct == ct.min)[, `:=` (ct = 0, e.rel = 0)]
 dd <- rbind(d0, dd)
 dl <- subset(dd, ct == ct.max)
 ep <- ggplot(dd, aes(ct, e.rel, colour = acid, group = pmid)) +
+  geom_line(aes(y = e.rel.pred), lty = '1111', alpha = 0.4) +
   geom_line() +
-  #geom_line(aes(y = e.rel.pred), lty = '1111') +
-  geom_text(data = dl, aes(label = man.ph), nudge_x = 7, size = 2.1, colour = 'black') +
+  geom_text(data = dl, aes(label = man.ph), nudge_x = 7, size = 1.5, colour = 'black') +
   theme_bw() +
   theme(legend.position = 'none') +
   #scale_color_viridis_d(option = 'D') +
@@ -35,8 +35,9 @@ d0 <- subset(dd, ct == ct.min)[, `:=` (ct = 0, e.rel = 0)]
 dd <- rbind(d0, dd)
 dl <- subset(dd, ct == ct.min)[, ct := 0][man.ph == 5.2, ct := -2.8]
 jp <- ggplot(dd, aes(ct, j.NH3, colour = acid, group = pmid)) +
+  geom_step(aes(y = j.NH3.pred), lty = '1111', alpha = 0.4) +
   geom_step() +
-  geom_text(data = dl, aes(label = man.ph), nudge_x = -2, size = 2.1, colour = 'black') +
+  geom_text(data = dl, aes(label = man.ph), nudge_x = -2, size = 1.5, colour = 'black') +
   theme_bw() +
   coord_cartesian(xlim = c(-5, 50)) +
   theme(legend.position = 'none') +
