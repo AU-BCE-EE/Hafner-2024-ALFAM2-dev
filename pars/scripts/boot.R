@@ -1,5 +1,6 @@
 # Bootstrap pars
 # See crossval.R for notes
+# NTS: Use parallel loop?
 
 pars.start <- mods$ps3$optim$par
 fixed <- c(int.r5 = -1.8)
