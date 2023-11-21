@@ -38,7 +38,7 @@ for (i in 1:nb) {
                                           resCalcComb(p = par, dat = idatsamp, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
                                                   app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
                                                   weights = idatsamp[, .(weight.lastc, weight.1c)], flatout = TRUE),
-                                          method = 'Nelder-Mead', control = list(maxit = maxit1))
+                                          method = 'Nelder-Mead', control = list(maxit = maxit2))
 
   mods.boot[[i]][['coef']] <- c(m$par, fixed)
   

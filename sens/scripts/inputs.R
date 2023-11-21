@@ -10,7 +10,7 @@ dat.ref <- data.table(dfcombos(dat.ref, man.source))
 man.dm <- data.table(man.dm = seq(0, 10, length.out = 100))
 man.ph <- data.table(man.ph = seq(5.5, 9.0, length.out = 100))
 air.temp <- data.table(air.temp = seq(-2, 28, length.out = 100))
-wind.2m <- data.table(wind.2m = seq(0, 10, length.out = 100))
+wind.2m <- data.table(wind.2m = seq(0.2, 10, length.out = 100))
 rain.rate <- data.table(rain.rate = seq(0, 3, length.out = 100))
 
 app.mthd <- data.table(app.mthd = c('bc', 'bsth', 'ts', 'os', 'cs'))

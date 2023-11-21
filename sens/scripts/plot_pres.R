@@ -1,3 +1,4 @@
+# Plots for presentations
 
 dat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
 dat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
@@ -20,7 +21,7 @@ ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = '168 h emis. (frac. TAN)', colour = '') +
   guides(colour = guide_legend(nrow = 1))
-ggsave2x('../plots/sens4_cattle', height = 3, width = 7)
+ggsave2x('../plots-pres/sens4_cattle', height = 3, width = 7)
 
 # Derivatives
 d <- qdat[man.source != 'pig' & set.nm != 'Rain' & app.mthd == 'bsth', ]
@@ -35,4 +36,4 @@ ggplot(d, aes(xval, dedx10)) +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') 
-ggsave2x('../plots/dsens4_cattle', height = 2, width = 7)
+ggsave2x('../plots-pres/dsens4_cattle', height = 2, width = 7)

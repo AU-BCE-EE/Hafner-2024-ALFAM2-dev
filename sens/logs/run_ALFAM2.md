@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "31 October, 2023 Oct:10"
+date: "21 November, 2023 Nov:11"
 ---
 
 Check package version.
@@ -14,7 +14,7 @@ packageVersion('ALFAM2')
 ```
 
 ```
-## [1] '3.15'
+## [1] '3.16'
 ```
 
 Run model with par set 3
@@ -173,6 +173,11 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
+## Warning in calcPParms(pars[which2], dat, upr = 100): Some calculated primary
+## parameters are at the limit. Check input parameters.
+```
+
+```
 ## User-supplied parameters are being used.
 ```
 
@@ -314,6 +319,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -530,6 +537,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -602,6 +611,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -818,6 +829,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1106,6 +1119,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1394,6 +1409,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1466,6 +1483,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1610,6 +1629,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1898,6 +1919,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1970,6 +1993,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2114,6 +2139,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2258,6 +2285,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2402,6 +2431,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2690,6 +2721,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2978,6 +3011,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3122,6 +3157,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3194,6 +3231,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3266,6 +3305,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3626,6 +3667,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3986,6 +4029,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4202,6 +4247,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4346,6 +4393,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4418,6 +4467,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4706,6 +4757,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5066,6 +5119,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5138,6 +5193,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5426,6 +5483,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5498,6 +5557,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5786,6 +5847,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6146,6 +6209,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6218,6 +6283,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6290,6 +6357,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6362,6 +6431,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6434,6 +6505,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6722,6 +6795,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6866,6 +6941,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6938,6 +7015,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -7226,6 +7305,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -7298,6 +7379,8 @@ for (i in unique(bpars$parset)) {
 ##   man.ph.r3
 ##   rain.rate.r5
 ##   int.r5
+
+## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
