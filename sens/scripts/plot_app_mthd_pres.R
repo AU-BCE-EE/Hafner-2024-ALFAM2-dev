@@ -1,7 +1,7 @@
 
 # Set labels here
-app.mthd.labels <- c('Broadcast', 'Trailing\nhose', 'Trailing\nshoe', 'Open slot\ninjection', 'Closed slot\ninjection')
-man.source.labels <- c('Cattle/other', 'Pig')
+app.mthd.labels <- c('Bred-\nspredning', 'Slæbe\nslange', 'Slæbe\nsko', 'Åben rende\nnedfældning', 'Lukket rende\nnedfældning')
+man.source.labels <- c('Kvæg/andet', 'Svin')
 
 pamdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = app.mthd.labels)]
 pamdat[, man.source.nm := factor(man.source, levels = c('cattle/other', 'pig'), labels = man.source.labels)]
@@ -17,5 +17,5 @@ ggplot(d1, aes(app.mthd.nm, -rr10)) +
   facet_wrap(~ man.source.nm, scale = 'fixed') +
   theme_bw() +
   theme(legend.position = 'none') +
-  labs(x = 'Application method', y = 'Emission reduction\n(Frac. broadcast emission)', colour = '')
+  labs(x = 'Udbringningsteknik', y = 'Emissions reduktion\n(Frak. bredspredt emission)', colour = '')
 ggsave2x('../plots-pres/rel_red_app_mthd', height = 3.0, width = 7)
