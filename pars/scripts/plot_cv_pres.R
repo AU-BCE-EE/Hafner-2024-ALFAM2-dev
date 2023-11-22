@@ -1,9 +1,9 @@
 # Plot cross-validation error estimates
 
 # Set labels here
-app.mthd.labels <- c('Bredspredning DK', 'Slæbeslange', 'Slæbesko', 'Åben rende\nnedfældning', 'Lukket rende\nnedfældning')
-set.labels <- c('Nedbringning DK', 'Forsuring', 'Afgasset biomasse', 'Andet')
-man.source.labels <- c('DK Svin', 'Kvæg & andet')
+app.mthd.labels <- c('Bredspredning', 'Slæbeslange', 'Slæbesko', 'Åben rende\nnedfældning', 'Lukket rende\nnedfældning')
+set.labels <- c('Nedbringning', 'Forsuring', 'Afgasset biomasse', 'Andet')
+man.source.labels <- c('Svin', 'Kvæg & andet')
 
 # Apply labels
 cvdat168[, `:=` (pig.nm = factor(ifelse(man.source == 'pig', 'Svin', 'Kvæg & andet'), levels = c('Svin', 'Kvæg & andet'), labels = man.source.labels),
