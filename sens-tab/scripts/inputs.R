@@ -18,30 +18,18 @@ dat[, ct := cumsum(dt), by = .(sid, app.mthd)]
 dat[ct > 3, rain.rate := 0]
 dat[, rain.cum := cumsum(rain.rate * dt), by = .(sid, app.mthd)]
 
-### Adjust temperature for heating and cooling simulations
-### Set amplitude 
-##amp <- 20.
-##dat[descrip == 'cooling', air.temp := air.temp - (ct - mean(ct) * amp / 168), by = .(sid, app.mthd)]  
-##dat[descrip == 'warming', air.temp := air.temp + (ct - mean(ct) * amp / 168), by = .(sid, app.mthd)]  
-##dat[dat$descrip == 'warming', 'air.temp'] <- dat[dat$descrip == 'warming', 'air.temp'] + 
-##  (dat[dat$descrip == 'warming', 'ct'] - mean(dat[dat$descrip == 'warming', 'ct']))*amp/168
-##
-##  Group 3 column 'air.temp': 3.940476 (type 'double') at RHS position 1 truncated (precision lost) when assigning to type 'integer'
-##4: In `[.data.table`(dat, descrip == "warming", `:=`(air.temp, air.temp +  :
-##  Group 4 column 'air.temp': 3.940476 (type 'double') at RHS position 1 truncated (precision lost) when assigning to type 'integer'
-##5
-
-## Add some factor levels for dummy vars
-#dat$app.mthd <- factor(dat$app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'))
-#dat$incorp <- factor(dat$incorp, levels = c('none', 'shallow', 'deep'))
-#dat$man.source <- factor(dat$man.source, levels = c('cat', 'pig'))
+# Adjust temperature for heating and cooling simulations
+# Set amplitude 
+amp <- 20.
+dat[descrip == 'cooling', air.temp := air.temp - (ct - mean(ct)) * amp / 168, by = .(sid, app.mthd)]  
+dat[descrip == 'warming', air.temp := air.temp + (ct - mean(ct)) * amp / 168, by = .(sid, app.mthd)]  
 
 # Dummy variables
-dat$app.rate.ni <- (!dat$app.mthd %in% c('os', 'cs')) * dat$app.rate
-dat$man.dm.ni <- (!dat$app.mthd %in% c('os', 'cs')) * dat$man.dm
+dat[, app.rate.ni := (!app.mthd %in% c('os', 'cs')) * app.rate]
+dat[, man.dm.ni := (!app.mthd %in% c('os', 'cs')) * man.dm]
 
 # Transformed wind
-dat$wind.sqrt <- sqrt(dat$wind.2m)
+dat[, wind.sqrt := sqrt(wind.2m)]
 
 # Sim ID plus application method for unique value for each sim
-dat$sida <- paste0(dat$sid, dat$app.mthd)
+dat[, sida := paste0(sid, app.mthd)]

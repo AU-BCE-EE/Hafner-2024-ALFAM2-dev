@@ -2,8 +2,8 @@
 
 # NTS: switch to data.table!
 
-datw <- merge(dat, pr3, by = c('sida', 'ct'))
-dat168.3 <- datw[datw$ct == 168, ]
+dat3 <- merge(dat, pr3, by = c('sida', 'ct'))
+dat168.3 <- dat3[dat3$ct == 168, ]
 
 summ168.3 <- dcast(dat168.3, sid + descrip ~ app.mthd, value.var = 'er')
 summ168.3$bc.red <- 100*(1 - summ168.3$bc/summ168.3$bc[1])
@@ -21,8 +21,8 @@ summ168.3$cs.bsth.red <- 100*(1 - summ168.3$cs/summ168.3$bsth)
 summ168.3 <- rounddf(summ168.3, 2, signif)
 
 # Repeat for 
-datu <- merge(dat, pr2, by = c('sida', 'ct'))
-dat168.2 <- datu[datu$ct == 168, ]
+dat2 <- merge(dat, pr2, by = c('sida', 'ct'))
+dat168.2 <- dat2[dat2$ct == 168, ]
 
 summ168.2 <- dcast(dat168.2, sid + descrip ~ app.mthd, value.var = 'er')
 summ168.2$bc.red <- 100*(1 - summ168.2$bc/summ168.2$bc[1])
@@ -57,3 +57,9 @@ summ168.1$ts.bsth.red <- 100*(1 - summ168.1$ts/summ168.1$bsth)
 summ168.1$os.bsth.red <- 100*(1 - summ168.1$os/summ168.1$bsth)
 summ168.1$cs.bsth.red <- 100*(1 - summ168.1$cs/summ168.1$bsth)
 summ168.1 <- rounddf(summ168.1, 2, signif)
+
+# And stack
+dat168.1$pars <- 'ps01'
+dat168.2$pars <- 'ps02'
+dat168.3$pars <- 'ps03'
+datc <- rbind(dat168.1, dat168.2, dat168.3)
