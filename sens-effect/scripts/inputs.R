@@ -8,7 +8,7 @@ dat.ref <- data.table(dfcombos(dat.ref, man.source))
 
 # Set min/max here
 man.dm <- data.table(man.dm = seq(1, 15, length.out = 100))
-man.ph <- data.table(man.ph = seq(5, 9, length.out = 100))
+man.ph <- data.table(man.ph = seq(6, 9, length.out = 100))
 air.temp <- data.table(air.temp = seq(0, 25, length.out = 100))
 wind.2m <- data.table(wind.2m = seq(0, 10, length.out = 100))
 rain.rate <- data.table(rain.rate = seq(0, 2, length.out = 100))
