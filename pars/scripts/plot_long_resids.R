@@ -27,7 +27,7 @@ ggsave2x('../plots-resids/long_resids_scatter', height = 6, width = 7)
 
 dd <- subset(dpreds, pars %in%  c('ps1', 'ps2', 'ps3') & dataset == 1 & cta > 48 & !is.na(resid.er) & !(app.mthd == 'cs' & pars == 'ps1'))
 dls <- dd[, as.list(coef(lm(resid.er ~ cta))), by = .(pmid, app.mthd, app.mthd.nm, pars,  pars.nm)]
-ggplot(dls, aes(app.mthd.nm, cta, fill = pars.nm)) +
+ggplot(dls, aes(app.mthd.nm, 1000 * cta, fill = pars.nm)) +
   geom_boxplot() +
   theme_bw() +
   theme(legend.position = 'top') +
