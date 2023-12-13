@@ -206,7 +206,7 @@ pdat1 <- pdat[pmid %in% unique(idat1[, pmid])]
 # Equal by application method
 idat1[, weight.app.mthd := 1 / length(unique(pmid)), by = app.mthd]
 # Get weights, equal by plot
-idat1[, weight.plots := 1 / length(j.NH3), by = pmid]
+idat1[, weight.plots := 1 / sum(cta <= 168), by = pmid]
 # Normalize for cumulative emission
 idat1[, weight.er := 1 / max(na.omit(er[cta <= 168])), by = pmid]
 # Normalize for number of intervals (later ints count more, last counts the most)
