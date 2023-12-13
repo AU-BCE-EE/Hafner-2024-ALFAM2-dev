@@ -32,5 +32,5 @@ ggplot(dls, aes(app.mthd.nm, 1000 * cta, fill = pars.nm)) +
   theme_bw() +
   theme(legend.position = 'top') +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  labs(x = 'Application method', y = expression(1000 %*% 'slope in residuals'), fill = 'Parameter set') 
+  labs(x = 'Application method', y = expression(1000 %*% 'slope in error'), fill = 'Parameter set') 
 ggsave2x('../plots-resids/long_resids_box', height = 4, width = 4)
