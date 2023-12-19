@@ -1,4 +1,4 @@
-R version 4.2.1 (2022-06-23)
+R version 4.2.3 (2023-03-15)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.3 LTS
 
@@ -18,16 +18,17 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggplot2_3.4.3     reshape2_1.4.4    data.table_1.14.8 rmarkdown_2.14   
-[5] knitr_1.39        ALFAM2_3.17       nvimcom_0.9-82   
+[1] ggplot2_3.4.2     reshape2_1.4.4    data.table_1.14.2 rmarkdown_2.14   
+[5] knitr_1.39        ALFAM2_3.22       nvimcom_0.9-123  
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.11      compiler_4.2.1   pillar_1.9.0     plyr_1.8.7      
- [5] tools_4.2.1      digest_0.6.31    evaluate_0.15    lifecycle_1.0.3 
- [9] tibble_3.2.1     gtable_0.3.0     pkgconfig_2.0.3  rlang_1.1.1     
-[13] DBI_1.1.3        cli_3.6.1        parallel_4.2.1   xfun_0.30       
-[17] fastmap_1.1.1    withr_2.5.0      stringr_1.4.0    dplyr_1.0.9     
-[21] generics_0.1.3   vctrs_0.5.1      grid_4.2.1       tidyselect_1.1.2
-[25] glue_1.6.2       R6_2.5.1         fansi_1.0.3      purrr_0.3.4     
-[29] magrittr_2.0.3   scales_1.2.0     htmltools_0.5.5  assertthat_0.2.1
-[33] colorspace_2.0-3 utf8_1.2.2       stringi_1.7.6    munsell_0.5.0   
+ [1] Rcpp_1.0.11       compiler_4.2.3    pillar_1.9.0      plyr_1.8.7       
+ [5] tools_4.2.3       digest_0.6.29     evaluate_0.15     lifecycle_1.0.3  
+ [9] tibble_3.2.1      gtable_0.3.0      pkgconfig_2.0.3   rlang_1.1.1      
+[13] cli_3.6.1         parallel_4.2.3    xfun_0.31         fastmap_1.1.0    
+[17] withr_2.5.0       stringr_1.5.0     dplyr_1.1.2       systemfonts_1.0.4
+[21] generics_0.1.2    vctrs_0.6.3       grid_4.2.3        tidyselect_1.2.0 
+[25] glue_1.6.2        R6_2.5.1          textshaping_0.3.6 fansi_1.0.3      
+[29] farver_2.1.0      magrittr_2.0.3    scales_1.2.0      htmltools_0.5.2  
+[33] colorspace_2.0-3  ragg_1.2.3        labeling_0.4.2    utf8_1.2.2       
+[37] stringi_1.7.6     munsell_0.5.0    

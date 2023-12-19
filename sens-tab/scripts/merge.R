@@ -1,6 +1,9 @@
 # Merge in predictions
 
 # NTS: switch to data.table!
+# NTS: switch to data.table!
+# NTS: switch to data.table!
+# NTS: switch to data.table!
 
 dat3 <- merge(dat, pr3, by = c('sida', 'ct'))
 dat168.3 <- dat3[dat3$ct == 168, ]
@@ -19,6 +22,13 @@ summ168.3$ts.bsth.red <- 100*(1 - summ168.3$ts/summ168.3$bsth)
 summ168.3$os.bsth.red <- 100*(1 - summ168.3$os/summ168.3$bsth)
 summ168.3$cs.bsth.red <- 100*(1 - summ168.3$cs/summ168.3$bsth)
 summ168.3 <- rounddf(summ168.3, 2, signif)
+names(summ168.3)
+
+# Get boot results
+bootsumm <- bootdat[ct == 168, .(n = length(er), 
+				 lwr = quantile(er, 0.05, na.rm = TRUE), 
+				 upr = quantile(er, 0.95, na.rm = TRUE)), by = .(sida)]
+dat168.3 <- merge(dat168.3, bootsumm, by = c('sida'))
 
 # Repeat for 
 dat2 <- merge(dat, pr2, by = c('sida', 'ct'))
@@ -62,4 +72,4 @@ summ168.1 <- rounddf(summ168.1, 2, signif)
 dat168.1$pars <- 'ps01'
 dat168.2$pars <- 'ps02'
 dat168.3$pars <- 'ps03'
-datc <- rbind(dat168.1, dat168.2, dat168.3)
+datc <- rbind(dat168.1, dat168.2, dat168.3, fill = TRUE)
