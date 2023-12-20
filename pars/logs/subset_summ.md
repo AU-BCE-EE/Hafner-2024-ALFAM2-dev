@@ -3,7 +3,7 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "16 November, 2023 Nov:11"
+date: "15 December, 2023 Dec:12"
 ---
 
 # Summary of main data subset
@@ -16,7 +16,7 @@ table(pdat1[, digested])
 ```
 ## 
 ## FALSE  TRUE 
-##   547    26
+##   547    29
 ```
 
 ```r
@@ -29,7 +29,7 @@ table(pdat1[, .(institute, digested)])
 ##   ADAS-RR    109    0
 ##   ARDC         7    0
 ##   AT          12    5
-##   AU          67    3
+##   AU          67    6
 ##   CAU-LU       0    9
 ##   DIAS        28    0
 ##   IMAG        86    0
@@ -52,7 +52,7 @@ table(pdat1[, .(uptake, digested)])
 ## uptake FALSE TRUE
 ##      1   114    0
 ##      2   431   18
-##      3     2    8
+##      3     2   11
 ```
 
 ```r
@@ -64,7 +64,7 @@ table(pdat1[, .(uptake, acid)])
 ## uptake FALSE TRUE
 ##      1   114    0
 ##      2   418   31
-##      3    10    0
+##      3    13    0
 ```
 
 ```r
@@ -77,7 +77,7 @@ table(pdat1[, .(institute, acid)])
 ##   ADAS-RR    109    0
 ##   ARDC         7    0
 ##   AT          17    0
-##   AU          44   26
+##   AU          47   26
 ##   CAU-LU       9    0
 ##   DIAS        28    0
 ##   IMAG        86    0
@@ -100,7 +100,7 @@ table(pdat1[, .(uptake, incorp)])
 ## uptake deep none shallow
 ##      1    0  114       0
 ##      2    3  411      35
-##      3    0    7       3
+##      3    0   10       3
 ```
 
 ```r
@@ -113,7 +113,7 @@ table(pdat1[, .(institute, incorp)])
 ##   ADAS-RR     0  109       0
 ##   ARDC        0    7       0
 ##   AT          0   17       0
-##   AU          0   70       0
+##   AU          0   73       0
 ##   CAU-LU      0    9       0
 ##   DIAS        0   28       0
 ##   IMAG        0   86       0
@@ -135,7 +135,7 @@ table(idat1[, rain.missing])
 ```
 ## 
 ## FALSE  TRUE 
-## 14170  1223
+## 15178  1223
 ```
 
 ```r
@@ -143,7 +143,7 @@ table(idat1[, rain.missing])
 ```
 
 ```
-## [1] 7.94517
+## [1] 7.456862
 ```
 
 ```r
@@ -153,7 +153,7 @@ table(idat1[, interp.wind])
 ```
 ## 
 ## FALSE  TRUE 
-## 15377    16
+## 16385    16
 ```
 
 ```r
@@ -161,7 +161,7 @@ table(idat1[, interp.wind])
 ```
 
 ```
-## [1] 0.1039434
+## [1] 0.09755503
 ```
 
 ```r
@@ -171,7 +171,7 @@ table(idat1[, interp.air.temp])
 ```
 ## 
 ## FALSE  TRUE 
-## 15389     4
+## 16397     4
 ```
 
 ```r
@@ -179,7 +179,7 @@ table(idat1[, interp.air.temp])
 ```
 
 ```
-## [1] 0.02598584
+## [1] 0.02438876
 ```
 
 ```r
@@ -189,7 +189,7 @@ table(idat1[, man.ph.missing])
 ```
 ## 
 ## FALSE  TRUE 
-## 14667   726
+## 15675   726
 ```
 
 ```r
@@ -197,7 +197,7 @@ table(idat1[, man.ph.missing])
 ```
 
 ```
-## [1] 4.71643
+## [1] 4.426559
 ```
 
 
@@ -209,7 +209,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   430   143
+##   433   143
 ```
 
 ```r
@@ -233,7 +233,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   557    16
+##   560    16
 ```
 
 ```r
@@ -257,7 +257,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   569     4
+##   572     4
 ```
 
 ```r
@@ -281,7 +281,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   526    47
+##   529    47
 ```
 
 ```r

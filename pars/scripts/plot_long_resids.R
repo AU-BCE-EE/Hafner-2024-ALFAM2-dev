@@ -1,4 +1,3 @@
-ls()
 
 dpreds[, pars.nm := factor(pars, levels = c('ps1', 'ps2', 'ps3'), labels = 1:3)]
 
