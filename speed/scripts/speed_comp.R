@@ -97,7 +97,7 @@ for (j in 1:3) {
   }
   
   # Many plots, no incorporation
-  nits <- 5
+  nits <- 7
   tt <- numeric(nits)
   for (i in 1:nits) {
     tt[i] <- system.time(alfam2(datp, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
@@ -108,7 +108,7 @@ for (j in 1:3) {
   stdev['plots', j] <- sd(tt)
   
   # Many plots, with incorporation.
-  nits <- 3
+  nits <- 7
   tt <- numeric(nits)
   for (i in 1:nits) {
     args(alfam2)
@@ -120,7 +120,7 @@ for (j in 1:3) {
   stdev['plots-incorp', j] <- sd(tt)
   
   # Many times, no incorporation
-  nits <- 5
+  nits <- 7
   tt <- numeric(nits)
   for (i in 1:nits) {
     tt[i] <- system.time(alfam2(datt, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
@@ -132,7 +132,7 @@ for (j in 1:3) {
   
   # Many times, with incorporation
   
-  nits <- 3
+  nits <- 7
   tt <- numeric(nits)
   for (i in 1:nits) {
     tt[i] <- system.time(alfam2(datti, pars = ALFAM2::alfam2pars02, time.incorp = 't.incorp', 
