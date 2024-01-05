@@ -1,0 +1,320 @@
+---
+title: 'Compare speed of alfam2() with Rcpp to old version'
+output: pdf_document
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Packages
+
+```{r}
+library(data.table)
+```
+
+
+# Install packages
+
+Locations for R (old) and Rcpp (new) versions
+```{r}
+rver <- '/home/sasha/R/ALFAM2-versions/R-ver/'
+cver <- '/home/sasha/R/ALFAM2-versions/Rcpp-ver/'
+```
+
+Install different versions to different locations
+
+```{r}
+#devtools::install_github('sashahafner/ALFAM2@v2.0', lib = rver)
+#devtools::install_github('sashahafner/ALFAM2@v3.17', ref = 'Rcpp-dev', lib = cver, force = TRUE)
+```
+
+# Input data
+
+Generate input data.
+
+## Many plots 
+
+```{r}
+set.seed(123)
+d <- data.frame(ct = 1:168, app.mthd = 'bc', 
+                man.dm = 7, man.ph = 7, man.source = 'cattle', 
+                air.temp = rnorm(168, mean = 10, sd = 5), 
+                wind.2m = rnorm(168, mean = 5, sd = 1),
+                tan.app = 100)
+```
+
+Without incorporation.
+
+```{r}
+nplots <- 1000
+nplots <- 100
+datp <- d[rep(1:nrow(d), nplots), ]
+datp$id <- rep(1:nplots, each = nrow(d))
+```
+
+Add incorporation.
+
+```{r}
+datpi <- datp
+datpi$t.incorp <- 3
+datpi$incorp <- 'shallow'
+```
+
+With prep
+
+```{r}
+datpp <- ALFAM2:::prepDat(datp, value = 'data')
+datpp$`__f4` <- 1
+datpp$`__add.row` <- FALSE
+```
+
+```{r}
+datpip <- ALFAM2:::prepDat(datpi, value = 'data')
+datpip$`__f4` <- 1
+datpip$`__add.row` <- FALSE
+```
+
+## Many times
+
+```{r}
+set.seed(123)
+d <- data.frame(ct = 1:1E6 * 168 / 1E6, app.mthd = 'bc', 
+                man.dm = 7, man.ph = 7, man.source = 'cattle', 
+                air.temp = rnorm(1E6, mean = 10, sd = 5), 
+                wind.2m = rnorm(1E6, mean = 5, sd = 1),
+                tan.app = 100)
+```
+
+Without incorporation.
+
+```{r}
+datt <- d
+```
+
+Add incorporation.
+
+```{r}
+datti <- datt
+datti$t.incorp <- 3
+datti$incorp <- 'shallow'
+```
+
+With prep
+
+```{r}
+dattp <- ALFAM2:::prepDat(datt, value = 'data')
+dattp$`__f4` <- 1
+dattp$`__add.row` <- FALSE
+```
+
+```{r}
+dattip <- ALFAM2:::prepDat(datti, value = 'data')
+dattip$`__f4` <- 1
+dattip$`__add.row` <- FALSE
+```
+
+# Results matrix
+
+```{r}
+stdev <- times <- matrix(NA, nrow = 4, ncol = 3, 
+                         dimnames = list(c('plots', 'plots-incorp', 'times', 'times-incorp'), 
+                                         c('R', 'Rcpp', 'flat-out')))
+
+```
+
+
+# Old R version
+
+```{r}
+if ('ALFAM2' %in% (.packages())) detach('package:ALFAM2')
+```
+
+```{r}
+library(ALFAM2, lib.loc = rver)
+packageVersion("ALFAM2")
+```
+
+Many plots, no incorporation.
+
+```{r}
+nits <- 5
+tt <- numeric(nits)
+for (i in 1:nits) {
+  tt[i] <- system.time(alfam2(datp, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
+                              group = 'id', prep = TRUE, warn = FALSE))[3]
+}
+```
+
+```{r}
+times['plots', 'R'] <- mean(tt)
+stdev['plots', 'R'] <- sd(tt)
+```
+
+Many plots, with incorporation.
+
+
+```{r}
+nits <- 3
+tt <- numeric(nits)
+for (i in 1:nits) {
+  args(alfam2)
+  tt[i] <- system.time(alfam2(datpi, pars = ALFAM2::alfam2pars02, time.incorp = 't.incorp', 
+                              app.name = 'tan.app', group = 'id', prep = TRUE, warn = FALSE))[3]
+}
+```
+
+```{r}
+times['plots-incorp', 'R'] <- mean(tt)
+stdev['plots-incorp', 'R'] <- sd(tt)
+```
+
+Many times, no incorporation.
+
+```{r}
+nits <- 5
+tt <- numeric(nits)
+for (i in 1:nits) {
+  tt[i] <- system.time(alfam2(datt, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
+                              prep = TRUE, warn = FALSE))[3]
+}
+```
+
+```{r}
+times['times', 'R'] <- mean(tt)
+stdev['times', 'R'] <- sd(tt)
+```
+
+Many plots, with incorporation.
+
+
+```{r}
+nits <- 3
+tt <- numeric(nits)
+for (i in 1:nits) {
+  args(alfam2)
+  tt[i] <- system.time(alfam2(datpi, pars = ALFAM2::alfam2pars02, time.incorp = 't.incorp', 
+                              app.name = 'tan.app', group = 'id', prep = TRUE, warn = FALSE))[3]
+}
+```
+
+```{r}
+times['plots-incorp', 'R'] <- mean(tt)
+stdev['plots-incorp', 'R'] <- sd(tt)
+```
+
+# With Rcpp version
+
+Now try latest Rcpp version.
+
+```{r}
+detach('package:ALFAM2')
+```
+
+```{r}
+library(ALFAM2, lib.loc = cver)
+packageVersion("ALFAM2")
+```
+
+No incorporation.
+
+```{r}
+nits <- 5
+tt <- numeric(nits)
+for (i in 1:nits) {
+  tt[i] <- system.time(alfam2(datp, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
+                              group = 'id', prep = TRUE, warn = FALSE))[3]
+}
+```
+
+```{r}
+tt
+mean(tt)
+sd(tt)
+100 * sd(tt) / mean(tt)
+res[1, 2] <- mean(tt)
+```
+
+No data prep
+
+```{r}
+nits <- 5
+tt <- numeric(nits)
+for (i in 1:nits) {
+  tt[i] <- system.time(alfam2(datpp, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
+                              group = 'id', prep = FALSE, warn = FALSE))[3]
+}
+```
+
+```{r}
+tt
+mean(tt)
+sd(tt)
+100 * sd(tt) / mean(tt)
+res[2, 2] <- mean(tt)
+```
+
+With flatout option (external prep)
+
+```{r}
+nits <- 5
+tt <- numeric(nits)
+head(datpp)
+undebug(alfam2)
+for (i in 1:nits) {
+  tt[i] <- system.time(alfam2(datpp, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
+                              warn = FALSE, flatout = TRUE))[3]
+}
+```
+
+```{r}
+tt
+mean(tt)
+sd(tt)
+100 * sd(tt) / mean(tt)
+res[4, 2] <- mean(tt)
+```
+
+With incorporation.
+
+
+```{r}
+nits <- 3
+tt <- numeric(nits)
+for (i in 1:nits) {
+  args(alfam2)
+  tt[i] <- system.time(alfam2(datpi, pars = ALFAM2::alfam2pars02, time.incorp = 't.incorp', 
+                              app.name = 'tan.app', group = 'id', prep = TRUE, warn = FALSE))[3]
+}
+```
+
+```{r}
+tt
+mean(tt)
+sd(tt)
+100 * sd(tt) / mean(tt)
+res[3, 2] <- mean(tt)
+```
+
+Incorporation with flatout (prep before)
+
+
+```{r}
+nits <- 3
+tt <- numeric(nits)
+for (i in 1:nits) {
+  args(alfam2)
+  tt[i] <- system.time(alfam2(datpip, pars = ALFAM2::alfam2pars02, time.incorp = 't.incorp', 
+                              app.name = 'tan.app', group = 'id', warn = FALSE, flatout = TRUE))[3]
+}
+```
+
+```{r}
+tt
+mean(tt)
+sd(tt)
+100 * sd(tt) / mean(tt)
+res[5, 2] <- mean(tt)
+```
+
+```{r}
+print(res)
+```
