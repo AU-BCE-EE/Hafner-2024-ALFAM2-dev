@@ -150,5 +150,5 @@ times <- rounddf(times, 3, func = signif)
 cv <- rounddf(cv, 3, func = signif)
 
 # Export results
-write.csv(times, '../output/times.csv')
-write.csv(cv, '../output/cv.csv')
+write.csv(times, '../output/times_ubuntu.csv')
+write.csv(cv, '../output/cv_ubuntu.csv')
