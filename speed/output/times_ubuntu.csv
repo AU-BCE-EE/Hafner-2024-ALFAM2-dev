@@ -1,5 +1,5 @@
-"","R","Rcpp","flat-out"
-"plots",4.46,1.77,1.58
-"plots-incorp",76.7,7.19,1.59
-"times",3.29,2.33,1.29
-"times-incorp",4.95,4.77,1.35
+"","R","Rcpp","Rcpp-fast"
+"plots",4.09,1.71,1.76
+"plots-incorp",78,1.55,1.51
+"times",3.24,2.53,2.31
+"times-incorp",3.82,3.84,3.43
