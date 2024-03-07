@@ -3,7 +3,7 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "15 December, 2023 Dec:12"
+date: "27 February, 2024 Feb:02"
 ---
 
 # Summary of main data subset
@@ -16,7 +16,7 @@ table(pdat1[, digested])
 ```
 ## 
 ## FALSE  TRUE 
-##   547    29
+##   591    29
 ```
 
 ```r
@@ -32,7 +32,6 @@ table(pdat1[, .(institute, digested)])
 ##   AU          67    6
 ##   CAU-LU       0    9
 ##   DIAS        28    0
-##   IMAG        86    0
 ##   INH-HAFL    45    0
 ##   INRA         9    4
 ##   MU           5    0
@@ -40,7 +39,7 @@ table(pdat1[, .(institute, digested)])
 ##   TEAGASC     49    0
 ##   UNIMI        0    4
 ##   UNINA        1    1
-##   WUR        121    0
+##   WUR        251    0
 ```
 
 ```r
@@ -50,9 +49,9 @@ table(pdat1[, .(uptake, digested)])
 ```
 ##       digested
 ## uptake FALSE TRUE
-##      1   114    0
-##      2   431   18
-##      3     2   11
+##      1    28    0
+##      2   310   18
+##      3   253   11
 ```
 
 ```r
@@ -62,9 +61,9 @@ table(pdat1[, .(uptake, acid)])
 ```
 ##       acid
 ## uptake FALSE TRUE
-##      1   114    0
-##      2   418   31
-##      3    13    0
+##      1    28    0
+##      2   297   31
+##      3   264    0
 ```
 
 ```r
@@ -80,7 +79,6 @@ table(pdat1[, .(institute, acid)])
 ##   AU          47   26
 ##   CAU-LU       9    0
 ##   DIAS        28    0
-##   IMAG        86    0
 ##   INH-HAFL    45    0
 ##   INRA        13    0
 ##   MU           5    0
@@ -88,7 +86,7 @@ table(pdat1[, .(institute, acid)])
 ##   TEAGASC     49    0
 ##   UNIMI        4    0
 ##   UNINA        2    0
-##   WUR        121    0
+##   WUR        251    0
 ```
 
 ```r
@@ -97,10 +95,10 @@ table(pdat1[, .(uptake, incorp)])
 
 ```
 ##       incorp
-## uptake deep none shallow
-##      1    0  114       0
-##      2    3  411      35
-##      3    0   10       3
+## uptake none shallow
+##      1   28       0
+##      2  318      10
+##      3  221      43
 ```
 
 ```r
@@ -109,22 +107,21 @@ table(pdat1[, .(institute, incorp)])
 
 ```
 ##           incorp
-## institute  deep none shallow
-##   ADAS-RR     0  109       0
-##   ARDC        0    7       0
-##   AT          0   17       0
-##   AU          0   73       0
-##   CAU-LU      0    9       0
-##   DIAS        0   28       0
-##   IMAG        0   86       0
-##   INH-HAFL    0   45       0
-##   INRA        0    7       6
-##   MU          0    1       4
-##   NMI-WUR     0    8       0
-##   TEAGASC     0   49       0
-##   UNIMI       0    1       3
-##   UNINA       0    2       0
-##   WUR         3   93      25
+## institute  none shallow
+##   ADAS-RR   109       0
+##   ARDC        7       0
+##   AT         17       0
+##   AU         73       0
+##   CAU-LU      9       0
+##   DIAS       28       0
+##   INH-HAFL   45       0
+##   INRA        7       6
+##   MU          1       4
+##   NMI-WUR     8       0
+##   TEAGASC    49       0
+##   UNIMI       1       3
+##   UNINA       2       0
+##   WUR       211      40
 ```
 
 
@@ -135,7 +132,7 @@ table(idat1[, rain.missing])
 ```
 ## 
 ## FALSE  TRUE 
-## 15178  1223
+## 16675    87
 ```
 
 ```r
@@ -143,7 +140,7 @@ table(idat1[, rain.missing])
 ```
 
 ```
-## [1] 7.456862
+## [1] 0.5190311
 ```
 
 ```r
@@ -153,7 +150,7 @@ table(idat1[, interp.wind])
 ```
 ## 
 ## FALSE  TRUE 
-## 16385    16
+## 16749    13
 ```
 
 ```r
@@ -161,7 +158,7 @@ table(idat1[, interp.wind])
 ```
 
 ```
-## [1] 0.09755503
+## [1] 0.07755638
 ```
 
 ```r
@@ -171,7 +168,7 @@ table(idat1[, interp.air.temp])
 ```
 ## 
 ## FALSE  TRUE 
-## 16397     4
+## 16760     2
 ```
 
 ```r
@@ -179,7 +176,7 @@ table(idat1[, interp.air.temp])
 ```
 
 ```
-## [1] 0.02438876
+## [1] 0.01193175
 ```
 
 ```r
@@ -189,7 +186,7 @@ table(idat1[, man.ph.missing])
 ```
 ## 
 ## FALSE  TRUE 
-## 15675   726
+## 16084   678
 ```
 
 ```r
@@ -197,7 +194,7 @@ table(idat1[, man.ph.missing])
 ```
 
 ```
-## [1] 4.426559
+## [1] 4.044863
 ```
 
 
@@ -209,7 +206,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   433   143
+##   610    10
 ```
 
 ```r
@@ -233,7 +230,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   560    16
+##   607    13
 ```
 
 ```r
@@ -257,7 +254,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   572     4
+##   618     2
 ```
 
 ```r
@@ -281,7 +278,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   529    47
+##   578    42
 ```
 
 ```r
@@ -306,10 +303,10 @@ table(pdati[, c('country', 'man.ph')])
 
 ```
 ##        man.ph
-## country 7.12 7.3 7.47 7.5 7.76 7.9 8 8.36
-##      FR    4   4    0   2    0   1 0    0
-##      IT    0   0    1   0    1   0 2    4
-##      NL    0   0    0   0    0   0 0    0
+## country 7.12 7.2 7.3 7.47 7.5 7.6 7.7 7.76 7.8 7.9 8 8.1 8.36 8.5
+##      FR    4   0   4    0   2   0   0    0   0   1 0   0    0   0
+##      IT    0   0   0    1   0   0   0    1   0   0 2   0    4   0
+##      NL    0   4   4    0   0   2   2    0   3   0 6   6    0   4
 ```
 
 ```r
@@ -318,10 +315,9 @@ table(pdati[, c('incorp', 'man.ph')])
 
 ```
 ##          man.ph
-## incorp    7.12 7.3 7.47 7.5 7.76 7.9 8 8.36
-##   deep       0   0    0   0    0   0 0    0
-##   none       2   2    0   2    0   0 0    1
-##   shallow    2   2    1   0    1   1 2    3
+## incorp    7.12 7.2 7.3 7.47 7.5 7.6 7.7 7.76 7.8 7.9 8 8.1 8.36 8.5
+##   none       2   2   4    0   2   0   0    0   1   0 5   3    1   1
+##   shallow    2   2   4    1   0   2   2    1   2   1 3   3    3   3
 ```
 
 Low pH for shallow incorp plots probably causing wrong sign for shallow incorp pars.
