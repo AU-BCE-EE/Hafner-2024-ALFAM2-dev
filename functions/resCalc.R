@@ -62,14 +62,24 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
     p <- ipars(p, rminj)
   }
 
-  obs <- data.frame(dat)[, to]
-
-  if (length(weights) == 1) weights <- data.frame(rep(weights, nrow(dat)), rep(weights, nrow(dat)))
-  obs[weights == 0] <- NA # To prevent warning on NaNs
-  if (any(is.na(obs[weights > 0]))) stop('NA values in observations obs, not just where weights = 0.')
-
   pred <- alfam2(dat, pars = p, app.name = app.name, time.name = time.name, 
                     time.incorp = time.incorp, group = group, flatout = flatout, warn = FALSE)[, to]
+
+  if (length(weights) == 1) {
+    weights <- data.frame(rep(weights, nrow(dat)), rep(weights, nrow(dat)))
+  }
+
+  # Note that data frame is needed for indexing by matrix
+  obs <- data.frame(dat[, ..to])
+  obs[weights == 0] <- NA # To prevent warning on NaNs
+  if (any(is.na(obs[weights > 0]))) {
+    stop('NA values in observations obs, not just where weights = 0.')
+  }
+
+  # Drop obs originally added in alfam2() call for data prep in prep.R
+  keeprows <- !dat[, `__add.row`]
+  obs <- obs[keeprows, ]
+  weights <- weights[keeprows, ]
 
   # Switch to matrix for cell-by-cell calcs
   pred <- as.matrix(pred)
@@ -86,8 +96,15 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   
   res <- weights * (pred - obs) 
   res[weights == 0] <- 0 
-  if (any(is.na(res))) warning('NA in residuals, see rows ', paste(which(is.na(res)), collapse = ', '), '. ')
-  if (any(is.na(res)) && browseNA) browser('NA in residuals')
+
+  if (any(is.na(res))) {
+    warning('NA in residuals, see rows ', paste(which(is.na(res)), collapse = ', '), '. ')
+  }
+
+  if (any(is.na(res)) && browseNA) {
+    browser('NA in residuals')
+  }
+
   res[is.na(res)] <- 0
 
   if (method == 'TAE') {
