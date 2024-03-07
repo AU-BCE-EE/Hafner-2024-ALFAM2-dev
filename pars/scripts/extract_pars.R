@@ -9,8 +9,8 @@ for(i in 1:length(mods)) {
 }
 
 # Add par sets 1 and 2
-d1 <- data.table(pars = 'ps1', t(ALFAM2pars01))
-d2 <- data.table(pars = 'ps2', t(ALFAM2pars02))
+d1 <- data.table(pars = 'ps1', t(alfam2pars01))
+d2 <- data.table(pars = 'ps2', t(alfam2pars02))
 d.pars <- rbind(d.pars, d1, d2, fill = TRUE)
 
 # Reshape for plotting 

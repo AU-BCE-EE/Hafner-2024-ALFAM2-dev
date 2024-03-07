@@ -33,18 +33,15 @@ dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
 # Will run model with flatout option, so need to do dummy variable data prep separately here
 # Note: *must* use flatout option for safety once rows have been added (will screw up incorp otherwise) etc.
-idat1 <-ALFAM2:::prepDat(idat1, value = 'data') 
-idat1$`__group` <- idat1$pmid
-idat1$`__f4` <- 1
-
 idat1 <- idat1[order(pmid, cta), ]
-idat1 <- ALFAM2:::prepIncorp(idat1, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
-                                       time.incorp = 'time.incorp',  
-                                       incorp.names = c('incorp', 'deep', 'shallow'), 
-                                       warn = TRUE)[[1]]
+idat1 <- alfam2(idat1, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
+                time.name = 'cta', group = 'pmid',
+                time.incorp = 'time.incorp',  incorp.names = c('incorp', 'deep', 'shallow'), 
+                warn = TRUE, value = 'incorp')
+idat1 <- data.table(idat1)
 # Set emission in added incorporation rows (needed because flatout option will be used) to NA so they are not used in fitting
 # See love-hate-data.table repo issue #1 for more on this operation below
-idat1[idat1$`__add.row`, c('j.NH3', 'e.cum', 'e.rel')] <- NA
+idat1[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
 # Wind tunnel and micromet variables
 idat1[, wt := meas.tech2 == 'wt']

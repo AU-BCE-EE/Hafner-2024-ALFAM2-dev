@@ -19,6 +19,8 @@ pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', grou
 # Should be no warning about pars (none dropped)
 # Should be no NA in output
 if (is.nan(sum(pr$j[!pr$cta == 0]))) stop('NAs! Check pars and input data.')
+dim(idat1)
+dim(pr)
 
 mods[[ps]] <- list()
 mods[[ps]][['optim']] <- m <- optim(par = pars.start, fn = function(par) 
