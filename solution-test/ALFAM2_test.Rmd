@@ -1,0 +1,174 @@
+---
+title: 'Test of ALFAM2 closed-form solution'
+author: 'Sasha D. Hafner'
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+urlcolor: blue
+---
+
+![Structure of ALFAM2 model.](fig1e.pdf)
+
+```{r}
+library(ALFAM2)
+```
+
+```{r}
+packageVersion('ALFAM2')
+```
+
+```{r}
+library(data.table)
+library(ggplot2)
+library(deSolve)
+```
+
+```{r}
+logistic <-
+function (x) {
+  exp(x)/(1 + exp(x))
+}
+
+logit <-
+function (p) {
+  log(p/(1 - p))
+}
+
+numalfam2 <- function(dat, pars = ALFAM2::alfam2pars03_alpha, app.name = 'TAN_app', time.name = 'time') {
+
+  pars <- pars[grepl('^int', names(pars))]
+  pars[grepl('\\.f', names(pars))] <- logistic(pars[grepl('\\.f', names(pars))])
+  pars[grepl('\\.r', names(pars))] <- 10^(pars[grepl('\\.r', names(pars))])
+  names(pars) <- gsub('int\\.', '', names(pars))
+  f0 <- pars['f0']
+  r1 <- pars['r1']
+  r2 <- pars['r2']
+  r3 <- pars['r3']
+  r5 <- pars['r5']
+
+  f <- dat[[app.name]][1] * pars['f0']
+  s <- dat[[app.name]][1] * (1 - pars['f0'])
+  e <- 0
+  tt <- 0
+  res <- data.table()
+
+  for (j in unique(dat[dat[[group]] == i, ][[time.name]])) {
+    dtt <- j - tt
+    f2 <- f - r1 * f * dtt - r2 * f * dtt 
+    s2 <- s + r2 * f * dtt - r3 * s * dtt - r5 * s * dtt
+
+    f <- (f + f2) / 2
+    s <- (s + s2) / 2
+
+    e <- e + r1 * f * dtt + r3 * s * dtt
+
+    f <- f2
+    s <- s2
+
+    tt <- j
+
+    res <- rbind(res, data.table(time = j, f = f, s = s, e = e))
+  }
+
+  return(res)
+
+}
+```
+
+```{r}
+tstart <- 0
+tend <- 168
+dat1 <- data.table(steps = '00002', time = seq(tstart, tend, length.out = 2), TAN_app = 100)
+dat2 <- data.table(steps = '00010', time = seq(tstart, tend, length.out = 10), TAN_app = 100)
+dat3 <- data.table(steps = '00100', time = seq(tstart, tend, length.out = 100), TAN_app = 100)
+dat4 <- data.table(steps = '01000', time = seq(tstart, tend, length.out = 1E3), TAN_app = 100)
+dat5 <- data.table(steps = '10000', time = seq(tstart, tend, length.out = 1E3), TAN_app = 100)
+dat <- rbind(dat1, dat2, dat3, dat4, dat5, dat6)
+```
+
+```{r}
+predscf <- data.table(alfam2(dat, pars = ALFAM2::alfam2pars03_alpha, app.name = 'TAN_app', time.name = 'time', group = 'steps'))
+```
+
+```{r}
+predsnum <- data.table()
+for (i in unique(dat[, steps])) {
+  dd <- dat[steps == i, ]
+  pr <- numalfam2(dd)
+  pr[, steps := i]
+  predsnum <- rbind(predsnum, pr)
+}
+```
+
+```{r}
+pars <- ALFAM2::alfam2pars03_alpha
+pars <- pars[grepl('^int', names(pars))]
+pars[grepl('\\.f', names(pars))] <- logistic(pars[grepl('\\.f', names(pars))])
+pars[grepl('\\.r', names(pars))] <- 10^(pars[grepl('\\.r', names(pars))])
+names(pars) <- gsub('int\\.', '', names(pars))
+pars
+y <- c(f = pars['f0'] * 100, s = (1 - pars['f0']) * 100, e = 0)
+pars <- pars[-1]
+
+rates <- function(t, x, parms) {
+  r1 <- parms['r1']
+  r2 <- parms['r2']
+  r3 <- parms['r3']
+  r5 <- parms['r5']
+
+  f <- x[1]
+  s <- x[2]
+
+  dfdt <-  -r1 * f - r2 * f
+  dsdt <- r2 * f - r3 * s - r5 * s
+  dedt <- r1 * f + r3 * s
+  return(list(c(dfdt, dsdt, dedt)))
+
+}
+
+lsoda(y = y, times = 1:168, func = rates, parms = pars)
+tail(dat)
+
+```
+
+
+
+```{r}
+dat <- merge(dat, predscf, by = c('steps', 'time'))
+dat <- merge(dat, predsnum, by = c('steps', 'time'), suffixes = c('.cf', '.num'))
+```
+
+```{r}
+ggplot(dat, aes(time, e.num, colour = steps)) +
+  geom_point() +
+  geom_line(aes(y = e.cf))
+```
+
+```{r}
+ggplot(dat, aes(time, e.num, colour = steps)) +
+  geom_point() +
+  geom_line(aes(y = e.cf)) +
+  ylim(0, 50)
+```
+
+```{r}
+ggplot(dat, aes(time, e.num, colour = steps)) +
+  geom_point() +
+  geom_line(aes(y = e.cf)) +
+  xlim(120, NA) +
+  ylim(37, 42)
+```
+
+```{r}
+dat[, e.diff := e.num - e.cf]
+tail(dat)
+x <- dat[steps == '10000', .(steps, time, e.diff)]
+plot(e.diff ~ time, data = x)
+```
+
+
+
+
+
+
+
+
+
