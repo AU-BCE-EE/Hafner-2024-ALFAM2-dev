@@ -5,7 +5,27 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 urlcolor: blue
 ---
 
+# Overview
+The `alfam2()` function uses a closed-form solution to calculate emission over time.
+In this document that solution is checked by comparison to a simple numerical solution.
+
+# Model structure
+
+With a sink for slow pool *S*, structure is given in Fig. 1.
+
 ![Structure of ALFAM2 model.](fig1e.pdf)
+
+So derivatives are:
+
+```
+df/dt <-  -r1 * F - r2 * F
+ds/dt <- r2 * F - r3 * S - r5 * S
+de/dt <- r1 * F + r3 * S
+```
+
+# Prep
+
+Packages.
 
 ```{r}
 library(ALFAM2)
@@ -21,82 +41,22 @@ library(ggplot2)
 library(deSolve)
 ```
 
-```{r}
-logistic <-
-function (x) {
-  exp(x)/(1 + exp(x))
-}
+# Predictions
 
-logit <-
-function (p) {
-  log(p/(1 - p))
-}
-
-numalfam2 <- function(dat, pars = ALFAM2::alfam2pars03_alpha, app.name = 'TAN_app', time.name = 'time') {
-
-  pars <- pars[grepl('^int', names(pars))]
-  pars[grepl('\\.f', names(pars))] <- logistic(pars[grepl('\\.f', names(pars))])
-  pars[grepl('\\.r', names(pars))] <- 10^(pars[grepl('\\.r', names(pars))])
-  names(pars) <- gsub('int\\.', '', names(pars))
-  f0 <- pars['f0']
-  r1 <- pars['r1']
-  r2 <- pars['r2']
-  r3 <- pars['r3']
-  r5 <- pars['r5']
-
-  f <- dat[[app.name]][1] * pars['f0']
-  s <- dat[[app.name]][1] * (1 - pars['f0'])
-  e <- 0
-  tt <- 0
-  res <- data.table()
-
-  for (j in unique(dat[dat[[group]] == i, ][[time.name]])) {
-    dtt <- j - tt
-    f2 <- f - r1 * f * dtt - r2 * f * dtt 
-    s2 <- s + r2 * f * dtt - r3 * s * dtt - r5 * s * dtt
-
-    f <- (f + f2) / 2
-    s <- (s + s2) / 2
-
-    e <- e + r1 * f * dtt + r3 * s * dtt
-
-    f <- f2
-    s <- s2
-
-    tt <- j
-
-    res <- rbind(res, data.table(time = j, f = f, s = s, e = e))
-  }
-
-  return(res)
-
-}
-```
+Input data--no predictor variables so only intercept parameters are used.
 
 ```{r}
-tstart <- 0
-tend <- 168
-dat1 <- data.table(steps = '00002', time = seq(tstart, tend, length.out = 2), TAN_app = 100)
-dat2 <- data.table(steps = '00010', time = seq(tstart, tend, length.out = 10), TAN_app = 100)
-dat3 <- data.table(steps = '00100', time = seq(tstart, tend, length.out = 100), TAN_app = 100)
-dat4 <- data.table(steps = '01000', time = seq(tstart, tend, length.out = 1E3), TAN_app = 100)
-dat5 <- data.table(steps = '10000', time = seq(tstart, tend, length.out = 1E3), TAN_app = 100)
-dat <- rbind(dat1, dat2, dat3, dat4, dat5, dat6)
+dat <- data.table(time = 0:168, TAN_app = 100)
 ```
 
-```{r}
-predscf <- data.table(alfam2(dat, pars = ALFAM2::alfam2pars03_alpha, app.name = 'TAN_app', time.name = 'time', group = 'steps'))
-```
+Closed-form solution with `alfam2()` function from ALFAM2 package.
 
 ```{r}
-predsnum <- data.table()
-for (i in unique(dat[, steps])) {
-  dd <- dat[steps == i, ]
-  pr <- numalfam2(dd)
-  pr[, steps := i]
-  predsnum <- rbind(predsnum, pr)
-}
+predscf <- data.table(alfam2(dat, pars = ALFAM2::alfam2pars03_alpha, app.name = 'TAN_app', 
+                             time.name = 'time'))
 ```
+
+Numerical solution uses `lsoda()`.
 
 ```{r}
 pars <- ALFAM2::alfam2pars03_alpha
@@ -120,55 +80,34 @@ rates <- function(t, x, parms) {
   dfdt <-  -r1 * f - r2 * f
   dsdt <- r2 * f - r3 * s - r5 * s
   dedt <- r1 * f + r3 * s
-  return(list(c(dfdt, dsdt, dedt)))
+ return(list(c(dfdt, dsdt, dedt)))
 
 }
 
-lsoda(y = y, times = 1:168, func = rates, parms = pars)
-tail(dat)
-
+predsnum <- lsoda(y = y, times = dat[, time], func = rates, parms = pars)
 ```
 
-
+Combine results.
 
 ```{r}
-dat <- merge(dat, predscf, by = c('steps', 'time'))
-dat <- merge(dat, predsnum, by = c('steps', 'time'), suffixes = c('.cf', '.num'))
+dat <- merge(dat, predscf, by = 'time')
+dat <- merge(dat, predsnum, by = 'time', suffixes = c('.cf', '.num'))
 ```
 
+Compare.
+
 ```{r}
-ggplot(dat, aes(time, e.num, colour = steps)) +
+ggplot(dat, aes(time, e.num)) +
   geom_point() +
   geom_line(aes(y = e.cf))
 ```
 
-```{r}
-ggplot(dat, aes(time, e.num, colour = steps)) +
-  geom_point() +
-  geom_line(aes(y = e.cf)) +
-  ylim(0, 50)
-```
-
-```{r}
-ggplot(dat, aes(time, e.num, colour = steps)) +
-  geom_point() +
-  geom_line(aes(y = e.cf)) +
-  xlim(120, NA) +
-  ylim(37, 42)
-```
+Check difference--very small.
 
 ```{r}
 dat[, e.diff := e.num - e.cf]
-tail(dat)
-x <- dat[steps == '10000', .(steps, time, e.diff)]
-plot(e.diff ~ time, data = x)
+plot(log10(abs(e.diff)) ~ time, data = dat)
 ```
 
-
-
-
-
-
-
-
-
+# Conclusion
+The closed-form solution seems to be accurate.
