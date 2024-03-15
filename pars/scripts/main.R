@@ -40,7 +40,7 @@ source('boot.R')
 source('extract_boot_pars.R')
 
 # Save work
-#source('save_image.R')
+source('save_image.R')
 
 # Add labels for plots
 source('labels.R')

@@ -2,7 +2,7 @@
 
 d.parscv <- data.table()
 
-for(i in 1:length(mods.cv)) {
+for(i in names(mods.cv)) {
     pp <- mods.cv[[i]][['coef']]
     pp <- data.table(inst.dropped = i, t(pp))
     d.parscv <- rbindf(d.parscv, pp)

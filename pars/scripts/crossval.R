@@ -13,7 +13,7 @@ lower <- c(
   app.rate.ni.f0 = -0.5,
   man.dm.f0 = -1,
   man.source.pig.f0 = -3,
-  app.mthd.cs.f0 = -10,
+  app.mthd.cs.f0 = -12,
   int.r1 = -3,
   app.mthd.bc.r1 = -1,
   man.dm.r1 = -1,
@@ -34,30 +34,30 @@ lower <- c(
   rain.rate.r5 = -1)
 
 upper <- c(
-  int.f0 = 2,
+  int.f0 = 4,
   app.mthd.os.f0 = 5,
   app.rate.ni.f0 = 0.5,
-  man.dm.f0 = 1,
+  man.dm.f0 = 2,
   man.source.pig.f0 = 1,
   app.mthd.cs.f0 = 1,
   int.r1 = 2,
   app.mthd.bc.r1 = 1,
   man.dm.r1 = 0.2,
   air.temp.r1 = 0.2,
-  wind.sqrt.r1 = 0.8,
+  wind.sqrt.r1 = 2,
   app.mthd.ts.r1 = 1,
   man.ph.r1 = 1,
   int.r2 = 0,
-  rain.rate.r2 = 0.5,
+  rain.rate.r2 = 1,
   int.r3 = 0,
-  app.mthd.bc.r3 = 0.5,
+  app.mthd.bc.r3 = 1,
   app.mthd.cs.r3 = 0.5,
   man.ph.r3 = 1,
   incorp.shallow.f4 = 0,
   incorp.shallow.r3 = 0,
   incorp.deep.f4 = 0,
   incorp.deep.r3 = 0,
-  rain.rate.r5 = 0.8)
+  rain.rate.r5 = 1)
 
 
 # Get institutions

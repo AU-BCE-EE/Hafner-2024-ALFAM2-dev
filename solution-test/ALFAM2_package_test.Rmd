@@ -1,0 +1,114 @@
+---
+title: 'Test of ALFAM2 closed-form solution'
+author: 'Sasha D. Hafner'
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+urlcolor: blue
+---
+
+# Overview
+The `alfam2()` function uses a closed-form solution to calculate emission over time.
+In this document that solution is checked by comparison to a simple numerical solution.
+
+# Model structure
+
+With a sink for slow pool *S*, structure is given in Fig. 1.
+
+![Structure of ALFAM2 model.](fig1e.pdf)
+
+So derivatives are:
+
+```
+df/dt <-  -r1 * F - r2 * F
+ds/dt <- r2 * F - r3 * S - r5 * S
+de/dt <- r1 * F + r3 * S
+```
+
+# Prep
+
+Packages.
+
+```{r}
+library(ALFAM2)
+```
+
+```{r}
+packageVersion('ALFAM2')
+```
+
+```{r}
+library(data.table)
+library(ggplot2)
+library(deSolve)
+```
+
+# Predictions
+
+Input data--no predictor variables so only intercept parameters are used.
+
+```{r}
+dat <- data.table(time = 0:168, TAN_app = 100)
+```
+
+Closed-form solution with `alfam2()` function from ALFAM2 package.
+
+```{r}
+predscf <- data.table(alfam2(dat, pars = ALFAM2::alfam2pars03_alpha, app.name = 'TAN_app', 
+                             time.name = 'time'))
+```
+
+Numerical solution uses `lsoda()`.
+
+```{r}
+pars <- ALFAM2::alfam2pars03_alpha
+pars <- pars[grepl('^int', names(pars))]
+pars[grepl('\\.f', names(pars))] <- ALFAM2:::logistic(pars[grepl('\\.f', names(pars))])
+pars[grepl('\\.r', names(pars))] <- 10^(pars[grepl('\\.r', names(pars))])
+names(pars) <- gsub('int\\.', '', names(pars))
+pars
+y <- c(f = pars['f0'] * 100, s = (1 - pars['f0']) * 100, e = 0)
+names(y) <- c('f', 's', 'e')
+pars <- pars[-1]
+
+rates <- function(t, x, parms) {
+  r1 <- parms['r1']
+  r2 <- parms['r2']
+  r3 <- parms['r3']
+  r5 <- parms['r5']
+
+  f <- x[1]
+  s <- x[2]
+
+  dfdt <-  -r1 * f - r2 * f
+  dsdt <- r2 * f - r3 * s - r5 * s
+  dedt <- r1 * f + r3 * s
+ return(list(c(dfdt, dsdt, dedt)))
+
+}
+
+predsnum <- lsoda(y = y, times = dat[, time], func = rates, parms = pars)
+```
+
+Combine results.
+
+```{r}
+dat <- merge(dat, predscf, by = 'time')
+dat <- merge(dat, predsnum, by = 'time', suffixes = c('.cf', '.num'))
+```
+
+Compare.
+
+```{r}
+ggplot(dat, aes(time, e.num)) +
+  geom_point() +
+  geom_line(aes(y = e.cf))
+```
+
+Check difference--very small.
+
+```{r}
+dat[, e.diff := e.num - e.cf]
+plot(log10(abs(e.diff)) ~ time, data = dat)
+```
+
+# Conclusion
+The closed-form solution seems to be accurate.

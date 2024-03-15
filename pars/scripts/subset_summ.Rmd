@@ -9,6 +9,16 @@ date: "`r format(Sys.time(), '%d %B, %Y %h:%m')`"
 # Summary of main data subset
 
 ```{r}
+nrow(pdat1)
+```
+
+
+```{r}
+table(pdat1[, inst])
+table(pdat1[, country])
+```
+
+```{r}
 table(pdat1[, digested])
 table(pdat1[, .(institute, digested)])
 table(pdat1[, .(uptake, digested)])
@@ -16,6 +26,10 @@ table(pdat1[, .(uptake, acid)])
 table(pdat1[, .(institute, acid)])
 table(pdat1[, .(uptake, incorp)])
 table(pdat1[, .(institute, incorp)])
+```
+
+```{r}
+nrow(dat1)
 ```
 
 ```{r}
