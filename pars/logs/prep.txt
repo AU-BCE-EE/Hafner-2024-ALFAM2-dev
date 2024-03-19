@@ -260,28 +260,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idati[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 8758 rows and 6 columns
- 84 unique rows
+ 8783 rows and 6 columns
+ 87 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0    2.97        cat    7.12    39.2
 Maximum                   os         133    13.8        pig     8.5     235
-Mean                    <NA>        72.1    5.78       <NA>    7.51    84.2
-Unique (excld. NA)         3          70      37          3      16      83
-Missing values             0           0       0          0     655       0
+Mean                    <NA>          72    5.79       <NA>    7.51    84.3
+Unique (excld. NA)         3          73      37          3      16      86
+Missing values             0           0       0          0     680       0
 Sorted                 FALSE       FALSE   FALSE       TRUE   FALSE   FALSE
                                                                            
 
 > dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 8758 rows and 6 columns
- 5991 unique rows
+ 8783 rows and 6 columns
+ 6014 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.25   -17.6     -0.1       0         0        0
 Maximum                508     508     35.2      10       4.2       55
-Mean                   141     150     14.1    2.31    0.0487     6.03
-Unique (excld. NA)    1754    2417     1635    3000        21      148
+Mean                   141     149     14.1    2.31    0.0485     6.01
+Unique (excld. NA)    1758    2421     1635    3000        21      148
 Missing values           0       0        0       0         0        0
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -314,28 +314,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idati[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 8539 rows and 6 columns
- 84 unique rows
+ 8564 rows and 6 columns
+ 87 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0    2.97        cat       7    39.2
 Maximum                   os         133    13.8        pig     8.5     235
-Mean                    <NA>        72.4    5.79       <NA>    7.45      84
-Unique (excld. NA)         3          70      37          3      17      83
+Mean                    <NA>        72.3     5.8       <NA>    7.45      84
+Unique (excld. NA)         3          73      37          3      17      86
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE       TRUE   FALSE   FALSE
                                                                            
 
 > dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 8539 rows and 6 columns
- 5847 unique rows
+ 8564 rows and 6 columns
+ 5870 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.25    0.25     -0.1       0         0        0
 Maximum                508     508     35.2      10       4.2       55
-Mean                   145     154       14    2.35    0.0499     6.19
-Unique (excld. NA)    1754    2325     1628    2859        21      148
+Mean                   145     153       14    2.35    0.0498     6.17
+Unique (excld. NA)    1758    2329     1628    2859        21      148
 Missing values           0       0        0       0         0        0
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       

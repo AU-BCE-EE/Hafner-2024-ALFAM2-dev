@@ -3,10 +3,43 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "08 March, 2024 Mar:03"
+date: "15 March, 2024 Mar:03"
 ---
 
 # Summary of main data subset
+
+
+```r
+nrow(pdat1)
+```
+
+```
+## [1] 639
+```
+
+
+
+```r
+table(pdat1[, inst])
+```
+
+```
+## 
+## 101 102 103 104 105 106 107 108 201 202 203 204 205 206 207 208 209 210 211 212 
+##   0   0   0  28   0   0   0   0   0 109   7  17  73   9  45  29   5   8   0  49 
+## 213 214 301 302 303 304 
+##   0 254   0   0   4   2
+```
+
+```r
+table(pdat1[, country])
+```
+
+```
+## 
+##  CA  CH  DE  DK  FR  IE  IT  NL  UK 
+##   7  45   9 117  29  49  11 263 109
+```
 
 
 ```r
@@ -16,7 +49,7 @@ table(pdat1[, digested])
 ```
 ## 
 ## FALSE  TRUE 
-##   595    41
+##   598    41
 ```
 
 ```r
@@ -40,7 +73,7 @@ table(pdat1[, .(institute, digested)])
 ##   TEAGASC     49    0
 ##   UNIMI        0    4
 ##   UNINA        1    1
-##   WUR        251    0
+##   WUR        254    0
 ```
 
 ```r
@@ -52,7 +85,7 @@ table(pdat1[, .(uptake, digested)])
 ## uptake FALSE TRUE
 ##      1    28    0
 ##      2   310   18
-##      3   257   23
+##      3   260   23
 ```
 
 ```r
@@ -64,7 +97,7 @@ table(pdat1[, .(uptake, acid)])
 ## uptake FALSE TRUE
 ##      1    28    0
 ##      2   297   31
-##      3   280    0
+##      3   283    0
 ```
 
 ```r
@@ -88,7 +121,7 @@ table(pdat1[, .(institute, acid)])
 ##   TEAGASC     49    0
 ##   UNIMI        4    0
 ##   UNINA        2    0
-##   WUR        251    0
+##   WUR        254    0
 ```
 
 ```r
@@ -97,10 +130,10 @@ table(pdat1[, .(uptake, incorp)])
 
 ```
 ##       incorp
-## uptake none shallow
-##      1   28       0
-##      2  318      10
-##      3  235      45
+## uptake deep none shallow
+##      1    0   28       0
+##      2    0  318      10
+##      3    3  235      45
 ```
 
 ```r
@@ -109,22 +142,31 @@ table(pdat1[, .(institute, incorp)])
 
 ```
 ##           incorp
-## institute  none shallow
-##   ADAS-RR   109       0
-##   ARDC        7       0
-##   AT         17       0
-##   AU         73       0
-##   CAU-LU      9       0
-##   DIAS       28       0
-##   INH-HAFL   45       0
-##   INRA        7       6
-##   INRAE      14       2
-##   MU          1       4
-##   NMI-WUR     8       0
-##   TEAGASC    49       0
-##   UNIMI       1       3
-##   UNINA       2       0
-##   WUR       211      40
+## institute  deep none shallow
+##   ADAS-RR     0  109       0
+##   ARDC        0    7       0
+##   AT          0   17       0
+##   AU          0   73       0
+##   CAU-LU      0    9       0
+##   DIAS        0   28       0
+##   INH-HAFL    0   45       0
+##   INRA        0    7       6
+##   INRAE       0   14       2
+##   MU          0    1       4
+##   NMI-WUR     0    8       0
+##   TEAGASC     0   49       0
+##   UNIMI       0    1       3
+##   UNINA       0    2       0
+##   WUR         3  211      40
+```
+
+
+```r
+nrow(dat1)
+```
+
+```
+## Error in nrow(dat1): object 'dat1' not found
 ```
 
 
@@ -135,7 +177,7 @@ table(idat1[, rain.missing])
 ```
 ## 
 ## FALSE  TRUE 
-## 16772    87
+## 16800    87
 ```
 
 ```r
@@ -143,7 +185,7 @@ table(idat1[, rain.missing])
 ```
 
 ```
-## [1] 0.5160448
+## [1] 0.5151892
 ```
 
 ```r
@@ -153,7 +195,7 @@ table(idat1[, interp.wind])
 ```
 ## 
 ## FALSE  TRUE 
-## 16846    13
+## 16874    13
 ```
 
 ```r
@@ -161,7 +203,7 @@ table(idat1[, interp.wind])
 ```
 
 ```
-## [1] 0.07711015
+## [1] 0.07698229
 ```
 
 ```r
@@ -171,7 +213,7 @@ table(idat1[, interp.air.temp])
 ```
 ## 
 ## FALSE  TRUE 
-## 16857     2
+## 16885     2
 ```
 
 ```r
@@ -179,7 +221,7 @@ table(idat1[, interp.air.temp])
 ```
 
 ```
-## [1] 0.0118631
+## [1] 0.01184343
 ```
 
 ```r
@@ -189,7 +231,7 @@ table(idat1[, man.ph.missing])
 ```
 ## 
 ## FALSE  TRUE 
-## 16181   678
+## 16181   706
 ```
 
 ```r
@@ -197,7 +239,7 @@ table(idat1[, man.ph.missing])
 ```
 
 ```
-## [1] 4.021591
+## [1] 4.180731
 ```
 
 
@@ -209,7 +251,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   626    10
+##   629    10
 ```
 
 ```r
@@ -233,7 +275,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   623    13
+##   626    13
 ```
 
 ```r
@@ -257,7 +299,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   634     2
+##   637     2
 ```
 
 ```r
@@ -281,7 +323,7 @@ table(xx[, 2])
 ```
 ## V1
 ## FALSE  TRUE 
-##   594    42
+##   594    45
 ```
 
 ```r
@@ -319,6 +361,7 @@ table(pdati[, c('incorp', 'man.ph')])
 ```
 ##          man.ph
 ## incorp    7.12 7.2 7.3 7.47 7.5 7.6 7.7 7.76 7.8 7.9 8 8.09 8.1 8.2 8.36 8.5
+##   deep       0   0   0    0   0   0   0    0   0   0 0    0   0   0    0   0
 ##   none       2   2   4    0   2   0   0    0   1   0 5    0   3   0    1   1
 ##   shallow    2   2   4    1   0   2   2    1   2   1 3    1   3   1    3   3
 ```
