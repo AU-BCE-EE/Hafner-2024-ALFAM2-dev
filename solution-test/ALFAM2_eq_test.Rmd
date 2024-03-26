@@ -153,6 +153,13 @@ pred <- merge(predcfa, prednum, by = 'time', suffixes = c('', '.num'))
 pred <- merge(pred, predcfb, by = 'time', suffixes = c('.cfa', '.cfb'))
 ```
 
+Differences.
+
+```{r}
+pred[, diffa := e.cfa - e.num]
+pred[, diffb := e.cfb - e.num]
+```
+
 Compare.
 
 ```{r}
@@ -171,6 +178,13 @@ points(f.cfb ~ time, data = pred, col = 'blue', cex = 0.4)
 plot(s.num ~ time, data = pred)
 points(s.cfa ~ time, data = pred, col = 'red', cex = 0.7)
 points(s.cfb ~ time, data = pred, col = 'blue', cex = 0.4)
+```
+
+Difference from numerical solution.
+
+```{r}
+plot(log10(abs(diffa)) ~ time, data = pred, col = 'red')
+points(log10(abs(diffb)) ~ time, data = pred, col = 'blue')
 ```
 
 # Conclusion
