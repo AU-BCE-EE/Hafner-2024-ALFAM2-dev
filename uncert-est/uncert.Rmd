@@ -1,0 +1,151 @@
+---
+title: 'Comparison of 2 approaches for parameter uncertainty'
+output: pdf_document
+classoption: landscape
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y %h:%m')`"
+---
+
+# Packages
+
+```{r}
+library(data.table)
+library(knitr)
+library(ALFAM2)
+library(ggplot2)
+```
+
+```{r}
+packageVersion('ALFAM2')
+```
+
+# Get pars
+
+```{r}
+pdl <- fread('../pars/output/pars_boot_long.csv')
+pdc <- fread('../pars/output/pars_boot.csv')
+ps3 <- fread('../pars/output/pars.csv')
+```
+
+```{r}
+ps3 <- ps3[pars == 'ps3', ]
+nn <- names(ps3)
+ps3 <- as.numeric(ps3)
+names(ps3) <- nn
+ps3 <- ps3[!is.na(ps3)]
+```
+
+```{r}
+ggplot(pdl, aes(value)) +
+  geom_histogram() +
+  facet_wrap(~ parameter, scale = 'free')
+```
+
+# Sampling function 
+
+```{r}
+getPars <- function(pp, n = 1) {
+
+  if (n > 1) {
+    pars <- NULL
+    for (i in 1:n) {
+      p <- data.table::data.table(t(getPars(pp, 1)))
+      pars <- rbind(pars, p)
+    }
+    return(pars)
+  }
+
+  pp <- pp[sample(1:nrow(pp), nrow(pp)), ]
+  p <- pp[!duplicated(pp[, parameter]), ]
+  pars <- as.numeric(p[, value])
+  names(pars) <- as.character(p[, parameter])
+
+  return(pars)
+}
+
+```
+
+# Get uncorrelated parameters
+
+```{r}
+pduc <- getPars(pdl, 100)
+```
+
+# Compare
+
+```{r}
+round(cor(pdc), 2)
+```
+
+```{r}
+round(cor(pduc), 2)
+```
+
+# Input data
+
+Vary inputs.
+
+```{r}
+n <- 100
+set.seed(123)
+dat <- data.table(id = 1:n, ct = rep(168, n), app.mthd = sample(c('bc', 'bsth', 'ts', 'os'), n, replace = TRUE), 
+                  man.dm = rnorm(n, 5, 1), man.ph = rnorm(n, 7, 0.5), wind.sqrt = rnorm(n, sqrt(5), sqrt(0.5)), 
+                  air.temp = rnorm(n, 10, 2), app.rate.ni = rnorm(n, 40, 10), TAN.app = 100)
+```
+
+Sort by application method for plotting.
+
+```{r}
+dat <- dat[order(app.mthd), ]
+dat[, id := 1:nrow(dat)]
+```
+
+```{r}
+pred <- alfam2(dat, pars = ps3, group = 'id')
+dat1 <- merge(dat, pred)
+```
+
+```{r}
+ggplot(dat1, aes(id, er, colour = app.mthd)) +
+  geom_point()
+```
+
+# Confidence intervals
+
+```{r}
+args(alfam2)
+```
+
+With correlated parameters.
+
+```{r}
+predcor <- alfam2(dat, group = 'id', conf.int = 0.95, pars.ci = pdc)
+datcor <- merge(dat, predcor)
+```
+
+Uncorrelated.
+
+```{r}
+preduc <- alfam2(dat, group = 'id', conf.int = 0.95, pars.ci = pduc)
+datuc <- merge(dat, preduc)
+```
+
+```{r}
+ggplot(dat1, aes(id, er, colour = app.mthd)) +
+  geom_point() +
+  geom_errorbar(data = datcor, aes(ymin = er.lwr, ymax = er.upr), alpha = 0.3, width = 0, lwd = 2) +
+  geom_errorbar(data = datuc, aes(ymin = er.lwr, ymax = er.upr), alpha = 0.3, width = 2)
+```
+
+Error bars with whiskers are from uncorrelated parameters, and wide transparent bars are from the correlated values (complete sets).
+
+# Conclusion
+Confidence intervals are always wider when correlation among parameters is ignored.
+
+
+
+
+
+
+
+
