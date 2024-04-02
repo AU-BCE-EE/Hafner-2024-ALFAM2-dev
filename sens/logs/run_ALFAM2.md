@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "21 November, 2023 Nov:11"
+date: "19 March, 2024 Mar:03"
 ---
 
 Check package version.
@@ -14,13 +14,30 @@ packageVersion('ALFAM2')
 ```
 
 ```
-## [1] '3.16'
+## [1] '3.78'
 ```
 
 Run model with par set 3
 
 ```r
-preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep = TRUE))
+args(alfam2)
+```
+
+```
+## function (dat, pars = ALFAM2::alfam2pars02, add.pars = NULL, 
+##     app.name = "TAN.app", time.name = "ct", time.incorp = NULL, 
+##     group = NULL, center = c(app.rate = 40, man.dm = 6, man.tan = 1.2, 
+##         man.ph = 7.5, air.temp = 13, wind.2m = 2.7, wind.sqrt = sqrt(2.7), 
+##         crop.z = 10), pass.col = NULL, incorp.names = c("incorp", 
+##         "deep", "shallow"), prep.dum = TRUE, prep.incorp = TRUE, 
+##     add.incorp.rows = FALSE, check = TRUE, warn = TRUE, value = "emis", 
+##     conf.int = NULL, pars.ci = NULL, n.ci = NULL, var.ci = "er", 
+##     ...) 
+## NULL
+```
+
+```r
+preds <- data.table(alfam2(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03))
 ```
 
 ```
@@ -28,35 +45,12 @@ preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   int.r5
-##   rain.rate.r5
-##   wind.sqrt.r1
 ```
 
 ```r
@@ -65,7 +59,7 @@ preds[, parset := '3']
 pdat <- cbind(dat, preds)
 
 # Different for application methods
-preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep = TRUE))
+preds <- data.table(alfam2(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03))
 ```
 
 ```
@@ -73,35 +67,12 @@ preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'c
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   int.r5
-##   rain.rate.r5
-##   wind.sqrt.r1
 ```
 
 ```r
@@ -120,14 +91,14 @@ for (i in unique(bpars$parset)) {
   pars <- d[, value]
   names(pars) <- d[, parameter]
 
-  preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, prep = TRUE))
+  preds <- data.table(alfam2(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars))
 
   names(preds) <- paste0(names(preds), '.pred')
   preds[, parset := i]
   pdat <- rbind(pdat, cbind(dat, preds))
 
   # Different for application methods
-  preds <- data.table(ALFAM2mod(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars, prep = TRUE))
+  preds <- data.table(alfam2(dat.app.mthd, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars))
 
   names(preds) <- paste0(names(preds), '.pred')
   preds[, parset := i]
@@ -141,76 +112,25 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
-## Warning in calcPParms(pars[which2], dat, upr = 100): Some calculated primary
-## parameters are at the limit. Check input parameters.
-```
-
-```
 ## User-supplied parameters are being used.
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -218,35 +138,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -254,35 +151,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -290,37 +164,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -328,35 +177,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -364,35 +190,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -400,35 +203,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -436,35 +216,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -472,35 +229,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -508,37 +242,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -546,35 +255,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -582,37 +268,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -620,35 +281,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -656,35 +294,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -692,35 +307,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -728,35 +320,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -764,35 +333,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -800,37 +346,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -838,35 +359,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -874,35 +372,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -910,35 +385,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -946,35 +398,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -982,35 +411,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1018,35 +424,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1054,35 +437,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1090,37 +450,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1128,35 +463,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1164,35 +476,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1200,35 +489,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1236,35 +502,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1272,35 +515,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1308,35 +528,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1344,35 +541,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1380,37 +554,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1418,35 +567,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1454,37 +580,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1492,35 +593,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1528,35 +606,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1564,35 +619,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1600,37 +632,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1638,35 +645,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1674,35 +658,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1710,35 +671,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1746,35 +684,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1782,35 +697,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1818,35 +710,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1854,35 +723,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1890,37 +736,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -1928,35 +749,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -1964,37 +762,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2002,35 +775,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2038,35 +788,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2074,35 +801,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2110,37 +814,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2148,35 +827,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2184,35 +840,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2220,35 +853,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2256,37 +866,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2294,35 +879,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2330,35 +892,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2366,35 +905,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2402,37 +918,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2440,35 +931,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2476,35 +944,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2512,35 +957,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2548,35 +970,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2584,35 +983,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2620,35 +996,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2656,35 +1009,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2692,37 +1022,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -2730,35 +1035,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2766,35 +1048,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2802,35 +1061,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2838,35 +1074,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2874,35 +1087,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2910,35 +1100,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2946,35 +1113,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -2982,37 +1126,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3020,35 +1139,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3056,35 +1152,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3092,35 +1165,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3128,37 +1178,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3166,35 +1191,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3202,37 +1204,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3240,35 +1217,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3276,37 +1230,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3314,35 +1243,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3350,35 +1256,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3386,35 +1269,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3422,35 +1282,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3458,35 +1295,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3494,35 +1308,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3530,35 +1321,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3566,35 +1334,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3602,35 +1347,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3638,37 +1360,17 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
+```
 
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+## Warning in calcPParms(pars[which2], dat, warn = warn, upr = 1e+15): Some
+## calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -3676,35 +1378,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3712,35 +1391,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3748,35 +1404,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3784,35 +1417,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3820,35 +1430,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3856,35 +1443,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3892,35 +1456,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3928,35 +1469,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -3964,35 +1482,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4000,37 +1495,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4038,35 +1508,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4074,35 +1521,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4110,35 +1534,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4146,35 +1547,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4182,35 +1560,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4218,37 +1573,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4256,35 +1586,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4292,35 +1599,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4328,35 +1612,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4364,37 +1625,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4402,35 +1638,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4438,37 +1651,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4476,35 +1664,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4512,35 +1677,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4548,35 +1690,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4584,35 +1703,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4620,35 +1716,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4656,35 +1729,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4692,35 +1742,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4728,37 +1755,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -4766,35 +1768,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4802,35 +1781,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4838,35 +1794,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4874,35 +1807,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4910,35 +1820,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4946,35 +1833,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -4982,35 +1846,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5018,35 +1859,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5054,35 +1872,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5090,37 +1885,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5128,35 +1898,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5164,37 +1911,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5202,35 +1924,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5238,35 +1937,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5274,35 +1950,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5310,35 +1963,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5346,35 +1976,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5382,35 +1989,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5418,35 +2002,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5454,37 +2015,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5492,35 +2028,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5528,37 +2041,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5566,35 +2054,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5602,35 +2067,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5638,35 +2080,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5674,35 +2093,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5710,35 +2106,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5746,35 +2119,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5782,35 +2132,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5818,37 +2145,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -5856,35 +2158,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5892,35 +2171,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5928,35 +2184,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -5964,35 +2197,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6000,35 +2210,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6036,35 +2223,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6072,35 +2236,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6108,35 +2249,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6144,35 +2262,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6180,37 +2275,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6218,35 +2288,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6254,37 +2301,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6292,35 +2314,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6328,37 +2327,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6366,35 +2340,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6402,37 +2353,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6440,35 +2366,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6476,37 +2379,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6514,35 +2392,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6550,35 +2405,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6586,35 +2418,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6622,35 +2431,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6658,35 +2444,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6694,35 +2457,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6730,35 +2470,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6766,37 +2483,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6804,35 +2496,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6840,35 +2509,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6876,35 +2522,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6912,37 +2535,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -6950,35 +2548,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -6986,37 +2561,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -7024,35 +2574,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -7060,35 +2587,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -7096,35 +2600,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -7132,35 +2613,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -7168,35 +2626,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -7204,35 +2639,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -7240,35 +2652,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -7276,37 +2665,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -7314,35 +2678,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 ```
@@ -7350,37 +2691,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
-
-## Warning in ALFAM2mod(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
 ```
 
 ```
@@ -7388,35 +2704,12 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in ALFAM2mod(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
-## 
-## These secondary parameters are being used:
-##   int.f0
-##   app.mthd.os.f0
-##   app.rate.ni.f0
-##   man.dm.f0
-##   man.source.pig.f0
-##   app.mthd.cs.f0
-##   int.r1
-##   app.mthd.bc.r1
-##   man.dm.r1
-##   air.temp.r1
-##   wind.sqrt.r1
-##   app.mthd.ts.r1
-##   man.ph.r1
-##   int.r2
-##   rain.rate.r2
-##   int.r3
-##   app.mthd.bc.r3
-##   app.mthd.cs.r3
-##   man.ph.r3
-##   rain.rate.r5
-##   int.r5
 ```
 
 

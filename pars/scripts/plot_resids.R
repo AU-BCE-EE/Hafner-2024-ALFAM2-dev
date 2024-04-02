@@ -28,4 +28,10 @@ for (p in sort(unique(dp168$pars))) {
     labs(colour = 'Institution', x = 'Slurry DM', y = 'Emission residual (frac. applied TAN)')
   ggsave2x(paste0('../plots-resids/resids_emis_DM_', p), height = 4.2, width = 6)
 
+  ggplot(ddf, aes(institute, resid.er, fill = app.mthd.nm)) +
+    geom_boxplot() +
+    labs(x = 'Institution', y = 'Emission residual (frac. applied TAN)', fill = 'Application method') +
+    scale_x_discrete(guide = guide_axis(angle = 90)) 
+  ggsave2x(paste0('../plots-resids/resids_emis_inst_', p), height = 4.2, width = 6)
+
 }

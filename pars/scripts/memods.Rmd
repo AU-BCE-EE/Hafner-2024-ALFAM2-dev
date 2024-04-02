@@ -1,0 +1,20 @@
+---
+title: 'Mixed-effects models'
+output: pdf_document
+classoption: landscape
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y %h:%m')`"
+---
+
+# 
+
+```{r}
+pdat1[, inst := factor(inst)]
+
+mod1 <- lmer(log10(e.rel.final) ~ app.mthd + incorp + man.dm + air.temp.24 + wind.2m.24 + (1|inst), data = pdat1)
+summary(mod1)
+
+mod2 <- lmer(log10(e.rel.final) ~ app.mthd + incorp + man.dm + air.temp.24 + wind.2m.24 + (app.mthd|inst), data = pdat1)
+summary(mod2)
+```
+
