@@ -75,6 +75,10 @@ pduc <- getPars(pdl, 100)
 
 ```{r}
 round(cor(pdc), 2)
+cc <- cor(pdc)
+cc <- c(cc)
+cc <- cc[cc != 1]
+hist(cc)
 ```
 
 ```{r}
