@@ -134,9 +134,12 @@ idati <- interpm(idati, 'ct', c('wind.2m', 'air.temp'), by = 'pmid', rule = 2)
 # Get an average air temperature for input
 idati[, air.temp.ave := ifelse(!is.na(air.temp.48), air.temp.48, air.temp.24)]
 
-# Set missing pH to 7.5
+# Fill in missing pH with institute means from full database
+mnph <- idat[, .(man.ph.mean = mean(na.omit(man.ph)), man.ph.n = sum(is.na(man.ph))), by = inst]
+idati <- merge(idati, mnph, by = 'inst')
 idati[is.na(man.ph), man.ph.missing := TRUE]
-idati[is.na(man.ph), man.ph := 7.0]
+idati[is.na(man.ph), man.ph := man.ph.mean]
+range(idati[, man.ph.mean])
 
 # Set missing rain to 0
 idati[is.na(rain.rate), rain.missing := TRUE]
