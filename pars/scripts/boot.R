@@ -2,8 +2,8 @@
 # See crossval.R for notes
 # NTS: Use parallel loop?
 
-pars.start <- mods$ps3$optim$par
-fixed <- c(int.r5 = -1.8)
+pars.start.main <- mods$ps3$optim$par
+fixed.main <- c(int.r5 = -1.8)
 
 nb <- 100
 inst.all <- unique(idat1[, inst])
@@ -31,6 +31,32 @@ for (i in 1:nb) {
     v <- v + 1
   }
 
+  pars.start <- pars.start.main
+  fixed <- fixed.main
+
+  # Move missing application methods to fixed pars
+  am <- paste0('app.mthd.', unique(idatsamp$app.mthd))
+  ampars <- names(pars.start)[grepl('app\\.mthd', names(pars.start))]
+  ampars <- unique(gsub('\\.[rf][0-5]$', '', ampars))
+  missingam <- ampars[! ampars %in% am] 
+  if (length(missingam) > 0) {
+    cat('\nDropping application methods: ', missingam, '\n')
+    pars.start <- pars.start[!gsub('\\.[rf][0-5]$', '', names(pars.start)) %in% missingam]
+    fixed <- c(fixed, pars.start.main[gsub('\\.[rf][0-5]$', '', names(pars.start.main)) %in% missingam])
+  }
+
+  # Move missing incorporation methods to fixed pars
+  im <- paste0('incorp.', unique(idatsamp$incorp))
+  im <- 'incorp.deep'
+  impars <- names(pars.start)[grepl('incorp', names(pars.start))]
+  impars <- unique(gsub('\\.[rf][0-5]$', '', impars))
+  missingim <- impars[! impars %in% im] 
+  if (length(missingim) > 0) {
+    cat('\nDropping incorporation methods: ', missingim, '\n')
+    pars.start <- pars.start[!gsub('\\.[rf][0-5]$', '', names(pars.start)) %in% missingim]
+    fixed <- c(fixed, pars.start.main[gsub('\\.[rf][0-5]$', '', names(pars.start.main)) %in% missingim])
+  }
+
   # Calibration
   mods.boot[[i]] <- list()
   mods.boot[[i]][['inst']] <- inst.samp
@@ -41,5 +67,6 @@ for (i in 1:nb) {
                                           method = 'Nelder-Mead', control = list(maxit = maxit2))
 
   mods.boot[[i]][['coef']] <- c(m$par, fixed)
-  
+  print(mods.boot[[i]][['coef']]) 
+
 }

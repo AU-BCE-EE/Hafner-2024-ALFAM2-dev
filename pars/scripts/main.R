@@ -36,6 +36,10 @@ source('extract_cv_pars.R')
 source('calc_emis_cv.R')
 source('cv_error.R')
 
+# Pars by institute
+source('par_est_inst.R')
+source('extract_inst_pars.R')
+
 # Bootstrap analysis for uncertainty
 source('boot.R')
 source('extract_boot_pars.R')

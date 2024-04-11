@@ -30,6 +30,10 @@ pdat <- droplevels(pdat)
 table(pdat$treat.nm, exclude = NULL)
 levels(pdat$treat.nm)
 
+table(pdat[, .(uptake, ct.max > 72)]) / matrix(rep(table(pdat[, .(uptake)]), 2), ncol = 2)
+table(pdat[, .(uptake, ct.max > 96)]) / matrix(rep(table(pdat[, .(uptake)]), 2), ncol = 2)
+table(pdat[, .(uptake, ct.max > 168)]) / matrix(rep(table(pdat[, .(uptake)]), 2), ncol = 2)
+
 ggplot(pdat, aes(app.mthd.nm, e.rel.final, colour = country, shape = treat.nm)) +
   geom_jitter(height = 0) +
   geom_bar(stat = 'summary', fun = 'mean', aes(group = app.mthd.nm), fill = 'gray55', colour = 'gray54', alpha = 0.1, legend = FALSE) +
