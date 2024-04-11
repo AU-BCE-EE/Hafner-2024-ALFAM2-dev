@@ -5,7 +5,7 @@
 pars.start.main <- mods$ps3$optim$par
 fixed.main <- c(int.r5 = -1.8)
 
-nb <- 100
+nb <- 10
 inst.all <- unique(idat1[, inst])
 mods.boot <- list()
 
@@ -22,6 +22,7 @@ for (i in 1:nb) {
   # Sample institutes
   inst.samp <- sort(sample(inst.all, length(inst.all), replace = TRUE))
 
+  # Iteration number etc.
   v <- 1
   idatsamp <- data.table()
   for (ii in inst.samp) {
@@ -47,7 +48,6 @@ for (i in 1:nb) {
 
   # Move missing incorporation methods to fixed pars
   im <- paste0('incorp.', unique(idatsamp$incorp))
-  im <- 'incorp.deep'
   impars <- names(pars.start)[grepl('incorp', names(pars.start))]
   impars <- unique(gsub('\\.[rf][0-5]$', '', impars))
   missingim <- impars[! impars %in% im] 
@@ -55,6 +55,13 @@ for (i in 1:nb) {
     cat('\nDropping incorporation methods: ', missingim, '\n')
     pars.start <- pars.start[!gsub('\\.[rf][0-5]$', '', names(pars.start)) %in% missingim]
     fixed <- c(fixed, pars.start.main[gsub('\\.[rf][0-5]$', '', names(pars.start.main)) %in% missingim])
+  }
+
+  # Remove rain pars if rain doesn't vary
+  if (diff(range(idatsamp[, rain.rate])) == 0) {
+    cat('\nDropping rain parameters.\n')
+    pars.start <- pars.start[!grepl('rain', names(pars.start))]
+    fixed <- c(fixed, pars.start.main[grepl('rain', names(pars.start.main))])
   }
 
   # Calibration
