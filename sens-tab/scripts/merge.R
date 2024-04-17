@@ -22,9 +22,9 @@ summ168.3$ts.bsth.red <- 100*(1 - summ168.3$ts/summ168.3$bsth)
 summ168.3$os.bsth.red <- 100*(1 - summ168.3$os/summ168.3$bsth)
 summ168.3$cs.bsth.red <- 100*(1 - summ168.3$cs/summ168.3$bsth)
 summ168.3 <- rounddf(summ168.3, 2, signif)
-names(summ168.3)
 
 # Get boot results
+# 90% CI
 bootsumm <- bootdat[ct == 168, .(n = length(er), 
 				 lwr = quantile(er, 0.05, na.rm = TRUE), 
 				 upr = quantile(er, 0.95, na.rm = TRUE)), by = .(sida)]
@@ -72,4 +72,4 @@ summ168.1 <- rounddf(summ168.1, 2, signif)
 dat168.1$pars <- 'ps01'
 dat168.2$pars <- 'ps02'
 dat168.3$pars <- 'ps03'
-datc <- rbind(dat168.1, dat168.2, dat168.3, fill = TRUE)
+datc <- rbind(data.table(dat168.1), data.table(dat168.2), data.table(dat168.3), fill = TRUE)
