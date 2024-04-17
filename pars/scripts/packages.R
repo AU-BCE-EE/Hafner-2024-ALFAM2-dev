@@ -6,6 +6,8 @@ library(viridisLite)
 library(knitr)
 library(rmarkdown)
 library(lme4)
+library(doParallel)
+library(doRNG)
 
 sink('../logs/R-versions.txt')
   print(sessionInfo())

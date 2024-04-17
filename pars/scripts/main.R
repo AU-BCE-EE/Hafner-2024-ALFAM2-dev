@@ -23,22 +23,21 @@ sink('../logs/par_est.txt')
   source('par_est.R', echo = TRUE, max.deparse.length = 300)
 sink()
 source('ps3.R')
+
 source('par_est_drop.R')
 
 # Extract and apply parameter sets
 source('calc_emis.R')
 source('fit_summ.R')
 source('extract_pars.R')
+source('par_table.R')
 
 # Cross-validation
 source('crossval.R')
 source('extract_cv_pars.R')
 source('calc_emis_cv.R')
 source('cv_error.R')
-
-# Pars by institute
-source('par_est_inst.R')
-source('extract_inst_pars.R')
+# Stopped here
 
 # Bootstrap analysis for uncertainty
 source('boot.R')
@@ -55,5 +54,6 @@ source('plot_resids.R')
 source('plot_country_curves.R')
 source('plot_curves.R')
 source('plot_scatter_emis.R')
+source('plot_scatter_emis_ps3.R')
 source('plot_cv.R')
 source('plot_cv_pres.R')

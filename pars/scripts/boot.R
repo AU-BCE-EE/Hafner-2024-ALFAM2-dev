@@ -1,17 +1,19 @@
 # Bootstrap pars
 # See crossval.R for notes
-# NTS: Use parallel loop?
+
+clstr <- parallel::makeCluster(parallel::detectCores(), type = 'FORK') 
+registerDoParallel(cl = clstr)
 
 pars.start.main <- mods$ps3$optim$par
 fixed.main <- c(int.r5 = -1.8)
 
-nb <- 10
+nb <- 100
 inst.all <- unique(idat1[, inst])
 mods.boot <- list()
 
-set.seed(123) 
+#set.seed(123) 
 
-for (i in 1:nb) {
+mods.boot <- foreach (i = 1:nb) %dorng% {
 
   cat('\n')
   cat('\n')
@@ -65,15 +67,17 @@ for (i in 1:nb) {
   }
 
   # Calibration
-  mods.boot[[i]] <- list()
-  mods.boot[[i]][['inst']] <- inst.samp
-  mods.boot[[i]][['optim']] <- m <- optim(par = pars.start, fn = function(par) 
+  output <- list()
+  output[['inst']] <- inst.samp
+  output[['optim']] <- m <- optim(par = pars.start, fn = function(par) 
                                           resCalcComb(p = par, dat = idatsamp, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
                                                   app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
                                                   weights = idatsamp[, .(weight.lastc, weight.1c)], flatout = TRUE),
                                           method = 'Nelder-Mead', control = list(maxit = maxit2))
 
-  mods.boot[[i]][['coef']] <- c(m$par, fixed)
-  print(mods.boot[[i]][['coef']]) 
+  output[['coef']] <- c(m$par, fixed)
+  output[['inst.samp']] <- inst.samp
+  
+  output
 
 }

@@ -201,6 +201,19 @@ idat1 <- idat1[!duplicated(idat1[, .(pmid, cta)]), ]
 # And then get new plots from idati in the pdat* df as well
 pdat1 <- pdat[pmid %in% unique(idat1[, pmid])]
 
+# Now remove values outside emission limits
+# Done here and not in subset.R in order to see effect on counts
+dim(pdat1)
+pdat1 <- pdat1[e.rel.24 > -0.20 & 
+               e.rel.24 < 1.20 &
+               e.rel.final < 1.20 &
+               e.rel.final > -0.20, ]
+dim(pdat1)
+range(pdat1$e.rel.final)
+range(pdat1$e.rel.24)
+
+idat1 <- idat1[pmid %in% unique(pdat1[, pmid])]
+
 
 # (Re)calculate weights ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Equal by application method

@@ -12,17 +12,17 @@ cvdat168 <- cvdat[cta == cta.168, ]
 # Get quantiles for 168 hr emission only
 cvdat <- merge(pdat, cvdat, by = 'pmid', suffixes = c('', '.cv'))
 cverrsumm1 <- cvdat[cta == cta.168 & !is.na(er.pred), .(n = length(er.pred), 
-                                                       ererr = mean(ererr),
-                                                       aererr = mean(abs(ererr)), 
-                                                       arerr = mean(abs(rerr)),
+                                                       ererr = median(ererr),
+                                                       aererr = median(abs(ererr)), 
+                                                       arerr = median(abs(rerr)),
                                                        ererrse = sd(ererr), 
                                                        ersd = sd(er)), 
                by = app.mthd]
 
 cverrsumm2 <- cvdat[cta == cta.168 & !is.na(er.pred), .(n = length(er.pred), 
-                                                       ererr = mean(ererr),
-                                                       aererr = mean(abs(ererr)), 
-                                                       arerr = mean(abs(rerr)),
+                                                       ererr = median(ererr),
+                                                       aererr = median(abs(ererr)), 
+                                                       arerr = median(abs(rerr)),
                                                        ererrse = sd(ererr), 
                                                        ersd = sd(er)), 
                by = .(app.mthd, incorp, man.source == 'pig')]

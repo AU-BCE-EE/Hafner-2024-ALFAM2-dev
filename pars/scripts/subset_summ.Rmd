@@ -73,3 +73,20 @@ table(pdati[, c('incorp', 'man.ph')])
 
 Low pH for shallow incorp plots probably causing wrong sign for shallow incorp pars.
 
+# Correlation among predictor variables
+
+```{r}
+m1 <- aov(man.dm ~ app.mthd, data = pdat1)
+summary(m1)
+TukeyHSD(m1)
+model.tables(m1, 'means')
+```
+
+# dfsumm
+
+```{r}
+dfsumm(pdat1)
+dfsumm(pdat2)
+```
+
+

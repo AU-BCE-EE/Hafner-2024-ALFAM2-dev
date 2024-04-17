@@ -23,10 +23,6 @@ pdat1 <- pdat[!is.na(e.rel.24) &
               !is.na(air.temp.24) & 
               !is.na(wind.2m.24) & 
               !is.na(incorp) & 
-              e.rel.24 > 0 & 
-              e.rel.24 < 1.0 &
-              e.rel.final < 1.05 &
-              e.rel.final > 0 &
               man.source != 'conc' &
               man.dm <= 15 &
               app.mthd != 'pi' &
