@@ -17,7 +17,7 @@ eb <- datc[, .(mx = max(c(er, upr), na.rm = TRUE)), by = .(sid, app.mthd.nm)]
 ggplot(datc, aes(sid, er, colour = pars.nm)) +
   geom_errorbar(aes(ymin = lwr, ymax = upr), alpha = 0.9, width = 0, lwd = 0.6) +
   geom_point(alpha = 0.6, size = 0.4) +
-  geom_line(alpha = 0.6) +
+  #geom_line(alpha = 0.6) +
   geom_text(data = eb, aes(y = mx, label = sid), colour = 'black', nudge_y = 0.07, size = 1.9, angle = 90) +
   facet_wrap(~ app.mthd.nm, ncol = 2) +
   theme_bw() +
