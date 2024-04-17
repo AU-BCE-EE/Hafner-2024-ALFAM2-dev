@@ -5,6 +5,9 @@ pamdat[, man.source.nm := factor(man.source, levels = c('cattle/other', 'pig'), 
 qamdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), labels = c('Broadcast', 'Trailing\nhose', 'Trailing\nshoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
 qamdat[, man.source.nm := factor(man.source, levels = c('pig', 'cattle/other'), labels = c('Pig', 'Cattle/other'))]
 
+# Drop cs CI
+qamdat[app.mthd == 'cs', `:=` (rr10 = NA, rr90 = NA)]
+
 d1 <- subset(qamdat, app.mthd != 'bc')
 d3 <- subset(pamdat, app.mthd != 'bc' & parset == '3')
 ggplot(d1, aes(app.mthd.nm, -rr10)) + 
