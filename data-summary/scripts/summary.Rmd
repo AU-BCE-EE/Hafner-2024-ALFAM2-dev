@@ -1,0 +1,27 @@
+
+
+```{r}
+dim(pdat)
+table(pdat[, sub.period])
+table(pdat[, corr.period])
+table(pdat[, .(country, corr.period)])
+table(pdat[, .(country, sub.period)])
+table(pdat[, .(meas.tech2, sub.period)])
+table(pdat[, .(sub.period, !is.na(e.rel.final) & e.rel.final > 1.5)])
+table(pdat[, .(sub.period, !is.na(e.rel.final) & e.rel.final > 2)])
+table(pdat[, .(sub.period, is.na(e.rel.final))])
+```
+
+```{r}
+table(pdat[, .(treat.nm, sub.period)])
+
+table(pdat$treat.nm, exclude = NULL)
+
+table(pdat[, .(period.nm, ct.max > 72)]) / matrix(rep(table(pdat[, .(period.nm)]), 2), ncol = 2)
+table(pdat[, .(period.nm, ct.max > 96)]) / matrix(rep(table(pdat[, .(period.nm)]), 2), ncol = 2)
+table(pdat[, .(period.nm, ct.max > 168)]) / matrix(rep(table(pdat[, .(period.nm)]), 2), ncol = 2)
+```
+
+
+
+
