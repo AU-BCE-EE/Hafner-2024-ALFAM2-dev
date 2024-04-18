@@ -15,6 +15,8 @@ table(pdat[, .(sub.period, !is.na(e.rel.final) & e.rel.final > 1.5)])
 table(pdat[, .(sub.period, !is.na(e.rel.final) & e.rel.final > 2)])
 table(pdat[, .(sub.period, is.na(e.rel.final))])
 
+x <- pdat[is.na(e.rel.final), ]
+
 pdat[, man.trts := paste(man.trt1, man.trt2, man.trt3)]
 pdat[, digested := grepl('[Dd]igest', man.trts)]
 pdat[, separated := grepl('[Ss]epar', man.trts)]
@@ -62,7 +64,7 @@ ggplot(pdat, aes(app.mthd.nm, e.rel.final, colour = inst, shape = treat.nm)) +
   facet_grid(meas.tech.nm ~ sub.period.nm)
 ggsave('../plots/emis_summ.png', height = 7, width = 6.5)
 
-ggplot(pdat, aes(air.temp.24, wind.2m.24, colour = period.nm, shape = period.nm)) +
+ggplot(pdat, aes(air.temp.24, wind.2m.24, colour = sub.period.nm, shape = sub.period.nm)) +
   geom_point(alpha = 0.5) +
   theme_bw() +
   labs(x = expression('Air temperature'~(degree*C)), y = expression('Wind speed'~(m~s^'-1')), 
@@ -76,7 +78,7 @@ ggplot(pdat, aes(air.temp.24, e.rel.24, colour = app.mthd.nm, shape = app.mthd.n
   geom_smooth(method = lm, se = FALSE, show.legend = FALSE) +
   theme_bw() +
   ylim(0, 1) +
-  facet_grid(meas.tech.nm ~ period.nm)
+  facet_grid(meas.tech.nm ~ sub.period.nm)
 ggsave('../plots/emis_temp.png', height = 5, width = 6.5)
 
 ggplot(pdat, aes(air.temp.24, fill = app.mthd)) +
