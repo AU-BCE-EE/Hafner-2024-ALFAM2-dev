@@ -9,7 +9,9 @@ pdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'
 pdat[, app.mthd.ab := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
                              labels = c('BC', 'TH', 'TS', 'OSI', 'CSI'))]
 pdat[, set.nm := factor(set, levels = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), 
-                        labels = c('DM', 'pH', 'Air temperature', 'Wind speed', 'Rain'))]
+                        labels = c(expression('DM'~(percent)), expression('pH'), 
+                                   expression('Air temp' ~(degree*C)), expression('Wind speed'~(m~s^'-1')), 
+                                   expression('Rain'~(mm~h^'-1'))))]
 
 qdat[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
                              labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection'))]
@@ -23,14 +25,13 @@ d3 <- d2[xval == xvalmax, ]
 ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) + 
   geom_line(lty = '1111', linewidth = 0.7) +
   geom_line(data = d1, linewidth = 0.7) +
-  #geom_text(data = d3, aes(label = app.mthd.ab), nudge_x = 1) +
-  facet_wrap(~ set.nm, scale = 'free_x') +
+  facet_wrap(~ set.nm, scale = 'free_x', label = 'label_parsed') +
   scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = '168 h relative emission (frac. TAN)', colour = '') +
   guides(colour = guide_legend(nrow = 2))
-ggsave2x('../plots/sens5_cattle', height = 4, width = 4)
+ggsave2x('../plots/sens5_cattle', height = 5, width = 5)
 
 d1 <- pdat[parset == 3 & man.source == 'pig' & !outsidein, ]
 d2 <- pdat[parset == 3 & man.source == 'pig', ]
