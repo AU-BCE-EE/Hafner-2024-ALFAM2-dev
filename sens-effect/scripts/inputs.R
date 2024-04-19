@@ -7,7 +7,7 @@ man.source <- data.table(man.source = c('pig', 'cattle/other'))
 dat.ref <- data.table(dfcombos(dat.ref, man.source))
 
 # Set min/max here
-man.dm <- data.table(man.dm = seq(1, 15, length.out = 100))
+man.dm <- data.table(man.dm = seq(1, 10, length.out = 100))
 man.ph <- data.table(man.ph = seq(6, 9, length.out = 100))
 air.temp <- data.table(air.temp = seq(0, 25, length.out = 100))
 wind.2m <- data.table(wind.2m = seq(0, 10, length.out = 100))
@@ -58,7 +58,7 @@ sets <- unique(dat[, set])
 sets <- sets[!sets %in% c('ref', 'app.mthd')]
 for (i in sets) {
   xref <- as.numeric(dat[set == 'ref', ..i][1])
-  div <- max(abs(dat[set == i, xval] - xref))
+  div <- max(dat[set == i, xval] - xref)
   dat[set == i, xval.norm := (xval - xref) / div] 
 }
 
@@ -70,3 +70,6 @@ dat[set == 'ref', xval.norm := 0]
 
 # Square root wind
 dat[, wind.sqrt := sqrt(wind.2m)]
+
+dat[set == 'man.dm', ]
+dat[set == 'ref', ]

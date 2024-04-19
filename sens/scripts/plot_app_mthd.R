@@ -14,7 +14,7 @@ ggplot(d1, aes(app.mthd.nm, rr10)) +
   geom_errorbar(aes(ymin = rr10, ymax = rr90), lty = 'solid', colour = 'gray55', lwd = 1.6, width = 0) +
   #geom_point(aes(y = rrmd),  col = 'gray45', size = 2) +
   geom_point(data = d3, aes(y = rr),  size = 3, shape = 19) +
-  ylim(0.9, 0.2) +
+  ylim(0.9, 0.1) +
   facet_wrap(~ man.source.nm, scale = 'fixed') +
   #scale_color_viridis_d() +
   theme_bw() +

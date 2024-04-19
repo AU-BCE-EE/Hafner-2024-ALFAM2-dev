@@ -29,17 +29,16 @@ for (i in unique(ddf[, inst])) {
     geom_point(colour = 'gray55', size = 3, alpha = 0.6) +
     geom_point(data = dd, colour = 'red', size = 3) +
     scale_shape_manual(values = c(20, 2, 3, 1)) +
-    facet_wrap( ~ app.mthd.nm) +
+    facet_wrap( ~ app.mthd.nm, ncol = 3) +
     scale_color_viridis_d() +
     labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', 
          y = 'Measured emission (frac. applied TAN)',
          colour = '', shape = '') +
     theme_bw() +
-    theme(legend.position = 'right') +
+  theme(legend.position = c(0.8, 0.27)) +
     xlim(0, 1) +
     ylim(0, 1) +
-    guides(colour = guide_legend(ncol = 1)) +
     coord_fixed()
-  ggsave2x(paste0('../plots-scatter/e168_comp_ps3_', i), height = 4.5, width = 7, scale = 1.2)
+  ggsave2x(paste0('../plots-scatter/e168_comp_ps3_', i), height = 5.5, width = 6)
 
 }

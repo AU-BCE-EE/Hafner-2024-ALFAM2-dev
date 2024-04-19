@@ -14,7 +14,7 @@ packageVersion('ALFAM2')
 
 Run model with par set 3
 ```{r}
-preds <- data.table(ALFAM2mod(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep = TRUE))
+preds <- data.table(alfam2(dat, app.name = 'tan.app', time.name = 'ct', group = 'id', pars = pars03, prep.dum = TRUE))
 names(preds) <- paste0(names(preds), '.pred')
 preds[, parset := '3']
 pdat <- cbind(dat, preds)

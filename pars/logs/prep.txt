@@ -13,28 +13,28 @@
 
 > dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 17253 rows and 6 columns
- 558 unique rows
+ 18650 rows and 6 columns
+ 562 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0   0.772        cat     4.3    10.9
 Maximum                   ts         133    13.8        pig     8.9     206
-Mean                    <NA>        50.3    5.61       <NA>    7.55    70.7
-Unique (excld. NA)         5         305     273          6      91     539
+Mean                    <NA>        50.3    5.61       <NA>    7.52    69.4
+Unique (excld. NA)         5         308     275          6      93     542
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 17253 rows and 6 columns
- 14094 unique rows
+ 18650 rows and 6 columns
+ 14475 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
-Minimum               0.15   -45.8    -4.83       0         0        0
+Minimum               0.15     -65    -4.83       0         0        0
 Maximum                650    1420     35.4    28.4       8.4      113
-Mean                   104     107     12.4    2.55    0.0415     4.27
-Unique (excld. NA)    3115    5783     2850    8045       554      261
+Mean                   113     116     12.5    2.47    0.0406      4.2
+Unique (excld. NA)    3124    5841     3046    8204       555      266
 Missing values           0     554        2      13        87       87
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -62,28 +62,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 16821 rows and 6 columns
- 558 unique rows
+ 18152 rows and 6 columns
+ 562 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0   0.772        cat     4.3    10.9
 Maximum                   ts         133    13.8        pig     8.9     206
-Mean                    <NA>        50.4    5.62       <NA>    7.54    70.5
-Unique (excld. NA)         5         305     273          6      91     539
+Mean                    <NA>        50.4    5.62       <NA>    7.52    69.1
+Unique (excld. NA)         5         308     275          6      93     542
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 16821 rows and 6 columns
- 13737 unique rows
+ 18152 rows and 6 columns
+ 14052 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.15  0.0167    -4.83       0         0        0
 Maximum                650    1420     35.4    28.4       8.4      113
-Mean                   106     109     12.4    2.59    0.0412     4.33
-Unique (excld. NA)    3115    5643     2812    7718       553      261
+Mean                   116     117     12.5    2.51    0.0405     4.28
+Unique (excld. NA)    3124    5651     2989    7864       554      266
 Missing values           0       0        0       0         0        0
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -138,28 +138,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 12671 rows and 6 columns
- 507 unique rows
+ 12695 rows and 6 columns
+ 510 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0   0.772        cat    6.54    10.9
 Maximum                   ts         133    13.8        pig     8.9     196
 Mean                    <NA>        43.2    5.61       <NA>    7.55    64.6
-Unique (excld. NA)         5         273     261          6      80     494
+Unique (excld. NA)         5         275     262          6      81     496
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 12671 rows and 6 columns
- 11365 unique rows
+ 12695 rows and 6 columns
+ 11389 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.15   -45.8    -4.83       0         0        0
 Maximum                650    1420     35.4    28.4       8.4      113
 Mean                   103     104     11.6    2.69    0.0302     3.53
-Unique (excld. NA)    2997    5484     2672    6924       528      220
+Unique (excld. NA)    3006    5494     2672    6929       528      220
 Missing values           0     554        2      13        87       87
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -187,28 +187,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 12422 rows and 6 columns
- 507 unique rows
+ 12446 rows and 6 columns
+ 510 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0   0.772        cat    6.54    10.9
 Maximum                   ts         133    13.8        pig     8.9     196
-Mean                    <NA>        43.4    5.62       <NA>    7.55    64.5
-Unique (excld. NA)         5         273     261          6      80     494
+Mean                    <NA>        43.3    5.61       <NA>    7.55    64.6
+Unique (excld. NA)         5         275     262          6      81     496
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 12422 rows and 6 columns
- 11116 unique rows
+ 12446 rows and 6 columns
+ 11140 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.15  0.0167    -4.83       0         0        0
 Maximum                650    1420     35.4    28.4       8.4      113
 Mean                   105     104     11.6    2.72    0.0291     3.54
-Unique (excld. NA)    2997    5375     2625    6698       527      220
+Unique (excld. NA)    3006    5385     2625    6703       527      220
 Missing values           0       0        0       0         0        0
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -407,6 +407,27 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > # And then get new plots from idati in the pdat* df as well
 > pdat1 <- pdat[pmid %in% unique(idat1[, pmid])]
+
+> # Now remove values outside emission limits
+> # Done here and not in subset.R in order to see effect on counts
+> dim(pdat1)
+[1] 736 225
+
+> pdat1 <- pdat1[e.rel.24 > -0.20 & 
++                e.rel.24 < 1.20 &
++                e.rel.final < 1.20 &
++                e.rel.final > -0.20, ]
+
+> dim(pdat1)
+[1] 734 225
+
+> range(pdat1$e.rel.final)
+[1] -0.11627  1.00380
+
+> range(pdat1$e.rel.24)
+[1] -0.0022194  0.9199000
+
+> idat1 <- idat1[pmid %in% unique(pdat1[, pmid])]
 
 > # (Re)calculate weights ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > # Equal by application method

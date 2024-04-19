@@ -1,9 +1,9 @@
-R version 4.2.1 (2022-06-23)
+R version 4.3.3 (2024-02-29)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.3 LTS
+Running under: Ubuntu 22.04.4 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
 LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
@@ -14,23 +14,25 @@ locale:
  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
+time zone: America/New_York
+tzcode source: system (glibc)
+
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] viridis_0.6.2     viridisLite_0.4.0 ggplot2_3.4.3     reshape2_1.4.4   
-[5] data.table_1.14.8 rmarkdown_2.14    knitr_1.39        ALFAM2_3.21      
-[9] nvimcom_0.9-82   
+[1] viridis_0.6.5     viridisLite_0.4.2 ggplot2_3.5.0     reshape2_1.4.4   
+[5] data.table_1.15.2 rmarkdown_2.26    knitr_1.45        ALFAM2_3.83      
+[9] nvimcom_0.9.37   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.11       compiler_4.2.1    pillar_1.9.0      plyr_1.8.7       
- [5] tools_4.2.1       digest_0.6.31     evaluate_0.15     lifecycle_1.0.3  
- [9] tibble_3.2.1      gtable_0.3.0      pkgconfig_2.0.3   rlang_1.1.1      
-[13] DBI_1.1.3         cli_3.6.1         parallel_4.2.1    xfun_0.30        
-[17] fastmap_1.1.1     gridExtra_2.3     withr_2.5.0       stringr_1.4.0    
-[21] dplyr_1.0.9       systemfonts_1.0.4 generics_0.1.3    vctrs_0.5.1      
-[25] grid_4.2.1        tidyselect_1.1.2  glue_1.6.2        R6_2.5.1         
-[29] textshaping_0.3.6 fansi_1.0.3       farver_2.1.0      purrr_0.3.4      
-[33] magrittr_2.0.3    scales_1.2.0      htmltools_0.5.5   assertthat_0.2.1 
-[37] colorspace_2.0-3  labeling_0.4.2    ragg_1.2.5        utf8_1.2.2       
-[41] stringi_1.7.6     munsell_0.5.0    
+ [1] gtable_0.3.4      dplyr_1.1.4       compiler_4.3.3    tidyselect_1.2.1 
+ [5] Rcpp_1.0.12       colorout_1.3-0.2  stringr_1.5.1     parallel_4.3.3   
+ [9] gridExtra_2.3     textshaping_0.3.7 systemfonts_1.0.6 scales_1.3.0     
+[13] fastmap_1.1.1     R6_2.5.1          plyr_1.8.9        labeling_0.4.3   
+[17] generics_0.1.3    tibble_3.2.1      munsell_0.5.0     pillar_1.9.0     
+[21] rlang_1.1.3       utf8_1.2.4        stringi_1.8.3     xfun_0.42        
+[25] cli_3.6.2         withr_3.0.0       magrittr_2.0.3    digest_0.6.35    
+[29] grid_4.3.3        lifecycle_1.0.4   vctrs_0.6.5       evaluate_0.23    
+[33] glue_1.7.0        farver_2.1.1      ragg_1.3.0        fansi_1.0.6      
+[37] colorspace_2.1-0  tools_4.3.3       pkgconfig_2.0.3   htmltools_0.5.7  

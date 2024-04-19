@@ -15,8 +15,8 @@ cver <- '/home/sasha/R/ALFAM2-versions/Rcpp-ver/'
 
 # Install different versions to different locations (only needs to be done once)
 #devtools::install_github('sashahafner/ALFAM2@v2.0', lib = rver)
-#devtools::install_github('sashahafner/ALFAM2@bb418400e3fec8ad5c1d065c583b06de7ef2de23', lib = cver, force = TRUE)
-#3
+#devtools::install_github('sashahafner/ALFAM2', ref = 'dev', lib = cver, force = TRUE)
+#
 
 # Need new version of package first for incorp data processing
 library(ALFAM2, lib.loc = cver)
@@ -170,7 +170,7 @@ for (j in 2:3) {
   tt <- numeric(nits)
   for (i in 1:nits) {
     tt[i] <- system.time(outpi.n <- alfam2(dpi, pars = ALFAM2::alfam2pars02, time.incorp = 't.incorp', 
-                                app.name = 'tan.app', group = 'id', prep.dum = FALSE, warn = FALSE, prep.incorp = prep.incorp, check = check))[3]
+                                app.name = 'tan.app', group = 'id', prep.dum = TRUE, warn = TRUE, prep.incorp = prep.incorp, check = check))[3]
   }
   
   times['plots-incorp', j] <- mean(tt)
@@ -212,7 +212,7 @@ if (!all(c1 <- isTRUE(all.equal(outp.o$er, outp.n$er)),
          c3 <- isTRUE(all.equal(outt.o$er, outt.n$er)), 
          c4 <- isTRUE(all.equal(outti.o$er, outti.n$er)))) {
   print(c(c1, c2, c3, c4))
-  stop('Output problem--results are not identical with and without flatout = TRUE!')
+  stop('Output problem--results are not identical with and without incorporation pre-processing!')
 }
 
 # Export results

@@ -8,3 +8,6 @@ idatp[, j.NH3.pred := preds$j]
 
 pdatp <- subset(pdat, pmid %in% c(1529:1532))
 pdatp$tan.app
+names(pdatp)
+pdatp$e.cum.24
+head(pdatp)
