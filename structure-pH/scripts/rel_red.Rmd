@@ -1,0 +1,21 @@
+---
+title: 'Stats on change in acidification relative reduction'
+output: pdf_document
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+
+```{r}
+dd <- dw3[ct %in% c('24', 'final') & rred > 0, ]
+
+ggplot(dd, aes(ct, rred, colour = factor(inst), group = iexper)) +
+  geom_line() +
+  ylim(0, 1)
+
+m1 <- lm(rred ~ iexper + ct, data = dd)
+summary(m1)
+summary.aov(m1)
+confint(m1)
+```
+
