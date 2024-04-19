@@ -11,7 +11,7 @@ for (i in unique(dp168[, pars])) {
       geom_abline(intercept = 0, slope = 1, col = 'gray45') +
       geom_point(bg = 'gray45') +
       #geom_line(stat = 'smooth', method = 'lm', se = FALSE, alpha = 0.6) +
-      scale_shape_manual(values = c(1, 2, 20)) +
+      scale_shape_manual(values = c(1, 2, 20, 3, 4, 5)) +
       facet_grid(pig.nm ~ app.mthd.nm) +
       labs(x = 'Calculated', 
            y = 'Measured',
