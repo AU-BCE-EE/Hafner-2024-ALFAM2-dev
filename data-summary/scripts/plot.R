@@ -2,7 +2,7 @@
 # Without na.translate = FALSE I get an NA entry in legend although there are no NA values for treat.nm
 ggplot(pdat, aes(app.mthd.nm, e.rel.final, colour = inst, shape = treat.nm)) +
   geom_jitter(height = 0) +
-  geom_bar(stat = 'summary', fun = 'mean', aes(group = app.mthd.nm), fill = 'gray55', colour = 'gray54', alpha = 0.1) +
+  stat_summary(aes(app.mthd.nm, e.rel.final, group = app.mthd.nm), colour = 'gray45', lwd = 1, geom = 'tile', fun = function(x) mean(x, na.rm = TRUE)) +
   scale_shape_discrete(na.translate = FALSE) +
   theme_bw() +
   labs(x = 'Application method', y = 'Total emission (frac. applied TAN)', shape = 'Slurry treatment', colour = 'Institution') +
