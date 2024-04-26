@@ -455,6 +455,24 @@ pre code {
 ##   Period 2   0.7027972 0.2972028
 ##   Period 2/3 1.0000000 0.0000000
 ##   Period 3   0.8636996 0.1363004</code></pre>
+<pre class="r"><code>table(pdat[, .(sub.period, ct.max &gt; 72)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)</code></pre>
+<pre><code>##           V2
+## sub.period     FALSE      TRUE
+##          1 0.3647059 0.6352941
+##          2 0.2909579 0.7090421
+##          3 0.1182197 0.8817803</code></pre>
+<pre class="r"><code>table(pdat[, .(sub.period, ct.max &gt; 96)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)</code></pre>
+<pre><code>##           V2
+## sub.period     FALSE      TRUE
+##          1 0.7088235 0.2911765
+##          2 0.5022381 0.4977619
+##          3 0.3630042 0.6369958</code></pre>
+<pre class="r"><code>table(pdat[, .(sub.period, ct.max &gt; 168)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)</code></pre>
+<pre><code>##           V2
+## sub.period     FALSE      TRUE
+##          1 0.8926471 0.1073529
+##          2 0.7717099 0.2282901
+##          3 0.8636996 0.1363004</code></pre>
 
 
 

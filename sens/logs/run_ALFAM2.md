@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "19 April, 2024 Apr:04"
+date: "23 April, 2024 Apr:04"
 ---
 
 Check package version.
@@ -14,7 +14,7 @@ packageVersion('ALFAM2')
 ```
 
 ```
-## [1] '3.83'
+## [1] '3.84'
 ```
 
 Run model with par set 3

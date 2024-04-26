@@ -10,6 +10,11 @@ d1counts <- d1counts[order(inst), ]
 # Export
 fwrite(d1counts, '../output/d1_counts.csv')
 
+d1incorp <- pdat1[incorp != 'none', ]
+d1icounts <- dcast(d1incorp, institute + inst + country ~ incorp, value.var = 'pmid', fun.aggregate = function(x) length(unique(x)))
+
+fwrite(d1icounts, '../output/d1_incorp_counts.csv')
+
 # *dat2
 pdat2[, app.mthd := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'))] 
 d2counts <- dcast(idat2, institute + inst + country ~ app.mthd, value.var = 'pmid', fun.aggregate = function(x) length(unique(x)))

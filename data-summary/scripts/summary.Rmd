@@ -23,5 +23,12 @@ table(pdat[, .(period.nm, ct.max > 168)]) / matrix(rep(table(pdat[, .(period.nm)
 ```
 
 
+```{r}
+table(pdat[, .(sub.period, ct.max > 72)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)
+table(pdat[, .(sub.period, ct.max > 96)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)
+table(pdat[, .(sub.period, ct.max > 168)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)
+```
+
+
 
 

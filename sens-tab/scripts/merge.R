@@ -7,6 +7,8 @@
 
 dat3 <- merge(dat, pr3, by = c('sida', 'ct'))
 dat168.3 <- dat3[dat3$ct == 168, ]
+dat168.3$upr.rel <- 100 * dat168.3$upr / dat168.3$er
+dat168.3$lwr.rel <- 100 * dat168.3$lwr / dat168.3$er
 
 summ168.3 <- dcast(dat168.3, sid + descrip ~ app.mthd, value.var = 'er')
 summ168.3$bc.red <- 100*(1 - summ168.3$bc/summ168.3$bc[1])
@@ -73,3 +75,14 @@ dat168.1$pars <- 'ps01'
 dat168.2$pars <- 'ps02'
 dat168.3$pars <- 'ps03'
 datc <- rbind(data.table(dat168.1), data.table(dat168.2), data.table(dat168.3), fill = TRUE)
+
+
+# Add dynamic data
+dat1 <- data.table(dat1)
+dat2 <- data.table(dat2)
+dat3 <- data.table(dat3)
+
+dat1[, pars := 'ps01']
+dat2[, pars := 'ps02']
+dat3[, pars := 'ps03']
+dat <- rbind(dat1, dat2, dat3)

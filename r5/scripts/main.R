@@ -2,6 +2,8 @@
 
 rm(list = ls())
 
+pn <- 'ps3'
+
 source('packages.R')
 source('functions.R')
 source('load_pars.R')
