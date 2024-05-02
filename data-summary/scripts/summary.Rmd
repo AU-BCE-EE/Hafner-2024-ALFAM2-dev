@@ -1,4 +1,8 @@
-
+---
+title: 'Summary of ALFAM2 database'
+author: 'Sasha D. Hafner'
+date: "`r format(Sys.time(), '%H:%M - %d %B, %Y')`"
+---
 
 ```{r}
 dim(pdat)
@@ -27,6 +31,19 @@ table(pdat[, .(period.nm, ct.max > 168)]) / matrix(rep(table(pdat[, .(period.nm)
 table(pdat[, .(sub.period, ct.max > 72)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)
 table(pdat[, .(sub.period, ct.max > 96)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)
 table(pdat[, .(sub.period, ct.max > 168)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)
+```
+
+New data specifically
+
+```{r}
+x <- pdat[sub.period == 3, ]
+table(x[, .(inst, treat.nm)])
+table(x[, .(inst)])
+table(pdat[, .(inst)])
+table(pdat[, .(institute)])
+table(x[, .(institute)])
+table(pdat[, .(inst, treat.nm)])
+table(pdat[, .(inst, corr.period)])
 ```
 
 
