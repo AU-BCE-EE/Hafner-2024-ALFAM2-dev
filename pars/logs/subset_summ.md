@@ -3,7 +3,7 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "16 April, 2024 Apr:04"
+date: "03 May, 2024 May:05"
 ---
 
 # Summary of main data subset
@@ -163,9 +163,7 @@ table(idat1[, rain.missing])
 ```
 
 ```
-## 
-## FALSE  TRUE 
-## 18786    87
+## Error: j (the 2nd argument inside [...]) is a single symbol but column name 'rain.missing' is not found. If you intended to select columns using a variable in calling scope, please try DT[, ..rain.missing]. The .. prefix conveys one-level-up similar to a file system path.
 ```
 
 ```r
@@ -173,7 +171,7 @@ table(idat1[, rain.missing])
 ```
 
 ```
-## [1] 0.460976
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': j (the 2nd argument inside [...]) is a single symbol but column name 'rain.missing' is not found. If you intended to select columns using a variable in calling scope, please try DT[, ..rain.missing]. The .. prefix conveys one-level-up similar to a file system path.
 ```
 
 ```r
@@ -181,9 +179,7 @@ table(idat1[, interp.wind])
 ```
 
 ```
-## 
-## FALSE  TRUE 
-## 18860    13
+## Error: j (the 2nd argument inside [...]) is a single symbol but column name 'interp.wind' is not found. If you intended to select columns using a variable in calling scope, please try DT[, ..interp.wind]. The .. prefix conveys one-level-up similar to a file system path.
 ```
 
 ```r
@@ -191,7 +187,7 @@ table(idat1[, interp.wind])
 ```
 
 ```
-## [1] 0.06888147
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': j (the 2nd argument inside [...]) is a single symbol but column name 'interp.wind' is not found. If you intended to select columns using a variable in calling scope, please try DT[, ..interp.wind]. The .. prefix conveys one-level-up similar to a file system path.
 ```
 
 ```r
@@ -199,9 +195,7 @@ table(idat1[, interp.air.temp])
 ```
 
 ```
-## 
-## FALSE  TRUE 
-## 18871     2
+## Error: j (the 2nd argument inside [...]) is a single symbol but column name 'interp.air.temp' is not found. If you intended to select columns using a variable in calling scope, please try DT[, ..interp.air.temp]. The .. prefix conveys one-level-up similar to a file system path.
 ```
 
 ```r
@@ -209,7 +203,7 @@ table(idat1[, interp.air.temp])
 ```
 
 ```
-## [1] 0.01059715
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': j (the 2nd argument inside [...]) is a single symbol but column name 'interp.air.temp' is not found. If you intended to select columns using a variable in calling scope, please try DT[, ..interp.air.temp]. The .. prefix conveys one-level-up similar to a file system path.
 ```
 
 ```r
@@ -217,9 +211,7 @@ table(idat1[, man.ph.missing])
 ```
 
 ```
-## 
-## FALSE  TRUE 
-## 18167   706
+## Error: j (the 2nd argument inside [...]) is a single symbol but column name 'man.ph.missing' is not found. If you intended to select columns using a variable in calling scope, please try DT[, ..man.ph.missing]. The .. prefix conveys one-level-up similar to a file system path.
 ```
 
 ```r
@@ -227,19 +219,24 @@ table(idat1[, man.ph.missing])
 ```
 
 ```
-## [1] 3.740794
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': j (the 2nd argument inside [...]) is a single symbol but column name 'man.ph.missing' is not found. If you intended to select columns using a variable in calling scope, please try DT[, ..man.ph.missing]. The .. prefix conveys one-level-up similar to a file system path.
 ```
 
 
 ```r
 xx <- idat1[, any(rain.missing), by = pmid]
+```
+
+```
+## Error: object 'rain.missing' not found
+```
+
+```r
 table(xx[, 2])
 ```
 
 ```
-## V1
-## FALSE  TRUE 
-##   724    10
+## Error in eval(expr, envir, enclos): object 'xx' not found
 ```
 
 ```r
@@ -247,23 +244,23 @@ table(xx[, 2])
 ```
 
 ```
-## Warning in mean.default(xx[, 2]): argument is not numeric or logical: returning
-## NA
-```
-
-```
-## [1] NA
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': object 'xx' not found
 ```
 
 ```r
 xx <- idat1[, any(interp.wind), by = pmid]
+```
+
+```
+## Error: object 'interp.wind' not found
+```
+
+```r
 table(xx[, 2])
 ```
 
 ```
-## V1
-## FALSE  TRUE 
-##   721    13
+## Error in eval(expr, envir, enclos): object 'xx' not found
 ```
 
 ```r
@@ -271,23 +268,23 @@ table(xx[, 2])
 ```
 
 ```
-## Warning in mean.default(xx[, 2]): argument is not numeric or logical: returning
-## NA
-```
-
-```
-## [1] NA
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': object 'xx' not found
 ```
 
 ```r
 xx <- idat1[, any(interp.air.temp), by = pmid]
+```
+
+```
+## Error: object 'interp.air.temp' not found
+```
+
+```r
 table(xx[, 2])
 ```
 
 ```
-## V1
-## FALSE  TRUE 
-##   732     2
+## Error in eval(expr, envir, enclos): object 'xx' not found
 ```
 
 ```r
@@ -295,23 +292,23 @@ table(xx[, 2])
 ```
 
 ```
-## Warning in mean.default(xx[, 2]): argument is not numeric or logical: returning
-## NA
-```
-
-```
-## [1] NA
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': object 'xx' not found
 ```
 
 ```r
 xx <- idat1[, any(man.ph.missing), by = pmid]
+```
+
+```
+## Error: object 'man.ph.missing' not found
+```
+
+```r
 table(xx[, 2])
 ```
 
 ```
-## V1
-## FALSE  TRUE 
-##   689    45
+## Error in eval(expr, envir, enclos): object 'xx' not found
 ```
 
 ```r
@@ -319,12 +316,7 @@ table(xx[, 2])
 ```
 
 ```
-## Warning in mean.default(xx[, 2]): argument is not numeric or logical: returning
-## NA
-```
-
-```
-## [1] NA
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': object 'xx' not found
 ```
 
 # Problems with incorporation
@@ -356,6 +348,62 @@ table(pdati[, c('incorp', 'man.ph')])
 
 Low pH for shallow incorp plots probably causing wrong sign for shallow incorp pars.
 
+# Correlation among predictor variables
+
+
+```r
+m1 <- aov(man.dm ~ app.mthd, data = pdat1)
+summary(m1)
+```
+
+```
+##              Df Sum Sq Mean Sq F value Pr(>F)    
+## app.mthd      4   1548   387.0   88.99 <2e-16 ***
+## Residuals   729   3170     4.3                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+TukeyHSD(m1)
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = man.dm ~ app.mthd, data = pdat1)
+## 
+## $app.mthd
+##                diff        lwr        upr     p adj
+## bsth-bc -2.98986725 -3.5422332 -2.4375013 0.0000000
+## ts-bc    0.09817867 -0.4859472  0.6823046 0.9908104
+## os-bc    0.24692758 -0.3813356  0.8751908 0.8195064
+## cs-bc   -4.81365766 -6.7526435 -2.8746718 0.0000000
+## ts-bsth  3.08804592  2.4936132  3.6824786 0.0000000
+## os-bsth  3.23679484  2.5989377  3.8746520 0.0000000
+## cs-bsth -1.82379041 -3.7659061  0.1183252 0.0774425
+## os-ts    0.14874891 -0.5168010  0.8142988 0.9733314
+## cs-ts   -4.91183633 -6.8632225 -2.9604501 0.0000000
+## cs-os   -5.06058524 -7.0256348 -3.0955357 0.0000000
+```
+
+```r
+model.tables(m1, 'means')
+```
+
+```
+## Tables of means
+## Grand mean
+##          
+## 6.192664 
+## 
+##  app.mthd 
+##         bc   bsth      ts      os    cs
+##       7.02   4.03   7.119   7.267 2.207
+## rep 222.00 205.00 167.000 131.000 9.000
+```
+
 # dfsumm
 
 
@@ -373,15 +421,12 @@ dfsumm(pdat1)
 ## Warning in as.character.POSIXt(c(min(yc), max(yc), mean(yc)), format =
 ## "%Y-%m-%d %H:%M:%S"): as.character(td, ..) no longer obeys a 'format' argument;
 ## use format(td, ..) ?
-
 ## Warning in as.character.POSIXt(c(min(yc), max(yc), mean(yc)), format =
 ## "%Y-%m-%d %H:%M:%S"): as.character(td, ..) no longer obeys a 'format' argument;
 ## use format(td, ..) ?
-
 ## Warning in as.character.POSIXt(c(min(yc), max(yc), mean(yc)), format =
 ## "%Y-%m-%d %H:%M:%S"): as.character(td, ..) no longer obeys a 'format' argument;
 ## use format(td, ..) ?
-
 ## Warning in as.character.POSIXt(c(min(yc), max(yc), mean(yc)), format =
 ## "%Y-%m-%d %H:%M:%S"): as.character(td, ..) no longer obeys a 'format' argument;
 ## use format(td, ..) ?
@@ -854,15 +899,12 @@ dfsumm(pdat2)
 ## Warning in as.character.POSIXt(c(min(yc), max(yc), mean(yc)), format =
 ## "%Y-%m-%d %H:%M:%S"): as.character(td, ..) no longer obeys a 'format' argument;
 ## use format(td, ..) ?
-
 ## Warning in as.character.POSIXt(c(min(yc), max(yc), mean(yc)), format =
 ## "%Y-%m-%d %H:%M:%S"): as.character(td, ..) no longer obeys a 'format' argument;
 ## use format(td, ..) ?
-
 ## Warning in as.character.POSIXt(c(min(yc), max(yc), mean(yc)), format =
 ## "%Y-%m-%d %H:%M:%S"): as.character(td, ..) no longer obeys a 'format' argument;
 ## use format(td, ..) ?
-
 ## Warning in as.character.POSIXt(c(min(yc), max(yc), mean(yc)), format =
 ## "%Y-%m-%d %H:%M:%S"): as.character(td, ..) no longer obeys a 'format' argument;
 ## use format(td, ..) ?

@@ -28,7 +28,6 @@ ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) +
   geom_line(lty = '1111', linewidth = 0.7) +
   geom_line(data = d1, linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free_x', label = 'label_parsed') +
-  scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = '168 h relative emission (frac. TAN)', colour = '') +
@@ -41,7 +40,6 @@ ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) +
   geom_line(lty = '1111', linewidth = 0.7) +
   geom_line(data = d1, linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free_x', label = 'label_parsed') +
-  scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = '168 h relative emission (frac. TAN)', colour = '') +
@@ -57,7 +55,6 @@ ggplot(d, aes(xval, dedx10)) +
   geom_line(aes(y = dedx90), lty = '2222') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free', label = 'label_parsed', ncol = 2) +
-  scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') +
@@ -72,7 +69,6 @@ ggplot(d, aes(xval, dedx10)) +
   geom_line(aes(y = dedx90), lty = '2222') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free', label = 'label_parsed', ncol = 2) +
-  scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') +
@@ -88,7 +84,6 @@ ggplot(d, aes(xval, dedx10)) +
   geom_line(aes(y = dedx90), lty = '2222') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free', label = 'label_parsed', ncol = 2) +
-  scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') +
@@ -103,7 +98,6 @@ ggplot(d, aes(xval, dedx10)) +
   geom_line(aes(y = dedx90), lty = '2222') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free', label = 'label_parsed') +
-  scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') +

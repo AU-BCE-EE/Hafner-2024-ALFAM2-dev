@@ -1,8 +1,5 @@
 # Summarize model fit/performance
 
-# Combind data sets idat1 and idat2
-dpreds <- rbindf(dpreds1, dpreds2)
-
 # Residuals, always calculated minus measured value
 dpreds[, `:=` (resid.j = j.pred - j, resid.er = er.pred - er)]
 

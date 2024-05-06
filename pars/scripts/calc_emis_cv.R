@@ -13,4 +13,6 @@ for (i in 1:length(mods.cv)) {
 
 }
 
+#cvdat <- merge(cvdat, pdat[, .(pmid, app.mthd, incorp, time.incorp, man.source, man.trt1, man.trt2, man.trt3, acid, digested, inst, institute, air.temp.24, wind.2m.24, meas.tech)], by = 'pmid')
+#dpreds2 <- merge(dpreds2, pdat[, .(pmid, app.mthd, incorp, time.incorp, man.source, man.trt1, man.trt2, man.trt3, acid, digested, inst, institute, air.temp.24, wind.2m.24, meas.tech)], by = 'pmid')
 

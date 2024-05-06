@@ -23,6 +23,7 @@ knit('subset_summ.Rmd', output = '../logs/subset_summ.md')
 #knit('memods.Rmd', output = '../logs/memods.md')
 sink('../logs/par_est.txt')
   source('par_est.R', echo = TRUE, max.deparse.length = 300)
+  source('par_est_refine.R', echo = TRUE, max.deparse.length = 300)
 sink()
 source('ps3.R')
 
@@ -44,7 +45,6 @@ source('boot.R')
 source('extract_boot_pars.R')
 source('boot_cor.R')
 source('par_table.R')
-# Stopped here
 
 # Save work
 source('save_image.R')
@@ -60,3 +60,4 @@ source('plot_scatter_emis.R')
 source('plot_scatter_emis_ps3.R')
 source('plot_cv.R')
 source('plot_cv_pres.R')
+

@@ -8,6 +8,7 @@ library(rmarkdown)
 library(lme4)
 library(doParallel)
 library(doRNG)
+library(R.utils)
 
 sink('../logs/R-versions.txt')
   print(sessionInfo())

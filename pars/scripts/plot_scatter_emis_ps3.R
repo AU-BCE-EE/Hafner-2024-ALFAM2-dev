@@ -1,6 +1,5 @@
 # Scatter plots of cumulative emission for model evaluation for par set 3
 
-
 ddf <- droplevels(subset(dp168, pars == 'ps3' & dataset == 1))
 ggplot(ddf, aes(er.pred, er, colour = inst, shape = set)) +
   geom_abline(intercept = 0, slope = 1, col = 'gray45') +

@@ -3,7 +3,6 @@
 rm(list = ls())
 
 pn <- 'ps3'
-#pn <- 'f12'
 
 source('functions.R')
 source('packages.R')

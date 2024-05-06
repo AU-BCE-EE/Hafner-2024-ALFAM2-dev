@@ -11,6 +11,8 @@ nb <- 100
 inst.all <- unique(idat1[, inst])
 mods.boot <- list()
 
+idat1sel <- idat1[, ..parestcols]
+
 #set.seed(123) 
 
 mods.boot <- foreach (i = 1:nb) %dorng% {
@@ -28,7 +30,7 @@ mods.boot <- foreach (i = 1:nb) %dorng% {
   v <- 1
   idatsamp <- data.table()
   for (ii in inst.samp) {
-    x <- idat1[inst == ii]
+    x <- idat1sel[inst == ii]
     x[, pmid := paste0(v, '-', pmid)]
     idatsamp <- rbind(idatsamp, x)
     v <- v + 1
@@ -66,7 +68,7 @@ mods.boot <- foreach (i = 1:nb) %dorng% {
     fixed <- c(fixed, pars.start.main[grepl('rain', names(pars.start.main))])
   }
 
-  # Calibration
+  # Par estimation
   output <- list()
   output[['inst']] <- inst.samp
   output[['optim']] <- m <- optim(par = pars.start, fn = function(par) 

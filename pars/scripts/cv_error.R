@@ -2,15 +2,19 @@
 
 # Merge in measurements
 # Note that without 'by = ' 40 pmid are lost, maybe dt mismatch?
-cvdat <- merge(idat1[, c('pmid', 'man.source', 'app.mthd', 'incorp', 'acid', 'digested', 'cta', 'cta.168', 'j', 'e.cum', 'er')], cvdat, by = c('pmid', 'cta'))
+cvdat <- merge(idat1[, c('pmid', 'cta', 'j', 'er')], cvdat, by = c('pmid', 'cta'))
+
+# Get cta closest to 24 and 168 hours to use these times for model evaluation
+cvdat[, cta.168 := cta[which.min(abs(cta - 168))], by = pmid]
+cvdat[, cta.24 := cta[which.min(abs(cta - 24))], by = pmid]
 
 cvdat[, dataset := 1]
 
 cvdat[, `:=` (ererr = er.pred - er, rerr = (er.pred - er) / er)]
+cvdat <- merge(pdat, cvdat, by = 'pmid', suffixes = c('', '.cv'))
 cvdat168 <- cvdat[cta == cta.168, ]
 
 # Get quantiles for 168 hr emission only
-cvdat <- merge(pdat, cvdat, by = 'pmid', suffixes = c('', '.cv'))
 cverrsumm1 <- cvdat[cta == cta.168 & !is.na(er.pred), .(n = length(er.pred), 
                                                        ererr = median(ererr),
                                                        aererr = median(abs(ererr)), 

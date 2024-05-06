@@ -1,5 +1,9 @@
 # Grouped leave-one-out cross-validation (LOOCV)
 
+# Parallel
+clstr <- parallel::makeCluster(parallel::detectCores(), type = 'FORK') 
+registerDoParallel(cl = clstr)
+
 # Change starting pars to avoid getting something similar to ps3 back
 # With this correction and maxit limit below this approach would tend to return poorer fit than possible and so overestimate error
 # Better approach is to use more iterations below (maxit = maxit3)
@@ -10,7 +14,6 @@ fixed <- c(int.r5 = -1.8)
 lower <- c(
   int.f0 = -2,
   app.mthd.os.f0 = -5,
-  app.rate.ni.f0 = -0.5,
   man.dm.f0 = -1,
   man.source.pig.f0 = -3,
   app.mthd.cs.f0 = -12,
@@ -36,7 +39,6 @@ lower <- c(
 upper <- c(
   int.f0 = 4,
   app.mthd.os.f0 = 5,
-  app.rate.ni.f0 = 0.5,
   man.dm.f0 = 2,
   man.source.pig.f0 = 1,
   app.mthd.cs.f0 = 1,
@@ -68,8 +70,10 @@ mods.cv <- list()
 
 set.seed(123) 
 
-for (i in insts) {
+mods.cv <- foreach (i = insts) %dorng% {
+
   ic <- as.character(i)
+
   cat('\n')
   print(Sys.time())
   cat('Institution dropped ', rep(i, 10))
@@ -79,7 +83,7 @@ for (i in insts) {
   idatsamp <- idat1[inst != i, ]
 
   # Parameter estimation
-  mods.cv[[ic]] <- list()
+  output <- list()
   mods[[ps]][['optim']] <- m <- optim(par = pars.start, fn = function(par) 
                                     resCalcComb(p = par, dat = idatsamp, to = c('er', 'j'), wr = 4 / 1, time.name = 'cta',
                                             app.name = 'tan.app', group = 'pmid', fixed = fixed, method = 'SS', 
@@ -90,6 +94,10 @@ for (i in insts) {
   cat('\n')
   print(pp)
 
-  mods.cv[[ic]][['coef']] <- pp
+  output[['coef']] <- pp
+
+  output
   
 }
+
+names(mods.cv) <- as.character(insts)

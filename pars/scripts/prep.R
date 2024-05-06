@@ -94,11 +94,15 @@ dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 # Will run model with flatout option, so need to do dummy variable data prep separately here
 # Note: *must* use flatout option for safety once rows have been added (will screw up incorp otherwise) etc.
 # No incorporation so skipping prepIncorp() call
-idat2 <-ALFAM2:::prepDat(idat2, value = 'data') 
-idat2$`__group` <- idat2$pmid
-idat2$`__f4` <- 1
-# Need add.row because it is usually added without flatout option
-idat2$`__add.row` <- FALSE
+idat2 <- idat2[order(pmid, cta), ]
+idat2 <- alfam2(idat2, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
+                time.name = 'cta', group = 'pmid',
+                time.incorp = 'time.incorp',  incorp.names = c('incorp', 'deep', 'shallow'), 
+                warn = TRUE, value = 'incorp')
+idat2 <- data.table(idat2)
+# Set emission in added incorporation rows (needed because flatout option will be used) to NA so they are not used in fitting
+# See love-hate-data.table repo issue #1 for more on this operation below
+idat2[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
 # Wind tunnel and micromet variables
 idat2[, wt := meas.tech2 == 'wt']
@@ -157,17 +161,15 @@ dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
 # Will run model with flatout option, so need to do dummy variable data prep separately here
 # Note: *must* use flatout option for safety once rows have been added (will screw up incorp otherwise) etc.
-idati <-ALFAM2:::prepDat(idati, value = 'data') 
-idati$`__group` <- idati$pmid
-idati$`__f4` <- 1
-
 idati <- idati[order(pmid, cta), ]
-idati <- ALFAM2:::prepIncorp(idati, pars = ALFAM2::alfam2pars02, time.name = 'cta', 
-                                       time.incorp = 'time.incorp',  
-                                       incorp.names = c('incorp', 'deep', 'shallow'), 
-                                       warn = TRUE)[[1]]
+idati <- alfam2(idati, pars = ALFAM2::alfam2pars02, app.name = 'tan.app', 
+                time.name = 'cta', group = 'pmid',
+                time.incorp = 'time.incorp',  incorp.names = c('incorp', 'deep', 'shallow'), 
+                warn = TRUE, value = 'incorp')
+idati <- data.table(idati)
 # Set emission in added incorporation rows (needed because flatout option will be used) to NA so they are not used in fitting
-idati[idati$`__add.row`, c('j.NH3', 'e.cum', 'e.rel')] <- NA
+# See love-hate-data.table repo issue #1 for more on this operation below
+idati[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
 # Wind tunnel and micromet variables
 idati[, wt := meas.tech2 == 'wt']
@@ -259,7 +261,14 @@ idat2[, weight.j := weight.plots * weight.168 * (cta > 0) * !is.na(j), by = pmid
 idat2[, cta.168 := cta[which.min(abs(cta - 168))], by = pmid]
 idat2[, weight.last := 1 * (cta == cta.168), by = pmid]
 idat2[, weight.2 := weight.last * weight.app.mthd * weight.er, by = pmid]
+# Arbitrary reduction in broadcast weight, increase in others, partially offsetting plot numbers, also low emission
+ww <- c(bsth = 1, ts = 1, os = 2, cs = 2, bc = 0.5)
+idat2[, `:=` (weight.lastc = weight.last * ww[app.mthd], weight.1c = weight.1a * ww[app.mthd])]
 
 # Missing incorporation problem
 idat1[is.na(incorp.deep), incorp.deep := 0]
 idat1[is.na(incorp.shallow), incorp.shallow := 0]
+
+# Finally, select only the necessary columns to reduce data table size, mainly for parallel stuff
+idat1 <- idat1[, ..parestcols]
+idat2 <- idat2[, ..parestcols]

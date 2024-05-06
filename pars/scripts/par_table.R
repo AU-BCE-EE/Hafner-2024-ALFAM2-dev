@@ -1,8 +1,7 @@
 # Create table for paper
 
-parstab <- parsl[pars == 'ps3', ]
+parstab <- parsl[pars == 'ps3' & !is.na(value), ]
 # Change name
-bootsumm[parameter == 'app.rate.ni.f0', parameter := 'app.rate.f0'] 
 parstab <- merge(parstab, bootsumm, by = 'parameter', all = TRUE)
 
 parstab[, l90 := round(l90, 3)]
@@ -18,7 +17,6 @@ parstab[, parameter := factor(parameter,
                               levels = c('int.f0',
                                          'app.mthd.os.f0',
                                          'app.mthd.cs.f0',
-                                         'app.rate.f0',
                                          'man.source.pig.f0',
                                          'man.dm.f0',
                                          'int.r1',
@@ -31,7 +29,6 @@ parstab[, parameter := factor(parameter,
                                          'int.r2',
                                          'rain.rate.r2',
                                          'int.r3',
-                                         'app.mthd.bc.r3',
                                          'app.mthd.cs.r3',
                                          'incorp.shallow.r3',
                                          'incorp.deep.r3',

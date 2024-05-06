@@ -45,7 +45,13 @@ dpreds2[, dataset := 2]
 
 # Merge in measurements (but not all idat* columns, to avoid massive object)
 # Note that without 'by = ' 40 pmid are lost, maybe dt mismatch?
-dpreds1 <- merge(idat1[, c('inst', 'institute', 'country', 'pmid', 'cta', 'cta.168', 'dt', 'app.mthd', 'meas.tech', 'man.trt1', 'man.trt2', 'man.source.pig', 'incorp', 'air.temp.24', 'man.ph', 'man.dm', 'acid', 'digested', 'j', 'e.cum', 'er')], dpreds1, by = c('pmid', 'cta'))
+dpreds1 <- merge(idat1[, c('pmid', 'cta', 'man.ph', 'man.dm', 'j', 'er')], dpreds1, by = c('pmid', 'cta'))
+dpreds2 <- merge(idat2[, c('pmid', 'cta', 'man.ph', 'man.dm', 'j', 'er')], dpreds2, by = c('pmid', 'cta'))
 
-dpreds2 <- merge(idat1[, c('inst', 'institute', 'country', 'pmid', 'cta', 'cta.168', 'dt', 'app.mthd', 'meas.tech', 'man.trt1', 'man.trt2', 'man.source.pig', 'incorp', 'air.temp.24', 'man.ph', 'man.dm', 'acid', 'digested', 'j', 'e.cum', 'er')], dpreds2, by = c('pmid', 'cta'))
+# Combind data sets idat1 and idat2
+dpreds <- rbindf(dpreds1, dpreds2)
+
+dpreds <- merge(dpreds, pdat[, .(pmid, app.mthd, incorp, time.incorp, man.source, man.trt1, man.trt2, man.trt3, acid, digested, inst, institute, country, air.temp.24, wind.2m.24, meas.tech)], by = 'pmid')
+
+#dpreds2 <- merge(idat1[, c('inst', 'institute', 'country', 'pmid', 'cta', 'cta.168', 'dt', 'app.mthd', 'meas.tech', 'man.trt1', 'man.trt2', 'man.source.pig', 'incorp', 'air.temp.24', 'man.ph', 'man.dm', 'acid', 'digested', 'j', 'e.cum', 'er')], dpreds2, by = c('pmid', 'cta'))
 
