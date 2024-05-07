@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "19 April, 2024 Apr:04"
+date: "07 May, 2024 May:05"
 ---
 
 Check package version.
@@ -14,7 +14,7 @@ packageVersion('ALFAM2')
 ```
 
 ```
-## [1] '3.83'
+## [1] '3.100'
 ```
 
 Run model with par set 3
@@ -28,7 +28,7 @@ preds <- data.table(alfam2(dat, app.name = 'tan.app', time.name = 'ct', group = 
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 4 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
 ##   incorp.shallow.r3

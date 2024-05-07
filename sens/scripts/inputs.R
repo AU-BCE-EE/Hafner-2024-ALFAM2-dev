@@ -1,8 +1,7 @@
 # Sort out scenarios
 
 # Reference conditions, based on cattle slurry 2010-2019 April for Denmark
-dat.ref <- data.table(ct = 168, man.dm = 6.5, wind.2m = 3.4, air.temp = 7.6, rain.rate = 0, app.rate = 40, man.ph = 7, tan.app = 100)
-dat.ref <- data.table(ct = 168, man.dm = 6.5, wind.2m = 3.4, air.temp = 13, rain.rate = 0, app.rate = 40, man.ph = 7, tan.app = 100)
+dat.ref <- data.table(ct = 168, man.dm = 6.5, wind.2m = 3.1, air.temp = 12, rain.rate = 0, app.rate = 40, man.ph = 7, tan.app = 100)
 
 man.source <- data.table(man.source = c('pig', 'cattle/other'))
 dat.ref <- data.table(dfcombos(dat.ref, man.source))

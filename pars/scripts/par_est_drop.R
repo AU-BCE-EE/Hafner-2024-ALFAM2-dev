@@ -13,7 +13,7 @@ fixed.main <- c(int.r5 = -1.8)
 set.seed(030979) 
 
 # Drop all weather, slurry pH and DM, or application method 
-dropvals <- c('air.temp|wind|rain', 'man\\.dm|man\\.ph', 'app\\.mthd')
+dropvals <- c('air.temp|wind|rain', 'man\\.dm|man\\.ph|pig', 'app\\.mthd')
 
 mods.drop <- foreach (i = dropvals) %dorng% {
 

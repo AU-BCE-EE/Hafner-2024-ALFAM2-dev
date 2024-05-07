@@ -2,7 +2,7 @@
 
 # Set reference values here
 # These values are based on cattle and April values in the DK EF report
-dat.ref <- data.table(ct = 168, man.dm = 6.5, wind.2m = 3.4, air.temp = 7.6, rain.rate = 0, app.rate.ni = 40, man.ph = 7.0, tan.app = 100, app.mthd = 'bsth')
+dat.ref <- data.table(ct = 168, man.dm = 6.5, wind.2m = 3.1, air.temp = 12, rain.rate = 0, app.rate.ni = 40, man.ph = 7.0, tan.app = 100, app.mthd = 'bsth')
 man.source <- data.table(man.source = c('pig', 'cattle/other'))
 dat.ref <- data.table(dfcombos(dat.ref, man.source))
 

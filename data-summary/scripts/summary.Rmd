@@ -46,6 +46,38 @@ table(pdat[, .(inst, treat.nm)])
 table(pdat[, .(inst, corr.period)])
 ```
 
+Johanna's wind tunnel results
+
+```{r}
+table(pdat[, .(inst, meas.tech2) ])
+table(pdat[, .(institute, meas.tech2) ])
+```
+
+```{r}
+x <- pdat[inst == 205, ]
+table(x[, .(sub.period, meas.tech2)])
+```
+
+```{r}
+x <- pdat[inst == 205 & meas.tech2 == 'wt', ]
+table(x[, .(sub.period, app.mthd)])
+```
+
+```{r}
+x <- pdat[inst == 205 & meas.tech2 == 'wt' & app.mthd == 'os', ]
+unique(x[, .(file, country)])
+```
+
+```{r}
+x <- pdat[grepl('[Pp]edersen', submitter) & sub.period == 3, ]
+unique(x[, file])
+
+```
+
+
+
+
+
 
 
 
