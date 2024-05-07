@@ -1,4 +1,3 @@
-# NTS: use flatout? have to prep for incorp
 
 bootdat <- data.table()
 
