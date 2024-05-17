@@ -13,8 +13,9 @@ bootsumm <- bootdat[ct == 168, .(n = length(er),
 				 upr = quantile(er, 0.95, na.rm = TRUE)), by = .(sida)]
 bootsumm[, pars := 'ps03']
 
-dd <- merge(dat, preds, by = c('sida', 'ct'))
-dd <- merge(dd, bootsumm, by = c('sida', 'pars'), all.x = TRUE)
-dat168 <- dd[ct == 168, ]
+# NTS: avoid rename, used in plot_curves.R
+dat <- merge(dat, preds, by = c('sida', 'ct'))
+dat <- merge(dat, bootsumm, by = c('sida', 'pars'), all.x = TRUE)
+dat168 <- dat[ct == 168, ]
 
 

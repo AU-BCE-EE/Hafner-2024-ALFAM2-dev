@@ -16,12 +16,11 @@ ggplot(d2, aes(xval, er.pred, colour = app.mthd.nm)) +
   geom_line(lty = '1111', linewidth = 0.7) +
   geom_line(data = d1, linewidth = 0.7) +
   facet_wrap(~ set.nm, scale = 'free_x', ncol = 4) +
-  scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = '168 h emis. (frac. TAN)', colour = '') +
   guides(colour = guide_legend(nrow = 1))
-ggsave2x('../plots-pres/sens4_cattle', height = 3, width = 7)
+ggsave2x('../plots-pres/sens4_cattle', height = 3, width = 9)
 
 # Derivatives
 d <- qdat[man.source != 'pig' & set.nm != 'Rain' & app.mthd == 'bsth', ]
@@ -32,7 +31,6 @@ ggplot(d, aes(xval, dedx10)) +
   geom_smooth(aes(y = dedx90), linewidth = 0.7, se = FALSE, lty = '2222') +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7, colour = 'gray45') +
   facet_wrap(~ set.nm, scale = 'free', nrow = 1) +
-  scale_color_viridis_d() +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') 
