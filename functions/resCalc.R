@@ -63,7 +63,7 @@ resCalcComb <- function(p, dat, weights = 1, app.name, group = NULL, time.name =
   }
 
   pred <- alfam2(dat, pars = p, app.name = app.name, time.name = time.name, 
-                    time.incorp = time.incorp, group = group, flatout = flatout, warn = FALSE)[, to]
+                    time.incorp = time.incorp, group = group, flatout = flatout, warn = FALSE, center = c(man.dm.app.mthd.bc = 6))[, to]
 
   if (length(weights) == 1) {
     weights <- data.frame(rep(weights, nrow(dat)), rep(weights, nrow(dat)))

@@ -16,6 +16,8 @@ nrow(pdat1)
 ```{r}
 table(pdat1[, inst])
 table(pdat1[, country])
+table(pdat1[, .(inst, sub.period)])
+table(pdat1[, .(institute, sub.period)])
 ```
 
 ```{r}
