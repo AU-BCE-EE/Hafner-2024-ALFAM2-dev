@@ -14,6 +14,7 @@ table(pdat[, .(meas.tech2, sub.period)])
 table(pdat[, .(sub.period, !is.na(e.rel.final) & e.rel.final > 1.5)])
 table(pdat[, .(sub.period, !is.na(e.rel.final) & e.rel.final > 2)])
 table(pdat[, .(sub.period, is.na(e.rel.final))])
+table(paste(pdat[, country], pdat[, institute], pdat[, app.mthd]), pdat[, sub.period])
 ```
 
 ```{r}

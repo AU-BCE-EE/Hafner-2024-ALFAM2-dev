@@ -5,7 +5,7 @@ clstr <- parallel::makeCluster(parallel::detectCores(), type = 'FORK')
 registerDoParallel(cl = clstr)
 
 pars.start.main <- mods$ps3$optim$par
-fixed.main <- c(int.r5 = -1.8)
+fixed.main <- c(int.r5 = -1.8, man.ph.r3 = 0.05)
 
 nb <- 100
 inst.all <- unique(idat1[, inst])

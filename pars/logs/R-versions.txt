@@ -25,7 +25,7 @@ other attached packages:
  [1] R.utils_2.12.3    R.oo_1.26.0       R.methodsS3_1.8.2 doRNG_1.8.6      
  [5] rngtools_1.5.2    doParallel_1.0.17 iterators_1.0.14  foreach_1.5.2    
  [9] lme4_1.1-35.3     Matrix_1.6-5      rmarkdown_2.26    knitr_1.46       
-[13] viridisLite_0.4.2 ggplot2_3.5.1     data.table_1.15.4 ALFAM2_3.120     
+[13] viridisLite_0.4.2 ggplot2_3.5.1     data.table_1.15.4 ALFAM2_3.126     
 [17] nvimcom_0.9.37   
 
 loaded via a namespace (and not attached):

@@ -8,8 +8,7 @@ registerDoParallel(cl = clstr)
 # With this correction and maxit limit below this approach would tend to return poorer fit than possible and so overestimate error
 # Better approach is to use more iterations below (maxit = maxit3)
 pars.start <- mods$ps3$optim$par * 0.9
-pars.start['app.mthd.cs.f0'] <- -5
-fixed <- c(int.r5 = -1.8)
+fixed <- c(int.r5 = -1.8, man.ph.r3 = 0.05)
 
 lower <- c(
   int.f0 = -2,
@@ -29,7 +28,6 @@ lower <- c(
   int.r3 = -4,
   app.mthd.bc.r3 = -1,
   app.mthd.cs.r3 = -2,
-  man.ph.r3 = -1,
   incorp.shallow.f4 = -5,
   incorp.shallow.r3 = -2,
   incorp.deep.f4 = -5,
@@ -54,7 +52,6 @@ upper <- c(
   int.r3 = 0,
   app.mthd.bc.r3 = 1,
   app.mthd.cs.r3 = 0.5,
-  man.ph.r3 = 1,
   incorp.shallow.f4 = 0,
   incorp.shallow.r3 = 0,
   incorp.deep.f4 = 0,

@@ -1,16 +1,16 @@
 app.mthd.nm,n,pars,rmse,mae,mbe,me
 Broadcast,222,1,0.24,0.17,-0.11,0.19
 Broadcast,222,2,0.19,0.14,-0.047,0.48
-Broadcast,222,3,0.17,0.13,0.004,0.59
+Broadcast,222,3,0.17,0.13,0.002,0.6
 Trailing hose,205,1,0.12,0.1,0.026,-0.05
 Trailing hose,205,2,0.1,0.07,-0.006,0.32
-Trailing hose,205,3,0.09,0.07,-0.006,0.38
+Trailing hose,205,3,0.09,0.07,-0.007,0.36
 Trailing shoe,167,1,0.14,0.11,-0.012,0.39
 Trailing shoe,167,2,0.13,0.09,-0.005,0.46
-Trailing shoe,167,3,0.13,0.09,0.008,0.46
+Trailing shoe,167,3,0.12,0.09,0.002,0.5
 Open slot injection,131,1,0.1,0.08,0.03,-0.18
 Open slot injection,131,2,0.1,0.08,0.035,-0.1
-Open slot injection,131,3,0.09,0.07,0.002,0.12
+Open slot injection,131,3,0.09,0.07,0.002,0.13
 Closed slot injection,9,1,0.19,0.17,0.173,-7.99
 Closed slot injection,9,2,0.07,0.07,-0.038,-0.34
-Closed slot injection,9,3,0.06,0.04,0.001,0
+Closed slot injection,9,3,0.06,0.04,0,0

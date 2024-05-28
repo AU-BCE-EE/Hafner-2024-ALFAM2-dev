@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Sasha D. Hafner" />
 
 
-<title>summary.knit</title>
+<title>Summary of ALFAM2 database</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -354,16 +355,19 @@ pre code {
 
 
 
+<h1 class="title toc-ignore">Summary of ALFAM2 database</h1>
+<h4 class="author">Sasha D. Hafner</h4>
+<h4 class="date">14:01 - 22 May, 2024</h4>
 
 </div>
 
 
 <pre class="r"><code>dim(pdat)</code></pre>
-<pre><code>## [1] 2516  233</code></pre>
+<pre><code>## [1] 2516  235</code></pre>
 <pre class="r"><code>table(pdat[, sub.period])</code></pre>
 <pre><code>## 
 ##    1    2    3 
-##  680 1117  719</code></pre>
+##  788 1009  719</code></pre>
 <pre class="r"><code>table(pdat[, corr.period])</code></pre>
 <pre><code>## 
 ##   3 
@@ -393,7 +397,7 @@ pre code {
 ##      FR   0  19  21
 ##      IE   0  68   0
 ##      IT  75   8  17
-##      NL   2 275 174
+##      NL 110 167 174
 ##      NO   6   0   0
 ##      SE  88   0  18
 ##      UK 342 109   0
@@ -403,33 +407,102 @@ pre code {
 ## meas.tech2    1   2   3
 ##   chamber   103  29 113
 ##   cps         0 290   0
-##   micro met 126 615 213
+##   micro met 234 507 213
 ##   wt        451 183 393</code></pre>
 <pre class="r"><code>table(pdat[, .(sub.period, !is.na(e.rel.final) &amp; e.rel.final &gt; 1.5)])</code></pre>
 <pre><code>##           V2
 ## sub.period FALSE TRUE
-##          1   666   14
-##          2  1116    1
+##          1   774   14
+##          2  1008    1
 ##          3   719    0</code></pre>
 <pre class="r"><code>table(pdat[, .(sub.period, !is.na(e.rel.final) &amp; e.rel.final &gt; 2)])</code></pre>
 <pre><code>##           V2
 ## sub.period FALSE TRUE
-##          1   674    6
-##          2  1117    0
+##          1   782    6
+##          2  1009    0
 ##          3   719    0</code></pre>
 <pre class="r"><code>table(pdat[, .(sub.period, is.na(e.rel.final))])</code></pre>
 <pre><code>##           V2
 ## sub.period FALSE TRUE
-##          1   677    3
-##          2  1078   39
+##          1   785    3
+##          2   970   39
 ##          3   719    0</code></pre>
+<pre class="r"><code>table(paste(pdat[, country], pdat[, institute], pdat[, app.mthd]), pdat[, sub.period])</code></pre>
+<pre><code>##                   
+##                      1   2   3
+##   CA AAFC bc         0 109   0
+##   CA ARDC bc         0  60   0
+##   CA AU bc           0   0  16
+##   CA AU bsth         0   0  32
+##   CA AU os           0   0  16
+##   CH INH-HAFL bc     0  27   0
+##   CH INH-HAFL bsth   0  12   0
+##   CH INH-HAFL os     0   3   0
+##   CH INH-HAFL ts     0   5   0
+##   CH IUL/FAT bc    117   0   0
+##   CH IUL/FAT bsth    2   0   0
+##   CH IUL/FAT os      2   0   0
+##   DE CAU-LU bsth     0 197   0
+##   DK AT bc           0   8   0
+##   DK AT bsth         0  11   0
+##   DK AT os           0   7   0
+##   DK AU bsth         0  61 281
+##   DK AU cs           0  16   0
+##   DK AU os           0  10  30
+##   DK AU ts           0   0 110
+##   DK AU-BCE bc       0   0   4
+##   DK DIAS bc        23   0   0
+##   DK DIAS bsth      21   0   0
+##   DK DIAS cs         2   0   0
+##   DK SDU bsth        0 106   0
+##   DK SDU cs          0   4   0
+##   FR INRA bc         0  10   0
+##   FR INRA bsth       0   8   0
+##   FR INRA ts         0   1   0
+##   FR INRAE bc        0   0   4
+##   FR INRAE bsth      0   0  17
+##   IE TEAGASC bc      0  20   0
+##   IE TEAGASC bsth    0  18   0
+##   IE TEAGASC ts      0  30   0
+##   IT CRPA bc        52   0   0
+##   IT CRPA bsth      18   0   0
+##   IT CRPA os         5   0   0
+##   IT DiSAA-IT bc     0   0   3
+##   IT DiSAA-IT os     0   0   3
+##   IT MU bc           0   7   0
+##   IT MU os           0   1   0
+##   IT UNIMI bc        0   0   4
+##   IT UNINA bc        0   0   7
+##   NL AU os           0   0  19
+##   NL IMAG bc         1   0   0
+##   NL IMAG os         1   0   0
+##   NL NMI-WUR bc      0  16   0
+##   NL WUR bc         46  92  20
+##   NL WUR os         33  59  61
+##   NL WUR ts         29   0  74
+##   NO AUN bc          3   0   0
+##   NO AUN bsth        3   0   0
+##   SE AU bsth         0   0  18
+##   SE JTI bc         17   0   0
+##   SE JTI bsth       34   0   0
+##   SE JTI cs          3   0   0
+##   SE JTI os         26   0   0
+##   SE JTI ts          8   0   0
+##   UK ADAS bc        79   0   0
+##   UK ADAS-RR bsth    0  63   0
+##   UK ADAS-RR ts      0  46   0
+##   UK IGER bc       245   0   0
+##   UK IGER bsth       3   0   0
+##   UK IGER os         6   0   0
+##   UK IGER ts         9   0   0
+##   US USDA bc         0   2   0</code></pre>
 <pre class="r"><code>table(pdat[, .(treat.nm, sub.period)])</code></pre>
 <pre><code>##             sub.period
 ## treat.nm       1   2   3
 ##   Acid         0  84  55
 ##   AD           2 185 153
 ##   Separated   18  53  51
-##   None/other 660 795 460</code></pre>
+##   None/other 768 687 460</code></pre>
 <pre class="r"><code>table(pdat$treat.nm, exclude = NULL)</code></pre>
 <pre><code>## 
 ##       Acid         AD  Separated None/other 
@@ -458,21 +531,239 @@ pre code {
 <pre class="r"><code>table(pdat[, .(sub.period, ct.max &gt; 72)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)</code></pre>
 <pre><code>##           V2
 ## sub.period     FALSE      TRUE
-##          1 0.3647059 0.6352941
-##          2 0.2909579 0.7090421
+##          1 0.3362944 0.6637056
+##          2 0.3052527 0.6947473
 ##          3 0.1182197 0.8817803</code></pre>
 <pre class="r"><code>table(pdat[, .(sub.period, ct.max &gt; 96)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)</code></pre>
 <pre><code>##           V2
 ## sub.period     FALSE      TRUE
-##          1 0.7088235 0.2911765
-##          2 0.5022381 0.4977619
+##          1 0.7246193 0.2753807
+##          2 0.4677899 0.5322101
 ##          3 0.3630042 0.6369958</code></pre>
 <pre class="r"><code>table(pdat[, .(sub.period, ct.max &gt; 168)]) / matrix(rep(table(pdat[, .(sub.period)]), 2), ncol = 2)</code></pre>
 <pre><code>##           V2
-## sub.period     FALSE      TRUE
-##          1 0.8926471 0.1073529
-##          2 0.7717099 0.2282901
-##          3 0.8636996 0.1363004</code></pre>
+## sub.period      FALSE       TRUE
+##          1 0.90736041 0.09263959
+##          2 0.74727453 0.25272547
+##          3 0.86369958 0.13630042</code></pre>
+<p>New data specifically</p>
+<pre class="r"><code>x &lt;- pdat[sub.period == 3, ]
+table(x[, .(inst, treat.nm)])</code></pre>
+<pre><code>##      treat.nm
+## inst  Acid  AD Separated None/other
+##   101    0   0         0          0
+##   102    0   0         0          0
+##   103    0   0         0          0
+##   104    0   0         0          0
+##   105    0   0         0          0
+##   106    0   0         0          0
+##   107    0   0         0          0
+##   108    0   0         0          0
+##   201    0   0         0          0
+##   202    0   0         0          0
+##   203    0   0         0          0
+##   204    0   0         0          0
+##   205   47 128        51        296
+##   206    0   0         0          0
+##   207    0   0         0          0
+##   208    0  14         0          7
+##   209    0   0         0          0
+##   210    0   0         0          0
+##   211    0   0         0          0
+##   212    0   0         0          0
+##   213    0   0         0          0
+##   214    8   0         0        147
+##   301    0   0         0          4
+##   302    0   3         0          3
+##   303    0   4         0          0
+##   304    0   4         0          3</code></pre>
+<pre class="r"><code>table(x[, .(inst)])</code></pre>
+<pre><code>## inst
+## 101 102 103 104 105 106 107 108 201 202 203 204 205 206 207 208 209 210 211 212 
+##   0   0   0   0   0   0   0   0   0   0   0   0 522   0   0  21   0   0   0   0 
+## 213 214 301 302 303 304 
+##   0 155   4   6   4   7</code></pre>
+<pre class="r"><code>table(pdat[, .(inst)])</code></pre>
+<pre><code>## inst
+## 101 102 103 104 105 106 107 108 201 202 203 204 205 206 207 208 209 210 211 212 
+##  79   6  75  46 263   2 121  88 109 109  60  26 609 197  47  40   8  16 110  68 
+## 213 214 301 302 303 304 
+##   2 414   4   6   4   7</code></pre>
+<pre class="r"><code>table(pdat[, .(institute)])</code></pre>
+<pre><code>## institute
+##     AAFC     ADAS  ADAS-RR     ARDC       AT       AU   AU-BCE      AUN 
+##      109       79      109       60       26      609        4        6 
+##   CAU-LU     CRPA     DIAS DiSAA-IT     IGER     IMAG INH-HAFL     INRA 
+##      197       75       46        6      263        2       47       19 
+##    INRAE  IUL/FAT      JTI       MU  NMI-WUR      SDU  TEAGASC    UNIMI 
+##       21      121       88        8       16      110       68        4 
+##    UNINA     USDA      WUR 
+##        7        2      414</code></pre>
+<pre class="r"><code>table(x[, .(institute)])</code></pre>
+<pre><code>## institute
+##       AU   AU-BCE DiSAA-IT    INRAE    UNIMI    UNINA      WUR 
+##      522        4        6       21        4        7      155</code></pre>
+<pre class="r"><code>table(pdat[, .(inst, treat.nm)])</code></pre>
+<pre><code>##      treat.nm
+## inst  Acid  AD Separated None/other
+##   101    0   0         0         79
+##   102    0   0         0          6
+##   103    0   0         4         71
+##   104    0   2         0         44
+##   105    0   0         0        263
+##   106    0   0         0          2
+##   107    0   0        14        107
+##   108    0   0         0         88
+##   201    0  33        21         55
+##   202    0   0         0        109
+##   203    0   0        24         36
+##   204    0   5         0         21
+##   205   73 134        51        351
+##   206    0 127         0         70
+##   207    0   0         0         47
+##   208    0  20         0         20
+##   209    0   0         0          8
+##   210    9   0         0          7
+##   211   49   8         8         45
+##   212    0   0         0         68
+##   213    0   0         0          2
+##   214    8   0         0        406
+##   301    0   0         0          4
+##   302    0   3         0          3
+##   303    0   4         0          0
+##   304    0   4         0          3</code></pre>
+<pre class="r"><code>table(pdat[, .(inst, corr.period)])</code></pre>
+<pre><code>##      corr.period
+## inst    3
+##   101   0
+##   102   0
+##   103   0
+##   104   0
+##   105   0
+##   106   0
+##   107   0
+##   108   0
+##   201   0
+##   202   0
+##   203   0
+##   204   0
+##   205   0
+##   206   0
+##   207   0
+##   208   0
+##   209   0
+##   210   0
+##   211   0
+##   212   0
+##   213   0
+##   214 259
+##   301   0
+##   302   0
+##   303   0
+##   304   0</code></pre>
+<p>Johanna’s wind tunnel results</p>
+<pre class="r"><code>table(pdat[, .(inst, meas.tech2) ])</code></pre>
+<pre><code>##      meas.tech2
+## inst  chamber cps micro met  wt
+##   101       0   0         0  79
+##   102       0   0         6   0
+##   103      15   0         0  60
+##   104       0   0        30  16
+##   105       0   0        33 230
+##   106       0   0         2   0
+##   107       0   0        55  66
+##   108      88   0         0   0
+##   201       0   0         0 109
+##   202       0   0       109   0
+##   203       0   0        12  48
+##   204       3   0        23   0
+##   205     113   0        90 406
+##   206       0 188         9   0
+##   207       0   0        47   0
+##   208       0   0        40   0
+##   209       0   0         8   0
+##   210       0   0         8   8
+##   211       8 102         0   0
+##   212      18   0        50   0
+##   213       0   0         2   0
+##   214       0   0       414   0
+##   301       0   0         4   0
+##   302       0   0         6   0
+##   303       0   0         4   0
+##   304       0   0         2   5</code></pre>
+<pre class="r"><code>table(pdat[, .(institute, meas.tech2) ])</code></pre>
+<pre><code>##           meas.tech2
+## institute  chamber cps micro met  wt
+##   AAFC           0   0         0 109
+##   ADAS           0   0         0  79
+##   ADAS-RR        0   0       109   0
+##   ARDC           0   0        12  48
+##   AT             3   0        23   0
+##   AU           113   0        90 406
+##   AU-BCE         0   0         4   0
+##   AUN            0   0         6   0
+##   CAU-LU         0 188         9   0
+##   CRPA          15   0         0  60
+##   DIAS           0   0        30  16
+##   DiSAA-IT       0   0         6   0
+##   IGER           0   0        33 230
+##   IMAG           0   0         2   0
+##   INH-HAFL       0   0        47   0
+##   INRA           0   0        19   0
+##   INRAE          0   0        21   0
+##   IUL/FAT        0   0        55  66
+##   JTI           88   0         0   0
+##   MU             0   0         8   0
+##   NMI-WUR        0   0         8   8
+##   SDU            8 102         0   0
+##   TEAGASC       18   0        50   0
+##   UNIMI          0   0         4   0
+##   UNINA          0   0         2   5
+##   USDA           0   0         2   0
+##   WUR            0   0       414   0</code></pre>
+<pre class="r"><code>x &lt;- pdat[inst == 205, ]
+table(x[, .(sub.period, meas.tech2)])</code></pre>
+<pre><code>##           meas.tech2
+## sub.period chamber micro met  wt
+##          2       0        69  18
+##          3     113        21 388</code></pre>
+<pre class="r"><code>x &lt;- pdat[inst == 205 &amp; meas.tech2 == &#39;wt&#39;, ]
+table(x[, .(sub.period, app.mthd)])</code></pre>
+<pre><code>##           app.mthd
+## sub.period  bc bsth  cs  os  ts
+##          2   0   12   6   0   0
+##          3  16  222   0  40 110</code></pre>
+<pre class="r"><code>x &lt;- pdat[inst == 205 &amp; meas.tech2 == &#39;wt&#39; &amp; app.mthd == &#39;os&#39;, ]
+unique(x[, .(file, country)])</code></pre>
+<pre><code>##                                                                          file
+##                                                                        &lt;char&gt;
+## 1:   ../../data-submitted/03/AU/ALFAM2_template_6_1_220524_JP_21E_220610.xlsx
+## 2: ../../data-submitted/03/AU/ALFAM2_template_5_2_210929_JP_CanadianData.xlsx
+## 3:       ../../data-submitted/03/AU/ALFAM2_template_5_2_211012_JP_18KLRS.xlsx
+## 4:   ../../data-submitted/03/AU/ALFAM2_template_6_0_220126_JP_20CD21A_JP.xlsx
+##    country
+##     &lt;char&gt;
+## 1:      NL
+## 2:      CA
+## 3:      DK
+## 4:      DK</code></pre>
+<pre class="r"><code>x &lt;- pdat[grepl(&#39;[Pp]edersen&#39;, submitter) &amp; sub.period == 3, ]
+unique(x[, file])</code></pre>
+<pre><code>##  [1] &quot;../../data-submitted/03/AU/ALFAM2_template_6_1_220317_JP_21CD22A.xlsx&quot;     
+##  [2] &quot;../../data-submitted/03/AU/ALFAM2_template_6_1_220524_JP_21E_220610.xlsx&quot;  
+##  [3] &quot;../../data-submitted/03/AU/ALFAM2_template_6_0_220310_JP_20EFGH_v2.xlsx&quot;   
+##  [4] &quot;../../data-submitted/03/AU/ALFAM2_template_5_2_210929_JP_CanadianData.xlsx&quot;
+##  [5] &quot;../../data-submitted/03/AU/ALFAM2_template_5_2_211012_JP_18ABC.xlsx&quot;       
+##  [6] &quot;../../data-submitted/03/AU/ALFAM2_template_5_2_211012_JP_18GHI.xlsx&quot;       
+##  [7] &quot;../../data-submitted/03/AU/ALFAM2_template_5_2_211012_JP_18KLRS.xlsx&quot;      
+##  [8] &quot;../../data-submitted/03/AU/ALFAM2_template_5_2_211012_JP_18NOP.xlsx&quot;       
+##  [9] &quot;../../data-submitted/03/AU/ALFAM2_template_5_2_211012_JP_19BCHI.xlsx&quot;      
+## [10] &quot;../../data-submitted/03/AU/ALFAM2_template_6_0_220126_JP_20CD21A_JP.xlsx&quot;  
+## [11] &quot;../../data-submitted/03/AU/ALFAM2_template_7.0_DFCtest_JP_231108_JK.xlsx&quot;  
+## [12] &quot;../../data-submitted/03/AU/ALFAM2_template_7.0_MAGspring23_231117.xlsx&quot;    
+## [13] &quot;../../data-submitted/03/AU/ALFAM2_template_6_1_230726_JP_18EF.xlsx&quot;        
+## [14] &quot;../../data-submitted/03/AU/ALFAM2_template_6_1_230726_JP_19G20AB.xlsx&quot;     
+## [15] &quot;../../data-submitted/03/AU/ALFAM2_template_7.0_22HIJK_240208.xlsx&quot;</code></pre>
 
 
 

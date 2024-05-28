@@ -23,6 +23,9 @@ f22,int.f0,0.223899364284332
 f23,int.f0,0.685898044031794
 f24,int.f0,0.675975211881284
 f25,int.f0,0.680327264426401
+dropweather,int.f0,0.0579294631925648
+dropprop,int.f0,0.0900616367567962
+dropapp,int.f0,1.30728949467842
 ps1,int.f0,-0.7364889
 ps2,int.f0,-0.605683377135473
 f1,app.mthd.os.f0,-2.04383732733983
@@ -49,6 +52,9 @@ f22,app.mthd.os.f0,-2.7479602151573
 f23,app.mthd.os.f0,-2.6455431886529
 f24,app.mthd.os.f0,-2.64571015958231
 f25,app.mthd.os.f0,-2.62973688385967
+dropweather,app.mthd.os.f0,-4.48078145186886
+dropprop,app.mthd.os.f0,-1.42042863517375
+dropapp,app.mthd.os.f0,
 ps1,app.mthd.os.f0,-1.1717859
 ps2,app.mthd.os.f0,-1.74351499199106
 f1,app.rate.ni.f0,-0.00997392800389076
@@ -75,6 +81,9 @@ f22,app.rate.ni.f0,
 f23,app.rate.ni.f0,
 f24,app.rate.ni.f0,
 f25,app.rate.ni.f0,
+dropweather,app.rate.ni.f0,
+dropprop,app.rate.ni.f0,
+dropapp,app.rate.ni.f0,
 ps1,app.rate.ni.f0,
 ps2,app.rate.ni.f0,-0.0111490009460872
 f1,man.dm.f0,0.546788734029235
@@ -101,6 +110,9 @@ f22,man.dm.f0,0.450314776380406
 f23,man.dm.f0,0.126829814949044
 f24,man.dm.f0,0.138203029075483
 f25,man.dm.f0,0.15023849481803
+dropweather,man.dm.f0,0.710666178732306
+dropprop,man.dm.f0,
+dropapp,man.dm.f0,-0.825000940975543
 ps1,man.dm.f0,0.407466
 ps2,man.dm.f0,0.399670699937794
 f1,man.source.pig.f0,-0.535821720821467
@@ -127,6 +139,9 @@ f22,man.source.pig.f0,-0.990633822282705
 f23,man.source.pig.f0,-1.30282952354469
 f24,man.source.pig.f0,-1.32179377850053
 f25,man.source.pig.f0,-1.31800763041106
+dropweather,man.source.pig.f0,-1.1217030854124
+dropprop,man.source.pig.f0,
+dropapp,man.source.pig.f0,-0.819600016616165
 ps1,man.source.pig.f0,
 ps2,man.source.pig.f0,-0.592028581423498
 f1,app.mthd.cs.f0,-7.3280499996979
@@ -153,6 +168,9 @@ f22,app.mthd.cs.f0,-5.02305341653253
 f23,app.mthd.cs.f0,-5.17437089833897
 f24,app.mthd.cs.f0,-5.23404725696036
 f25,app.mthd.cs.f0,-5.25548090519472
+dropweather,app.mthd.cs.f0,1.01212903975287
+dropprop,app.mthd.cs.f0,-6.13584073362093
+dropapp,app.mthd.cs.f0,
 ps1,app.mthd.cs.f0,
 ps2,app.mthd.cs.f0,-7.63373787323506
 f1,int.r1,-1.36399624301213
@@ -179,6 +197,9 @@ f22,int.r1,-1.40913977481566
 f23,int.r1,-1.90720221172677
 f24,int.r1,-1.89899781047624
 f25,int.r1,-1.8886532997501
+dropweather,int.r1,-1.44130140326342
+dropprop,int.r1,-1.68829130703717
+dropapp,int.r1,-2.45526599430197
 ps1,int.r1,-1.1785848
 ps2,int.r1,-0.939215157554942
 f1,app.mthd.bc.r1,0.881991774721255
@@ -205,6 +226,9 @@ f22,app.mthd.bc.r1,0.689839987133361
 f23,app.mthd.bc.r1,0.785572532800666
 f24,app.mthd.bc.r1,0.777283130746922
 f25,app.mthd.bc.r1,0.772277576808786
+dropweather,app.mthd.bc.r1,1.00043721367462
+dropprop,app.mthd.bc.r1,1.02597083653412
+dropapp,app.mthd.bc.r1,
 ps1,app.mthd.bc.r1,0.6283396
 ps2,app.mthd.bc.r1,0.793524800080501
 f1,man.dm.r1,-0.10790949789943
@@ -231,6 +255,9 @@ f22,man.dm.r1,-0.0289985158493516
 f23,man.dm.r1,0.108612323777226
 f24,man.dm.r1,0.106056358288616
 f25,man.dm.r1,0.100870790553508
+dropweather,man.dm.r1,-0.0709203818245349
+dropprop,man.dm.r1,
+dropapp,man.dm.r1,0.390810454695488
 ps1,man.dm.r1,-0.075822
 ps2,man.dm.r1,-0.139881887708132
 f1,air.temp.r1,0.0279565537506331
@@ -257,6 +284,9 @@ f22,air.temp.r1,0.0366818958884689
 f23,air.temp.r1,0.0423913805869312
 f24,air.temp.r1,0.042313391171424
 f25,air.temp.r1,0.0417082601514465
+dropweather,air.temp.r1,
+dropprop,air.temp.r1,0.0388341835973724
+dropapp,air.temp.r1,0.0234278650815692
 ps1,air.temp.r1,0.0492777
 ps2,air.temp.r1,0.0735426766754151
 f1,wind.2m.r1,0.0895121314954315
@@ -283,6 +313,9 @@ f22,wind.2m.r1,
 f23,wind.2m.r1,
 f24,wind.2m.r1,
 f25,wind.2m.r1,
+dropweather,wind.2m.r1,
+dropprop,wind.2m.r1,
+dropapp,wind.2m.r1,
 ps1,wind.2m.r1,0.0486651
 ps2,wind.2m.r1,0.150267203970342
 f1,app.mthd.ts.r1,-0.00431942089382805
@@ -309,6 +342,9 @@ f22,app.mthd.ts.r1,-0.113980261453037
 f23,app.mthd.ts.r1,-0.155306128813423
 f24,app.mthd.ts.r1,-0.160218957152748
 f25,app.mthd.ts.r1,-0.165262101287184
+dropweather,app.mthd.ts.r1,0.10474555613935
+dropprop,app.mthd.ts.r1,0.292279422995387
+dropapp,app.mthd.ts.r1,
 ps1,app.mthd.ts.r1,
 ps2,app.mthd.ts.r1,-0.459071351818907
 f1,man.ph.r1,0.241186320781901
@@ -335,6 +371,9 @@ f22,man.ph.r1,0.49150282412666
 f23,man.ph.r1,0.595838258947381
 f24,man.ph.r1,0.563993764954684
 f25,man.ph.r1,0.52711970215996
+dropweather,man.ph.r1,0.427899567628623
+dropprop,man.ph.r1,
+dropapp,man.ph.r1,1.13236845727316
 ps1,man.ph.r1,0.5327231
 ps2,man.ph.r1,0.665
 f1,int.r2,-1.27576811314212
@@ -361,6 +400,9 @@ f22,int.r2,-1.21570154481336
 f23,int.r2,-1.56913844937849
 f24,int.r2,-1.56602730362857
 f25,int.r2,-1.56948618026718
+dropweather,int.r2,-1.06654939901889
+dropprop,int.r2,-1.06339904658945
+dropapp,int.r2,-1.28816816900232
 ps1,int.r2,-0.9543731
 ps2,int.r2,-1.79918545831297
 f1,rain.rate.r2,0.542703148872445
@@ -387,6 +429,9 @@ f22,rain.rate.r2,0.636404444789594
 f23,rain.rate.r2,0.796139157358524
 f24,rain.rate.r2,0.800152873833314
 f25,rain.rate.r2,0.796146283867681
+dropweather,rain.rate.r2,
+dropprop,rain.rate.r2,0.474493748516134
+dropapp,rain.rate.r2,1.00362423265964
 ps1,rain.rate.r2,0.4327281
 ps2,rain.rate.r2,0.394021556916743
 f1,int.r3,-3.17296127038711
@@ -413,6 +458,9 @@ f22,int.r3,-2.72965240044334
 f23,int.r3,-2.74223371422867
 f24,int.r3,-2.7378926472396
 f25,int.r3,-2.74649618601257
+dropweather,int.r3,-2.56145679574845
+dropprop,int.r3,-2.71825325366362
+dropapp,int.r3,-2.55709677467042
 ps1,int.r3,-2.9012937
 ps2,int.r3,-3.22841225187594
 f1,app.mthd.bc.r3,0.287987505022161
@@ -439,6 +487,9 @@ f22,app.mthd.bc.r3,0.285408572259876
 f23,app.mthd.bc.r3,0.132080676650232
 f24,app.mthd.bc.r3,0.135362325667928
 f25,app.mthd.bc.r3,0.102204540866738
+dropweather,app.mthd.bc.r3,0.221874279114206
+dropprop,app.mthd.bc.r3,0.363099045016623
+dropapp,app.mthd.bc.r3,
 ps1,app.mthd.bc.r3,
 ps2,app.mthd.bc.r3,0.561539558429444
 f1,app.mthd.cs.r3,0.0179562032607403
@@ -465,6 +516,9 @@ f22,app.mthd.cs.r3,-0.232885254517991
 f23,app.mthd.cs.r3,-0.200351821463863
 f24,app.mthd.cs.r3,-0.219571776991689
 f25,app.mthd.cs.r3,-0.225040632936017
+dropweather,app.mthd.cs.r3,-1.18211779763224
+dropprop,app.mthd.cs.r3,-0.272359023651393
+dropapp,app.mthd.cs.r3,
 ps1,app.mthd.cs.r3,
 ps2,app.mthd.cs.r3,-0.666474172842208
 f1,man.ph.r3,0.294809321801521
@@ -491,6 +545,9 @@ f22,man.ph.r3,0.0296570203094048
 f23,man.ph.r3,-0.055859135519123
 f24,man.ph.r3,0
 f25,man.ph.r3,0.05
+dropweather,man.ph.r3,
+dropprop,man.ph.r3,
+dropapp,man.ph.r3,
 ps1,man.ph.r3,0.2663616
 ps2,man.ph.r3,0.238
 f1,incorp.shallow.f4,-1.56841042891604
@@ -517,6 +574,9 @@ f22,incorp.shallow.f4,-1.75242464684557
 f23,incorp.shallow.f4,-1.1552689005606
 f24,incorp.shallow.f4,-1.31978475999174
 f25,incorp.shallow.f4,-1.59501200711822
+dropweather,incorp.shallow.f4,
+dropprop,incorp.shallow.f4,
+dropapp,incorp.shallow.f4,
 ps1,incorp.shallow.f4,-0.4121023
 ps2,incorp.shallow.f4,-0.964966548279922
 f1,incorp.shallow.r3,-0.204209530621176
@@ -543,6 +603,9 @@ f22,incorp.shallow.r3,-0.0611121072325292
 f23,incorp.shallow.r3,-0.0235818412171473
 f24,incorp.shallow.r3,0.019589032706423
 f25,incorp.shallow.r3,0.113671110110529
+dropweather,incorp.shallow.r3,
+dropprop,incorp.shallow.r3,
+dropapp,incorp.shallow.r3,
 ps1,incorp.shallow.r3,
 ps2,incorp.shallow.r3,-0.580526893811793
 f1,incorp.deep.f4,-2.89515133892982
@@ -569,6 +632,9 @@ f22,incorp.deep.f4,-23.9732156019972
 f23,incorp.deep.f4,-23.9732156019032
 f24,incorp.deep.f4,-23.9732156018595
 f25,incorp.deep.f4,-23.9732156018501
+dropweather,incorp.deep.f4,
+dropprop,incorp.deep.f4,
+dropapp,incorp.deep.f4,
 ps1,incorp.deep.f4,-3.6477259
 ps2,incorp.deep.f4,-3.6949495394145
 f1,incorp.deep.r3,-8.50284667159991
@@ -595,6 +661,9 @@ f22,incorp.deep.r3,-5.85566675540011
 f23,incorp.deep.r3,-5.85566712543932
 f24,incorp.deep.r3,-5.85566688110248
 f25,incorp.deep.r3,-5.85566680661726
+dropweather,incorp.deep.r3,
+dropprop,incorp.deep.r3,
+dropapp,incorp.deep.r3,
 ps1,incorp.deep.r3,-0.3838862
 ps2,incorp.deep.r3,-1.2656956200405
 f1,int.r5,-2.18192737249892
@@ -621,6 +690,9 @@ f22,int.r5,-1.8
 f23,int.r5,-1.8
 f24,int.r5,-1.8
 f25,int.r5,-1.8
+dropweather,int.r5,-1.8
+dropprop,int.r5,-1.8
+dropapp,int.r5,-1.8
 ps1,int.r5,
 ps2,int.r5,
 f1,rain.rate.r5,0.0109594247460221
@@ -647,6 +719,9 @@ f22,rain.rate.r5,0.332319450188595
 f23,rain.rate.r5,0.139378961194487
 f24,rain.rate.r5,0.122951297001152
 f25,rain.rate.r5,0.179019339175281
+dropweather,rain.rate.r5,
+dropprop,rain.rate.r5,0.468367777992518
+dropapp,rain.rate.r5,-0.276185966232113
 ps1,rain.rate.r5,
 ps2,rain.rate.r5,
 f1,wind.sqrt.r1,
@@ -673,6 +748,9 @@ f22,wind.sqrt.r1,0.493494546376075
 f23,wind.sqrt.r1,0.586856826877842
 f24,wind.sqrt.r1,0.585779744533327
 f25,wind.sqrt.r1,0.576904805530689
+dropweather,wind.sqrt.r1,
+dropprop,wind.sqrt.r1,0.381421042690062
+dropapp,wind.sqrt.r1,0.968761590798848
 ps1,wind.sqrt.r1,
 ps2,wind.sqrt.r1,
 f1,man.dm.sqrt.f0,
@@ -699,6 +777,9 @@ f22,man.dm.sqrt.f0,
 f23,man.dm.sqrt.f0,
 f24,man.dm.sqrt.f0,
 f25,man.dm.sqrt.f0,
+dropweather,man.dm.sqrt.f0,
+dropprop,man.dm.sqrt.f0,
+dropapp,man.dm.sqrt.f0,
 ps1,man.dm.sqrt.f0,
 ps2,man.dm.sqrt.f0,
 f1,man.dm.r2,
@@ -725,6 +806,9 @@ f22,man.dm.r2,
 f23,man.dm.r2,
 f24,man.dm.r2,
 f25,man.dm.r2,
+dropweather,man.dm.r2,
+dropprop,man.dm.r2,
+dropapp,man.dm.r2,
 ps1,man.dm.r2,
 ps2,man.dm.r2,
 f1,app.mthd.bc.man.dm.r1,
@@ -751,6 +835,9 @@ f22,app.mthd.bc.man.dm.r1,
 f23,app.mthd.bc.man.dm.r1,
 f24,app.mthd.bc.man.dm.r1,
 f25,app.mthd.bc.man.dm.r1,
+dropweather,app.mthd.bc.man.dm.r1,
+dropprop,app.mthd.bc.man.dm.r1,
+dropapp,app.mthd.bc.man.dm.r1,
 ps1,app.mthd.bc.man.dm.r1,
 ps2,app.mthd.bc.man.dm.r1,
 f1,app.mthd.bc.man.dm.f0,
@@ -777,6 +864,9 @@ f22,app.mthd.bc.man.dm.f0,
 f23,app.mthd.bc.man.dm.f0,
 f24,app.mthd.bc.man.dm.f0,
 f25,app.mthd.bc.man.dm.f0,
+dropweather,app.mthd.bc.man.dm.f0,
+dropprop,app.mthd.bc.man.dm.f0,
+dropapp,app.mthd.bc.man.dm.f0,
 ps1,app.mthd.bc.man.dm.f0,
 ps2,app.mthd.bc.man.dm.f0,
 f1,man.dm.app.mthd.bc.f0,
@@ -803,6 +893,9 @@ f22,man.dm.app.mthd.bc.f0,
 f23,man.dm.app.mthd.bc.f0,
 f24,man.dm.app.mthd.bc.f0,
 f25,man.dm.app.mthd.bc.f0,
+dropweather,man.dm.app.mthd.bc.f0,
+dropprop,man.dm.app.mthd.bc.f0,
+dropapp,man.dm.app.mthd.bc.f0,
 ps1,man.dm.app.mthd.bc.f0,
 ps2,man.dm.app.mthd.bc.f0,
 f1,man.dm.app.mthd.bc.r1,
@@ -829,6 +922,9 @@ f22,man.dm.app.mthd.bc.r1,
 f23,man.dm.app.mthd.bc.r1,
 f24,man.dm.app.mthd.bc.r1,
 f25,man.dm.app.mthd.bc.r1,
+dropweather,man.dm.app.mthd.bc.r1,
+dropprop,man.dm.app.mthd.bc.r1,
+dropapp,man.dm.app.mthd.bc.r1,
 ps1,man.dm.app.mthd.bc.r1,
 ps2,man.dm.app.mthd.bc.r1,
 f1,app.rate.f0,
@@ -855,6 +951,9 @@ f22,app.rate.f0,
 f23,app.rate.f0,
 f24,app.rate.f0,
 f25,app.rate.f0,
+dropweather,app.rate.f0,
+dropprop,app.rate.f0,
+dropapp,app.rate.f0,
 ps1,app.rate.f0,-0.0134681
 ps2,app.rate.f0,
 f1,air.temp.r3,
@@ -881,6 +980,9 @@ f22,air.temp.r3,
 f23,air.temp.r3,
 f24,air.temp.r3,
 f25,air.temp.r3,
+dropweather,air.temp.r3,
+dropprop,air.temp.r3,
+dropapp,air.temp.r3,
 ps1,air.temp.r3,0.0152419
 ps2,air.temp.r3,
 f1,app.mthd.os.r3,
@@ -907,6 +1009,9 @@ f22,app.mthd.os.r3,
 f23,app.mthd.os.r3,
 f24,app.mthd.os.r3,
 f25,app.mthd.os.r3,
+dropweather,app.mthd.os.r3,
+dropprop,app.mthd.os.r3,
+dropapp,app.mthd.os.r3,
 ps1,app.mthd.os.r3,-0.122883
 ps2,app.mthd.os.r3,
 f1,rain.cum.r3,
@@ -933,6 +1038,9 @@ f22,rain.cum.r3,
 f23,rain.cum.r3,
 f24,rain.cum.r3,
 f25,rain.cum.r3,
+dropweather,rain.cum.r3,
+dropprop,rain.cum.r3,
+dropapp,rain.cum.r3,
 ps1,rain.cum.r3,-0.0300936
 ps2,rain.cum.r3,
 f1,ts.cereal.hght.r1,
@@ -959,5 +1067,8 @@ f22,ts.cereal.hght.r1,
 f23,ts.cereal.hght.r1,
 f24,ts.cereal.hght.r1,
 f25,ts.cereal.hght.r1,
+dropweather,ts.cereal.hght.r1,
+dropprop,ts.cereal.hght.r1,
+dropapp,ts.cereal.hght.r1,
 ps1,ts.cereal.hght.r1,
 ps2,ts.cereal.hght.r1,-0.244712378321887

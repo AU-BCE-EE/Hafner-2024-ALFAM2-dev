@@ -8,7 +8,7 @@ registerDoParallel(cl = clstr)
 # Get ps3 parameters but remove incorp pars
 pars.start.main <- mods$ps3$optim$par
 pars.start.main <- pars.start.main[!grepl('incorp', names(pars.start.main))]
-fixed.main <- c(int.r5 = -1.8)
+fixed.main <- c(int.r5 = -1.8, man.ph.r3 = 0.05)
 
 set.seed(030979) 
 

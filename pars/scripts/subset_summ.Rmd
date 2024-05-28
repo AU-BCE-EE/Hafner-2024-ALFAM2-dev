@@ -91,4 +91,11 @@ dfsumm(pdat1)
 dfsumm(pdat2)
 ```
 
+# Treatments
+
+```{r}
+pdat1[, man.trt.all := paste(man.trt1, man.trt2, man.trt3)]
+table(pdat1[, man.trt.all])
+```
+
 
