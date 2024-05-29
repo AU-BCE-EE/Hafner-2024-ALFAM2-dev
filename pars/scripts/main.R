@@ -25,6 +25,8 @@ sink('../logs/par_est.txt')
   source('par_est.R', echo = TRUE, max.deparse.length = 300)
   source('par_est_refine.R', echo = TRUE, max.deparse.length = 300)
 sink()
+
+# Pick par set 3
 source('ps3.R')
 
 source('par_est_drop.R')

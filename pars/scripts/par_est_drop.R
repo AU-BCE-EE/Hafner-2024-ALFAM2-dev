@@ -7,8 +7,7 @@ registerDoParallel(cl = clstr)
 
 # Get ps3 parameters but remove incorp pars
 pars.start.main <- mods$ps3$optim$par
-pars.start.main <- pars.start.main[!grepl('incorp', names(pars.start.main))]
-fixed.main <- c(int.r5 = -1.8, man.ph.r3 = 0.05)
+fixed <- c(int.r5 = -1.8)
 
 set.seed(030979) 
 
@@ -17,7 +16,6 @@ dropvals <- c('air.temp|wind|rain', 'man\\.dm|man\\.ph|pig', 'app\\.mthd')
 
 mods.drop <- foreach (i = dropvals) %dorng% {
 
-  fixed <- c(int.r5 = -1.8)
   pars.start <- pars.start.main[!grepl(i, names(pars.start.main))]
   
   # Look for problem observations before parameter estimation by running with all parameters
