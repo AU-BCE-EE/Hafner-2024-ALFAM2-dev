@@ -7,20 +7,21 @@ for (i in unique(dp168[, pars])) {
   if (!file.exists(fname)) {
 
     ddf <- subset(dp168, pars == i & dataset == 1)
-    ggplot(ddf, aes(er.pred, er, colour = country, shape = set)) +
+    ggplot(ddf, aes(er.pred, er, colour = inst, shape = set)) +
       geom_abline(intercept = 0, slope = 1, col = 'gray45') +
-      geom_point(bg = 'gray45') +
-      #geom_line(stat = 'smooth', method = 'lm', se = FALSE, alpha = 0.6) +
-      scale_shape_manual(values = c(1, 2, 20, 3, 4, 5)) +
-      facet_grid(pig.nm ~ app.mthd.nm) +
-      labs(x = 'Calculated', 
-           y = 'Measured',
+      geom_point(bg = 'gray45', size = 3, alpha = 0.8) +
+      scale_shape_manual(values = c(20, 2, 3, 1)) +
+      facet_wrap( ~ app.mthd.nm, ncol = 3) +
+      #scale_color_viridis_d() +
+      labs(x = 'ALFAM2 par. set 3 calculated emission (frac. applied TAN)', 
+           y = 'Measured emission (frac. applied TAN)',
            colour = '', shape = '') +
       theme_bw() +
-      theme(legend.position = 'top') +
-      xlim(0, 0.9) +
-      guides(colour = guide_legend(nrow = 1))
-    ggsave(fname, height = 6.2, width = 11.02)
+      theme(legend.position = c(0.8, 0.27)) +
+      guides(color = 'none') +
+      scale_x_continuous(labels = formatLabels) +
+      coord_fixed(xlim = c(0, 1), ylim = c(0, 1))
+    ggsave(fname, height = 5.5, width = 6)
 
   }
 }

@@ -97,4 +97,6 @@ mods.cv <- foreach (i = insts) %dorng% {
   
 }
 
-names(mods.cv) <- as.character(insts)
+names(mods.cv) <- paste0('loocv-', as.character(insts))
+
+mods <- c(mods, mods.cv)

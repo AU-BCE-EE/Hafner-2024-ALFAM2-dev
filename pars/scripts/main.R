@@ -29,11 +29,6 @@ source('ps3.R')
 
 source('par_est_drop.R')
 
-# Extract and apply parameter sets
-source('calc_emis.R')
-source('fit_summ.R')
-source('extract_pars.R')
-
 # Cross-validation
 source('crossval.R')
 source('extract_cv_pars.R')
@@ -44,6 +39,13 @@ source('cv_error.R')
 source('boot.R')
 source('extract_boot_pars.R')
 source('boot_cor.R')
+
+# Extract and apply parameter sets
+source('calc_emis.R')
+source('fit_summ.R')
+source('extract_pars.R')
+
+# Combined parameter table for paper
 source('par_table.R')
 
 # Save work

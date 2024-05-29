@@ -45,7 +45,7 @@ dp168[, `:=` (acid.nm = factor(ifelse(acid, 'Acidified', 'Reference'), levels = 
               pig.nm = factor(ifelse(man.source == 'pig', 'Pig', 'Cattle &\nothers'), levels = c('Cattle &\nothers', 'Pig')),
               app.mthd.nm = factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
                                labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 'Open slot\ninjection', 'Closed slot\ninjection')),
-              set = ifelse(incorp != 'none', 'Incorporation', ifelse(acid, 'Acidification', ifelse(digested, 'Digestate', 'Other'))),
+              set = ifelse(incorp != 'none', 'Incorporation', ifelse(acid, 'Acidification', ifelse(digested, 'Digestate', 'None/other'))),
               incorp.nm = factor(oneupper(incorp), levels = c('None', 'Shallow', 'Deep')))]
 
 dpreds[, `:=` (acid.nm = factor(ifelse(acid, 'Acidified', 'Reference'), levels = c('Reference', 'Acidified')), 
@@ -78,6 +78,6 @@ cvdat168[, `:=` (pig.nm = factor(ifelse(man.source == 'pig', 'Pig', 'Cattle & ot
                               labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 
 					 'Open slot\ninjection', 'Closed slot\ninjection')))]
 
-cvdat168[, set := ifelse(incorp != 'none', 'Incorporation', ifelse(acid, 'Acidification', ifelse(digested, 'Digestate', 'Other')))]
+cvdat168[, set := ifelse(incorp != 'none', 'Incorporation', ifelse(acid, 'Acidification', ifelse(digested, 'Digestate', 'None/other')))]
 
 

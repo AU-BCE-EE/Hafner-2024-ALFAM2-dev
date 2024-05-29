@@ -3,11 +3,12 @@
 ggplot(cvdat168, aes(app.mthd.nm, abs(ererr), fill = set)) +
   geom_boxplot() +
   facet_grid(~ pig.nm) +
-  labs(x = 'Application method', y = 'Model error (frac. applied TAN)', fill = '') +
+  labs(x = 'Application method', y = 'Absolute model error (frac. TAN)', fill = '') +
   theme_bw() +
-  coord_cartesian(ylim = c(0, 0.4)) +
-  theme(legend.position = 'top', axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-ggsave2x('../plots-cross-val/cross_val_error', height = 3.3, width = 6)
+  coord_flip(ylim = c(0, 0.4)) +
+  theme(legend.position = 'top') +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+ggsave2x('../plots-cross-val/cross_val_error', height = 3.3, width = 4)
 
 dd <- cvdat168[!app.mthd %in% c('os', 'cs')]
 ggplot(dd, aes(app.mthd.nm, abs(rerr), fill = set)) +
