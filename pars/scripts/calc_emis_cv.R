@@ -4,7 +4,7 @@
 cvdat <- data.table()
 for (i in 1:length(mods.cv)) {
   pp <- mods.cv[[i]][['coef']]
-  dd <- idat1[inst == names(mods.cv)[i], ]
+  dd <- idat1[inst == gsub('loocv-', '', names(mods.cv)[i]), ]
 
   preds <- as.data.table(alfam2(dd, pars = pp, app.name = 'tan.app', time.name = 'cta', group = 'pmid', flatout = TRUE))
   names(preds)[-1:-3] <- paste0(names(preds)[-1:-3], '.pred')

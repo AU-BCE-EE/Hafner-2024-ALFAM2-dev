@@ -10,31 +10,28 @@ cvdat[, cta.24 := cta[which.min(abs(cta - 24))], by = pmid]
 
 cvdat[, dataset := 1]
 
-cvdat[, `:=` (ererr = er.pred - er, rerr = (er.pred - er) / er)]
+#cvdat[, `:=` (ererr = er.pred - er, rerr = (er.pred - er) / er)]
 cvdat <- merge(pdat, cvdat, by = 'pmid', suffixes = c('', '.cv'))
 cvdat168 <- cvdat[cta == cta.168, ]
+names(cvdat168)
 
-# Get quantiles for 168 hr emission only
-cverrsumm1 <- cvdat[cta == cta.168 & !is.na(er.pred), .(n = length(er.pred), 
-                                                       ererr = median(ererr),
-                                                       aererr = median(abs(ererr)), 
-                                                       arerr = median(abs(rerr)),
-                                                       ererrse = sd(ererr), 
-                                                       ersd = sd(er)), 
-               by = app.mthd]
+fitcv.168 <- cvdat168[, .(rmse = rmse(m = er, p = er.pred),
+                          me = me(m = er, p = er.pred),
+                          mae = mae(m = er, p = er.pred),
+                          mbe = mbe(m = er, p = er.pred),
+                          nu = length(unique(pmid)),
+                          er.mn = mean(er.pred),
+                          er.md = median(er.pred),
+                          n = length(er)), ]
 
-cverrsumm2 <- cvdat[cta == cta.168 & !is.na(er.pred), .(n = length(er.pred), 
-                                                       ererr = median(ererr),
-                                                       aererr = median(abs(ererr)), 
-                                                       arerr = median(abs(rerr)),
-                                                       ererrse = sd(ererr), 
-                                                       ersd = sd(er)), 
-               by = .(app.mthd, incorp, man.source == 'pig')]
-
-
-cverrsumm1 <- cverrsumm1[order(app.mthd), ]
-cverrsumm2 <- cverrsumm2[order(app.mthd, man.source), ]
+fitcv.168.am <- dp168[, .(rmse = rmse(m = er, p = er.pred),
+                        me = me(m = er, p = er.pred),
+                        mae = mae(m = er, p = er.pred),
+                        mbe = mbe(m = er, p = er.pred),
+                        er.mn = mean(er.pred),
+                        er.md = median(er.pred),
+                        n = length(er)), by = .(app.mthd)]
 
 # Export
-fwrite(cverrsumm1, '../output/cv_error_summary1.csv')
-fwrite(cverrsumm2, '../output/cv_error_summary2.csv')
+fwrite(fitcv.168, '../output/fit168_cv.csv')
+fwrite(fitcv.168.am, '../output/fit168_app_methd_cv.csv')
