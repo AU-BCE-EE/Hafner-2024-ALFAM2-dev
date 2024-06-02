@@ -1,7 +1,7 @@
 # Summarize model fit/performance
 
 # Residuals, always calculated minus measured value
-dpreds[, `:=` (resid.j = j.pred - j, resid.er = er.pred - er)]
+dpreds[, `:=` (resid.j = j.pred - j, lrresid.j = log10(j.pred / j), resid.er = er.pred - er)]
 
 # No need to take copy with subsetting (I think, see issue #2 in love-hate-data.table repo)
 derr <- dpreds[!is.na(resid.er), ]

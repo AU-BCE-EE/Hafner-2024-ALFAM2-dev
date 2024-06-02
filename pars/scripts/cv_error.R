@@ -24,7 +24,7 @@ fitcv.168 <- cvdat168[, .(rmse = rmse(m = er, p = er.pred),
                           er.md = median(er.pred),
                           n = length(er)), ]
 
-fitcv.168.am <- dp168[, .(rmse = rmse(m = er, p = er.pred),
+fitcv.168.am <- cvdat168[, .(rmse = rmse(m = er, p = er.pred),
                         me = me(m = er, p = er.pred),
                         mae = mae(m = er, p = er.pred),
                         mbe = mbe(m = er, p = er.pred),

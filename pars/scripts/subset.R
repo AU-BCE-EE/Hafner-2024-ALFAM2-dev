@@ -48,6 +48,9 @@ idat2[, dataset := 2]
 # Will be combined with 2 and 3 (removing duplicates) in prep.R
 # No acidification allowed
 incorp.exper <- unique(pdat[incorp != 'none', c('inst', 'exper', 'iexper')])
+cs.exper <- unique(pdat[app.mthd == 'cs', c('inst', 'exper', 'iexper')])
+
+incorp.exper <- unique(rbind(incorp.exper, cs.exper))
 
 pdati <- pdat[iexper %in% incorp.exper[, iexper] &
               !is.na(e.rel.24) &
@@ -70,5 +73,3 @@ pdati <- pdat[iexper %in% incorp.exper[, iexper] &
               !grepl('Exclude data from analysis', notes.plot) , ]
 
 idati <- idat[pmid %in% pdati[, pmid], ]
-
-

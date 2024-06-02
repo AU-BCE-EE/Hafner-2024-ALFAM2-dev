@@ -103,20 +103,6 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 > # See love-hate-data.table repo issue #1 for more on this operation below
 > idat1[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
-> # Wind tunnel and micromet variables
-> idat1[, wt := meas.tech2 == 'wt']
-
-> idat1[, mm := meas.tech2 == 'micro met']
-
-> # Measurement method-specific weather]
-> idat1[, wind.wt := (meas.tech2 == 'wt') * sqrt(wind.2m)]
-
-> idat1[, wind.mm := (meas.tech2 == 'micro met') * sqrt(wind.2m)]
-
-> idat1[, air.temp.wt := (meas.tech2 == 'wt') * air.temp]
-
-> idat1[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
-
 > # Alternate predictor variables
 > idat1[, wind.sqrt := sqrt(wind.2m)]
 
@@ -229,20 +215,6 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 > # See love-hate-data.table repo issue #1 for more on this operation below
 > idat2[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
-> # Wind tunnel and micromet variables
-> idat2[, wt := meas.tech2 == 'wt']
-
-> idat2[, mm := meas.tech2 == 'micro met']
-
-> # Measurement method-specific weather]
-> idat2[, wind.wt := (meas.tech2 == 'wt') * sqrt(wind.2m)]
-
-> idat2[, wind.mm := (meas.tech2 == 'micro met') * sqrt(wind.2m)]
-
-> idat2[, air.temp.wt := (meas.tech2 == 'wt') * air.temp]
-
-> idat2[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
-
 > # Alternate predictor variables
 > idat2[, wind.sqrt := sqrt(wind.2m)]
 
@@ -264,29 +236,29 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idati[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 8783 rows and 6 columns
- 87 unique rows
+ 8934 rows and 6 columns
+ 99 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
-Minimum                   bc           0    2.97        cat    7.12    39.2
+Minimum                   bc           0    1.81        cat    7.12    39.2
 Maximum                   ts         133    13.8        pig     8.5     235
-Mean                    <NA>          72    5.79       <NA>    7.51    84.3
-Unique (excld. NA)         4          73      37          3      16      86
+Mean                    <NA>          71    5.72       <NA>    7.51    84.2
+Unique (excld. NA)         5          75      48          3      23      97
 Missing values             0           0       0          0     680       0
-Sorted                 FALSE       FALSE   FALSE       TRUE   FALSE   FALSE
+Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 8783 rows and 6 columns
- 6014 unique rows
+ 8934 rows and 6 columns
+ 6095 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
-Minimum               0.25   -17.6     -0.1       0         0        0
+Minimum               0.25   -17.6     -1.9       0         0        0
 Maximum                508     508     35.2      10       4.2       55
-Mean                   141     149     14.1    2.31    0.0485     6.01
-Unique (excld. NA)    1758    2421     1551    3000        21      148
-Missing values           0       0        0       0         0        0
+Mean                   139     147       14    2.32    0.0483     5.92
+Unique (excld. NA)    1803    2458     1556    3032        45      162
+Missing values           0      11        0       0         0        0
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
 
@@ -325,28 +297,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idati[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 8564 rows and 6 columns
- 87 unique rows
+ 8715 rows and 6 columns
+ 99 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
-Minimum                   bc           0    2.97        cat    7.12    39.2
+Minimum                   bc           0    1.81        cat    7.12    39.2
 Maximum                   ts         133    13.8        pig     8.5     235
-Mean                    <NA>        72.3     5.8       <NA>    7.48      84
-Unique (excld. NA)         4          73      37          3      18      86
+Mean                    <NA>        71.2    5.73       <NA>    7.49      84
+Unique (excld. NA)         5          75      48          3      25      97
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idati[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 8564 rows and 6 columns
- 5870 unique rows
+ 8715 rows and 6 columns
+ 5951 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
-Minimum               0.25    0.25     -0.1       0         0        0
+Minimum               0.25    0.25     -1.9       0         0        0
 Maximum                508     508     35.2      10       4.2       55
-Mean                   145     153       14    2.35    0.0498     6.17
-Unique (excld. NA)    1758    2329     1544    2859        21      148
+Mean                   143     151     13.9    2.36    0.0495     6.07
+Unique (excld. NA)    1803    2370     1549    2891        45      162
 Missing values           0       0        0       0         0        0
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -365,20 +337,6 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 > # Set emission in added incorporation rows (needed because flatout option will be used) to NA so they are not used in fitting
 > # See love-hate-data.table repo issue #1 for more on this operation below
 > idati[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
-
-> # Wind tunnel and micromet variables
-> idati[, wt := meas.tech2 == 'wt']
-
-> idati[, mm := meas.tech2 == 'micro met']
-
-> # Measurement method-specific weather]
-> idati[, wind.wt := (meas.tech2 == 'wt') * sqrt(wind.2m)]
-
-> idati[, wind.mm := (meas.tech2 == 'micro met') * sqrt(wind.2m)]
-
-> idati[, air.temp.wt := (meas.tech2 == 'wt') * air.temp]
-
-> idati[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
 
 > # Alternate predictor variables
 > idati[, wind.sqrt := sqrt(wind.2m)]
@@ -429,6 +387,11 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 [1] -0.0022194  0.9199000
 
 > idat1 <- idat1[pmid %in% unique(pdat1[, pmid])]
+
+> table(pdat1$app.mthd)
+
+  bc bsth   cs   os   ts 
+ 222  205   13  127  167 
 
 > # (Re)calculate weights ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > # Equal by application method

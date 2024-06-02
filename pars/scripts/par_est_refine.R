@@ -359,6 +359,7 @@ print(pars.start)
 
 upper <- pars.start + 2
 lower <- pars.start - 2
+lower['incorp.deep.f4'] <- -10
 
 # Look for problem observations before parameter estimation by running with all parameters
 pr <- alfam2(as.data.frame(idat1), app.name = 'tan.app', time.name = 'cta', group = 'pmid', pars = c(pars.start, fixed), flatout = TRUE)

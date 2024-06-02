@@ -3,7 +3,7 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "03 May, 2024 May:05"
+date: "30 May, 2024 May:05"
 ---
 
 # Summary of main data subset
@@ -39,6 +39,65 @@ table(pdat1[, country])
 ## 
 ##  CA  CH  DE  DK  FR  IE  IT  NL  UK 
 ##   7  45   9 118  32  49  12 353 109
+```
+
+```r
+table(pdat1[, .(inst, sub.period)])
+```
+
+```
+##      sub.period
+## inst    1   2   3
+##   101   0   0   0
+##   102   0   0   0
+##   103   0   0   0
+##   104  28   0   0
+##   105   0   0   0
+##   106   0   0   0
+##   107   0   0   0
+##   108   0   0   0
+##   201   0   0   0
+##   202   0 109   0
+##   203   0   7   0
+##   204   0  17   0
+##   205   0  67   7
+##   206   0   9   0
+##   207   0  45   0
+##   208   0  15  17
+##   209   0   6   0
+##   210   0   8   0
+##   211   0   0   0
+##   212   0  49   0
+##   213   0   0   0
+##   214 102 131 111
+##   301   0   0   0
+##   302   0   0   0
+##   303   0   0   4
+##   304   0   0   2
+```
+
+```r
+table(pdat1[, .(institute, sub.period)])
+```
+
+```
+##           sub.period
+## institute    1   2   3
+##   ADAS-RR    0 109   0
+##   ARDC       0   7   0
+##   AT         0  17   0
+##   AU         0  67   7
+##   CAU-LU     0   9   0
+##   DIAS      28   0   0
+##   INH-HAFL   0  45   0
+##   INRA       0  15   0
+##   INRAE      0   0  17
+##   MU         0   6   0
+##   NMI-WUR    0   8   0
+##   TEAGASC    0  49   0
+##   UNIMI      0   0   4
+##   UNINA      0   0   2
+##   WUR      102 131 111
 ```
 
 
@@ -328,10 +387,17 @@ table(pdati[, c('country', 'man.ph')])
 
 ```
 ##        man.ph
-## country 7.12 7.2 7.3 7.47 7.5 7.6 7.7 7.76 7.8 7.9 8 8.09 8.1 8.2 8.36 8.5
-##      FR    4   0   4    0   2   0   0    0   0   1 0    1   0   1    0   0
-##      IT    0   0   0    1   0   0   0    1   0   0 2    0   0   0    4   0
-##      NL    0   4   4    0   0   2   2    0   3   0 6    0   6   0    0   4
+## country 7.12 7.2 7.3 7.35 7.47 7.5 7.52 7.6 7.7 7.76 7.79 7.8 7.83 7.85 7.87
+##      DK    0   0   0    1    0   0    1   0   0    0    6   4    2    2    4
+##      FR    4   0   4    0    0   2    0   0   0    0    0   0    0    0    0
+##      IT    0   0   0    0    1   0    0   0   0    1    0   0    0    0    0
+##      NL    0   4   4    0    0   0    0   2   2    0    0   3    0    0    0
+##        man.ph
+## country 7.88 7.9 8 8.09 8.1 8.2 8.36 8.5
+##      DK    2   0 0    0   0   0    0   0
+##      FR    0   1 0    1   0   1    0   0
+##      IT    0   0 2    0   0   0    4   0
+##      NL    0   0 6    0   6   0    0   4
 ```
 
 ```r
@@ -340,10 +406,15 @@ table(pdati[, c('incorp', 'man.ph')])
 
 ```
 ##          man.ph
-## incorp    7.12 7.2 7.3 7.47 7.5 7.6 7.7 7.76 7.8 7.9 8 8.09 8.1 8.2 8.36 8.5
-##   deep       0   0   0    0   0   0   0    0   0   0 0    0   0   0    0   0
-##   none       2   2   4    0   2   0   0    0   1   0 5    0   3   0    1   1
-##   shallow    2   2   4    1   0   2   2    1   2   1 3    1   3   1    3   3
+## incorp    7.12 7.2 7.3 7.35 7.47 7.5 7.52 7.6 7.7 7.76 7.79 7.8 7.83 7.85 7.87
+##   deep       0   0   0    0    0   0    0   0   0    0    0   0    0    0    0
+##   none       2   2   4    1    0   2    1   0   0    0    6   5    2    2    4
+##   shallow    2   2   4    0    1   0    0   2   2    1    0   2    0    0    0
+##          man.ph
+## incorp    7.88 7.9 8 8.09 8.1 8.2 8.36 8.5
+##   deep       0   0 0    0   0   0    0   0
+##   none       2   0 5    0   3   0    1   1
+##   shallow    0   1 3    1   3   1    3   3
 ```
 
 Low pH for shallow incorp plots probably causing wrong sign for shallow incorp pars.
@@ -358,8 +429,8 @@ summary(m1)
 
 ```
 ##              Df Sum Sq Mean Sq F value Pr(>F)    
-## app.mthd      4   1548   387.0   88.99 <2e-16 ***
-## Residuals   729   3170     4.3                   
+## app.mthd      4   1434   358.4   79.56 <2e-16 ***
+## Residuals   729   3284     4.5                   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -376,16 +447,16 @@ TukeyHSD(m1)
 ## 
 ## $app.mthd
 ##                diff        lwr        upr     p adj
-## bsth-bc -2.98986725 -3.5422332 -2.4375013 0.0000000
-## ts-bc    0.09817867 -0.4859472  0.6823046 0.9908104
-## os-bc    0.24692758 -0.3813356  0.8751908 0.8195064
-## cs-bc   -4.81365766 -6.7526435 -2.8746718 0.0000000
-## ts-bsth  3.08804592  2.4936132  3.6824786 0.0000000
-## os-bsth  3.23679484  2.5989377  3.8746520 0.0000000
-## cs-bsth -1.82379041 -3.7659061  0.1183252 0.0774425
-## os-ts    0.14874891 -0.5168010  0.8142988 0.9733314
-## cs-ts   -4.91183633 -6.8632225 -2.9604501 0.0000000
-## cs-os   -5.06058524 -7.0256348 -3.0955357 0.0000000
+## bsth-bc -2.98986725 -3.5520980 -2.4276365 0.0000000
+## ts-bc    0.09817867 -0.4963793  0.6927366 0.9914095
+## os-bc    0.19392764 -0.4518581  0.8397134 0.9241035
+## cs-bc   -2.73878586 -4.3950892 -1.0824826 0.0000700
+## ts-bsth  3.08804592  2.4829971  3.6930947 0.0000000
+## os-bsth  3.18379490  2.5283377  3.8392521 0.0000000
+## cs-bsth  0.25108139 -1.4090167  1.9111795 0.9938617
+## os-ts    0.09574897 -0.5876395  0.7791375 0.9954283
+## cs-ts   -2.83696453 -4.5082877 -1.1656413 0.0000402
+## cs-os   -2.93271351 -4.6229388 -1.2424883 0.0000247
 ```
 
 ```r
@@ -399,9 +470,9 @@ model.tables(m1, 'means')
 ## 6.192664 
 ## 
 ##  app.mthd 
-##         bc   bsth      ts      os    cs
-##       7.02   4.03   7.119   7.267 2.207
-## rep 222.00 205.00 167.000 131.000 9.000
+##         bc   bsth      ts      os     cs
+##       7.02   4.03   7.119   7.214  4.282
+## rep 222.00 205.00 167.000 127.000 13.000
 ```
 
 # dfsumm
@@ -436,8 +507,8 @@ dfsumm(pdat1)
 ##                      inst     eid     pid    pmid sub.period corr.period
 ## Class              factor integer integer integer    integer     integer
 ## Minimum               101      44     182     182          1           3
-## Maximum               304     573    2860    2860          3           3
-## Mean                  209     359    1920    1930       2.15           3
+## Maximum               304     675    3130    3140          3           3
+## Mean                  209     404    2040    2040       2.01           3
 ## Unique (excld. NA)     14     230     732     734          3           1
 ## Missing values          0       0       0       0          0         501
 ## Sorted              FALSE    TRUE    TRUE    TRUE      FALSE        TRUE
@@ -914,8 +985,8 @@ dfsumm(pdat2)
 ##                      inst     eid     pid    pmid sub.period corr.period
 ## Class              factor integer integer integer    integer     integer
 ## Minimum               101      44     182     182          1           3
-## Maximum               304     573    2860    2860          3           3
-## Mean                  209     356    1890    1890       2.14           3
+## Maximum               304     675    3130    3140          3           3
+## Mean                  209     396    2000    2000       1.98           3
 ## Unique (excld. NA)     14     206     617     618          3           1
 ## Missing values          0       0       0       0          0         435
 ## Sorted              FALSE    TRUE    TRUE    TRUE      FALSE        TRUE
@@ -1361,6 +1432,52 @@ dfsumm(pdat2)
 ## Missing values                 0
 ## Sorted                     FALSE
 ## 
+```
+
+# Treatments
+
+
+```r
+pdat1[, man.trt.all := paste(man.trt1, man.trt2, man.trt3)]
+table(pdat1[, man.trt.all])
+```
+
+```
+## 
+##                        Acidification None NA 
+##                                            5 
+##                              Acidified NA NA 
+##                                            8 
+##                      Anaerobic digestion  NA 
+##                                            2 
+## Anaerobic digestion Mechanical separation NA 
+##                                            9 
+##                    Anaerobic digestion NA NA 
+##                                           10 
+##                  anaerobic digestion none NA 
+##                                            1 
+##                  Anaerobic digestion none NA 
+##                                           12 
+##                  Anaerobic digestion None NA 
+##                                            7 
+##                       Barn acidification  NA 
+##                                           12 
+##                                Diluted NA NA 
+##                                           23 
+##                      Field acidification  NA 
+##                                           14 
+##                              Irrigated NA NA 
+##                                            4 
+##                     Low protein diet none NA 
+##                                            9 
+##                                     None  NA 
+##                                           53 
+##                                   None NA NA 
+##                                          316 
+##                                 None none NA 
+##                                          243 
+##                                 None None NA 
+##                                            6
 ```
 
 

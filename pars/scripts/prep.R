@@ -43,16 +43,6 @@ idat1 <- data.table(idat1)
 # See love-hate-data.table repo issue #1 for more on this operation below
 idat1[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
-# Wind tunnel and micromet variables
-idat1[, wt := meas.tech2 == 'wt']
-idat1[, mm := meas.tech2 == 'micro met']
-
-# Measurement method-specific weather]
-idat1[, wind.wt := (meas.tech2 == 'wt') * sqrt(wind.2m)]
-idat1[, wind.mm := (meas.tech2 == 'micro met') * sqrt(wind.2m)]
-idat1[, air.temp.wt := (meas.tech2 == 'wt') * air.temp]
-idat1[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
-
 # Alternate predictor variables
 idat1[, wind.sqrt := sqrt(wind.2m)]
 idat1[, air.temp.log := log10(air.temp + 273.15)]
@@ -103,16 +93,6 @@ idat2 <- data.table(idat2)
 # Set emission in added incorporation rows (needed because flatout option will be used) to NA so they are not used in fitting
 # See love-hate-data.table repo issue #1 for more on this operation below
 idat2[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
-
-# Wind tunnel and micromet variables
-idat2[, wt := meas.tech2 == 'wt']
-idat2[, mm := meas.tech2 == 'micro met']
-
-# Measurement method-specific weather]
-idat2[, wind.wt := (meas.tech2 == 'wt') * sqrt(wind.2m)]
-idat2[, wind.mm := (meas.tech2 == 'micro met') * sqrt(wind.2m)]
-idat2[, air.temp.wt := (meas.tech2 == 'wt') * air.temp]
-idat2[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
 
 # Alternate predictor variables
 idat2[, wind.sqrt := sqrt(wind.2m)]
@@ -171,16 +151,6 @@ idati <- data.table(idati)
 # See love-hate-data.table repo issue #1 for more on this operation below
 idati[(`__add.row`), c('j.NH3', 'e.cum', 'e.rel')] <- NA
 
-# Wind tunnel and micromet variables
-idati[, wt := meas.tech2 == 'wt']
-idati[, mm := meas.tech2 == 'micro met']
-
-# Measurement method-specific weather]
-idati[, wind.wt := (meas.tech2 == 'wt') * sqrt(wind.2m)]
-idati[, wind.mm := (meas.tech2 == 'micro met') * sqrt(wind.2m)]
-idati[, air.temp.wt := (meas.tech2 == 'wt') * air.temp]
-idati[, air.temp.mm := (meas.tech2 == 'micro met') * air.temp]
-
 # Alternate predictor variables
 idati[, wind.sqrt := sqrt(wind.2m)]
 idati[, air.temp.log := log10(air.temp + 273.15)]
@@ -215,6 +185,8 @@ range(pdat1$e.rel.final)
 range(pdat1$e.rel.24)
 
 idat1 <- idat1[pmid %in% unique(pdat1[, pmid])]
+
+table(pdat1$app.mthd)
 
 
 # (Re)calculate weights ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

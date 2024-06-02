@@ -11,18 +11,14 @@ ggplot(dd, aes(cta, resid.er, colour = factor(country), group = pmid)) +
   theme_bw() +
 ggsave2x('../plots-resids/long_resids', height = 6, width = 7)
 
-dd <- subset(dpreds, pars %in%  c('ps1', 'ps2', 'ps3') & dataset == 1 & cta <= 500)
-dw <- dcast(dd, country + app.mthd.nm + pmid + cta ~ pars, value.var = 'resid.er')
-ggplot(dw, aes(ps2, ps3, colour = cta, group = pmid)) +
-  geom_abline(intercept = 0, slope = 1) +
-  geom_point() +
-  geom_line(alpha = 0.3) +
-  facet_wrap(~ app.mthd.nm) +
-#   coord_cartesian(xlim = c(0, 500)) +
-  scale_color_gradientn(colours = rainbow(5)) +
+dd <- subset(dpreds, pars %in%  c('ps1', 'ps2', 'ps3') & dataset == 1 & cta <= 24)
+ggplot(dd, aes(app.mthd.nm, resid.j, fill = pars.nm)) +
+  geom_boxplot() +
   labs(x = 'Time (h)', y = 'Model error (frac. applied TAN)', colour = 'Country') +
-  theme(legend.position = 'top')
-ggsave2x('../plots-resids/long_resids_scatter', height = 6, width = 7)
+  theme(legend.position = 'top') +
+  coord_cartesian(ylim = c(-2, 2)) +
+  theme_bw() +
+ggsave2x('../plots-resids/short_resids_box', height = 6, width = 7)
 
 dd <- subset(dpreds, pars %in%  c('ps1', 'ps2', 'ps3') & dataset == 1 & cta > 48 & !is.na(resid.er) & !(app.mthd == 'cs' & pars == 'ps1'))
 dls <- dd[, as.list(coef(lm(resid.er ~ cta))), by = .(pmid, app.mthd, app.mthd.nm, pars,  pars.nm)]

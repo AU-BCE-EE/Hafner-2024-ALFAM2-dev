@@ -3,7 +3,7 @@ title: 'Model call record'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "29 May, 2024 May:05"
+date: "02 June, 2024 Jun:06"
 ---
 
 Check package version.
@@ -46,10 +46,9 @@ preds <- data.table(alfam2(dat, app.name = 'tan.app', time.name = 'ct', group = 
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -68,10 +67,9 @@ preds <- data.table(alfam2(dat.app.mthd, app.name = 'tan.app', time.name = 'ct',
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 21 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -113,10 +111,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -126,10 +123,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -139,10 +135,33 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -157,10 +176,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -170,24 +188,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -197,10 +200,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -210,10 +212,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -223,10 +224,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -236,23 +236,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
@@ -263,10 +249,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -276,10 +261,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -289,10 +273,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -302,10 +285,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -315,10 +297,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -328,10 +309,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -341,10 +321,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -354,10 +333,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -367,10 +345,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -380,10 +357,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -393,10 +369,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -406,10 +381,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -419,10 +393,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -432,10 +405,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -445,10 +417,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -458,10 +429,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -471,10 +441,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -484,10 +453,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -497,10 +465,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -510,10 +477,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -523,10 +489,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -536,88 +501,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
@@ -628,10 +514,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -641,10 +526,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -654,10 +538,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -667,10 +550,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -680,10 +562,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -693,426 +574,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
@@ -1123,10 +587,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1136,10 +599,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1149,10 +611,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1162,24 +623,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1189,10 +635,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1202,10 +647,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1215,10 +659,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1228,10 +671,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1241,24 +683,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1268,10 +695,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1281,10 +707,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1294,36 +719,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
@@ -1334,10 +732,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1347,10 +744,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1360,10 +756,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1373,10 +768,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1386,10 +780,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1399,10 +792,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1412,10 +804,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1425,10 +816,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1438,10 +828,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1451,10 +840,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1464,10 +852,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1477,10 +864,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1490,10 +876,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1503,10 +888,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1516,10 +900,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1529,114 +912,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
@@ -1647,10 +925,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -1660,374 +937,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
@@ -2038,10 +950,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2051,24 +962,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2078,10 +974,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2091,309 +986,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
-##   incorp.deep.f4
-##   incorp.deep.r3
-```
-
-```
-## User-supplied parameters are being used.
-```
-
-```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
-## These secondary parameters have been dropped:
-##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
@@ -2404,10 +999,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2417,10 +1011,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2430,10 +1023,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2443,10 +1035,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2456,10 +1047,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2469,10 +1059,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2482,10 +1071,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2495,10 +1083,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
@@ -2509,10 +1096,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2522,10 +1108,22 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2535,10 +1133,22 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2548,10 +1158,22 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2561,10 +1183,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2574,10 +1195,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2587,10 +1207,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2600,10 +1219,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2613,10 +1231,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2626,10 +1243,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2639,10 +1255,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2652,10 +1267,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2665,10 +1279,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2678,10 +1291,9 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2691,10 +1303,22 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2704,10 +1328,22 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
@@ -2717,10 +1353,1184 @@ for (i in unique(bpars$parset)) {
 ```
 
 ```
-## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 20 parameters. Dropped 4 with no match.
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
 ## These secondary parameters have been dropped:
 ##   incorp.shallow.f4
-##   incorp.shallow.r3
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
+##   incorp.deep.f4
+##   incorp.deep.r3
+## Warning in alfam2(dat, app.name = "tan.app", time.name = "ct", group = "id", : Some calculated primary parameters are at the limit. Check input parameters.
+```
+
+```
+## User-supplied parameters are being used.
+```
+
+```
+## Warning in alfam2(dat.app.mthd, app.name = "tan.app", time.name = "ct", : Running with 19 parameters. Dropped 3 with no match.
+## These secondary parameters have been dropped:
+##   incorp.shallow.f4
 ##   incorp.deep.f4
 ##   incorp.deep.r3
 ```
