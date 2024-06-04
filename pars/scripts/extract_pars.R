@@ -19,4 +19,3 @@ parsl <- melt(d.pars, id.vars = 'pars', variable.name = 'parameter')
 # Export
 fwrite(d.pars, '../output/pars.csv')
 fwrite(parsl, '../output/pars_long.csv')
-

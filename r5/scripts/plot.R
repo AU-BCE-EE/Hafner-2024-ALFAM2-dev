@@ -32,6 +32,6 @@ ggplot(pl, aes(ct, value, colour = pars, lty = rain, group = sim)) +
   theme(legend.position = 'right') +
   facet_wrap(~var, scale = 'free', label = 'label_parsed') +
   scale_colour_discrete(labels = c('2', expression('2 &'~italic(r[5])), '3')) +
-  labs(x = 'Time since application (h)', y = 'Flux or cum. emis.', colour = 'Parameter set', lty = '') #+
+  labs(x = 'Time since application (h)', y = '', colour = 'Parameter set', lty = '') #+
   #theme(axis.text.y = element_blank())
 ggsave2x('../plots/r5_demo_both', height = 2.3, width = 6)

@@ -46,6 +46,7 @@ source('boot_cor.R')
 source('calc_emis.R')
 source('fit_summ.R')
 source('extract_pars.R')
+source('export_ps3.R')
 
 # Combined parameter table for paper
 source('par_table.R')
