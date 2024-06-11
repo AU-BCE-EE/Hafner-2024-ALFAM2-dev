@@ -10,7 +10,7 @@ cvdat[, cta.24 := cta[which.min(abs(cta - 24))], by = pmid]
 
 cvdat[, dataset := 1]
 
-#cvdat[, `:=` (ererr = er.pred - er, rerr = (er.pred - er) / er)]
+cvdat[, `:=` (aerr = er.pred - er, rerr = (er.pred - er) / er)]
 cvdat <- merge(pdat, cvdat, by = 'pmid', suffixes = c('', '.cv'))
 cvdat168 <- cvdat[cta == cta.168, ]
 names(cvdat168)

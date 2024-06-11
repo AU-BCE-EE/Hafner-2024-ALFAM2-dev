@@ -6,6 +6,9 @@ pr2[, pars := 'ps02']
 pr3[, pars := 'ps03']
 preds <- rbind(pr0, pr1, pr2, pr3, fill = TRUE)
 
+# Remove unused combinations
+preds <- preds[!sida %in% c(paste0(6:8, 'os'), paste0(6:8, 'cs')), ]
+
 # Get boot results
 # 90% CI
 bootsumm <- bootdat[ct == 168, .(n = length(er), 

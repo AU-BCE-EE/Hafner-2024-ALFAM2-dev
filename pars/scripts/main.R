@@ -1,7 +1,5 @@
 # Parameter estimation - par set 3
 
-#detach('package:ALFAM2')
-
 rm(list = ls())
 
 # Can load earlier saved image to use parameter estimates made earlier

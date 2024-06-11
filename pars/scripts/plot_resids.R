@@ -25,7 +25,7 @@ for (p in sort(unique(dp168$pars))) {
     facet_wrap(~ app.mthd.nm, scale = 'free') +
     geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
     theme_bw() +
-    labs(colour = 'Institution', x = 'Slurry DM', y = 'Emission residual (frac. applied TAN)')
+    labs(colour = 'Institution', x = 'Slurry DM (%)', y = 'Emission residual (frac. applied TAN)')
   ggsave2x(paste0('../plots-resids/resids_emis_DM_', p), height = 4.2, width = 6)
 
   ggplot(ddf, aes(institute, resid.er, fill = app.mthd.nm)) +
