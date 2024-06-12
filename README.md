@@ -10,10 +10,17 @@ Work on ALFAM2 model, all in R.
 
 # Subdirectory structure and components
 
+## `censoring`
+Check of measurements for censoring low, late emission rates.
+
 ## `data-emission`
 ALFAM2 database data in `data-emission/data`. 
 Data are downloaded from <https://github.com/sashahafner/ALFAM2-data>.
 Saved data files are excluded from Git in `.gitignore`, so contributors will have to run `scripts/main.R` to download data locally.
+See `data-emission/data/data_version.txt` for current data version.
+
+## `data-summary`
+Summary of latest data.
 
 ## `functions`
 R functions used in the other subdirectories.
@@ -25,7 +32,7 @@ The largest component, with several further sub-directories for different result
 Some of these are described here.
 
 ### `scripts`
-`main.R` runs everything, but it would take a day or more to run because of the bootstrap part.
+`main.R` runs everything, but it would take a day or more to run, mainly because of the bootstrap and cross-validation parts.
 Some parts are described here.
 
 The `subset.R` and `prep.R` scripts get measurement data ready.
@@ -43,7 +50,8 @@ In `extract_pars.R` the parameters are extracted for export and plotting.
 
 ### `workspace`
 To work with parameter estimation results without re-running everything, use the saved workspace.
-See call near top of `main.R`.
+See commented out call near top of `pars/scripts/main.R`.
+These files are excluded via `.gitignore`, so are only helpful if the analysis had been carried out previously.
 
 ### `plots-curves`
 Plots of cumulative emission curves for all field plots used for parameter estimation.
@@ -66,10 +74,18 @@ Sensitivity of model to predictor variables, including uncertainty from bootstra
 
 ## `sens-effect`
 Sensitivity with predictors on some common scale.
-Not well-developed.
 
 ## `sens-tab`
 Sensitivity table like Table 4 in the 2019 paper, with emission predictions for all application methods x multiple scenarios defined by weather and slurry characteristics.
 
-## `structure`
+## `solution-test`
+A test of the closed-form solution by comparison to a numerical approach.
 
+## `speed`
+Evaluation of `alfam2()` evaluation on multiple machines.
+
+## `structure-pH`
+Evaluation of model structure with respect to pH effects.
+
+## `uncert-est`
+Example to show importance of parameter correlation in estimating uncertainty.
