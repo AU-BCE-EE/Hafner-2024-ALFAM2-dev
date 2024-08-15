@@ -1,0 +1,59 @@
+---
+title: 'Do any curves show "complete" emission?'
+author: 'Sasha D. Hafner'
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+urlcolor: blue
+---
+
+```{r}
+rm(list = ls())
+library(data.table)
+library(ggplot2)
+```
+
+# Overview
+Reviewer 1 asked about focusing on measurements where emission was complete.
+Do any fit that characterization?
+
+# Data
+
+```{r}
+dat <- fread('../pars/data-subsets/ALFAM2_interval_sub1.csv.gz')
+pdat <- fread('../pars/data-subsets/ALFAM2_plot_sub1.csv.gz')
+```
+
+Relative emission rate, fraction of applied TAN per hour.
+And relative emission in interval.
+
+```{r}
+dat[, j.rel := j / tan.app]
+dat[, eri := c(0, diff(er)), by = pmid]
+```
+
+Last interval.
+
+```{r}
+dat[, cta.max := max(cta), by = pmid]
+dat[, dt := c(0, diff(cta)), by = pmid]
+ds <- dat[cta == cta.max, ]
+```
+
+```{r}
+table(ds$app.mthd, ds$j.rel > 0)
+table(ds$j.rel > 0) / nrow(ds)
+```
+
+```{r}
+quantile(pdat$ct.max)
+quantile(pdat$ct.max, 70:90 / 100)
+```
+
+```{r}
+quantile(ds$dt)
+```
+
+```{r}
+quantile(ds$eri)
+quantile(ds[eri > 0, eri])
+```
+

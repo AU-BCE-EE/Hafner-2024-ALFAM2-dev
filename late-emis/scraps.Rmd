@@ -1,0 +1,126 @@
+Get intervals 12-24 hours within trial end.
+
+```{r}
+ds <- dat[ctb <= 24, ]
+ds[, ctbcut := cut(ctb, c(-1, 6, 12, 24))]
+```
+
+Fraction of total measured emission that occurred in that period.
+
+```{r}
+summ <- ds[, .(fe = sum(eri / max(er))), by = .(app.mthd, pmid, ctbcut)]
+```
+
+```{r}
+ggplot(summ, aes(fe24, fill = app.mthd)) +
+  geom_histogram() +
+  facet_wrap(~ app.mthd)
+```
+
+```{r}
+cts <- table(summ$app.mthd, summ$fe > 0, summ$ctbcut)
+cts
+cts[, 2, ] / (cts[, 1, ] + cts[, 2, ])
+cts[, 1, ] / (cts[, 1, ] + cts[, 2, ])
+```
+
+```{r}
+cts <- table(summ$ctbcut, summ$fe > 0)
+cts
+cts / rowSums(cts)
+```
+
+```{r}
+cts <- table(summ$fe > 0)
+cts
+cts / sum(cts)
+```
+
+```{r}
+summ[, median(fe), by = .(app.mthd, ctbcut)]
+summ[, median(fe), by = .(ctbcut)]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Interval emission.
+
+```{r}
+dat[, eri := c(0, diff(er)), by = pmid]
+```
+
+Time before trial ended.
+
+```{r}
+dat[, ctb := cta.max - cta]
+```
+
+Get intervals 12-24 hours within trial end.
+
+```{r}
+ds24 <- dat[ctb <= 24, ]
+ds6 <- dat[ctb <= 6, ]
+```
+
+Fraction of total measured emission that occurred in that period.
+
+```{r}
+summ24 <- ds24[, .(fe = sum(eri / max(er)), cta = mean(cta), ctb = mean(ctb), dts = sum(dt), n = .N), by = .(app.mthd, pmid)]
+summ6 <- ds6[, .(fe = sum(eri / max(er)), cta = mean(cta), ctb = mean(ctb), dts = sum(dt), n = .N), by = .(app.mthd, pmid)]
+```
+
+```{r}
+ggplot(summ24, aes(fe, fill = app.mthd)) +
+  geom_histogram() +
+  facet_wrap(~ app.mthd)
+```
+
+```{r}
+ggplot(summ6, aes(fe, fill = app.mthd)) +
+  geom_histogram() +
+  facet_wrap(~ app.mthd)
+```
+
+```{r}
+cts <- table(summ$app.mthd, summ$fe > 0, summ$ctbcut)
+cts
+cts[, 2, ] / (cts[, 1, ] + cts[, 2, ])
+cts[, 1, ] / (cts[, 1, ] + cts[, 2, ])
+```
+
+```{r}
+cts <- table(summ$ctbcut, summ$fe > 0)
+cts
+cts / rowSums(cts)
+```
+
+```{r}
+cts <- table(summ$fe > 0)
+cts
+cts / sum(cts)
+```
+
+```{r}
+summ[, median(fe), by = .(app.mthd, ctbcut)]
+summ[, median(fe), by = .(ctbcut)]
+```
+
+

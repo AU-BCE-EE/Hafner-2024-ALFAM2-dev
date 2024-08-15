@@ -1,0 +1,71 @@
+---
+title: 'ALFAM2 model sensitivity to r5'
+author: 'Sasha D. Hafner'
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+urlcolor: blue
+---
+
+```{r}
+rm(list = ls())
+library(data.table)
+library(ALFAM2)
+```
+
+# Overview
+How sensitive are predictions really to the r5 value?
+
+# Parameters
+
+```{r}
+parsm <- parsl <- parsh <- alfam2pars03[grepl('^int', names(alfam2pars03))]
+parsl['int.r5'] <- -2.1
+parsh['int.r5'] <- -1.5
+```
+
+```{r}
+dat <- data.table(ct = 1:168, TAN.app = 100)
+predm <- alfam2(dat, pars = parsm)
+predl <- alfam2(dat, pars = parsl)
+predh <- alfam2(dat, pars = parsh)
+```
+
+```{r}
+plot(predm$ct, predm$er, type = 'l', col = 'black', ylim = c(0, 1))
+lines(predl$ct, predl$er, type = 'l', col = 'blue')
+lines(predh$ct, predh$er, type = 'l', col = 'red')
+```
+
+Try longer, 4 weeks.
+
+```{r}
+dat <- data.table(ct = 1:168 * 4, TAN.app = 100)
+predm <- alfam2(dat, pars = parsm)
+predl <- alfam2(dat, pars = parsl)
+predh <- alfam2(dat, pars = parsh)
+```
+
+```{r}
+plot(predm$ct, predm$er, type = 'l', col = 'black')
+lines(predl$ct, predl$er, type = 'l', col = 'blue')
+lines(predh$ct, predh$er, type = 'l', col = 'red')
+```
+
+Just the 2 times for a summary.
+
+```{r}
+dat <- data.table(ct = 168 * c(1, 4), TAN.app = 100)
+predm <- alfam2(dat, pars = parsm)
+predl <- alfam2(dat, pars = parsl)
+predh <- alfam2(dat, pars = parsh)
+```
+
+```{r}
+predl$er / predm$er - 1
+1 - predh$er / predm$er
+```
+
+
+
+
+
+
