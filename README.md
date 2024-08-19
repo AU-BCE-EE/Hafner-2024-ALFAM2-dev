@@ -89,3 +89,11 @@ Evaluation of model structure with respect to pH effects.
 
 ## `uncert-est`
 Example to show importance of parameter correlation in estimating uncertainty.
+
+# Links to published paper
+
+| Paper section | Content | Script source | Output source |
+| ------------- | ------- | ------------- | ------------- |
+| 2.5           | Number of plots outside of emis. limits | pars/scripts/prep.R          | pars/logs/prep.txt       |
+| 2.5           | Number of plots with missing values     | pars/scripts/subset_summ.Rmd | pars/logs/subset_summ.md |
+| ------------- | ------- | ------------- | ------------- |
