@@ -24,4 +24,5 @@ other attached packages:
 [1] data.table_1.15.4 nvimcom_0.9.37   
 
 loaded via a namespace (and not attached):
-[1] compiler_4.4.0   tools_4.4.0      colorout_1.3-0.2
+[1] compiler_4.4.0    tools_4.4.0       colorout_1.3-0.2  R.methodsS3_1.8.2
+[5] R.utils_2.12.3    R.oo_1.26.0      
