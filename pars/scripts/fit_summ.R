@@ -118,10 +118,34 @@ fit.3ps[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', '
                                 labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 
                                            'Open slot injection', 'Closed slot injection'))]
 
-
+# NTS: could use setorder instead
 fit.3ps <- fit.3ps[order(app.mthd.nm, pars), .(app.mthd.nm, n, pars, rmse, mae, mbe, me)]
 fit.3ps[, pars := gsub('ps', '', pars)]
 fit.3ps <- rounddf(fit.3ps, digits = c(0, 0, 2, 2, 2, 3, 2))
 
 # Export table
 fwrite(fit.3ps, '../output/fit_168_table.csv')
+
+# Combine ps3 and cv results
+cvdat168[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 'cs'), 
+                                 labels = c('Broadcast', 'Trailing hose', 'Trailing shoe', 
+                                            'Open slot injection', 'Closed slot injection'))]
+cvdat168[, pars := 'CV']
+
+fitcv <- cvdat168[, .(n = length(er), 
+                  pars = pars[1],
+                  rmse = rmse(m = er, p = er.pred),
+                  me = me(m = er, p = er.pred),
+                  mae = mae(m = er, p = er.pred),
+                  mbe = mbe(m = er, p = er.pred)),
+                  by = .(app.mthd.nm)]
+
+fittab <- rbind(fit.3ps, fitcv)
+fittab[, pars := factor(pars, levels = c('1', '2', '3', 'CV'))]
+setorder(fittab, app.mthd.nm, pars)
+fittab <- rounddf(fittab, digits = c(0, 0, 2, 2, 2, 3, 2), pad = TRUE)
+setDT(fittab)
+fittab[pars == '1' & app.mthd.nm == 'Closed slot injection', c('rmse', 'mae', 'mbe', 'me')] <- ''
+
+# Export
+fwrite(fittab, '../output/fit_table_comb.csv')

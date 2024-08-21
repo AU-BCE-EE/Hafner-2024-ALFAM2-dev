@@ -18,20 +18,18 @@ table(pdat1[, inst])
 table(pdat1[, country])
 table(pdat1[, .(inst, sub.period)])
 table(pdat1[, .(institute, sub.period)])
+table(pdat1[, man.source])
 ```
 
 ```{r}
 table(pdat1[, digested])
 table(pdat1[, .(institute, digested)])
-table(pdat1[, .(uptake, digested)])
-table(pdat1[, .(uptake, acid)])
+names(pdat1)
+table(pdat1[, .(sub.period, digested)])
+table(pdat1[, .(sub.period, acid)])
 table(pdat1[, .(institute, acid)])
-table(pdat1[, .(uptake, incorp)])
+table(pdat1[, .(sub.period, incorp)])
 table(pdat1[, .(institute, incorp)])
-```
-
-```{r}
-nrow(dat1)
 ```
 
 ```{r}
@@ -44,26 +42,51 @@ table(idat1[, interp.wind])
 table(idat1[, interp.air.temp])
 100 * mean(idat1[, interp.air.temp])
 
-table(idat1[, man.ph.missing])
-100 * mean(idat1[, man.ph.missing])
+x <- unique(idat1[, .(inst, file, pmid, man.ph.missing, incorp)])
+table(x[, man.ph.missing])
+table(x[, .(inst, man.ph.missing)])
+y <- x[(man.ph.missing), ]
+table(y[, .(inst, incorp)])
+100 * mean(x[, man.ph.missing])
 ```
 
 ```{r}
 xx <- idat1[, any(rain.missing), by = pmid]
 table(xx[, 2])
-100 * mean(xx[, 2])
+100 * mean(xx[, 2]$V1)
 
 xx <- idat1[, any(interp.wind), by = pmid]
 table(xx[, 2])
-100 * mean(xx[, 2])
+100 * mean(xx[, 2]$V1)
 
 xx <- idat1[, any(interp.air.temp), by = pmid]
 table(xx[, 2])
-100 * mean(xx[, 2])
+100 * mean(xx[, 2]$V1)
 
 xx <- idat1[, any(man.ph.missing), by = pmid]
 table(xx[, 2])
-100 * mean(xx[, 2])
+100 * mean(xx[, 2]$V1)
+```
+
+```{r}
+table(pdat1$rain.12 == 0)
+table(pdat1$rain.12 == 0) / nrow(pdat1)
+```
+
+```{r}
+quantile(pdat1$rain.12 / 12, na.rm = TRUE)
+x <- pdat1[rain.12 > 0, ]
+quantile(x$rain.12 / 12, na.rm = TRUE)
+range(x$rain.12 / 12, na.rm = TRUE)
+
+x <- pdat1[rain.1 > 0, ]
+quantile(x$rain.1, na.rm = TRUE)
+range(x$rain.1, na.rm = TRUE)
+```
+
+```{r}
+x <- idat1[rain.rate > 0, ]
+quantile(x$rain.rate)
 ```
 
 # Problems with incorporation

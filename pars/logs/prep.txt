@@ -13,28 +13,28 @@
 
 > dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 18650 rows and 6 columns
- 562 unique rows
+ 18562 rows and 6 columns
+ 550 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0   0.772        cat     4.3    10.9
 Maximum                   ts         133    13.8        pig     8.9     206
-Mean                    <NA>        50.3    5.61       <NA>    7.52    69.4
-Unique (excld. NA)         5         308     275          6      93     542
+Mean                    <NA>        50.5    5.62       <NA>    7.52    69.2
+Unique (excld. NA)         5         304     270          4      93     530
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 18650 rows and 6 columns
- 14475 unique rows
+ 18562 rows and 6 columns
+ 14388 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.15     -65    -4.83       0         0        0
 Maximum                650    1420     35.4    28.4       8.4      113
-Mean                   113     116     12.5    2.47    0.0406      4.2
-Unique (excld. NA)    3124    5841     3046    8204       555      266
+Mean                   114     116     12.5    2.47    0.0408     4.22
+Unique (excld. NA)    3110    5828     3033    8134       555      266
 Missing values           0     554        2      13        87       87
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -62,28 +62,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idat1[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 18152 rows and 6 columns
- 562 unique rows
+ 18064 rows and 6 columns
+ 550 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0   0.772        cat     4.3    10.9
 Maximum                   ts         133    13.8        pig     8.9     206
-Mean                    <NA>        50.4    5.62       <NA>    7.52    69.1
-Unique (excld. NA)         5         308     275          6      93     542
+Mean                    <NA>        50.6    5.63       <NA>    7.52      69
+Unique (excld. NA)         5         304     270          4      93     530
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idat1[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 18152 rows and 6 columns
- 14052 unique rows
+ 18064 rows and 6 columns
+ 13965 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.15  0.0167    -4.83       0         0        0
 Maximum                650    1420     35.4    28.4       8.4      113
-Mean                   116     117     12.5    2.51    0.0405     4.28
-Unique (excld. NA)    3124    5651     2989    7864       554      266
+Mean                   117     118     12.5    2.51    0.0407      4.3
+Unique (excld. NA)    3110    5638     2976    7794       554      266
 Missing values           0       0        0       0         0        0
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -124,28 +124,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 12695 rows and 6 columns
- 510 unique rows
+ 12607 rows and 6 columns
+ 498 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0   0.772        cat    6.54    10.9
 Maximum                   ts         133    13.8        pig     8.9     196
-Mean                    <NA>        43.2    5.61       <NA>    7.55    64.6
-Unique (excld. NA)         5         275     262          6      81     496
+Mean                    <NA>        43.4    5.62       <NA>    7.55    64.4
+Unique (excld. NA)         5         271     257          4      81     484
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 12695 rows and 6 columns
- 11389 unique rows
+ 12607 rows and 6 columns
+ 11302 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.15   -45.8    -4.83       0         0        0
 Maximum                650    1420     35.4    28.4       8.4      113
-Mean                   103     104     11.6    2.69    0.0302     3.53
-Unique (excld. NA)    3006    5494     2672    6929       528      220
+Mean                   103     105     11.6    2.69    0.0304     3.55
+Unique (excld. NA)    2991    5480     2656    6857       528      220
 Missing values           0     554        2      13        87       87
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -173,28 +173,28 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > dfsumm(idat2[, .(app.mthd, app.rate.ni, man.dm, man.source, man.ph, tan.app)])
 
- 12446 rows and 6 columns
- 510 unique rows
+ 12358 rows and 6 columns
+ 498 unique rows
                     app.mthd app.rate.ni  man.dm man.source  man.ph tan.app
 Class              character     numeric numeric  character numeric numeric
 Minimum                   bc           0   0.772        cat    6.54    10.9
 Maximum                   ts         133    13.8        pig     8.9     196
-Mean                    <NA>        43.3    5.61       <NA>    7.55    64.6
-Unique (excld. NA)         5         275     262          6      81     496
+Mean                    <NA>        43.6    5.62       <NA>    7.54    64.3
+Unique (excld. NA)         5         271     257          4      81     484
 Missing values             0           0       0          0       0       0
 Sorted                 FALSE       FALSE   FALSE      FALSE   FALSE   FALSE
                                                                            
 
 > dfsumm(idat2[, .(ct, cta, air.temp, wind.2m, rain.rate, rain.cum)])
 
- 12446 rows and 6 columns
- 11140 unique rows
+ 12358 rows and 6 columns
+ 11053 unique rows
                         ct     cta air.temp wind.2m rain.rate rain.cum
 Class              numeric numeric  numeric numeric   numeric  numeric
 Minimum               0.15  0.0167    -4.83       0         0        0
 Maximum                650    1420     35.4    28.4       8.4      113
-Mean                   105     104     11.6    2.72    0.0291     3.54
-Unique (excld. NA)    3006    5385     2625    6703       527      220
+Mean                   105     105     11.6    2.72    0.0293     3.57
+Unique (excld. NA)    2991    5371     2609    6631       527      220
 Missing values           0       0        0       0         0        0
 Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
                                                                       
@@ -359,6 +359,107 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 
 > idati[, dataset := 0]
 
+> names(idat1)
+  [1] "pid"                   "pmid"                  "inst"                 
+  [4] "eid"                   "sub.period"            "corr.period"          
+  [7] "proj"                  "exper"                 "exper2"               
+ [10] "institute"             "country"               "submitter"            
+ [13] "file"                  "first.row.in.file.int" "last.row.in.file.int" 
+ [16] "row.in.file.plot"      "pub.id"                "pub.info"             
+ [19] "lat"                   "long"                  "topo"                 
+ [22] "field"                 "plot"                  "plot.area"            
+ [25] "treat"                 "rep"                   "rep2"                 
+ [28] "n.ints"                "t.start.p"             "t.end.p"              
+ [31] "dt1"                   "dt.min"                "dt.max"               
+ [34] "ct.min"                "ct.max"                "meas.tech"            
+ [37] "meas.tech2"            "meas.tech.orig"        "meas.tech.det"        
+ [40] "j.NH31"                "j.rel1"                "e.1"                  
+ [43] "e.4"                   "e.6"                   "e.12"                 
+ [46] "e.24"                  "e.48"                  "e.72"                 
+ [49] "e.96"                  "e.168"                 "e.final"              
+ [52] "e.cum.1"               "e.cum.4"               "e.cum.6"              
+ [55] "e.cum.12"              "e.cum.24"              "e.cum.48"             
+ [58] "e.cum.72"              "e.cum.96"              "e.cum.168"            
+ [61] "e.cum.final"           "e.rel.1"               "e.rel.4"              
+ [64] "e.rel.6"               "e.rel.12"              "e.rel.24"             
+ [67] "e.rel.48"              "e.rel.72"              "e.rel.96"             
+ [70] "e.rel.168"             "e.rel.final"           "clay"                 
+ [73] "silt"                  "sand"                  "oc"                   
+ [76] "soil.type"             "soil.type2"            "soil.water"           
+ [79] "soil.water.v"          "soil.moist"            "soil.ph"              
+ [82] "soil.dens"             "crop.res"              "till"                 
+ [85] "air.temp.1"            "air.temp.4"            "air.temp.6"           
+ [88] "air.temp.12"           "air.temp.24"           "air.temp.48"          
+ [91] "air.temp.72"           "air.temp.96"           "air.temp.168"         
+ [94] "air.temp.mn"           "air.temp.z"            "soil.temp.1"          
+ [97] "soil.temp.4"           "soil.temp.6"           "soil.temp.12"         
+[100] "soil.temp.24"          "soil.temp.48"          "soil.temp.72"         
+[103] "soil.temp.96"          "soil.temp.168"         "soil.temp.mn"         
+[106] "soil.temp.surf.1"      "soil.temp.surf.4"      "soil.temp.surf.6"     
+[109] "soil.temp.surf.12"     "soil.temp.surf.24"     "soil.temp.surf.48"    
+[112] "soil.temp.surf.72"     "soil.temp.surf.96"     "soil.temp.surf.168"   
+[115] "soil.temp.surf.mn"     "soil.temp.z"           "rad.1"                
+[118] "rad.4"                 "rad.6"                 "rad.12"               
+[121] "rad.24"                "rad.48"                "rad.72"               
+[124] "rad.96"                "rad.168"               "rad.mn"               
+[127] "wind.1"                "wind.4"                "wind.6"               
+[130] "wind.12"               "wind.24"               "wind.48"              
+[133] "wind.72"               "wind.96"               "wind.168"             
+[136] "wind.mn"               "wind.z"                "wind.2m.1"            
+[139] "wind.2m.4"             "wind.2m.6"             "wind.2m.12"           
+[142] "wind.2m.24"            "wind.2m.48"            "wind.2m.72"           
+[145] "wind.2m.96"            "wind.2m.168"           "wind.2m.mn"           
+[148] "wind.loc"              "rain.1"                "rain.4"               
+[151] "rain.6"                "rain.12"               "rain.24"              
+[154] "rain.48"               "rain.72"               "rain.96"              
+[157] "rain.168"              "rain.tot"              "rain.rate.1"          
+[160] "rain.rate.4"           "rain.rate.6"           "rain.rate.12"         
+[163] "rain.rate.24"          "rain.rate.48"          "rain.rate.72"         
+[166] "rain.rate.96"          "rain.rate.168"         "rain.rate.mn"         
+[169] "rh.1"                  "rh.4"                  "rh.6"                 
+[172] "rh.12"                 "rh.24"                 "rh.48"                
+[175] "rh.72"                 "rh.96"                 "rh.168"               
+[178] "rh.mn"                 "far.loc"               "man.source"           
+[181] "man.source.orig"       "man.source.det"        "man.bed"              
+[184] "man.con"               "man.trt1"              "man.trt2"             
+[187] "man.trt3"              "man.stor"              "man.dm"               
+[190] "man.vs"                "man.tkn"               "man.tan"              
+[193] "man.vfa"               "man.tic"               "man.ua"               
+[196] "man.ph"                "acid"                  "date.start"           
+[199] "app.start"             "app.start.orig"        "app.end"              
+[202] "app.end.orig"          "app.method"            "app.method.orig"      
+[205] "app.rate"              "tan.app"               "incorp"               
+[208] "incorp.orig"           "time.incorp"           "man.area"             
+[211] "dist.inj"              "furrow.z"              "furrow.w"             
+[214] "crop"                  "crop.orig"             "crop.z"               
+[217] "crop.area"             "lai"                   "notes.plot"           
+[220] "flag.plot"             "app.mthd"              "digested"             
+[223] "man.ph.missing"        "iexper"                "oid"                  
+[226] "row.in.file.int"       "interval"              "t.start"              
+[229] "t.end"                 "t.start.orig"          "t.end.orig"           
+[232] "dt"                    "dt.calc"               "dt.diff"              
+[235] "ct"                    "mt"                    "cta"                  
+[238] "bta"                   "bg.dl"                 "bg.val"               
+[241] "bg.unit"               "MOL"                   "ustar"                
+[244] "rl"                    "air.pres"              "air.pres.unit"        
+[247] "j.NH3"                 "j.rel"                 "e.int"                
+[250] "e.cum"                 "e.rel"                 "air.temp"             
+[253] "soil.temp"             "soil.temp.surf"        "pH.surf"              
+[256] "rad"                   "wind"                  "wind.2m"              
+[259] "soil.temp.z.int"       "air.temp.z.int"        "wind.z.int"           
+[262] "wind.loc.int"          "far.loc.int"           "rain"                 
+[265] "rain.rate"             "rain.cum"              "rh"                   
+[268] "notes.int"             "flag.int"              "rain.missing"         
+[271] "dataset"               "app.rate.ni"           "man.dm.ni"            
+[274] "man.ph.ni"             "app.mthd.inj"          "interp.wind"          
+[277] "interp.air.temp"       "air.temp.ave"          "app.mthd.ts"          
+[280] "app.mthd.bc"           "app.mthd.os"           "app.mthd.cs"          
+[283] "incorp.shallow"        "incorp.deep"           "man.source.pig"       
+[286] "__group"               "__orig.order"          "__add.row"            
+[289] "__f4"                  "wind.sqrt"             "air.temp.log"         
+[292] "man.dm.log"            "j"                     "e"                    
+[295] "er"                   
+
 > idat1 <- rbind(idat1, idati, fill = TRUE)[, dataset := 1]
 
 > # Needs next row beacuse there is lack of duplication for same pmid because missing pH is added in idati but not idat1
@@ -370,7 +471,7 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 > # Now remove values outside emission limits
 > # Done here and not in subset.R in order to see effect on counts
 > dim(pdat1)
-[1] 736 225
+[1] 724 224
 
 > pdat1 <- pdat1[e.rel.24 > -0.20 & 
 +                e.rel.24 < 1.20 &
@@ -378,7 +479,7 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 +                e.rel.final > -0.20, ]
 
 > dim(pdat1)
-[1] 734 225
+[1] 722 224
 
 > range(pdat1$e.rel.final)
 [1] -0.11627  1.00380
@@ -391,7 +492,7 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 > table(pdat1$app.mthd)
 
   bc bsth   cs   os   ts 
- 222  205   13  127  167 
+ 222  205   13  119  163 
 
 > # (Re)calculate weights ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > # Equal by application method
@@ -470,8 +571,3 @@ Sorted               FALSE   FALSE    FALSE   FALSE     FALSE    FALSE
 > idat1[is.na(incorp.deep), incorp.deep := 0]
 
 > idat1[is.na(incorp.shallow), incorp.shallow := 0]
-
-> # Finally, select only the necessary columns to reduce data table size, mainly for parallel stuff
-> idat1 <- idat1[, ..parestcols]
-
-> idat2 <- idat2[, ..parestcols]

@@ -167,6 +167,7 @@ idati[app.mthd != 'os', app.mthd.os := 0]
 idati[app.mthd != 'cs', app.mthd.cs := 0]
 idati[, dataset := 0]
 
+names(idat1)
 idat1 <- rbind(idat1, idati, fill = TRUE)[, dataset := 1]
 # Needs next row beacuse there is lack of duplication for same pmid because missing pH is added in idati but not idat1
 idat1 <- idat1[!duplicated(idat1[, .(pmid, cta)]), ]
@@ -240,7 +241,3 @@ idat2[, `:=` (weight.lastc = weight.last * ww[app.mthd], weight.1c = weight.1a *
 # Missing incorporation problem
 idat1[is.na(incorp.deep), incorp.deep := 0]
 idat1[is.na(incorp.shallow), incorp.shallow := 0]
-
-# Finally, select only the necessary columns to reduce data table size, mainly for parallel stuff
-idat1 <- idat1[, ..parestcols]
-idat2 <- idat2[, ..parestcols]

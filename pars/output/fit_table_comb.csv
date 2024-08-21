@@ -1,0 +1,21 @@
+app.mthd.nm,n,pars,rmse,mae,mbe,me
+Broadcast,222,1,0.24,0.17,-0.11,0.19
+Broadcast,222,2,0.19,0.14,-0.047,0.48
+Broadcast,222,3,0.17,0.13,-0.005,0.60
+Broadcast,222,CV,0.19,0.15,-0.038,0.46
+Trailing hose,205,1,0.12,0.10,0.026,-0.05
+Trailing hose,205,2,0.10,0.07,-0.006,0.32
+Trailing hose,205,3,0.09,0.07,-0.002,0.39
+Trailing hose,205,CV,0.10,0.08,0.006,0.22
+Trailing shoe,163,1,0.14,0.10,-0.015,0.39
+Trailing shoe,163,2,0.13,0.09,-0.008,0.46
+Trailing shoe,163,3,0.13,0.09,0.008,0.46
+Trailing shoe,163,CV,0.15,0.10,-0.003,0.28
+Open slot injection,119,1,0.10,0.08,0.022,-0.14
+Open slot injection,119,2,0.10,0.08,0.03,-0.11
+Open slot injection,119,3,0.09,0.07,0,0.09
+Open slot injection,119,CV,0.14,0.11,0.08,-1.28
+Closed slot injection,13,1,"","",,""
+Closed slot injection,13,2,0.06,0.05,-0.026,-0.13
+Closed slot injection,13,3,0.06,0.04,0.003,0.07
+Closed slot injection,13,CV,0.07,0.06,-0.022,-0.42
