@@ -22,11 +22,11 @@ attached base packages:
 
 other attached packages:
 [1] lme4_1.1-35.3     Matrix_1.6-5      rmarkdown_2.26    knitr_1.46       
-[5] viridisLite_0.4.2 ggplot2_3.5.1     data.table_1.15.4 ALFAM2_3.120     
+[5] viridisLite_0.4.2 ggplot2_3.5.1     data.table_1.15.4 ALFAM2_4.1.3     
 [9] nvimcom_0.9.37   
 
 loaded via a namespace (and not attached):
- [1] vctrs_0.6.5       nlme_3.1-163      cli_3.6.2         rlang_1.1.3      
+ [1] vctrs_0.6.5       nlme_3.1-165      cli_3.6.2         rlang_1.1.3      
  [5] xfun_0.43         generics_0.1.3    minqa_1.2.6       glue_1.7.0       
  [9] colorspace_2.1-0  htmltools_0.5.8.1 scales_1.3.0      fansi_1.0.6      
 [13] grid_4.4.0        evaluate_0.23     munsell_0.5.1     tibble_3.2.1     

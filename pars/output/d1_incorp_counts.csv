@@ -1,6 +1,6 @@
-institute,inst,country,deep,shallow
-INRA,208,FR,0,8
-INRAE,208,FR,0,2
-MU,209,IT,1,4
-UNIMI,304,IT,0,3
-WUR,214,NL,3,40
+institute,inst,country,deep,shallow,total
+INRAE,208,FR,0,10,10
+MU,209,IT,1,4,5
+UNIMI,304,IT,0,3,3
+WUR,214,NL,3,40,43
+Total,"","",4,57,61
