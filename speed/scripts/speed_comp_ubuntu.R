@@ -10,17 +10,22 @@ source('../../functions/rounddf.R')
 
 # Install packages
 # Locations for R (old) and Rcpp (new) versions
-rver <- '/home/sasha/R/ALFAM2-versions/R-ver/'
-cver <- '/home/sasha/R/ALFAM2-versions/Rcpp-ver/'
+rver <- '~/R/ALFAM2-versions/R-ver/'
+cver <- '~/R/ALFAM2-versions/Rcpp-ver/'
 
-# Install different versions to different locations (only needs to be done once)
+## Install different versions to different locations (only needs to be done once)
 #devtools::install_github('sashahafner/ALFAM2@v2.0', lib = rver)
-#devtools::install_github('sashahafner/ALFAM2', ref = 'dev', lib = cver, force = TRUE)
-#
+#devtools::install_github('sashahafner/ALFAM2', lib = cver, force = TRUE)
+#install.packages('ALFAM2', lib = cver, force = TRUE)
+##
 
 # Need new version of package first for incorp data processing
 library(ALFAM2, lib.loc = cver)
-packageVersion('ALFAM2')
+sink('../log/ubuntu_versions.txt')
+  print('Incorp calcs')
+  print(packageVersion("ALFAM2"))
+  print(sessionInfo())
+sink()
 
 # Input data
 # Many plots 
@@ -79,7 +84,11 @@ for (j in 1) {
   if ('ALFAM2' %in% (.packages())) detach('package:ALFAM2')
   ll <- rver
   library(ALFAM2, lib.loc = ll)
-  print(packageVersion("ALFAM2"))
+  sink('../log/ubuntu_versions.txt', append = TRUE)
+    print('Old version')
+    print(packageVersion("ALFAM2"))
+    print(sessionInfo())
+  sink()
 
   # Many plots, no incorporation
   nits <- 7
@@ -130,14 +139,17 @@ for (j in 1) {
 
 
 # Run new version with and without flatout option
-j <- 2
 for (j in 2:3) {
 
   if ('ALFAM2' %in% (.packages())) detach('package:ALFAM2')
   ll <- cver
 
   library(ALFAM2, lib.loc = ll)
-  print(packageVersion("ALFAM2"))
+  sink('../log/ubuntu_versions.txt', append = TRUE)
+    print('New version')
+    print(packageVersion("ALFAM2"))
+    print(sessionInfo())
+  sink()
 
   dp <- datp
   dt <- datt
