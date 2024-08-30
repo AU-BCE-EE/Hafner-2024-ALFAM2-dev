@@ -96,4 +96,24 @@ Example to show importance of parameter correlation in estimating uncertainty.
 | ------------- | ------- | ------------- | ------------- |
 | 2.5           | Number of plots outside of emis. limits | pars/scripts/prep.R          | pars/logs/prep.txt       |
 | 2.5           | Number of plots with missing values     | pars/scripts/subset_summ.Rmd | pars/logs/subset_summ.md |
+| 3.1           | Fig. 2    | data-summary/scripts/plot   | data-summary/plots/emis_summ.png |
+| 3.3           | Fig. 3    | pars/scripts/plot_scatter_emis_ps3.R   | pars/plots-scatter/e168_comp_ps3.pdf |
+| Supplement    | Table S-1 | pars/scripts/counts.R | pars/output/d1_counts.csv |
+| Supplement    | Table S-2 | pars/scripts/counts.R | pars/output/d1_incorp_counts.csv |
+| Supplement    | Table S-3 | pars/scripts/fit_summ.R | pars/output/fit_168.csv |
+| Supplement    | Table S-4 | pars/scripts/fit_summ.R | pars/output/fit_table_comb.csv |
+| Supplement    | Table S-6 | speed/scripts/speed_comp_ubuntu.R | speed/output/times_ubuntu.csv |
+| Supplement    | Fig. S-1 | pars/scripts/plot_long_resids.R | pars/plots-resids/long_resids.png |
+| Supplement    | Fig. S-2 | pars/scripts/plot_long_resids.R | pars/plots-resids/long_resids_box.png |
+| Supplement    | Fig. S-3 | pars/scripts/plot_pars.R | pars/plots-pars/pars_sel.png |
+| Supplement    | Fig. S-4 | pars/scripts/plot_cv.R | pars/plots-cross-val/cross_val_error.png |
+| Supplement    | Fig. S-5 | pars/scripts/plot_cv.R | pars/plots-cross-val/cross_val_rel_error.png |
+| Supplement    | Fig. S-6 | sens/scripts/plot.R | sens/plots/sens5_pig.png |
+| Supplement    | Fig. S-7 | pars/scripts/plot_resids.R | pars/plots-resids/resids_emis_DM_ps3.png |
+| Supplement    | Fig. S-8 | pars/scripts/plot_resids.R | pars/plots-resids/resids_emis_temp_ps3.png |
+| Supplement    | Fig. S-9 | sens-tab/scripts/plot_curves.R | sens-tab/plots/sens_curves.png |
+| Supplement    | Fig. S-10 | sens-tab/scripts/plot_curves.R | sens-tab/plots/sens_comp_1col_ALFAM.png |
+| Supplement    | Fig. S-11 | pars/scripts/plot_scatter_emis.R | pars/plots-scatter/e168_comp_loocv-202.png |
+| Supplement    | Fig. S-12 | pars/scripts/plot_scatter_emis.R | pars/plots-scatter/e168_comp_loocv-214.png |
+| Supplement    | Fig. S-13 through S-26| pars/scripts/plot_scatter_emis_ps3.R | pars/plots-scatter/e168_comp_loocv-\*.png |
 | ------------- | ------- | ------------- | ------------- |
