@@ -132,6 +132,14 @@ cvdat168[, app.mthd.nm := factor(app.mthd, levels = c('bc', 'bsth', 'ts', 'os', 
                                             'Open slot injection', 'Closed slot injection'))]
 cvdat168[, pars := 'CV']
 
+fitcv1 <- cvdat168[, .(n = length(er), 
+                  pars = pars[1],
+                  rmse = rmse(m = er, p = er.pred),
+                  me = me(m = er, p = er.pred),
+                  mae = mae(m = er, p = er.pred),
+                  mbe = mbe(m = er, p = er.pred)),
+                  by = .(pars)]
+
 fitcv <- cvdat168[, .(n = length(er), 
                   pars = pars[1],
                   rmse = rmse(m = er, p = er.pred),
@@ -149,3 +157,5 @@ fittab[pars == '1' & app.mthd.nm == 'Closed slot injection', c('rmse', 'mae', 'm
 
 # Export
 fwrite(fittab, '../output/fit_table_comb.csv')
+fwrite(fitcv, '../output/fit_cv.csv')
+fwrite(fitcv1, '../output/fit_cv1.csv')
