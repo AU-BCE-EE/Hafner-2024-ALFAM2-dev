@@ -51,33 +51,33 @@ pd <- pdat[man.source != 'pig' & app.mthd == 'bsth', ]
 d <- qdat[man.source != 'pig' & app.mthd == 'bsth', ]
 d3 <- pdat[man.source != 'pig' & app.mthd == 'bsth' & parset == '3', ]
 ggplot(d, aes(xval, dedx10)) + 
-  geom_hline(yintercept = 0, colour = 'gray45') +
+  geom_hline(yintercept = 0, colour = 'gray55') +
   geom_line(aes(y = dedx10), lty = '2222') +
   geom_line(aes(y = dedx90), lty = '2222') +
+  geom_line(data = pd, aes(y = dedx, group = parset), colour = 'gray55', linewidth = 0.7, alpha = 0.2) +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
-  geom_line(data = pd, aes(y = dedx, group = parset), colour = 'gray45', linewidth = 0.7, alpha = 0.2) +
   facet_wrap(~ set.nm, scale = 'free', label = 'label_parsed', ncol = 2) +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') +
   guides(colour = guide_legend(nrow = 2))
-ggsave2x('../plots/dsens5_cattle', height = 5, width = 5)
+ggsave2x('../plots/dsens5_cattle', height = 6.85, width = 5)
 
 pd <- pdat[man.source == 'pig' & app.mthd == 'bsth', ]
 d <- qdat[man.source == 'pig' & app.mthd == 'bsth', ]
 d3 <- pdat[man.source == 'pig' & app.mthd == 'bsth' & parset == '3', ]
 ggplot(d, aes(xval, dedx10)) + 
-  geom_hline(yintercept = 0, colour = 'gray45') +
+  geom_hline(yintercept = 0, colour = 'gray55') +
   geom_line(aes(y = dedx10), lty = '2222') +
   geom_line(aes(y = dedx90), lty = '2222') +
+  geom_line(data = pd, aes(y = dedx, group = parset), colour = 'gray55', linewidth = 0.7, alpha = 0.2) +
   geom_line(data = d3, aes(y = dedx), linewidth = 0.7) +
-  geom_line(data = pd, aes(y = dedx, group = parset), colour = 'gray45', linewidth = 0.7, alpha = 0.2) +
   facet_wrap(~ set.nm, scale = 'free', label = 'label_parsed', ncol = 2) +
   theme_bw() +
   theme(legend.position = 'top') +
   labs(x = 'Predictor variable value', y = 'Emission derivative', colour = '') +
   guides(colour = guide_legend(nrow = 2))
-ggsave2x('../plots/dsens5_pig', height = 5, width = 5)
+ggsave2x('../plots/dsens5_pig', height = 6.85, width = 5)
 
 # Derivatives
 pd <- pdat[man.source != 'pig' & app.mthd == 'bsth' & set != 'rain.rate', ]

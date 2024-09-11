@@ -16,6 +16,13 @@ d.pars <- rbind(d.pars, d1, d2, fill = TRUE)
 # Reshape for plotting 
 parsl <- melt(d.pars, id.vars = 'pars', variable.name = 'parameter')
 
+# Add in par set 3 value to boot parts for comparison
+ps3 <- parsl[pars == 'ps3', ]
+parsbl3 <- merge(parsbl, ps3[, -1], by = 'parameter', suffixes = c('', '.ps3'))
+bootsumm3 <- parsbl3[, .(mn = mean(value), md = median(value), se = sd(value), l90 = quantile(value, 0.05), u90 = quantile(value, 0.95), fps3 = mean(value == value.ps3)), by = parameter]
+
 # Export
 fwrite(d.pars, '../output/pars.csv')
 fwrite(parsl, '../output/pars_long.csv')
+fwrite(parsbl3, '../output/pars_boot_long_ps3.csv')
+fwrite(bootsumm, '../output/boot_summary_ps3.csv')

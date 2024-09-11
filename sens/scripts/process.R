@@ -15,4 +15,8 @@ pamdat[, rr := (er.pred[app.mthd == 'bc'] - er.pred) / er.pred[app.mthd == 'bc']
 qamdat <- pamdat[!is.na(rr) & parset != '3', .(n = length(rr), rr10 = quantile(rr, 0.05), rr90 = quantile(rr, 0.95), rrmd = median(rr)), 
              by = .(ct, man.dm, wind.2m, app.rate, man.ph, tan.app, man.source, air.temp, app.mthd, id, set, xval, id.pred)]
 
-
+# Add limits and cut some extreme bootstrap preds for plots
+lims <- data.table(set = c('man.dm', 'man.ph', 'air.temp', 'wind.2m', 'rain.rate'), 
+                   ymax = c(0.06, 0.3, 0.025, 0.08, 0.3))
+pdat <- merge(pdat, lims, by = 'set')
+pdat[dedx > ymax & parset != '3', dedx := NA]

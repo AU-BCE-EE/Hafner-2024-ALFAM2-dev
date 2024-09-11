@@ -14,6 +14,10 @@ derr[, ct.24 := cta[which.min(abs(cta - 24))], by = pmid]
 dp168 <- derr[cta == ct.168, ]
 dp24 <- derr[cta == ct.24, ]
 
+# Drop ps1 cs results (because cs pars were not included)
+dp168 <- dp168[app.mthd != 'cs' | pars != 'ps1', ]
+dp24 <- dp24[app.mthd != 'cs' | pars != 'ps1', ]
+
 # Data table with fit statistics, by various variables
 fit.168 <- dp168[, .(rmse = rmse(m = er, p = er.pred),
                      me = me(m = er, p = er.pred),

@@ -30,10 +30,25 @@ table(pdat1[, .(sub.period, acid)])
 table(pdat1[, .(institute, acid)])
 table(pdat1[, .(sub.period, incorp)])
 table(pdat1[, .(institute, incorp)])
+table(pdat1[, .(is.na(rain.12))])
+100 * mean(is.na(pdat1[, .(rain.12)]))
+table(pdat1[, .(rain.12)])
+x <- table(pdat1[, .(inst, rain.12 > 0)])
+print(x)
+100 * table(pdat1[, .(rain.12)], exclude = NULL) / nrow(pdat1)
+```
+
+Rain mean by institution.
+
+```{r}
+ppdat <- idat1[, .(rain.tot = sum(rain.rate * diff(c(0, cta)))), by = .(inst, pmid)]
+pidat <- ppdat[, .(rain.min = min(rain.tot), rain.max = max(rain.tot), rain.tot = mean(rain.tot), rain.diff = diff(range(rain.tot))), by = .(inst)]
+print(pidat)
+sum(pidat[, rain.tot] == 0)
 ```
 
 ```{r}
-table(idat1[, rain.missing])
+table(idat1[, rain.missing], exclude = NULL)
 100 * mean(idat1[, rain.missing])
 
 table(idat1[, interp.wind])
@@ -106,6 +121,12 @@ summary(m1)
 TukeyHSD(m1)
 model.tables(m1, 'means')
 ```
+
+```{r}
+cor(pdat1[, .(man.dm, man.ph, air.temp.12, wind.12, rain.12)], use = 'complete.obs')
+```
+
+
 
 # dfsumm
 

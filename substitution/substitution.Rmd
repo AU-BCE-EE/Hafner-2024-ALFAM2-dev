@@ -1,0 +1,164 @@
+---
+title: 'Exploration of rate constant/time substitution'
+output: pdf_document
+classoption: landscape
+author: Sasha D. Hafner
+date: "`r format(Sys.time(), '%d %B, %Y %h:%m')`"
+---
+
+# Packages
+
+```{r}
+library(data.table)
+library(knitr)
+library(ALFAM2)
+library(ggplot2)
+```
+
+```{r}
+packageVersion('ALFAM2')
+```
+
+# Setup
+
+Parameters.
+Mitigation (0), reference (1), and doubled (2) r1 and r3.
+
+```{r}
+print(ALFAM2::alfam2pars03)
+p0 <- c(int.f0 = 0.4, int.r1 = -1.5 - 0.3, int.r2 = -1.2, int.r3 = -2.7 - 0.3, int.r5 = -1.8)
+p1 <- c(int.f0 = 0.4, int.r1 = -1.5, int.r2 = -1.2, int.r3 = -2.7, int.r5 = -1.8)
+p2 <- c(int.f0 = 0.4, int.r1 = -1.5 + 0.3, int.r2 = -1.2, int.r3 = -2.7 + 0.3, int.r5 = -1.8)
+```
+
+Input data.
+
+```{r}
+dat <- data.table(ct = c(2, 4, 8) * 24, TAN.app = 100)
+```
+
+# Predictions
+
+```{r}
+pred0 <- alfam2(dat, pars = p0)
+pred1 <- alfam2(dat, pars = p1)
+pred2 <- alfam2(dat, pars = p2)
+```
+
+Doubling pars effect:
+
+```{r}
+(pred2 / pred1)[, 'er'] - 1
+```
+
+Halving:
+
+
+```{r}
+1 - (pred0 / pred1)[, 'er']
+```
+
+Doubling time:
+
+```{r}
+pred1[3, 'er'] / pred1[2, 'er'] - 1
+```
+
+Halving time:
+
+```{r}
+1 - pred1[1, 'er'] / pred1[2, 'er']
+```
+
+Apparent mitigation effect at reference time:
+
+```{r}
+1 - pred0[2, 'er'] / pred1[2, 'er']
+```
+
+At later time.
+
+```{r}
+1 - pred0[3, 'er'] / pred1[3, 'er']
+```
+
+And under higher emission conditions.
+
+```{r}
+1 - pred1[2, 'er'] / pred2[2, 'er']
+```
+
+Later:
+
+```{r}
+1 - pred1[3, 'er'] / pred2[3, 'er']
+```
+
+# Single-pool model
+
+```{r}
+p0 <- c(int.f0 = 100, int.r1 = -1.5 - 0.3, int.r2 = -100, int.r3 = -100, int.r5 = -100)
+p1 <- c(int.f0 = 100, int.r1 = -1.5      , int.r2 = -100, int.r3 = -100, int.r5 = -100)
+p2 <- c(int.f0 = 100, int.r1 = -1.5 + 0.3, int.r2 = -100, int.r3 = -100, int.r5 = -100)
+```
+
+```{r}
+pred0 <- alfam2(dat, pars = p0)
+pred1 <- alfam2(dat, pars = p1)
+pred2 <- alfam2(dat, pars = p2)
+```
+
+Doubling pars effect:
+
+```{r}
+(pred2 / pred1)[, 'er'] - 1
+```
+
+Halving:
+
+
+```{r}
+1 - (pred0 / pred1)[, 'er']
+```
+
+Doubling time:
+
+```{r}
+pred1[3, 'er'] / pred1[2, 'er'] - 1
+```
+
+Halving time:
+
+```{r}
+1 - pred1[1, 'er'] / pred1[2, 'er']
+```
+
+Apparent mitigation effect at reference time:
+
+```{r}
+1 - pred0[2, 'er'] / pred1[2, 'er']
+```
+
+At later time.
+
+```{r}
+1 - pred0[3, 'er'] / pred1[3, 'er']
+```
+
+And under higher emission conditions.
+
+```{r}
+1 - pred1[2, 'er'] / pred2[2, 'er']
+```
+
+Later:
+
+```{r}
+1 - pred1[3, 'er'] / pred2[3, 'er']
+```
+
+# Conclusions
+
+* Predicted emission is much more sensitive to a fixed relative change in emission rate constants than to time
+* But mitigation effects drop in response to increases from either time or emission rate constants, although much more for changes in emission rate constants
+* For a single-pool first-order model effects of time and r1 are interchageable

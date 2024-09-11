@@ -95,9 +95,11 @@ Example to show importance of parameter correlation in estimating uncertainty.
 | Paper section | Content | Script source | Output source |
 | ------------- | ------- | ------------- | ------------- |
 | 2.5           | Number of plots outside of emis. limits | pars/scripts/prep.R          | pars/logs/prep.txt       |
-| 2.5           | Number of plots with missing values     | pars/scripts/subset_summ.Rmd | pars/logs/subset_summ.md |
+| 2.5           | Number of plots with missing values     | pars/scripts subset_summ.Rmd | pars/logs/subset_summ.md |
 | 3.1           | Fig. 2    | data-summary/scripts/plot   | data-summary/plots/emis_summ.png |
+| 3.2           | Results on bootstrap par. correlation | pars/scripts/boot_cor.R | pars/output/boot_correlation.cav |
 | 3.3           | Fig. 3    | pars/scripts/plot_scatter_emis_ps3.R   | pars/plots-scatter/e168_comp_ps3.pdf |
+| 3.3           | Table 2   | pars/scripts/fit_summ.R | pars/output/fit_168.csv, pars/output/fit_cv.csv|
 | Supplement    | Table S-1 | pars/scripts/counts.R | pars/output/d1_counts.csv |
 | Supplement    | Table S-2 | pars/scripts/counts.R | pars/output/d1_incorp_counts.csv |
 | Supplement    | Table S-3 | pars/scripts/fit_summ.R | pars/output/fit_168.csv |

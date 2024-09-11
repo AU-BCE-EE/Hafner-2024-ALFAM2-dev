@@ -13,7 +13,7 @@ mods.boot <- list()
 
 idat1sel <- idat1[, ..parestcols]
 
-#set.seed(123) 
+set.seed(123) 
 
 mods.boot <- foreach (i = 1:nb) %dorng% {
 

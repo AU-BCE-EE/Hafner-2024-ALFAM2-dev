@@ -3,7 +3,7 @@ title: 'Subset summary'
 output: pdf_document
 classoption: landscape
 author: Sasha D. Hafner
-date: "19 August, 2024 Aug:08"
+date: "06 September, 2024 Sep:09"
 ---
 
 # Summary of main data subset
@@ -91,8 +91,7 @@ table(pdat1[, .(institute, sub.period)])
 ##   CAU-LU     0   9   0
 ##   DIAS      28   0   0
 ##   INH-HAFL   0  45   0
-##   INRA       0  15   0
-##   INRAE      0   0  17
+##   INRAE      0  15  17
 ##   MU         0   6   0
 ##   NMI-WUR    0   8   0
 ##   TEAGASC    0  49   0
@@ -136,8 +135,7 @@ table(pdat1[, .(institute, digested)])
 ##   CAU-LU       0    9
 ##   DIAS        28    0
 ##   INH-HAFL    45    0
-##   INRA        11    4
-##   INRAE        5   12
+##   INRAE       16   16
 ##   MU           6    0
 ##   NMI-WUR      8    0
 ##   TEAGASC     49    0
@@ -266,8 +264,7 @@ table(pdat1[, .(institute, acid)])
 ##   CAU-LU       9    0
 ##   DIAS        28    0
 ##   INH-HAFL    45    0
-##   INRA        15    0
-##   INRAE       17    0
+##   INRAE       32    0
 ##   MU           6    0
 ##   NMI-WUR      3    5
 ##   TEAGASC     49    0
@@ -302,8 +299,7 @@ table(pdat1[, .(institute, incorp)])
 ##   CAU-LU      0    9       0
 ##   DIAS        0   28       0
 ##   INH-HAFL    0   45       0
-##   INRA        0    7       8
-##   INRAE       0   15       2
+##   INRAE       0   22      10
 ##   MU          1    1       4
 ##   NMI-WUR     0    8       0
 ##   TEAGASC     0   49       0
@@ -312,9 +308,130 @@ table(pdat1[, .(institute, incorp)])
 ##   WUR         3  289      40
 ```
 
+```r
+table(pdat1[, .(is.na(rain.12))])
+```
+
+```
+## V1
+## FALSE  TRUE 
+##   700    22
+```
 
 ```r
-table(idat1[, rain.missing])
+100 * mean(is.na(pdat1[, .(rain.12)]))
+```
+
+```
+## [1] 3.047091
+```
+
+```r
+table(pdat1[, .(rain.12)])
+```
+
+```
+## rain.12
+##      0    0.1    0.2    0.3    0.4    0.5    0.6    0.7    0.8   0.93      1 
+##    597     11     24      1      5      1      9      6      4      1      1 
+##    1.1    1.2    1.3    1.4 1.6194    1.8      2 2.1634    2.2    2.4    2.6 
+##      2      2      2      4      2      8      4      1      4      7      2 
+##      5    5.2 
+##      1      1
+```
+
+```r
+x <- table(pdat1[, .(inst, rain.12 > 0)])
+print(x)
+```
+
+```
+##      V2
+## inst  FALSE TRUE
+##   101     0    0
+##   102     0    0
+##   103     0    0
+##   104    22    6
+##   105     0    0
+##   106     0    0
+##   107     0    0
+##   108     0    0
+##   201     0    0
+##   202    60   48
+##   203     0    0
+##   204     7    5
+##   205    59   15
+##   206     5    4
+##   207    36    6
+##   208    22    4
+##   209     6    0
+##   210     8    0
+##   211     0    0
+##   212    34   15
+##   213     0    0
+##   214   332    0
+##   301     0    0
+##   302     0    0
+##   303     0    0
+##   304     4    0
+##   305     2    0
+```
+
+```r
+100 * table(pdat1[, .(rain.12)], exclude = NULL) / nrow(pdat1)
+```
+
+```
+## rain.12
+##          0        0.1        0.2        0.3        0.4        0.5        0.6 
+## 82.6869806  1.5235457  3.3240997  0.1385042  0.6925208  0.1385042  1.2465374 
+##        0.7        0.8       0.93          1        1.1        1.2        1.3 
+##  0.8310249  0.5540166  0.1385042  0.1385042  0.2770083  0.2770083  0.2770083 
+##        1.4     1.6194        1.8          2     2.1634        2.2        2.4 
+##  0.5540166  0.2770083  1.1080332  0.5540166  0.1385042  0.5540166  0.9695291 
+##        2.6          5        5.2       <NA> 
+##  0.2770083  0.1385042  0.1385042  3.0470914
+```
+
+Rain mean by institution.
+
+
+```r
+ppdat <- idat1[, .(rain.tot = sum(rain.rate * diff(c(0, cta)))), by = .(inst, pmid)]
+pidat <- ppdat[, .(rain.min = min(rain.tot), rain.max = max(rain.tot), rain.tot = mean(rain.tot), rain.diff = diff(range(rain.tot))), by = .(inst)]
+print(pidat)
+```
+
+```
+##       inst  rain.min   rain.max   rain.tot  rain.diff
+##     <fctr>     <num>      <num>      <num>      <num>
+##  1:    104 0.0000000  29.800075  9.7249801  29.800075
+##  2:    203 0.1999968  80.400205 57.3713764  80.200208
+##  3:    207 0.0000000  16.800001  1.9905083  16.800001
+##  4:    208 0.0000000 113.200560 23.3398789 113.200560
+##  5:    209 0.0000000  55.000000 23.0335000  55.000000
+##  6:    210 0.0000000  55.885133 13.9702444  55.885133
+##  7:    212 0.0999984   2.300003  0.7897942   2.200005
+##  8:    304 3.2000000   3.200000  3.2000000   0.000000
+##  9:    305 0.0000000   0.000000  0.0000000   0.000000
+## 10:    214 0.0000000   0.000000  0.0000000   0.000000
+## 11:    202 0.0000000  89.248864 12.5519438  89.248864
+## 12:    204 0.0000000  22.000995 11.2764274  22.000995
+## 13:    205 0.0000000  24.500000  0.8932606  24.500000
+## 14:    206 0.0000000  20.400106  3.5777801  20.400106
+```
+
+```r
+sum(pidat[, rain.tot] == 0)
+```
+
+```
+## [1] 2
+```
+
+
+```r
+table(idat1[, rain.missing], exclude = NULL)
 ```
 
 ```
@@ -368,21 +485,95 @@ table(idat1[, interp.air.temp])
 ```
 
 ```r
-table(idat1[, man.ph.missing])
+x <- unique(idat1[, .(inst, file, pmid, man.ph.missing, incorp)])
+table(x[, man.ph.missing])
 ```
 
 ```
 ## 
 ## FALSE  TRUE 
-## 18079   706
+##   677    45
 ```
 
 ```r
-100 * mean(idat1[, man.ph.missing])
+table(x[, .(inst, man.ph.missing)])
 ```
 
 ```
-## [1] 3.758318
+##      man.ph.missing
+## inst  FALSE TRUE
+##   101     0    0
+##   102     0    0
+##   103     0    0
+##   104    28    0
+##   105     0    0
+##   106     0    0
+##   107     0    0
+##   108     0    0
+##   201     0    0
+##   202   109    0
+##   203     7    0
+##   204    17    0
+##   205    74    0
+##   206     9    0
+##   207    45    0
+##   208    31    1
+##   209     6    0
+##   210     8    0
+##   211     0    0
+##   212    49    0
+##   213     0    0
+##   214   288   44
+##   301     0    0
+##   302     0    0
+##   303     0    0
+##   304     4    0
+##   305     2    0
+```
+
+```r
+y <- x[(man.ph.missing), ]
+table(y[, .(inst, incorp)])
+```
+
+```
+##      incorp
+## inst  deep none shallow
+##   101    0    0       0
+##   102    0    0       0
+##   103    0    0       0
+##   104    0    0       0
+##   105    0    0       0
+##   106    0    0       0
+##   107    0    0       0
+##   108    0    0       0
+##   201    0    0       0
+##   202    0    0       0
+##   203    0    0       0
+##   204    0    0       0
+##   205    0    0       0
+##   206    0    0       0
+##   207    0    0       0
+##   208    0    0       1
+##   209    0    0       0
+##   210    0    0       0
+##   211    0    0       0
+##   212    0    0       0
+##   213    0    0       0
+##   214    3   18      23
+##   301    0    0       0
+##   302    0    0       0
+##   303    0    0       0
+##   304    0    0       0
+##   305    0    0       0
+```
+
+```r
+100 * mean(x[, man.ph.missing])
+```
+
+```
+## [1] 6.232687
 ```
 
 
@@ -398,16 +589,11 @@ table(xx[, 2])
 ```
 
 ```r
-100 * mean(xx[, 2])
+100 * mean(xx[, 2]$V1)
 ```
 
 ```
-## Warning in mean.default(xx[, 2]): argument is not numeric or logical: returning
-## NA
-```
-
-```
-## [1] NA
+## [1] 1.385042
 ```
 
 ```r
@@ -422,16 +608,11 @@ table(xx[, 2])
 ```
 
 ```r
-100 * mean(xx[, 2])
+100 * mean(xx[, 2]$V1)
 ```
 
 ```
-## Warning in mean.default(xx[, 2]): argument is not numeric or logical: returning
-## NA
-```
-
-```
-## [1] NA
+## [1] 1.800554
 ```
 
 ```r
@@ -446,16 +627,11 @@ table(xx[, 2])
 ```
 
 ```r
-100 * mean(xx[, 2])
+100 * mean(xx[, 2]$V1)
 ```
 
 ```
-## Warning in mean.default(xx[, 2]): argument is not numeric or logical: returning
-## NA
-```
-
-```
-## [1] NA
+## [1] 0.2770083
 ```
 
 ```r
@@ -470,16 +646,89 @@ table(xx[, 2])
 ```
 
 ```r
-100 * mean(xx[, 2])
+100 * mean(xx[, 2]$V1)
 ```
 
 ```
-## Warning in mean.default(xx[, 2]): argument is not numeric or logical: returning
-## NA
+## [1] 6.232687
+```
+
+
+```r
+table(pdat1$rain.12 == 0)
 ```
 
 ```
-## [1] NA
+## 
+## FALSE  TRUE 
+##   103   597
+```
+
+```r
+table(pdat1$rain.12 == 0) / nrow(pdat1)
+```
+
+```
+## 
+##     FALSE      TRUE 
+## 0.1426593 0.8268698
+```
+
+
+```r
+quantile(pdat1$rain.12 / 12, na.rm = TRUE)
+```
+
+```
+##        0%       25%       50%       75%      100% 
+## 0.0000000 0.0000000 0.0000000 0.0000000 0.4333333
+```
+
+```r
+x <- pdat1[rain.12 > 0, ]
+quantile(x$rain.12 / 12, na.rm = TRUE)
+```
+
+```
+##          0%         25%         50%         75%        100% 
+## 0.008333333 0.016666667 0.058333333 0.150000000 0.433333333
+```
+
+```r
+range(x$rain.12 / 12, na.rm = TRUE)
+```
+
+```
+## [1] 0.008333333 0.433333333
+```
+
+```r
+x <- pdat1[rain.1 > 0, ]
+quantile(x$rain.1, na.rm = TRUE)
+```
+
+```
+##   0%  25%  50%  75% 100% 
+##  0.2  0.2  0.7  1.8  2.4
+```
+
+```r
+range(x$rain.1, na.rm = TRUE)
+```
+
+```
+## [1] 0.2 2.4
+```
+
+
+```r
+x <- idat1[rain.rate > 0, ]
+quantile(x$rain.rate)
+```
+
+```
+##         0%        25%        50%        75%       100% 
+## 0.00021962 0.04210500 0.20000000 0.44444000 8.40000000
 ```
 
 # Problems with incorporation
@@ -579,6 +828,22 @@ model.tables(m1, 'means')
 ## rep 222.00 205.00 163.000 119.000 13.000
 ```
 
+
+```r
+cor(pdat1[, .(man.dm, man.ph, air.temp.12, wind.12, rain.12)], use = 'complete.obs')
+```
+
+```
+##                 man.dm      man.ph air.temp.12     wind.12    rain.12
+## man.dm       1.0000000 -0.26253047  0.28929152 -0.10594195 -0.1825831
+## man.ph      -0.2625305  1.00000000 -0.05317003 -0.06252788  0.1054117
+## air.temp.12  0.2892915 -0.05317003  1.00000000 -0.26690032 -0.1205369
+## wind.12     -0.1059419 -0.06252788 -0.26690032  1.00000000  0.2554047
+## rain.12     -0.1825831  0.10541175 -0.12053686  0.25540468  1.0000000
+```
+
+
+
 # dfsumm
 
 
@@ -615,14 +880,14 @@ dfsumm(pdat1)
 ## Mean                  209     406    2110    2110          2           3
 ## Unique (excld. NA)     14     228     720     722          3           1
 ## Missing values          0       0       0       0          0         489
-## Sorted              FALSE    TRUE    TRUE    TRUE      FALSE        TRUE
+## Sorted              FALSE   FALSE   FALSE   FALSE      FALSE        TRUE
 ##                                                                         
 ##                         proj     exper  exper2 institute   country
 ## Class              character character integer character character
 ## Minimum               1997sl         1       9   ADAS-RR        CA
 ## Maximum                Unter        Z2      23       WUR        UK
 ## Mean                    <NA>      <NA>    15.8      <NA>      <NA>
-## Unique (excld. NA)       146       215      15        15         9
+## Unique (excld. NA)       146       215      15        14         9
 ## Missing values            46         0     694         0         0
 ## Sorted                 FALSE     FALSE   FALSE     FALSE     FALSE
 ##                                                                   
@@ -1029,7 +1294,7 @@ dfsumm(pdat1)
 ## Mean                    <NA>      <NA>         <NA>      11      69.7   0.433
 ## Unique (excld. NA)         5         9           16     121         8       3
 ## Missing values           695         0            0     131       633     719
-## Sorted                 FALSE     FALSE        FALSE   FALSE     FALSE   FALSE
+## Sorted                 FALSE     FALSE        FALSE   FALSE     FALSE    TRUE
 ##                                                                              
 ##                                                                                        notes.plot
 ## Class                                                                                   character
@@ -1047,7 +1312,7 @@ dfsumm(pdat1)
 ## Mean                    <NA>     bsth 0.056786703601108 TRUE         0 TRUE
 ## Unique (excld. NA)         4        5                      2              1
 ## Missing values             0        0                      0              0
-## Sorted                 FALSE    FALSE                  FALSE           TRUE
+## Sorted                 FALSE     TRUE                  FALSE           TRUE
 ##                                                                            
 ##                           iexper
 ## Class                  character

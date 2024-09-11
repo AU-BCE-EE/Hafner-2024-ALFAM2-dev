@@ -10,7 +10,8 @@ parstab[, u90 := round(u90, 3)]
 # Columns used in table
 parstab[, valcol := round(value, 3)]
 parstab[, secol := round(se, 3)] 
-parstab[, cicol := paste0(l90, ', ', u90)] 
+parstab[, lcl := l90] 
+parstab[, ucl := u90] 
 
 # Sort
 parstab[, parameter := factor(parameter, 
