@@ -12,11 +12,25 @@ Check package version.
 packageVersion('ALFAM2')
 ```
 
+Check values of pars03.
+
+```{r}
+pars03[order(names(pars03))]
+```
+
+Compare to:
+
+```{r}
+alfam2pars03[order(names(alfam2pars03))]
+```
+
 Run model with par set 3
 
 ```{r}
 pr3 <- alfam2(dat, app.name = 'tan.app', time.name = 'ct', time.incorp = 'time.incorp',
               group = 'sida', pars = pars03, flatout = TRUE)
+#pr3 <- alfam2(dat, app.name = 'tan.app', time.name = 'ct', time.incorp = 'time.incorp',
+#              group = 'sida', pars = alfam2pars03, flatout = TRUE)
 setDT(pr3)
 ```
 
