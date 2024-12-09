@@ -1,5 +1,7 @@
 # Hafner-2023-ALFAM2-dev
-Refinement, evaluation of ALFAM2 model and development of parameter set 3.
+Refinement, evaluation of ALFAM2 model and development of parameter set 3 as described in this paper:
+
+Hafner, S. D., Pedersen, J., Fuß, R., Kamp, J. N., Dalby, F. R., Amon, B., Pacholski, A., Adamsen, A. P. S., & Sommer, S. G. (2025). Improved tools for estimation of ammonia emission from field-applied animal slurry: Refinement of the ALFAM2 model and database. Atmospheric Environment, 340, 120910. <https://doi.org/10.1016/j.atmosenv.2024.120910>
 
 # Maintainer
 Sasha D. Hafner.
