@@ -12,6 +12,14 @@ for (p in sort(unique(dp168$pars))) {
     labs(colour = 'Institution', x = expression('24 h ave. air temperature'~(degree*C)), y = 'Emission residual (frac. applied TAN)')
   ggsave2x(paste0('../plots-resids/resids_emis_temp_', p), height = 4.2, width = 6)
 
+  ggplot(ddf, aes(wind.2m.24, resid.er, colour = inst, group = pmid)) +
+    geom_point(alpha = 0.4) +
+    facet_wrap(~ app.mthd.nm, scale = 'free') +
+    geom_smooth(method = MASS::rlm, se = FALSE, aes(group = interaction(inst, app.mthd))) +
+    theme_bw() +
+    labs(colour = 'Institution', x = expression('24 h ave. wind speed'~(m~s^'-1')), y = 'Emission residual (frac. applied TAN)')
+  ggsave2x(paste0('../plots-resids/resids_emis_wind_', p), height = 4.2, width = 6)
+
   ggplot(ddf, aes(man.ph, resid.er, colour = inst, group = pmid)) +
     geom_point(alpha = 0.4) +
     facet_wrap(~ app.mthd.nm, scale = 'free') +
